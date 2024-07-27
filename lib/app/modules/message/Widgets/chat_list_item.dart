@@ -1,3 +1,4 @@
+import 'package:felpus/app/common/app_images/app_images.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -18,7 +19,8 @@ class ChatListItem extends StatelessWidget {
     required this.name,
     required this.message,
     required this.time,
-    required this.numberOfMessages
+    required this.numberOfMessages,
+    this.isArchived = false
   });
 
   final String image;
@@ -26,13 +28,13 @@ class ChatListItem extends StatelessWidget {
   final String message;
   final String time;
   final int numberOfMessages;
+  final bool isArchived;
 
   bool isOnline = true;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 14.h),
       padding: EdgeInsets.all(12.w),
       child: Row(
         children: [
@@ -84,6 +86,7 @@ class ChatListItem extends StatelessWidget {
               ),
             ],
           )),
+          isArchived? Image.asset(AppImages.archiveIcon, scale: 20,) : const SizedBox(),
         ],
       ),
     );

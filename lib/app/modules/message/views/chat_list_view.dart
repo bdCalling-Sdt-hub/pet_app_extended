@@ -36,56 +36,59 @@ class ChatListView extends StatelessWidget {
             children: [
               CustomTextField(title: "", hintText: "Search your message", width: Get.width, sufIcon: Icon(Icons.search),),
               sh10,
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: Row(
-                  children: [
+              Obx(() {
+                return Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: Row(
+                    children: [
 
-                    ///<<<=================== Card Information Button ===========>>>
+                      ///<<<=================== Card Information Button ===========>>>
 
-                    GestureDetector(
-                      onTap: () {
-                        controller.isStyle.value = false;
-                        controller.isInformation.value = true;
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 4),
-                        decoration: BoxDecoration(
+                      GestureDetector(
+                        onTap: () {
+                          controller.isStyle.value = false;
+                          controller.isInformation.value = true;
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 4),
+                          decoration: BoxDecoration(
                             color: controller.isInformation.value
                                 ? AppColors.mainColor
-                                : AppColors.grayLight,
+                                : AppColors.pink,
                             borderRadius: BorderRadius.circular(4),
-                            ),
-                        child: Text("Conversation", style: h2.copyWith(fontSize: 20, color: controller.isInformation.value? AppColors.white : AppColors.black),),
+                          ),
+                          child: Text("Conversation", style: h2.copyWith(fontSize: 20, color: controller.isInformation.value? AppColors.white : AppColors.black),),
+                        ),
                       ),
-                    ),
-                    Spacer(),
+                      Spacer(),
 
-                    ///<<<===================== Card Style Button =============>>>
+                      ///<<<===================== Card Style Button =============>>>
 
-                    GestureDetector(
-                      onTap: () {
-                        controller.isStyle.value = true;
-                        controller.isInformation.value = false;
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 4),
-                        decoration: BoxDecoration(
+                      GestureDetector(
+                        onTap: () {
+                          controller.isStyle.value = true;
+                          controller.isInformation.value = false;
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 4),
+                          decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(4),
                             color: controller.isStyle.value
                                 ? AppColors.mainColor
                                 : AppColors.pink,
-                            ),
-                        child: Text("Archived", style: h2.copyWith(fontSize: 20, color: controller.isStyle.value? AppColors.white : AppColors.black),),
+                          ),
+                          child: Text("Archived", style: h2.copyWith(fontSize: 20, color: controller.isStyle.value? AppColors.white : AppColors.black),),
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              ),
+                    ],
+                  ),
+                );
+              },),
 
-              Expanded(
+              controller.isInformation.value
+                  ? Expanded(
                 child: ListView.builder(
                   // controller: _scrollController,
                   itemCount: 10,
@@ -99,6 +102,26 @@ class ChatListView extends StatelessWidget {
                         message: "They are at my place.",
                         time: "10 :15",
                         numberOfMessages: 5,
+                      ),
+                    );
+                  },
+                ),
+              )
+                  : Expanded(
+                child: ListView.builder(
+                  // controller: _scrollController,
+                  itemCount: 10,
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: () {
+                      },
+                      child: ChatListItem(
+                        image: "https://shorturl.at/2iMPa",
+                        name: "Henry",
+                        message: "You: I got my pet",
+                        time: "10 :15",
+                        numberOfMessages: 5,
+                        isArchived: true,
                       ),
                     );
                   },

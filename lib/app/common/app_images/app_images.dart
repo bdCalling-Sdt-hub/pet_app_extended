@@ -54,6 +54,7 @@ class AppImages{
   static const treatment = "assets/icons/treatment.png";
   static const lagPrint = "assets/icons/lag-print.png";
   static const veterinary = "assets/icons/veterinary.png";
+  static const archiveIcon = "assets/icons/archiveIcon.png";
 
   //app images
   static const onboarding = "assets/images/onboarding.png";
