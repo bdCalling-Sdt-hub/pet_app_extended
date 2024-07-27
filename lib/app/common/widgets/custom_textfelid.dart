@@ -14,7 +14,8 @@ class CustomTextField extends StatelessWidget {
   final Widget? preIcon;
   final bool? optional;
   final int? maxLines;
-  const CustomTextField({
+  double borderRadius;
+  CustomTextField({
     super.key,
     required this.title,
     required this.width,
@@ -25,6 +26,7 @@ class CustomTextField extends StatelessWidget {
      this.sufIcon,
      this.maxLines,
      this.preIcon,
+    this.borderRadius = 10,
   });
 
   @override
@@ -34,20 +36,20 @@ class CustomTextField extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
+          title == ""? const SizedBox() : Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(title,style: h3.copyWith(color: AppColors.textColor),),
-               Text(optional == true? "(Optional)" : "",style: h3.copyWith(color: AppColors.light),),
+              Text(optional == true? "(Optional)" : "",style: h3.copyWith(color: AppColors.light),),
             ],
           ),
-          const SizedBox(height: 12,),
+          title == ""? const SizedBox() :const SizedBox(height: 12,),
           Container(
             height: maxLines != null ? 100 : 50,
             width: width,
             decoration: BoxDecoration(
               color: AppColors.white,
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(borderRadius),
               border: Border.all(color: AppColors.grayLight)
             ),
             child:  Padding(

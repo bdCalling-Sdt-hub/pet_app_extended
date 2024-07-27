@@ -13,11 +13,12 @@ Padding myPetsWidget() {
       width: 158.w,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        gradient: const LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [AppColors.gradient2, AppColors.gradient1],
-        ),
+        color: AppColors.olive
+        // gradient: const LinearGradient(
+        //   begin: Alignment.topCenter,
+        //   end: Alignment.bottomCenter,
+        //   colors: [AppColors.gradient2, AppColors.gradient1],
+        // ),
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 6),
@@ -42,7 +43,7 @@ Padding myPetsWidget() {
                   style: h4.copyWith(fontSize: 13),
                 ),
                 Text(
-                  "1.5 Years.",
+                  " 1.5 Years.",
                   style: h4.copyWith(fontSize: 13),
                 ),
               ],

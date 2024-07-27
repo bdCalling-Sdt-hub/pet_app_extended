@@ -23,7 +23,7 @@ class PetDetailsView extends GetView<PetDetailsController> {
             children: [
               Container(
                 decoration: BoxDecoration(
-                    color: AppColors.pinkExtraLight,
+                    color: AppColors.oliveLight,
                   borderRadius: BorderRadius.circular(20)
                 ),
                 child: Padding(
@@ -32,7 +32,7 @@ class PetDetailsView extends GetView<PetDetailsController> {
                     children: [
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           InkWell(
                               onTap: () => Get.back(),
@@ -40,7 +40,6 @@ class PetDetailsView extends GetView<PetDetailsController> {
           
                           Text("Pet’s Information",style: h2.copyWith(fontSize: 18),),
                           sw50,
-                          sw20,
                         ],
                       ),
                       sh30,
@@ -100,7 +99,7 @@ class PetDetailsView extends GetView<PetDetailsController> {
                             sh15,
                             Container(
                               decoration: BoxDecoration(
-                                color: AppColors.pinkLight,
+                                color: AppColors.oliveDeep,
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Padding(
@@ -108,6 +107,7 @@ class PetDetailsView extends GetView<PetDetailsController> {
                                 child: Row(
                                   children: [
                                    Image.asset(AppImages.editInfo,scale: 4,),
+                                    sw5,            
                                     Text("Description About The Pet:",style: h3,)
                                   ],
                                 ),
@@ -127,7 +127,7 @@ class PetDetailsView extends GetView<PetDetailsController> {
               sh20,
               Container(
                 decoration: BoxDecoration(
-                    color: AppColors.pinkExtraLight,
+                    color: AppColors.oliveLight,
                     borderRadius: BorderRadius.circular(20)
                 ),
                 child: Padding(

@@ -14,11 +14,12 @@ Padding lostPetsList() {
       width: Get.width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        gradient: const LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [AppColors.gradient2, AppColors.gradient1],
-        ),
+        color: AppColors.olive
+        // gradient: const LinearGradient(
+        //   begin: Alignment.topCenter,
+        //   end: Alignment.bottomCenter,
+        //   colors: [AppColors.gradient2, AppColors.gradient1],
+        // ),
       ),
       child: Padding(
         padding: const EdgeInsets.only(left: 6.0),
@@ -41,7 +42,7 @@ Padding lostPetsList() {
                       style: h4.copyWith(fontSize: 13),
                     ),
                     Text(
-                      "1.5 Years.",
+                      " 1.5 Years.",
                       style: h4.copyWith(fontSize: 13),
                     ),
                   ],

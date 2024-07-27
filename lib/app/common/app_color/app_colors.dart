@@ -28,6 +28,10 @@ class AppColors{
   static const chatColor1 = Color(0xffD9D9D9);
   static const chatColor2 = Color(0xff0094FF);
   static const notificationColor = Color(0xffE7E7E7);
+  static const olive = Color(0xffE2D2BD);
+  static const oliveDeep = Color(0xffD2AA75);
+  static const oliveLight = Color(0xffF0E8DE);
+  static const pink = Color(0xffF1F1F1);
 
 
 

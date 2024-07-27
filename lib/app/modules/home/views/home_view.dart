@@ -8,6 +8,7 @@ import 'package:felpus/app/modules/emergency/views/emergency_view.dart';
 import 'package:felpus/app/modules/home/views/my_pets_view.dart';
 import 'package:felpus/app/modules/lost_pets/views/all_lost_pets_view.dart';
 import 'package:felpus/app/modules/lost_pets/views/lost_pets_view.dart';
+import 'package:felpus/app/modules/message/views/chat_list_view.dart';
 import 'package:felpus/app/modules/notifications/views/notifications_view.dart';
 import 'package:felpus/app/modules/pet_details/views/pet_details_view.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,17 +20,22 @@ import 'package:get/get.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends StatelessWidget {
-  const HomeView({super.key});
+  HomeView({super.key});
+
+  List categoryList = ["Family", "Neighbor", "Friends"];
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: AppColors.white,
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           backgroundColor: AppColors.white,
           actions: [
             InkWell(
               onTap: () {
-
+                Get.to(() => ChatListView());
               },
                 child: Image.asset(AppImages.chat, scale: 3, color: AppColors.ash,),
             ),
@@ -66,10 +72,7 @@ class HomeView extends StatelessWidget {
             children: [
               Stack(
                 children: [
-                  Image.asset(
-                    AppImages.banner,
-                    scale: 4,
-                  ),
+                  Image.asset(AppImages.homeBanner, scale: 1,),
                   Positioned(
                       right: 36,
                       left: 36,
@@ -81,21 +84,19 @@ class HomeView extends StatelessWidget {
                           height: 155,
                           width: 320,
                           decoration: BoxDecoration(
-                              color: Colors.red.withOpacity(0.9),
+                              image: const DecorationImage(
+                                fit: BoxFit.fill,
+                                  image: AssetImage(AppImages.emergencyTab)),
                               borderRadius: BorderRadius.circular(10)),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                AppImages.emergency,
-                                scale: 4,
-                              ),
-                              Text(
+                          child: Center(
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 48.0),
+                              child: Text(
                                 "Emergency!",
                                 style: h2.copyWith(
                                     fontSize: 32, color: AppColors.white),
-                              )
-                            ],
+                              ),
+                            ),
                           ),
                         ),
                       ))
@@ -127,7 +128,7 @@ class HomeView extends StatelessWidget {
                       child: ListView.builder(
                           shrinkWrap: true,
                           scrollDirection: Axis.horizontal,
-                          itemCount: 3,
+                          itemCount: categoryList.length,
                           itemBuilder: (context, index) {
                             return Padding(
                               padding:
@@ -141,7 +142,7 @@ class HomeView extends StatelessWidget {
                                       horizontal: 10.0, vertical: 10),
                                   child: Center(
                                     child: Text(
-                                      "Family",
+                                      categoryList[index],
                                       style: h2.copyWith(fontSize: 14),
                                     ),
                                   ),

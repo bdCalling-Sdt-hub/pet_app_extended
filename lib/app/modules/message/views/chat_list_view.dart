@@ -1,0 +1,113 @@
+
+import 'package:felpus/app/common/widgets/custom_textfelid.dart';
+import 'package:felpus/app/modules/message/controllers/message_controller.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../../common/app_color/app_colors.dart';
+import '../../../common/app_text_style/styles.dart';
+import '../../../common/size_box/custom_sizebox.dart';
+import '../Widgets/chat_list_item.dart';
+
+class ChatListView extends StatelessWidget {
+  ChatListView({super.key});
+
+  MessageController controller = Get.put(MessageController());
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        leading: InkWell(
+          onTap: () {
+            Get.back();
+          },
+            child: Icon(Icons.arrow_back_ios, size: 20,)),
+        centerTitle: true,
+        title: Text(
+          "Messages",
+          style: h1,
+        ),
+      ),
+      body: GetBuilder<MessageController>(builder: (controller) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: Column(
+            children: [
+              CustomTextField(title: "", hintText: "Search your message", width: Get.width, sufIcon: Icon(Icons.search),),
+              sh10,
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: Row(
+                  children: [
+
+                    ///<<<=================== Card Information Button ===========>>>
+
+                    GestureDetector(
+                      onTap: () {
+                        controller.isStyle.value = false;
+                        controller.isInformation.value = true;
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 4),
+                        decoration: BoxDecoration(
+                            color: controller.isInformation.value
+                                ? AppColors.mainColor
+                                : AppColors.grayLight,
+                            borderRadius: BorderRadius.circular(4),
+                            ),
+                        child: Text("Conversation", style: h2.copyWith(fontSize: 20, color: controller.isInformation.value? AppColors.white : AppColors.black),),
+                      ),
+                    ),
+                    Spacer(),
+
+                    ///<<<===================== Card Style Button =============>>>
+
+                    GestureDetector(
+                      onTap: () {
+                        controller.isStyle.value = true;
+                        controller.isInformation.value = false;
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 4),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(4),
+                            color: controller.isStyle.value
+                                ? AppColors.mainColor
+                                : AppColors.pink,
+                            ),
+                        child: Text("Archived", style: h2.copyWith(fontSize: 20, color: controller.isStyle.value? AppColors.white : AppColors.black),),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              Expanded(
+                child: ListView.builder(
+                  // controller: _scrollController,
+                  itemCount: 10,
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: () {
+                      },
+                      child: ChatListItem(
+                        image: "https://shorturl.at/2iMPa",
+                        name: "Henry",
+                        message: "They are at my place.",
+                        time: "10 :15",
+                        numberOfMessages: 5,
+                      ),
+                    );
+                  },
+                ),
+              )
+            ],
+          ),
+        );
+      },),
+    );
+  }
+}

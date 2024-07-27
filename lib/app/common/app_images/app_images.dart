@@ -63,6 +63,7 @@ class AppImages{
   static const welcomeImg = "assets/images/welcomeImg.png";
   static const success = "assets/images/success.png";
   static const banner = "assets/images/banner.png";
+  static const homeBanner = "assets/images/homeBanner.png";
   static const catImage = "assets/images/cat-image.png";
   static const dogCat = "assets/images/dog-cat.png";
   static const catWithGirl = "assets/images/cat-with-girl.png";
@@ -71,6 +72,8 @@ class AppImages{
   static const allPets = "assets/images/all-pets.png";
   static const multiPets = "assets/images/multi-pets.png";
   static const demoProfileImg = "assets/images/demoProfileImg.png";
+  static const emergencyTab = "assets/images/emergencyTab.png";
+  static const noImage = "assets/images/noImage.png";
 
 
 }
