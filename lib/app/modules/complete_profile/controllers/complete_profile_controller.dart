@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class CompleteProfileController extends GetxController {
+
+  static CompleteProfileController get instance => Get.put(CompleteProfileController());
   var selectedDate = DateTime.now().obs;
 
   String get formattedDate => DateFormat('dd-MM-yy').format(selectedDate.value);
@@ -17,5 +19,12 @@ class CompleteProfileController extends GetxController {
     if (picked != null && picked != selectedDate.value) {
       selectedDate.value = picked;
     }
+  }
+
+  TextEditingController locationController = TextEditingController();
+
+  setLocation({required String address}){
+    locationController.text = address;
+    update();
   }
 }

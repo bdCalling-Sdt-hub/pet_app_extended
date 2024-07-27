@@ -27,6 +27,13 @@ class HomeView extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: AppColors.white,
           actions: [
+            InkWell(
+              onTap: () {
+
+              },
+                child: Image.asset(AppImages.chat, scale: 3, color: AppColors.ash,),
+            ),
+            sw15,
             GestureDetector(
               onTap: () => Get.to(() => NotificationsView(),),
               child: Image.asset(

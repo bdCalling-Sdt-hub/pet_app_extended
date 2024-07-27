@@ -5,6 +5,7 @@ import 'package:felpus/app/common/widgets/custom_auth_appbar.dart';
 import 'package:felpus/app/common/widgets/custom_button.dart';
 import 'package:felpus/app/common/widgets/custom_textfelid.dart';
 import 'package:felpus/app/modules/dashboard/views/dashboard_view.dart';
+import 'package:felpus/app/modules/profile_location/views/profile_location_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -123,7 +124,7 @@ class CompleteProfileView extends StatelessWidget {
               ),
             ),
             sh20,
-            CustomButton(ontap: () => showCustomBottomSheet(),title: "Next", width: Get.width, color: AppColors.mainColor,),
+            CustomButton(ontap: () => Get.to(() => ProfileLocationView()),title: "Next", width: Get.width, color: AppColors.mainColor,),
             sh10,
         
           ],
@@ -133,36 +134,3 @@ class CompleteProfileView extends StatelessWidget {
   }
 }
 
-void showCustomBottomSheet() {
-  Get.bottomSheet(
-    Container(
-      width: Get.width,
-      decoration: const BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.only(topLeft: Radius.circular(70),topRight: Radius.circular(70)),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: Column(
-          children: [
-            sh10,
-            Container(
-              height: 2,
-              width: 100,
-              color: AppColors.grayLight,
-            ),
-            Image.asset(AppImages.success,scale: 4,),
-            sh10,
-            Text("Your Account Has Been",style:  h3.copyWith(fontSize: 26,),textAlign: TextAlign.center,),
-            Text("Successfully Completed.",style:  h3.copyWith(fontSize: 26,color: AppColors.mainColor),textAlign: TextAlign.center,),
-            sh50,
-            CustomButton(ontap: () => Get.to(() => DashboardView()),title: "Finish", width: Get.width, color: AppColors.mainColor),
-            sh10,
-          ],
-        ),
-      ),
-    ),
-    barrierColor: Colors.black.withOpacity(0.5),
-    isDismissible: true,
-  );
-}

@@ -13,9 +13,9 @@ import '../../../common/widgets/custom_button.dart';
 
 class VerifyView extends GetView {
   const VerifyView({super.key});
+  static String purpose = "";
   @override
   Widget build(BuildContext context) {
-    String purpose = Get.arguments["purpose"] ?? "";
     
     return Scaffold(
       backgroundColor: AppColors.white,

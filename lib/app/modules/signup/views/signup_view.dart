@@ -66,7 +66,10 @@ class SignupView extends StatelessWidget {
                 ),
               ),
               sh30,
-              CustomButton(ontap: () => Get.to(() => VerifyView(), arguments: {"purpose" : "sign up"}),title: "Sign Up", width: Get.width, color: AppColors.mainColor),
+              CustomButton(ontap: (){
+                Get.to(() => const VerifyView());
+                VerifyView.purpose =  "sign up";
+              },title: "Sign Up", width: Get.width, color: AppColors.mainColor),
               sh10,
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
