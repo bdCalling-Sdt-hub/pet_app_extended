@@ -37,7 +37,7 @@ class MenuView extends GetView<MenuDataController> {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 7.0),
                     child: GestureDetector(
-                      onTap: () => Get.to(() => ProfileView()),
+                      onTap: () => Get.to(() => const ProfileView()),
                       child: Container(
                         height: 65,
                         decoration: BoxDecoration(
