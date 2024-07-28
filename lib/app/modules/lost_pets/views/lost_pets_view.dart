@@ -20,6 +20,7 @@ class LostPetsView extends GetView<LostPetsController> {
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: AppColors.white,
         actions: [
           GestureDetector(

@@ -24,6 +24,7 @@ class MenuView extends GetView<MenuDataController> {
     return Scaffold(
         backgroundColor: AppColors.white,
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           backgroundColor: AppColors.white,
           title:  Text('Menu',style: h2.copyWith(fontSize: 22,color: AppColors.mainColor),),
        //   centerTitle: true,

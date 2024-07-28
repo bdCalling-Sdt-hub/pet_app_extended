@@ -20,6 +20,7 @@ class GroupsView extends GetView<GroupsController> {
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: AppColors.white,
         title: Text('Groups',style: h2.copyWith(fontSize: 26,color: AppColors.mainColor),),
         centerTitle: true,

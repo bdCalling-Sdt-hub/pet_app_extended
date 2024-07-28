@@ -22,6 +22,7 @@ class AdoptionView extends GetView<AdoptionController> {
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: AppColors.white,
         title:  Text('Adoption',style: h2.copyWith(fontSize: 22,color: AppColors.mainColor),),
         centerTitle: true,
