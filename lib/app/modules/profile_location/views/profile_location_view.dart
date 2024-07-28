@@ -81,7 +81,7 @@ class ProfileLocationView extends GetView<ProfileLocationController> {
 
                     mapController.marker.add(
                         Marker(
-                          markerId: MarkerId('tapped place'),
+                          markerId: const MarkerId('customMarker'),
                           position: LatLng(latlng.latitude, latlng.longitude),
                           icon: customMarker,
                           infoWindow: InfoWindow(
