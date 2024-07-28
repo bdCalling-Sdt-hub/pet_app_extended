@@ -77,16 +77,19 @@ class ProfileLocationView extends GetView<ProfileLocationController> {
 
                     var tappedAddress = mapController.placeAddress;
 
+                    final BitmapDescriptor customMarker = await mapController.customMarkerImage(Get.context!);
+
                     mapController.marker.add(
                         Marker(
                           markerId: MarkerId('tapped place'),
                           position: LatLng(latlng.latitude, latlng.longitude),
-                          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
+                          icon: customMarker,
                           infoWindow: InfoWindow(
                               title: "${tappedAddress.first.subLocality}: ${latlng.latitude}, ${latlng.longitude}"
                           ),
                         )
                     );
+
                     final GoogleMapController controller = await mapController.googleMapController.future;
                     await controller.animateCamera(CameraUpdate.newCameraPosition(mapController.kRandom));
 

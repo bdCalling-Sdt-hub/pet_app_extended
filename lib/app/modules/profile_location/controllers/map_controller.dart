@@ -10,6 +10,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:uuid/uuid.dart';
 import 'dart:developer' as print;
 
+import '../../../common/app_images/app_images.dart';
+
 class MapController extends GetxController {
   final Completer<GoogleMapController> googleMapController = Completer();
 
@@ -66,27 +68,14 @@ class MapController extends GetxController {
     super.onInit();
   }
 
-  // customMarker(
-  //     {required String markerId,
-  //     required double latitude,
-  //     required double longitude,
-  //     required String infoTitle,
-  //     String? iconPath,
-  //     double? width,
-  //     double? height}) async {
-  //   Marker(
-  //       markerId: MarkerId(markerId),
-  //       position: LatLng(latitude, longitude),
-  //       infoWindow: InfoWindow(
-  //         title: infoTitle,
-  //       ),
-  //       icon: await MarkerIcon.pictureAsset(
-  //           assetPath: iconPath!, width: width!, height: height!));
-  // }
-
   void onChange() {
     sessionToken ??= uuid.v4();
     getSuggestion(searchText.value.text);
+  }
+
+  Future<BitmapDescriptor> customMarkerImage(BuildContext context) async {
+    return await BitmapDescriptor.asset(ImageConfiguration(devicePixelRatio: MediaQuery.of(context).devicePixelRatio),
+      AppImages.icon, height: 40, width: 40);
   }
 
   void getSuggestion(String inputText) async {
