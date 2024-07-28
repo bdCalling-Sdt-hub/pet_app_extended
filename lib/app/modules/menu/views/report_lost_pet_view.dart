@@ -1,3 +1,4 @@
+import 'package:felpus/app/common/Extension/extension.dart';
 import 'package:felpus/app/common/widgets/custom_button.dart';
 import 'package:felpus/app/common/widgets/custom_textfelid.dart';
 import 'package:flutter/cupertino.dart';
@@ -42,9 +43,9 @@ class _ReportLosPetViewState extends State<ReportLosPetView> {
         padding: const EdgeInsets.symmetric(horizontal:14.0),
         child: Column(
           children: [
-            sh10,
+            15.height,
             Expanded(
-              flex: 3,
+              flex: 4,
               child: ListView.builder(
                   shrinkWrap: true,
                   itemCount: 12,
@@ -65,7 +66,7 @@ class _ReportLosPetViewState extends State<ReportLosPetView> {
                               gradient:  LinearGradient(
                                 begin: Alignment.topCenter,
                                 end: Alignment.bottomCenter,
-                                colors: selectedPet == index? [AppColors.mainColor, AppColors.mainColor] :  [AppColors.gradient2, AppColors.gradient1],
+                                colors: selectedPet == index? [AppColors.mainColor, AppColors.mainColor] :  [AppColors.olive, AppColors.olive],
                               ),
                             ),
                             child: Padding(
@@ -97,13 +98,15 @@ class _ReportLosPetViewState extends State<ReportLosPetView> {
                                     ],
                                   ),
                                   Row(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                        Icon(
                                         CupertinoIcons.location_solid,
                                         color:  selectedPet == index? AppColors.white : AppColors.mainColor,
                                       ),
                                       SizedBox(
-                                          width: 50.w,
+                                          width: 70.w,
                                           child: Text(
                                             "Puerta del Sol, 28013 Madrid, Spain.",
                                             style: h5.copyWith(fontSize: 12,color: selectedPet == index? AppColors.white : AppColors.black),
@@ -130,6 +133,7 @@ class _ReportLosPetViewState extends State<ReportLosPetView> {
                   }),
             ),
             Expanded(
+              flex: 2,
                 child: Container(
               color: AppColors.white,
                   child: Column(
@@ -139,8 +143,16 @@ class _ReportLosPetViewState extends State<ReportLosPetView> {
                       CustomTextField(title: "Description", width: Get.width, horizontalPadding: 0,hintText: "Write a short description about your report.",maxLines: 2,),
                       sh5,
                       Row(children: [
-                        CustomButton(title: "Cancel", width: Get.width / 2.8, color: AppColors.light,titleColor: AppColors.black,),
-                        CustomButton(title: "Got The Pet", width: Get.width / 2.8, color: AppColors.mainColor,),
+                        CustomButton(
+                          onTap: () {
+                            Get.back();
+                          },
+                          title: "Cancel", width: Get.width / 2.8, color: AppColors.light,titleColor: AppColors.black,),
+                        CustomButton(
+                          onTap: () {
+                            Get.back();
+                          },
+                          title: "Got The Pet", width: Get.width / 2.8, color: AppColors.mainColor,),
                       ],)
                     ],
                   ),

@@ -69,16 +69,12 @@ class MessageView extends GetView<MessageController> {
                           width: 110,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
-                            gradient: const LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: [AppColors.gradient2, AppColors.gradient1],
-                            ),
+                            color: AppColors.olive
                           ),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image.asset(AppImages.search,scale: 3,),
+                              Image.asset(AppImages.search,scale: 2,),
                               Text("Lost Pets",style: h2,)
                             ],
                           ),
@@ -222,7 +218,7 @@ class MessageView extends GetView<MessageController> {
                         onTap: () => Get.to(() => ResourcesView()),
                         child: Column(
                           children: [
-                            Image.asset(AppImages.more, scale: 4),
+                            Image.asset(AppImages.more, scale: 15),
                             Text("More Resources", style: h3.copyWith(fontSize: 13)),
                           ],
                         ),

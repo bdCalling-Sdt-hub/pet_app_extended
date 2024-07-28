@@ -78,7 +78,7 @@ class LoginView extends StatelessWidget {
               ),
             ),
             sh30,
-            CustomButton(ontap: () => Get.to(() => DashboardView()),title: "Sign In", width: Get.width, color: AppColors.mainColor),
+            CustomButton(onTap: () => Get.to(() => DashboardView()),title: "Sign In", width: Get.width, color: AppColors.mainColor),
             sh100,
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

@@ -23,21 +23,34 @@ class ProfileView extends GetView<ProfileController> {
               children: [
                 Container(
                   decoration: BoxDecoration(
-                      color: AppColors.proLight.withOpacity(0.5),
+                      color: AppColors.oliveLight,
                       borderRadius: BorderRadius.circular(20)),
                   child: Column(
                     children: [
                       Stack(
                         clipBehavior: Clip.none,
                         children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(20),
-                            child: ImageFiltered(
-                                imageFilter:
-                                    ImageFilter.blur(sigmaX: 3, sigmaY: 3),
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: AppColors.olive,
+                                  spreadRadius: 0,
+                                  blurRadius: 7,
+                                  offset: Offset(0, 3),
+                                ),
+                              ],
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: ImageFiltered(
+                                imageFilter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
                                 child: Image.asset(
                                   AppImages.allPets,
-                                )),
+                                ),
+                              ),
+                            ),
                           ),
                           Positioned(
                             top: 30,
@@ -129,7 +142,7 @@ class ProfileView extends GetView<ProfileController> {
                 sh20,
                 Container(
                   decoration: BoxDecoration(
-                      color: AppColors.proLight.withOpacity(0.5),
+                      color: AppColors.oliveLight,
                       borderRadius: BorderRadius.circular(20)),
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),

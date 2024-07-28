@@ -26,12 +26,10 @@ class CreatePetView extends GetView {
       ),
       body: Stack(
         children: [
-          Image.asset(AppImages.dogCat),
-          Container(
-            width: Get.width,
+          SizedBox(
             height: Get.height,
-            color: AppColors.white.withOpacity(0.7),
-          ),
+              width: Get.width,
+              child: Image.asset(AppImages.backgroundImage, fit: BoxFit.fill,)),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 14.0),
             child: Column(
@@ -43,11 +41,7 @@ class CreatePetView extends GetView {
                     width: Get.width,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [AppColors.gradient2, AppColors.gradient1],
-                      ),
+                      color: AppColors.olive
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -97,11 +91,7 @@ class CreatePetView extends GetView {
                     width: Get.width,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [AppColors.gradient2, AppColors.gradient1],
-                      ),
+                        color: AppColors.olive
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -151,11 +141,7 @@ class CreatePetView extends GetView {
                     width: Get.width,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [AppColors.gradient2, AppColors.gradient1],
-                      ),
+                        color: AppColors.olive
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),

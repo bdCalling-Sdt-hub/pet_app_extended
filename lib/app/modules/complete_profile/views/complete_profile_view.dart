@@ -124,7 +124,7 @@ class CompleteProfileView extends StatelessWidget {
               ),
             ),
             sh20,
-            CustomButton(ontap: () => Get.to(() => ProfileLocationView()),title: "Next", width: Get.width, color: AppColors.mainColor,),
+            CustomButton(onTap: () => Get.to(() => ProfileLocationView()),title: "Next", width: Get.width, color: AppColors.mainColor,),
             sh10,
         
           ],

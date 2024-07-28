@@ -11,22 +11,23 @@ class CustomButton extends StatelessWidget {
   final Color? borderColor;
   final double? horizontalPadding;
   final Color? titleColor;
-  final Function()? ontap;
+  final Function()? onTap;
+
   const CustomButton({
     super.key,
     required this.title,
     required this.width,
     required this.color,
-     this.borderColor,
+    this.borderColor,
     this.horizontalPadding,
-     this.titleColor,
-    this.ontap,
+    this.titleColor,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: ontap,
+      onTap: onTap,
       child: Padding(
         padding:  EdgeInsets.symmetric(horizontal: horizontalPadding != null? horizontalPadding! : 20,),
         child: Container(
@@ -35,7 +36,7 @@ class CustomButton extends StatelessWidget {
           decoration: BoxDecoration(
               color: color,
               borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: borderColor != null ? borderColor! : color)
+              border: Border.all(color: borderColor != null ? borderColor! : color)
           ),
           child: Center(child: Text(title,style: h2.copyWith(color: titleColor != null ? titleColor! : AppColors.white),),),
         ),

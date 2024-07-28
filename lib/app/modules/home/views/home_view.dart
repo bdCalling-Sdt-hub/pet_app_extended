@@ -17,6 +17,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 
+import '../../lost_pets/views/all_found_pets_view.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends StatelessWidget {
@@ -152,6 +153,9 @@ class HomeView extends StatelessWidget {
                           }),
                     ),
                     sh10,
+
+                    ///<<<================ My Pets ==========================>>>
+
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -161,7 +165,7 @@ class HomeView extends StatelessWidget {
                               fontSize: 20, color: AppColors.mainColor),
                         ),
                         InkWell(
-                          onTap: () => Get.to(() => MyPetsView()),
+                          onTap: () => Get.to(() => const MyPetsView()),
                           child: Text(
                             "See all",
                             style:
@@ -180,12 +184,15 @@ class HomeView extends StatelessWidget {
                           itemBuilder: (context, index) {
                             return GestureDetector(
                                 onTap: (){
-                                  Get.to(() => PetDetailsView());
+                                  Get.to(() => const PetDetailsView());
                                 },
                                 child: myPetsWidget());
                           }),
                     ),
                     sh10,
+
+                    ///<<<==================== Lost Pets ====================>>>
+
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -195,7 +202,7 @@ class HomeView extends StatelessWidget {
                               fontSize: 20, color: AppColors.mainColor),
                         ),
                         GestureDetector(
-                          onTap: () => Get.to(() => AllLostPetsView()),
+                          onTap: () => Get.to(() => const AllLostPetsView()),
                           child: Text(
                             "See all",
                             style:
@@ -207,15 +214,49 @@ class HomeView extends StatelessWidget {
                     sh10,
                     ListView.builder(
                         shrinkWrap: true,
-                        itemCount: 12,
+                        itemCount: 5,
                         physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          return GestureDetector(
+                              onTap: (){
+                                Get.to(() => const PetDetailsView());
+                              },
+                              child: petsList());
+                        }),
+                    sh10,
+
+
+                    ///<<<<================= Found Pets ====================>>>>
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Found Pets",
+                          style: h2.copyWith(
+                              fontSize: 20, color: AppColors.mainColor),
+                        ),
+                        GestureDetector(
+                          onTap: () => Get.to(() => const AllFoundPetsView()),
+                          child: Text(
+                            "See all",
+                            style:
+                            h2.copyWith(fontSize: 18, color: AppColors.ash),
+                          ),
+                        ),
+                      ],
+                    ),
+                    sh10,
+                    ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: 5,
                         itemBuilder: (context, index) {
                           return GestureDetector(
                               onTap: (){
                                 Get.to(() => PetDetailsView());
                               },
-                              child: lostPetsList());
-                        })
+                              child: petsList());
+                        }),
                   ],
                 ),
               )

@@ -35,7 +35,7 @@ class ResetPasswordView extends GetView {
                     CustomTextField(title: "New Password", width: Get.width,hintText: "Password",sufIcon: Icon(CupertinoIcons.eye_slash),),
                     CustomTextField(title: "Confirm New Password", width: Get.width,hintText: "Password",sufIcon: Icon(CupertinoIcons.eye_slash),),
                     sh100,
-                    CustomButton(ontap: () => Get.to(() => LoginView()),title: "Reset Password", width: Get.width, color: AppColors.mainColor),
+                    CustomButton(onTap: () => Get.to(() => LoginView()),title: "Reset Password", width: Get.width, color: AppColors.mainColor),
                     sh50,
                   ],
                 ),

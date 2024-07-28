@@ -38,7 +38,7 @@ class AllLostPetsView extends GetView {
                       onTap: (){
                         Get.to(() => PetDetailsView());
                       },
-                      child: lostPetsList());
+                      child: petsList());
                 }),
           ),
         ],

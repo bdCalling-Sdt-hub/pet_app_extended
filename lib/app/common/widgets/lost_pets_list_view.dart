@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-Padding lostPetsList() {
+Padding petsList() {
   return Padding(
     padding: const EdgeInsets.symmetric(vertical: 5.0),
     child: Container(
@@ -50,13 +50,14 @@ Padding lostPetsList() {
               ],
             ),
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Icon(
                   CupertinoIcons.location_solid,
                   color: AppColors.mainColor,
                 ),
                 SizedBox(
-                    width: 50.w,
+                    width: 70.w,
                     child: Text(
                       "Puerta del Sol, 28013 Madrid, Spain.",
                       style: h5.copyWith(fontSize: 12),

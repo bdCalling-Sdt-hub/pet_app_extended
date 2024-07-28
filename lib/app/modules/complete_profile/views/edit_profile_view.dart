@@ -118,7 +118,7 @@ class EditProfileView extends StatelessWidget {
               ),
               CustomTextField(title: "Address", width: Get.width,hintText: "Enter your address",),
               sh20,
-              CustomButton(ontap: (){},title: "Update", width: Get.width, color: AppColors.mainColor,),
+              CustomButton(onTap: (){},title: "Update", width: Get.width, color: AppColors.mainColor,),
               sh10,
 
             ],

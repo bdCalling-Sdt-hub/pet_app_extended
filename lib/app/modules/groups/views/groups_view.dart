@@ -25,7 +25,7 @@ class GroupsView extends GetView<GroupsController> {
         centerTitle: true,
         actions: [
           GestureDetector(
-            onTap: () => Get.to(() => NotificationsView(),),
+            onTap: () => Get.to(() => const NotificationsView(),),
             child: Image.asset(
               AppImages.notification,
               scale: 4,
@@ -101,11 +101,7 @@ class GroupsView extends GetView<GroupsController> {
                         width: 108.w,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          gradient: const LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [AppColors.gradient2, AppColors.gradient1],
-                          ),
+                          color: AppColors.olive
                         ),
                         child: Padding(
                           padding: const EdgeInsets.symmetric(

@@ -56,12 +56,7 @@ class AdoptionView extends GetView<AdoptionController> {
       body: Stack(
 
         children: [
-          Image.asset(AppImages.dogCat),
-          Container(
-            width: Get.width,
-            height: Get.height,
-            color: AppColors.white.withOpacity(0.7),
-          ),
+          Image.asset(AppImages.backgroundImage),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 14.0),
             child: Column(
@@ -123,15 +118,19 @@ class AdoptionView extends GetView<AdoptionController> {
                             onTap: (){
                               Get.to(() => PetDetailsView());
                             },
-                            child: lostPetsList());
+                            child: petsList());
                       }),
                 ),
               ],
             ),
-          )
+          ),
+          Positioned(
+            bottom: 0,
+              left: 0,
+              right: 0,
+              child: Image.asset(AppImages.ads, scale: 4,))
         ],
       ),
-      bottomNavigationBar: Image.asset(AppImages.ads, scale: 4,),
     );
   }
 }

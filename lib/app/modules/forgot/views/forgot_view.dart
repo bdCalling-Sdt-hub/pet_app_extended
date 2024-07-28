@@ -34,7 +34,7 @@ class ForgotView extends GetView<ForgotController> {
                   sh50,
                   CustomTextField(title: "Email", width: Get.width,hintText: "Enter your email",),
                   sh100,
-                  CustomButton(ontap: () => Get.to(() => VerifyView()),title: "Get OTP", width: Get.width, color: AppColors.mainColor),
+                  CustomButton(onTap: () => Get.to(() => VerifyView()),title: "Get OTP", width: Get.width, color: AppColors.mainColor),
                   sh50,
                 ],
               ),

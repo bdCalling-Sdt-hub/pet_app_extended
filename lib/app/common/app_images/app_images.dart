@@ -55,6 +55,8 @@ class AppImages{
   static const lagPrint = "assets/icons/lag-print.png";
   static const veterinary = "assets/icons/veterinary.png";
   static const archiveIcon = "assets/icons/archiveIcon.png";
+  static const deleteIcon = "assets/icons/delete.png";
+  static const refreshIcon = "assets/icons/refresh.png";
 
   //app images
   static const onboarding = "assets/images/onboarding.png";
@@ -75,6 +77,5 @@ class AppImages{
   static const demoProfileImg = "assets/images/demoProfileImg.png";
   static const emergencyTab = "assets/images/emergencyTab.png";
   static const noImage = "assets/images/noImage.png";
-
-
+  static const backgroundImage = "assets/images/backgroundImage.png";
 }

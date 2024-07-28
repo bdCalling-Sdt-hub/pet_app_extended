@@ -6,7 +6,7 @@ import 'package:felpus/app/modules/menu/views/create_pet_view.dart';
 import 'package:felpus/app/modules/menu/views/faq_view.dart';
 import 'package:felpus/app/modules/menu/views/password_change_view.dart';
 import 'package:felpus/app/modules/menu/views/report_found_pet_view.dart';
-import 'package:felpus/app/modules/menu/views/report_los_pet_view.dart';
+import 'package:felpus/app/modules/menu/views/report_lost_pet_view.dart';
 import 'package:felpus/app/modules/menu/views/settings_view.dart';
 import 'package:felpus/app/modules/menu/views/your_pet_view.dart';
 import 'package:felpus/app/modules/profile/views/profile_view.dart';
@@ -95,7 +95,7 @@ class MenuView extends GetView<MenuDataController> {
                   ),
                   profileCard(image: AppImages.memberCard, title: 'Your Pet Cards', onTap: () { Get.to(() => YourPetView()); }),
                   profileCard(image: AppImages.vaccinations, title: 'Create Pet Cards', onTap: () { Get.to(() => CreatePetView()); }),
-                  profileCard(image: AppImages.report, title: 'Report Los Pet', onTap: () { Get.to(() => ReportLosPetView()); }),
+                  profileCard(image: AppImages.report, title: 'Report Lost Pet', onTap: () { Get.to(() => ReportLosPetView()); }),
                   profileCard(image: AppImages.clipboard, title: 'Report Found Pet', onTap: () { Get.to(() => ReportFoundPetView()); }),
                   profileCard(image: AppImages.question, title: 'FAQ', onTap: () { Get.to(() => FaqView()); }),
                   profileCard(image: AppImages.setting, title: 'Settings', onTap: () {Get.to(() => SettingsView());   }),

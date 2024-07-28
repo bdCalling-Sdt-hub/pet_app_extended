@@ -49,91 +49,95 @@ class LostPetsView extends GetView<LostPetsController> {
           sw10,
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 14.0),
-        child: Stack(
+      body: Stack(
 
-          children: [
-            Image.asset(AppImages.dogCat),
-            Container(
-              width: Get.width,
-              height: Get.height,
-              color: AppColors.white.withOpacity(0.7),
+        children: [
+          Image.asset(AppImages.backgroundImage, fit: BoxFit.fill, height: Get.height, width: Get.width,),
+          // Container(
+          //   width: Get.width,
+          //   height: Get.height,
+          //   color: AppColors.white.withOpacity(0.7),
+          // ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.0),
+            child: Column(
+              children: [
+                sh10,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Lost Pets",
+                      style: h2.copyWith(
+                          fontSize: 20, color: AppColors.mainColor),
+                    ),
+                    GestureDetector(
+                      onTap: () => Get.to(() => AllLostPetsView()),
+                      child: Text(
+                        "See all",
+                        style:
+                        h2.copyWith(fontSize: 18, color: AppColors.ash),
+                      ),
+                    ),
+                  ],
+                ),
+                sh10,
+                Expanded(
+                  flex: 1,
+                  child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: 12,
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                            onTap: (){
+                              Get.to(() => PetDetailsView());
+                            },
+                            child: petsList());
+                      }),
+                ),
+                sh10,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Found Pets",
+                      style: h2.copyWith(
+                          fontSize: 20, color: AppColors.mainColor),
+                    ),
+                    GestureDetector(
+                      onTap: () => Get.to(() => AllFoundPetsView()),
+                      child: Text(
+                        "See all",
+                        style:
+                        h2.copyWith(fontSize: 18, color: AppColors.ash),
+                      ),
+                    ),
+                  ],
+                ),
+                sh10,
+                Expanded(
+                  flex: 1,
+                  child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: 12,
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                            onTap: (){
+                              Get.to(() => PetDetailsView());
+                            },
+                            child: petsList());
+                      }),
+                ),
+              ],
             ),
-          Column(
-            children: [
-              sh10,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Lost Pets",
-                    style: h2.copyWith(
-                        fontSize: 20, color: AppColors.mainColor),
-                  ),
-                  GestureDetector(
-                    onTap: () => Get.to(() => AllLostPetsView()),
-                    child: Text(
-                      "See all",
-                      style:
-                      h2.copyWith(fontSize: 18, color: AppColors.ash),
-                    ),
-                  ),
-                ],
-              ),
-              sh10,
-              Expanded(
-                flex: 1,
-                child: ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: 12,
-                    itemBuilder: (context, index) {
-                      return GestureDetector(
-                          onTap: (){
-                            Get.to(() => PetDetailsView());
-                          },
-                          child: lostPetsList());
-                    }),
-              ),
-              sh10,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Found Pets",
-                    style: h2.copyWith(
-                        fontSize: 20, color: AppColors.mainColor),
-                  ),
-                  GestureDetector(
-                    onTap: () => Get.to(() => AllFoundPetsView()),
-                    child: Text(
-                      "See all",
-                      style:
-                      h2.copyWith(fontSize: 18, color: AppColors.ash),
-                    ),
-                  ),
-                ],
-              ),
-              sh10,
-              Expanded(
-                flex: 1,
-                child: ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: 12,
-                    itemBuilder: (context, index) {
-                      return GestureDetector(
-                          onTap: (){
-                            Get.to(() => PetDetailsView());
-                          },
-                          child: lostPetsList());
-                    }),
-              ),
-            ],
-          )
-          ],
-        ),
+          ),
+          Positioned(
+            bottom: 0,
+              right: 0,
+              left: 0,
+              child: Image.asset(AppImages.ads, scale: 4,)),
+        ],
       ),
-      bottomNavigationBar: Image.asset(AppImages.ads, scale: 4,),
     );
   }
 }

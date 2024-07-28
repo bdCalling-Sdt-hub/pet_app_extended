@@ -51,7 +51,7 @@ class OnboardingView extends GetView<OnboardingController> {
                       Image.asset(controller.onboardingList[index]["image"]),
                       sh20,
                       CustomButton(
-                          ontap: () {
+                          onTap: () {
                             if(index !=2){
                               if(controller.currentPosition <= controller.onboardingList.length - 1 ){
                                 controller.updatePosition();

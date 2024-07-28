@@ -83,7 +83,7 @@ class VerifyView extends GetView {
                       ],
                     ),
                     sh100,
-                    CustomButton(ontap: () => purpose == "sign up"? Get.to(() => CompleteProfileView()):Get.to(() => ResetPasswordView()),title: "Verify", width: Get.width, color: AppColors.mainColor),
+                    CustomButton(onTap: () => purpose == "sign up"? Get.to(() => CompleteProfileView()):Get.to(() => ResetPasswordView()),title: "Verify", width: Get.width, color: AppColors.mainColor),
                     sh50,
                   ],
                 ),

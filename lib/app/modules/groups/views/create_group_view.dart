@@ -217,7 +217,7 @@ class _CreateGroupViewState extends State<CreateGroupView> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CustomButton(title: "Cancel", width: Get.width / 2.8, color: AppColors.light,titleColor: AppColors.black,),
-              CustomButton(ontap: (){
+              CustomButton(onTap: (){
                 _printSelectedIndices();
               },title: "Create Group", width: Get.width / 2.8, color: AppColors.mainColor),
             ],

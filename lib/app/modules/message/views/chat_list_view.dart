@@ -1,6 +1,7 @@
 
 import 'package:felpus/app/common/widgets/custom_textfelid.dart';
 import 'package:felpus/app/modules/message/controllers/message_controller.dart';
+import 'package:felpus/app/modules/message/views/message_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -32,12 +33,12 @@ class ChatListView extends StatelessWidget {
       body: GetBuilder<MessageController>(builder: (controller) {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: Column(
-            children: [
-              CustomTextField(title: "", hintText: "Search your message", width: Get.width, sufIcon: Icon(Icons.search),),
-              sh10,
-              Obx(() {
-                return Padding(
+          child: Obx(() {
+            return Column(
+              children: [
+                CustomTextField(title: "", hintText: "Search your message", width: Get.width, sufIcon: Icon(Icons.search),),
+                sh10,
+                Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Row(
                     children: [
@@ -84,51 +85,52 @@ class ChatListView extends StatelessWidget {
                       ),
                     ],
                   ),
-                );
-              },),
+                ),
 
-              controller.isInformation.value
-                  ? Expanded(
-                child: ListView.builder(
-                  // controller: _scrollController,
-                  itemCount: 10,
-                  itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () {
-                      },
-                      child: ChatListItem(
-                        image: "https://shorturl.at/2iMPa",
-                        name: "Henry",
-                        message: "They are at my place.",
-                        time: "10 :15",
-                        numberOfMessages: 5,
-                      ),
-                    );
-                  },
-                ),
-              )
-                  : Expanded(
-                child: ListView.builder(
-                  // controller: _scrollController,
-                  itemCount: 10,
-                  itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () {
-                      },
-                      child: ChatListItem(
-                        image: "https://shorturl.at/2iMPa",
-                        name: "Henry",
-                        message: "You: I got my pet",
-                        time: "10 :15",
-                        numberOfMessages: 5,
-                        isArchived: true,
-                      ),
-                    );
-                  },
-                ),
-              )
-            ],
-          ),
+                controller.isInformation.value
+                    ? Expanded(
+                  child: ListView.builder(
+                    // controller: _scrollController,
+                    itemCount: 10,
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                        onTap: () {
+                          Get.to(() => MessageView());
+                        },
+                        child: ChatListItem(
+                          image: "https://shorturl.at/2iMPa",
+                          name: "Henry",
+                          message: "They are at my place.",
+                          time: "10 :15",
+                          numberOfMessages: 5,
+                        ),
+                      );
+                    },
+                  ),
+                )
+                    : Expanded(
+                  child: ListView.builder(
+                    // controller: _scrollController,
+                    itemCount: 10,
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                        onTap: () {
+                        },
+                        child: ChatListItem(
+                          image: "https://shorturl.at/2iMPa",
+                          name: "Henry",
+                          message: "You: I got my pet",
+                          time: "10 :15",
+                          numberOfMessages: 5,
+                          isArchived: true,
+                        ),
+                      );
+                    },
+                  ),
+                )
+              ],
+            );
+          },),
         );
       },),
     );

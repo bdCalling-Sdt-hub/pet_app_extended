@@ -66,7 +66,7 @@ class SignupView extends StatelessWidget {
                 ),
               ),
               sh30,
-              CustomButton(ontap: (){
+              CustomButton(onTap: (){
                 Get.to(() => const VerifyView());
                 VerifyView.purpose =  "sign up";
               },title: "Sign Up", width: Get.width, color: AppColors.mainColor),

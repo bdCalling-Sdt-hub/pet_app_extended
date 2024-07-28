@@ -107,7 +107,7 @@ class ProfileLocationView extends GetView<ProfileLocationController> {
                 controller: completeProfileController.locationController,
                 title: "", width: Get.width,hintText: "Location details", preIcon: const Icon(Icons.location_on, color: AppColors.hintColor,),),
               sh10,
-              CustomButton(ontap: () => showCustomBottomSheet() ,title: "Next", width: Get.width, color: AppColors.mainColor,),
+              CustomButton(onTap: () => showCustomBottomSheet() ,title: "Next", width: Get.width, color: AppColors.mainColor,),
               sh10,
 
             ],
@@ -140,7 +140,12 @@ class ProfileLocationView extends GetView<ProfileLocationController> {
               Text("Your Account Has Been",style:  h3.copyWith(fontSize: 26,),textAlign: TextAlign.center,),
               Text("Successfully Completed.",style:  h3.copyWith(fontSize: 26,color: AppColors.mainColor),textAlign: TextAlign.center,),
               sh50,
-              CustomButton(ontap: () => Get.to(() => DashboardView()),title: "Finish", width: Get.width, color: AppColors.mainColor),
+              CustomButton(
+                  onTap: () => Get.to(() => DashboardView()),
+                  title: "Finish",
+                  width: Get.width,
+                  color: AppColors.mainColor,
+              ),
               sh10,
             ],
           ),

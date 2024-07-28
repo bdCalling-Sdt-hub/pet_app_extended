@@ -135,7 +135,7 @@ class _SelectPetsViewState extends State<SelectPetsView> {
             right: 0,
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 14.0),
-              child: CustomButton(ontap: () => Get.to(() => MessageView()),title: "New Message", width: Get.width, color: AppColors.white,titleColor: AppColors.black,),
+              child: CustomButton(onTap: () => Get.to(() => MessageView()),title: "New Message", width: Get.width, color: AppColors.white,titleColor: AppColors.black,),
             ),
           ),
         ],

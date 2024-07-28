@@ -40,9 +40,9 @@ class WelcomeView extends GetView<WelcomeController> {
             padding: const EdgeInsets.symmetric(horizontal: 12),
               child: Image.asset(AppImages.welcomeImg)),
           sh20,
-          CustomButton(ontap: () => Get.to(() => LoginView()),title: "Sign In", width: Get.width / 1.2, color: AppColors.mainColor),
+          CustomButton(onTap: () => Get.to(() => LoginView()),title: "Sign In", width: Get.width / 1.2, color: AppColors.mainColor),
           sh15,
-          CustomButton(ontap: () => Get.to(() => SignupView()),title: "Sign Up", width: Get.width / 1.2, color: AppColors.white,borderColor: AppColors.mainColor,titleColor: AppColors.black,),
+          CustomButton(onTap: () => Get.to(() => SignupView()),title: "Sign Up", width: Get.width / 1.2, color: AppColors.white,borderColor: AppColors.mainColor,titleColor: AppColors.black,),
 
         ],
       )

@@ -1,3 +1,4 @@
+import 'package:felpus/app/common/Extension/extension.dart';
 import 'package:felpus/app/common/app_images/app_images.dart';
 import 'package:felpus/app/common/size_box/custom_sizebox.dart';
 import 'package:felpus/app/common/widgets/custom_button.dart';
@@ -69,11 +70,7 @@ class _YourPetViewState extends State<YourPetView> {
                           width: 158.w,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            gradient: LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: selectedPet == index ? [AppColors.mainColor, AppColors.mainColor] : [AppColors.gradient2, AppColors.gradient1],
-                            ),
+                            color: AppColors.olive
                           ),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 6),
@@ -134,10 +131,10 @@ class _YourPetViewState extends State<YourPetView> {
             right: 0,
             child: Column(
               children: [
-                CustomButton(title: "Update Your Pet Card", width: Get.width, color: AppColors.light, titleColor: AppColors.black,),
-                sh5,
-                CustomButton(title: "Delete Your Pet Card", width: Get.width, color: AppColors.light, titleColor: AppColors.black,),
-                sh20,
+                petCardButton(onTap: () {},tittle: "Update Your Pet Card", width: Get.width, buttonColor: AppColors.light, titleColor: AppColors.black, height: 60, icon: AppImages.refreshIcon,),
+                10.height,
+                petCardButton(onTap: () {},tittle: "Delete Your Pet Card", width: Get.width, buttonColor: AppColors.light, titleColor: AppColors.black, height: 60, icon: AppImages.deleteIcon,),
+                20.height,
               ],
             ),
           ),
@@ -153,4 +150,39 @@ class _YourPetViewState extends State<YourPetView> {
       ),*/
     );
   }
+
+  GestureDetector petCardButton({required VoidCallback onTap,required String tittle, required double height, required double width, required Color titleColor, required Color buttonColor, required String icon}) {
+    return GestureDetector(
+                onTap: onTap,
+                child: Padding(
+                  padding:  const EdgeInsets.symmetric(horizontal: 20,),
+                  child: Container(
+                    height: height,
+                    width: width,
+                    decoration: BoxDecoration(
+                        color: buttonColor,
+                        borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppColors.black.withOpacity(0.3), // Shadow color
+                          spreadRadius: 0, // Spread radius
+                          blurRadius: 5, // Blur radius
+                          offset: Offset(1, 2), // Offset in x and y
+                        ),
+                      ],
+                    ),
+                    child: Row(
+
+                      children: [
+                        30.width,
+                        Image.asset(icon, scale: icon == "assets/icons/delete.png"? 2 : 1,),
+                        30.width,
+                        Center(child: Text(tittle,style: h2.copyWith(color: titleColor),),),
+                      ],
+                    ),
+                  ),
+                ),
+              );
+  }
+
 }
