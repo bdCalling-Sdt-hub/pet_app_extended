@@ -140,33 +140,33 @@ class MessageView extends GetView<MessageController> {
                         ),
                       ),
                       sh10,
-                      ChatMessage(
+                      const ChatMessage(
                           text: "I arrived home after work and my pets aren't here. Has anyone seen them?",
                           time: "06:35 PM",
                           isSentByMe: true),
-                      ChatMessage(
+                      const ChatMessage(
                           text: "Hey, Santiago! I saw someone at your door an hour ago.",
                           time: "06:55 PM",
                           isSentByMe: false),
-                      ChatMessage(
+                      const ChatMessage(
                           text: "I arrived home after work and my pets aren't here. Has anyone seen them?",
                           time: "06:35 PM",
                           isSentByMe: true),
-                      ChatMessage(
+                      const ChatMessage(
                           text: "Hey, Santiago! I saw someone at your door an hour ago.",
                           time: "06:55 PM",
-                          isSentByMe: false), ChatMessage(
+                          isSentByMe: false), const ChatMessage(
                           text: "I arrived home after work and my pets aren't here. Has anyone seen them?",
                           time: "06:35 PM",
                           isSentByMe: true),
-                      ChatMessage(
+                      const ChatMessage(
                           text: "Hey, Santiago! I saw someone at your door an hour ago.",
                           time: "06:55 PM",
-                          isSentByMe: false), ChatMessage(
+                          isSentByMe: false), const ChatMessage(
                           text: "I arrived home after work and my pets aren't here. Has anyone seen them?",
                           time: "06:35 PM",
                           isSentByMe: true),
-                      ChatMessage(
+                      const ChatMessage(
                           text: "Hey, Santiago! I saw someone at your door an hour ago.",
                           time: "06:55 PM",
                           isSentByMe: false),
@@ -215,7 +215,7 @@ class MessageView extends GetView<MessageController> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       GestureDetector(
-                        onTap: () => Get.to(() => ResourcesView()),
+                        onTap: () => Get.to(() => const ResourcesView()),
                         child: Column(
                           children: [
                             Image.asset(AppImages.more, scale: 15),

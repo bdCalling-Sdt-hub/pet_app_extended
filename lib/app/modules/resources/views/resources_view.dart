@@ -1,4 +1,5 @@
 import 'package:felpus/app/common/size_box/custom_sizebox.dart';
+import 'package:felpus/app/common/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -22,6 +23,11 @@ class _ResourcesViewState extends State<ResourcesView> {
     'Item 3',
     'Item 4',
   ];
+
+  RxBool isFirstAidTapped = false.obs;
+  RxBool isVetsNearbyTapped = false.obs;
+  RxBool isPetSheltersTapped = false.obs;
+  RxBool isCallFiremanTapped = false.obs;
 
   final Map<int, bool> selectedItems = {};
   void _printSelectedIndices() {
@@ -109,263 +115,272 @@ class _ResourcesViewState extends State<ResourcesView> {
                 sh15,
                 GestureDetector(
                   onTap: (){
-                    Get.bottomSheet(
-                      Container(
-                        width: Get.width,
-                        decoration: const BoxDecoration(
-                          color: AppColors.white,
-                          borderRadius: BorderRadius.only(topLeft: Radius.circular(40),topRight: Radius.circular(40)),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16.0,vertical: 10),
-                          child: SingleChildScrollView(
-                            child: Column(
-                              children: [
-                                sh10,
-                                Container(
-                                  height: 2,
-                                  width: 100,
-                                  color: AppColors.grayLight,
-                                ),
-                               Row(
-                                 mainAxisAlignment: MainAxisAlignment.center,
-                                 children: [
+                    isFirstAidTapped.value = !isFirstAidTapped.value;
+                    isVetsNearbyTapped.value = false;
+                    isPetSheltersTapped.value = false;
+                    isCallFiremanTapped.value = false;
 
-                                   Text("First Aid",style:  h3.copyWith(fontSize: 26,color: AppColors.mainColor),textAlign: TextAlign.center,),
-                                   sw5,
-                                   Text("Resources.",style:  h3.copyWith(fontSize: 26,color: AppColors.black),textAlign: TextAlign.center,),
-                                 ],
-                               ),
-                                sh10,
-                                ListTile(
-                                title: Text("Vital signs monitoring."),
-                                leading: Image.asset(AppImages.monitoring,scale: 4,),
-                                trailing: GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                     // selectedItems[index] = !(selectedItems[index] ?? false);
-                                    });
-                                  },
-                                  child: Container(
-                                    decoration: const ShapeDecoration(
-                                      shape: CircleBorder(
-                                        side: BorderSide(
-                                          width: 2.0,
-                                          color: AppColors.mainColor,
-                                        ),
-                                      ),
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(1.0),
+                    if(isFirstAidTapped.value){
+                      Get.bottomSheet(
+                        Container(
+                          width: Get.width,
+                          decoration: const BoxDecoration(
+                            color: AppColors.white,
+                            borderRadius: BorderRadius.only(topLeft: Radius.circular(40),topRight: Radius.circular(40)),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16.0,vertical: 10),
+                            child: SingleChildScrollView(
+                              child: Column(
+                                children: [
+                                  sh10,
+                                  Container(
+                                    height: 2,
+                                    width: 100,
+                                    color: AppColors.grayLight,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+
+                                      Text("First Aid",style:  h3.copyWith(fontSize: 26,color: AppColors.mainColor),textAlign: TextAlign.center,),
+                                      sw5,
+                                      Text("Resources.",style:  h3.copyWith(fontSize: 26,color: AppColors.black),textAlign: TextAlign.center,),
+                                    ],
+                                  ),
+                                  sh10,
+                                  ListTile(
+                                    title: CustomText(text: "Monitorizacion de signos vitales"),
+                                    leading: Image.asset(AppImages.monitoring,scale: 4,),
+                                    trailing: GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          // selectedItems[index] = !(selectedItems[index] ?? false);
+                                        });
+                                      },
                                       child: Container(
-                                        decoration: ShapeDecoration(
-                                          shape: CircleBorder(),
-                                          color: AppColors.mainColor ,
+                                        decoration: const ShapeDecoration(
+                                          shape: CircleBorder(
+                                            side: BorderSide(
+                                              width: 2.0,
+                                              color: AppColors.mainColor,
+                                            ),
+                                          ),
                                         ),
-                                        child: SizedBox(
-                                          width: 16.0,
-                                          height: 16.0,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(1.0),
+                                          child: Container(
+                                            decoration: ShapeDecoration(
+                                              shape: CircleBorder(),
+                                              color: AppColors.mainColor ,
+                                            ),
+                                            child: SizedBox(
+                                              width: 16.0,
+                                              height: 16.0,
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     ),
                                   ),
-                                ),
+                                  ListTile(
+                                    title: const CustomText(text: "Maniobra de Heimlich para Ahogos"),
+                                    leading: Image.asset(AppImages.heimlich,scale: 4,),
+                                    trailing: GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          // selectedItems[index] = !(selectedItems[index] ?? false);
+                                        });
+                                      },
+                                      child: Container(
+                                        decoration: const ShapeDecoration(
+                                          shape: CircleBorder(
+                                            side: BorderSide(
+                                              width: 2.0,
+                                              color: AppColors.mainColor,
+                                            ),
+                                          ),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(1.0),
+                                          child: Container(
+                                            decoration: const ShapeDecoration(
+                                              shape: CircleBorder(),
+                                              color: AppColors.mainColor ,
+                                            ),
+                                            child: const SizedBox(
+                                              width: 16.0,
+                                              height: 16.0,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  ListTile(
+                                    title: CustomText(text: "RCP (Resucitación Cardiopulmonar)"),
+                                    leading: Image.asset(AppImages.heart,scale: 4,),
+                                    trailing: GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          // selectedItems[index] = !(selectedItems[index] ?? false);
+                                        });
+                                      },
+                                      child: Container(
+                                        decoration: const ShapeDecoration(
+                                          shape: CircleBorder(
+                                            side: BorderSide(
+                                              width: 2.0,
+                                              color: AppColors.mainColor,
+                                            ),
+                                          ),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(1.0),
+                                          child: Container(
+                                            decoration: const ShapeDecoration(
+                                              shape: CircleBorder(),
+                                              color: AppColors.mainColor ,
+                                            ),
+                                            child: const SizedBox(
+                                              width: 16.0,
+                                              height: 16.0,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  ListTile(
+                                    title: CustomText(text: "Manejo de convulsiones",),
+                                    leading: Image.asset(AppImages.seizure,scale: 4,),
+                                    trailing: GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          // selectedItems[index] = !(selectedItems[index] ?? false);
+                                        });
+                                      },
+                                      child: Container(
+                                        decoration: const ShapeDecoration(
+                                          shape: CircleBorder(
+                                            side: BorderSide(
+                                              width: 2.0,
+                                              color: AppColors.mainColor,
+                                            ),
+                                          ),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(1.0),
+                                          child: Container(
+                                            decoration: const ShapeDecoration(
+                                              shape: CircleBorder(),
+                                              color: AppColors.mainColor ,
+                                            ),
+                                            child: const SizedBox(
+                                              width: 16.0,
+                                              height: 16.0,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  ListTile(
+                                    title: const Text("Smoke Inhalation."),
+                                    leading: Image.asset(AppImages.smoke,scale: 4,),
+                                    trailing: GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          // selectedItems[index] = !(selectedItems[index] ?? false);
+                                        });
+                                      },
+                                      child: Container(
+                                        decoration: const ShapeDecoration(
+                                          shape: CircleBorder(
+                                            side: BorderSide(
+                                              width: 2.0,
+                                              color: AppColors.mainColor,
+                                            ),
+                                          ),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(1.0),
+                                          child: Container(
+                                            decoration: const ShapeDecoration(
+                                              shape: CircleBorder(),
+                                              color: AppColors.mainColor ,
+                                            ),
+                                            child: const SizedBox(
+                                              width: 16.0,
+                                              height: 16.0,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  ListTile(
+                                    title: const Text("Treatment of burns\n and heat stroke."),
+                                    leading: Image.asset(AppImages.treatment,scale: 4,),
+                                    trailing: GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          // selectedItems[index] = !(selectedItems[index] ?? false);
+                                        });
+                                      },
+                                      child: Container(
+                                        decoration: const ShapeDecoration(
+                                          shape: CircleBorder(
+                                            side: BorderSide(
+                                              width: 2.0,
+                                              color: AppColors.mainColor,
+                                            ),
+                                          ),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(1.0),
+                                          child: Container(
+                                            decoration: const ShapeDecoration(
+                                              shape: CircleBorder(),
+                                              color: AppColors.mainColor ,
+                                            ),
+                                            child: const SizedBox(
+                                              width: 16.0,
+                                              height: 16.0,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+
+
+                                ],
                               ),
-                                ListTile(
-                                  title: const Text("Treatment of burns\n and heat stroke."),
-                                  leading: Image.asset(AppImages.treatment,scale: 4,),
-                                  trailing: GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        // selectedItems[index] = !(selectedItems[index] ?? false);
-                                      });
-                                    },
-                                    child: Container(
-                                      decoration: const ShapeDecoration(
-                                        shape: CircleBorder(
-                                          side: BorderSide(
-                                            width: 2.0,
-                                            color: AppColors.mainColor,
-                                          ),
-                                        ),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(1.0),
-                                        child: Container(
-                                          decoration: const ShapeDecoration(
-                                            shape: CircleBorder(),
-                                            color: AppColors.mainColor ,
-                                          ),
-                                          child: const SizedBox(
-                                            width: 16.0,
-                                            height: 16.0,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                ListTile(
-                                  title: const Text("Smoke Inhalation."),
-                                  leading: Image.asset(AppImages.smoke,scale: 4,),
-                                  trailing: GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        // selectedItems[index] = !(selectedItems[index] ?? false);
-                                      });
-                                    },
-                                    child: Container(
-                                      decoration: const ShapeDecoration(
-                                        shape: CircleBorder(
-                                          side: BorderSide(
-                                            width: 2.0,
-                                            color: AppColors.mainColor,
-                                          ),
-                                        ),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(1.0),
-                                        child: Container(
-                                          decoration: const ShapeDecoration(
-                                            shape: CircleBorder(),
-                                            color: AppColors.mainColor ,
-                                          ),
-                                          child: const SizedBox(
-                                            width: 16.0,
-                                            height: 16.0,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                ListTile(
-                                  title: const Text("Seizure management."),
-                                  leading: Image.asset(AppImages.seizure,scale: 4,),
-                                  trailing: GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        // selectedItems[index] = !(selectedItems[index] ?? false);
-                                      });
-                                    },
-                                    child: Container(
-                                      decoration: const ShapeDecoration(
-                                        shape: CircleBorder(
-                                          side: BorderSide(
-                                            width: 2.0,
-                                            color: AppColors.mainColor,
-                                          ),
-                                        ),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(1.0),
-                                        child: Container(
-                                          decoration: const ShapeDecoration(
-                                            shape: CircleBorder(),
-                                            color: AppColors.mainColor ,
-                                          ),
-                                          child: const SizedBox(
-                                            width: 16.0,
-                                            height: 16.0,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                ListTile(
-                                  title: const Text("Heimlich maneuver."),
-                                  leading: Image.asset(AppImages.heimlich,scale: 4,),
-                                  trailing: GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        // selectedItems[index] = !(selectedItems[index] ?? false);
-                                      });
-                                    },
-                                    child: Container(
-                                      decoration: const ShapeDecoration(
-                                        shape: CircleBorder(
-                                          side: BorderSide(
-                                            width: 2.0,
-                                            color: AppColors.mainColor,
-                                          ),
-                                        ),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(1.0),
-                                        child: Container(
-                                          decoration: const ShapeDecoration(
-                                            shape: CircleBorder(),
-                                            color: AppColors.mainColor ,
-                                          ),
-                                          child: const SizedBox(
-                                            width: 16.0,
-                                            height: 16.0,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                ListTile(
-                                  title: const Text("Cardiopulmonary\n Resuscitation."),
-                                  leading: Image.asset(AppImages.heart,scale: 4,),
-                                  trailing: GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        // selectedItems[index] = !(selectedItems[index] ?? false);
-                                      });
-                                    },
-                                    child: Container(
-                                      decoration: const ShapeDecoration(
-                                        shape: CircleBorder(
-                                          side: BorderSide(
-                                            width: 2.0,
-                                            color: AppColors.mainColor,
-                                          ),
-                                        ),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(1.0),
-                                        child: Container(
-                                          decoration: const ShapeDecoration(
-                                            shape: CircleBorder(),
-                                            color: AppColors.mainColor ,
-                                          ),
-                                          child: const SizedBox(
-                                            width: 16.0,
-                                            height: 16.0,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
                             ),
                           ),
                         ),
-                      ),
-                      barrierColor: Colors.black.withOpacity(0.5),
-                      isDismissible: true,
-                    );
+                        barrierColor: Colors.black.withOpacity(0.5),
+                        isDismissible: true,
+                      );
+                    }
                   },
-                  child: Container(
+                  child: Obx(() => Container(
                     height: 122,
                     width: 142,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        color: AppColors.pinkExtraLight
+                        color: isFirstAidTapped.value? AppColors.mainColor : AppColors.pinkExtraLight
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Image.asset(AppImages.firstAidKit,scale: 4,),
+                        Image.asset(AppImages.firstAidKit,scale: 4, color: isFirstAidTapped.value? AppColors.white : null),
                         sh5,
-                        Text("First Aid",style: h2.copyWith(fontSize: 20),textAlign: TextAlign.center,)
+                        Text("First Aid",style: h2.copyWith(fontSize: 20, color: isFirstAidTapped.value? AppColors.white : AppColors.black),textAlign: TextAlign.center, )
                       ],
                     ),
-                  ),
+                  )),
                 ),
               ],
             ),

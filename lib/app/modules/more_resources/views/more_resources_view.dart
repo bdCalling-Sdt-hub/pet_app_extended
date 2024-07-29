@@ -6,6 +6,8 @@ import '../controllers/more_resources_controller.dart';
 
 class MoreResourcesView extends GetView<MoreResourcesController> {
   const MoreResourcesView({Key? key}) : super(key: key);
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,6 +15,7 @@ class MoreResourcesView extends GetView<MoreResourcesController> {
         title: const Text('MoreResourcesView'),
         centerTitle: true,
       ),
+
       body: const Center(
         child: Text(
           'MoreResourcesView is working',

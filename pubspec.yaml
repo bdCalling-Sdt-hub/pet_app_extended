@@ -20,6 +20,11 @@ dependencies:
   geocoding: ^2.1.1
   flutter_svg: ^2.0.10+1
   cached_network_image: ^3.3.1
+  flutter_dotenv: ^5.1.0
+  shared_preferences: ^2.2.3
+  intl_phone_field: ^3.2.0
+  socket_io_client: ^2.0.3+1
+
 
 
 
@@ -36,4 +41,5 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
+    - assets/.env
 
