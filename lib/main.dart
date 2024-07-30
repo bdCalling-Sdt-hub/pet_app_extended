@@ -7,7 +7,6 @@ import 'app/routes/app_pages.dart';
 
 
 Future<void> main() async {
-
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: 'assets/.env');
 
