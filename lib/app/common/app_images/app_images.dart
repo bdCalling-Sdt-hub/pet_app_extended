@@ -55,8 +55,12 @@ class AppImages{
   static const lagPrint = "assets/icons/lag-print.png";
   static const veterinary = "assets/icons/veterinary.png";
   static const archiveIcon = "assets/icons/archiveIcon.png";
-  static const deleteIcon = "assets/icons/delete.png";
+  static const deleteIcon = "assets/icons/deleteIcon.png";
   static const refreshIcon = "assets/icons/refresh.png";
+  static const boneIcon = "assets/icons/bone.png";
+  static const crossIcon = "assets/icons/crossIcon.png";
+  static const aidIcon = "assets/icons/aidIcon.png";
+  static const lightIcon = "assets/icons/lightIcon.png";
 
   //app images
   static const onboarding = "assets/images/onboarding.png";
