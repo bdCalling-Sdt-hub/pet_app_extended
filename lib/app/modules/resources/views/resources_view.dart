@@ -1,5 +1,6 @@
 import 'package:felpus/app/common/size_box/custom_sizebox.dart';
 import 'package:felpus/app/common/widgets/custom_text.dart';
+import 'package:felpus/app/modules/FirstAid/Views/monitorizacion.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -9,18 +10,11 @@ import '../../../common/app_images/app_images.dart';
 import '../../../common/app_text_style/styles.dart';
 import '../controllers/resources_controller.dart';
 
-class ResourcesView extends StatefulWidget {
-  const ResourcesView({super.key});
-
-  @override
-  State<ResourcesView> createState() => _ResourcesViewState();
-}
-
-class _ResourcesViewState extends State<ResourcesView> {
-
+class ResourcesView extends StatelessWidget {
+  ResourcesView({super.key});
 
   List firstAidItems = [
-    {"icon" : AppImages.monitoring, "title" : "Monitorizacion de signos vitales"},
+    {"icon" : AppImages.monitoring, "title" : "Monitorizacion de signos vitales", "onTap": () => Get.to(()=> Monitorizacion())},
     {"icon" : AppImages.heimlich, "title" : "Maniobra de Heimlich para Ahogos"},
     {"icon" : AppImages.heart, "title" : "RCP (Resucitación Cardiopulmonar)"},
     {"icon" : AppImages.seizure, "title" : "Manejo de convulsiones"},
@@ -39,11 +33,15 @@ class _ResourcesViewState extends State<ResourcesView> {
   ];
 
   RxBool isFirstAidTapped = false.obs;
+
   RxBool isVetsNearbyTapped = false.obs;
+
   RxBool isPetSheltersTapped = false.obs;
+
   RxBool isCallFiremanTapped = false.obs;
 
   final Map<int, bool> selectedItems = {};
+
   void _printSelectedIndices() {
     final selectedIndices = selectedItems.entries
         .where((entry) => entry.value)
@@ -51,6 +49,7 @@ class _ResourcesViewState extends State<ResourcesView> {
         .toList();
     print('Selected indices: $selectedIndices');
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,7 +64,7 @@ class _ResourcesViewState extends State<ResourcesView> {
       ),
       body: Stack(
         children: [
-          Image.asset(AppImages.multiPets),
+          Image.asset(AppImages.lotsOfPets),
           Container(
             width: Get.width,
             height: Get.height,
@@ -138,13 +137,16 @@ class _ResourcesViewState extends State<ResourcesView> {
                       Get.bottomSheet(
                         Container(
                           width: Get.width,
-                          height: 700,
+                          height: 600,
                           decoration: const BoxDecoration(
                             color: AppColors.white,
-                            borderRadius: BorderRadius.only(topLeft: Radius.circular(40),topRight: Radius.circular(40)),
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(40),
+                              topRight: Radius.circular(40),
+                            ),
                           ),
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16.0,vertical: 10),
+                            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10),
                             child: Column(
                               children: [
                                 sh10,
@@ -156,10 +158,17 @@ class _ResourcesViewState extends State<ResourcesView> {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-
-                                    Text("First Aid",style:  h3.copyWith(fontSize: 26,color: AppColors.mainColor),textAlign: TextAlign.center,),
+                                    Text(
+                                      "First Aid",
+                                      style: h3.copyWith(fontSize: 26, color: AppColors.mainColor),
+                                      textAlign: TextAlign.center,
+                                    ),
                                     sw5,
-                                    Text("Resources.",style:  h3.copyWith(fontSize: 26,color: AppColors.black),textAlign: TextAlign.center,),
+                                    Text(
+                                      "Resources.",
+                                      style: h3.copyWith(fontSize: 26, color: AppColors.black),
+                                      textAlign: TextAlign.center,
+                                    ),
                                   ],
                                 ),
                                 sh10,
@@ -167,43 +176,49 @@ class _ResourcesViewState extends State<ResourcesView> {
                                   child: ListView.builder(
                                     itemCount: firstAidItems.length,
                                     itemBuilder: (context, index) {
-                                    return GestureDetector(
-                                      child: ListTile(
-                                        title: CustomText(text: firstAidItems[index]["title"]),
-                                        leading: Image.asset(firstAidItems[index]["icon"],scale: 4 ),
-                                        trailing: Container(
-                                          decoration: const ShapeDecoration(
-                                            shape: CircleBorder(
-                                              side: BorderSide(
-                                                width: 2.0,
-                                                color: AppColors.mainColor,
+                                      return GestureDetector(
+                                        onTap: firstAidItems[index]["onTap"],
+                                        child: ListTile(
+                                          title: CustomText(text: firstAidItems[index]["title"]),
+                                          leading: Image.asset(
+                                            firstAidItems[index]["icon"],
+                                            scale: 4,
+                                          ),
+                                          trailing: Container(
+                                            decoration: const ShapeDecoration(
+                                              shape: CircleBorder(
+                                                side: BorderSide(
+                                                  width: 2.0,
+                                                  color: AppColors.mainColor,
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(1.0),
-                                            child: Container(
-                                              decoration: const ShapeDecoration(
-                                                shape: CircleBorder(),
-                                                color: AppColors.mainColor ,
-                                              ),
-                                              child: const SizedBox(
-                                                width: 16.0,
-                                                height: 16.0,
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(1.0),
+                                              child: Container(
+                                                decoration: const ShapeDecoration(
+                                                  shape: CircleBorder(),
+                                                  color: AppColors.mainColor,
+                                                ),
+                                                child: const SizedBox(
+                                                  width: 16.0,
+                                                  height: 16.0,
+                                                ),
                                               ),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                    );
-                                  },),
-                                )
+                                      );
+                                    },
+                                  ),
+                                ),
                               ],
                             ),
                           ),
                         ),
                         barrierColor: Colors.black.withOpacity(0.5),
                         isDismissible: true,
+                        isScrollControlled: true, // Allows the bottom sheet to take the full height
                       );
                     }
                   },

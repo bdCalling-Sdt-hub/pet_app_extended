@@ -150,7 +150,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.RESOURCES,
-      page: () => const ResourcesView(),
+      page: () => ResourcesView(),
       binding: ResourcesBinding(),
     ),
   ];

@@ -61,6 +61,7 @@ class AppImages{
   static const crossIcon = "assets/icons/crossIcon.png";
   static const aidIcon = "assets/icons/aidIcon.png";
   static const lightIcon = "assets/icons/lightIcon.png";
+  static const dotPoint = "assets/icons/dotPoint.png";
 
   //app images
   static const onboarding = "assets/images/onboarding.png";
@@ -82,4 +83,6 @@ class AppImages{
   static const emergencyTab = "assets/images/emergencyTab.png";
   static const noImage = "assets/images/noImage.png";
   static const backgroundImage = "assets/images/backgroundImage.png";
+  static const emergencyPet = "assets/images/emergencyPet.png";
+  static const lotsOfPets = "assets/images/lotsOfPets.png";
 }
