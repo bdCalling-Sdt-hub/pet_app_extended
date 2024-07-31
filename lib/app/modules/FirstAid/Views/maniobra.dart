@@ -202,117 +202,12 @@ class Maniobra extends StatelessWidget {
               ),
             ),
             16.height,
-            const Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  width: double.infinity,
-                  child: Text(
-                    'Recuerda:',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontFamily: 'Urbanist',
-                      fontWeight: FontWeight.w600,
-                      height: 0,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 5),
-                SizedBox(
-                  width: double.infinity,
-                  child: Text.rich(
-                    TextSpan(
-                      children: [
-                        TextSpan(
-                          text: '1. Mantén la calma:',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 13,
-                            fontFamily: 'Urbanist',
-                            fontWeight: FontWeight.w700,
-                            height: 0,
-                          ),
-                        ),
-                        TextSpan(
-                          text: ' Es fundamental que te mantengas calmado para poder actuar con claridad y salvar a tu mascota.\n',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 13,
-                            fontFamily: 'Urbanist',
-                            fontWeight: FontWeight.w400,
-                            height: 0,
-                          ),
-                        ),
-                        TextSpan(
-                          text: '2. Actúa rápido:',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 13,
-                            fontFamily: 'Urbanist',
-                            fontWeight: FontWeight.w700,
-                            height: 0,
-                          ),
-                        ),
-                        TextSpan(
-                          text: ' El tiempo es crucial en casos de atragantamiento. Cuanto antes realices la maniobra de Heimlich, mayor será la probabilidad de salvar a tu mascota.\n',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 13,
-                            fontFamily: 'Urbanist',
-                            fontWeight: FontWeight.w400,
-                            height: 0,
-                          ),
-                        ),
-                        TextSpan(
-                          text: '3. No intentes meter los dedos en la boca de tu mascota:',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 13,
-                            fontFamily: 'Urbanist',
-                            fontWeight: FontWeight.w700,
-                            height: 0,
-                          ),
-                        ),
-                        TextSpan(
-                          text: ' Esto podría empeorar la obstrucción y causar más daño.\n',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 13,
-                            fontFamily: 'Urbanist',
-                            fontWeight: FontWeight.w400,
-                            height: 0,
-                          ),
-                        ),
-                        TextSpan(
-                          text: '4. Si no estás seguro de qué hacer:',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 13,
-                            fontFamily: 'Urbanist',
-                            fontWeight: FontWeight.w700,
-                            height: 0,
-                          ),
-                        ),
-                        TextSpan(
-                          text: ' Si no estás seguro de si tu mascota se está ahogando o cómo realizar la maniobra de Heimlich, no dudes en llamar a tu veterinario o buscar ayuda profesional de inmediato.',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 13,
-                            fontFamily: 'Urbanist',
-                            fontWeight: FontWeight.w400,
-                            height: 0,
-                          ),
-                        ),
-                      ],
-                    ),
-                    textAlign: TextAlign.justify,
-                  ),
-                ),
-              ],
-            ),
+            CustomTitleText(titleText: "Recuerda:"),
+            6.height,
+            DotRow(titleText: "Mantén la calma:",text: " Es fundamental que te mantengas calmado para poder actuar con claridad y salvar a tu mascota."),
+            DotRow(titleText: "Actúa rápido:",text: " El tiempo es crucial en casos de atragantamiento. Cuanto antes realices la maniobra de Heimlich, mayor será la probabilidad de salvar a tu mascota."),
+            DotRow(titleText: "No intentes meter los dedos en la boca de tu mascota:",text: " Esto podría empeorar la obstrucción y causar más daño."),
+            DotRow(titleText: "Si no estás seguro de qué hacer:",text: " Si no estás seguro de si tu mascota se está ahogando o cómo realizar la maniobra de Heimlich, no dudes en llamar a tu veterinario o buscar ayuda profesional de inmediato."),
             20.height
           ],
         ),

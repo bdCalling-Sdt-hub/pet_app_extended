@@ -186,7 +186,10 @@ class RCPGuideScreen extends StatelessWidget {
               ),
             ),
             CustomTitleText(titleText: "Recuerda:"),
-            DotRow(titleText: "Mantén la calma:",text: " Es fundamental que te mantengas calmado para poder realizar la RCP de manera efectiva.")
+            DotRow(titleText: "Mantén la calma:",text: " Es fundamental que te mantengas calmado para poder realizar la RCP de manera efectiva."),
+            DotRow(titleText: "Actúa rápido:",text: " El tiempo es crucial en casos de paro cardíaco o respiratorio. Inicia la RCP de inmediato y continúa hasta que tu mascota muestre signos de recuperación o hasta que llegue la ayuda veterinaria."),
+            DotRow(titleText: "No dudes en pedir ayuda:",text: " Si no estás seguro de cómo realizar la RCP o si te sientes abrumado, no dudes en pedir ayuda a un familiar, amigo o vecino que pueda colaborar o llamar a un veterinario para obtener instrucciones por teléfono."),
+            20.height
           ],
         ),
       ),
