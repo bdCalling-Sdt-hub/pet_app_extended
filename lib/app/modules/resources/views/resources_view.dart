@@ -1,7 +1,7 @@
 import 'package:felpus/app/common/size_box/custom_sizebox.dart';
 import 'package:felpus/app/common/widgets/custom_text.dart';
-import 'package:felpus/app/modules/FirstAid/Views/maniobra.dart';
-import 'package:felpus/app/modules/FirstAid/Views/monitorizacion.dart';
+import 'package:felpus/app/modules/FirstAid/Views/maniobra_screen.dart';
+import 'package:felpus/app/modules/FirstAid/Views/monitorizacion_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -9,7 +9,9 @@ import 'package:get/get.dart';
 import '../../../common/app_color/app_colors.dart';
 import '../../../common/app_images/app_images.dart';
 import '../../../common/app_text_style/styles.dart';
+import '../../FirstAid/Views/manejo_screen.dart';
 import '../../FirstAid/Views/rcp_guide_screen.dart';
+import '../../FirstAid/Views/tratamiento_fracturas.dart';
 import '../controllers/resources_controller.dart';
 
 class ResourcesView extends StatelessWidget {
@@ -19,8 +21,8 @@ class ResourcesView extends StatelessWidget {
     {"icon" : AppImages.monitoring, "title" : "Monitorizacion de signos vitales", "onTap": () => Get.to(()=> Monitorizacion())},
     {"icon" : AppImages.heimlich, "title" : "Maniobra de Heimlich para Ahogos", "onTap": () => Get.to(()=> Maniobra())},
     {"icon" : AppImages.heart, "title" : "RCP (Resucitación Cardiopulmonar)", "onTap": () => Get.to(()=> RCPGuideScreen())},
-    {"icon" : AppImages.seizure, "title" : "Manejo de convulsiones"},
-    {"icon" : AppImages.boneIcon , "title" : "Tratamiento de fracturas"},
+    {"icon" : AppImages.seizure, "title" : "Manejo de convulsiones", "onTap": () => Get.to(()=> ManejoScreen())},
+    {"icon" : AppImages.boneIcon , "title" : "Tratamiento de fracturas", "onTap": () => Get.to(()=> TratamientoFracturas())},
     {"icon" : AppImages.crossIcon , "title" : "Traslado de Mascota Lesionada"},
     {"icon" : AppImages.aidIcon , "title" : "Tratamiento Quemaduras y Golpes de Calor"},
     {"icon" : AppImages.smoke , "title" : "Inhalación de Humo"},

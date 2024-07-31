@@ -96,5 +96,8 @@ class AppImages{
   static const maniobra_3 = "assets/images/maniobra_3.png";
   static const rcp_screen_1 = "assets/images/rcp_screen-1.png";
   static const rcp_screen_2 = "assets/images/rcp_screen-2.png";
+  static const manejo_1 = "assets/images/manejo_1.png";
+  static const manejo_2 = "assets/images/manejo_2.png";
+  static const tratamientoFracturas = "assets/images/tratamiento_fracturas.png";
 
 }

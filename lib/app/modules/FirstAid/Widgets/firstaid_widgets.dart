@@ -117,21 +117,30 @@ class CustomTitleText extends StatelessWidget {
     super.key,
     required this.titleText,
     this.textAlignment = Alignment.centerLeft,
+    this.isDecoration = true,
+    this.fontSize = 18,
+    this.leftPadding = 0,
   });
 
   final String titleText;
   final Alignment textAlignment;
+  final bool isDecoration;
+  final double fontSize;
+  final double leftPadding;
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-        alignment: textAlignment,
-        child: CustomText(
-          textAlign: TextAlign.center,
-          text: titleText,
-          isTextDecoration: true,
-          fontSize: 18,
-          fontWeight: FontWeight.w600,
-        ));
+    return Padding(
+      padding: EdgeInsets.only(left: leftPadding),
+      child: Align(
+          alignment: textAlignment,
+          child: CustomText(
+            textAlign: TextAlign.center,
+            text: titleText,
+            isTextDecoration: isDecoration,
+            fontSize: fontSize,
+            fontWeight: FontWeight.w600,
+          )),
+    );
   }
 }
