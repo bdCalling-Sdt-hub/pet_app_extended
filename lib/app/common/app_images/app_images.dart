@@ -85,4 +85,16 @@ class AppImages{
   static const backgroundImage = "assets/images/backgroundImage.png";
   static const emergencyPet = "assets/images/emergencyPet.png";
   static const lotsOfPets = "assets/images/lotsOfPets.png";
+
+  ///First aid images
+
+  static const monitorizacion1 = "assets/images/monitorizacion-1.png";
+  static const monitorizacion2 = "assets/images/monitorizacion-2.png";
+  static const monitorizacion3 = "assets/images/monitorizacion-3.png";
+  static const maniobra_1 = "assets/images/maniobra_1.png";
+  static const maniobra_2 = "assets/images/maniobra_2.png";
+  static const maniobra_3 = "assets/images/maniobra_3.png";
+  static const rcp_screen_1 = "assets/images/rcp_screen-1.png";
+  static const rcp_screen_2 = "assets/images/rcp_screen-2.png";
+
 }

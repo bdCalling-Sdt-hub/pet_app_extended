@@ -1,5 +1,6 @@
 import 'package:felpus/app/common/size_box/custom_sizebox.dart';
 import 'package:felpus/app/common/widgets/custom_text.dart';
+import 'package:felpus/app/modules/FirstAid/Views/maniobra.dart';
 import 'package:felpus/app/modules/FirstAid/Views/monitorizacion.dart';
 import 'package:flutter/material.dart';
 
@@ -8,6 +9,7 @@ import 'package:get/get.dart';
 import '../../../common/app_color/app_colors.dart';
 import '../../../common/app_images/app_images.dart';
 import '../../../common/app_text_style/styles.dart';
+import '../../FirstAid/Views/rcp_guide_screen.dart';
 import '../controllers/resources_controller.dart';
 
 class ResourcesView extends StatelessWidget {
@@ -15,8 +17,8 @@ class ResourcesView extends StatelessWidget {
 
   List firstAidItems = [
     {"icon" : AppImages.monitoring, "title" : "Monitorizacion de signos vitales", "onTap": () => Get.to(()=> Monitorizacion())},
-    {"icon" : AppImages.heimlich, "title" : "Maniobra de Heimlich para Ahogos"},
-    {"icon" : AppImages.heart, "title" : "RCP (Resucitación Cardiopulmonar)"},
+    {"icon" : AppImages.heimlich, "title" : "Maniobra de Heimlich para Ahogos", "onTap": () => Get.to(()=> Maniobra())},
+    {"icon" : AppImages.heart, "title" : "RCP (Resucitación Cardiopulmonar)", "onTap": () => Get.to(()=> RCPGuideScreen())},
     {"icon" : AppImages.seizure, "title" : "Manejo de convulsiones"},
     {"icon" : AppImages.boneIcon , "title" : "Tratamiento de fracturas"},
     {"icon" : AppImages.crossIcon , "title" : "Traslado de Mascota Lesionada"},
