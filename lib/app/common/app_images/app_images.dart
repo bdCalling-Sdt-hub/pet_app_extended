@@ -99,5 +99,10 @@ class AppImages{
   static const manejo_1 = "assets/images/manejo_1.png";
   static const manejo_2 = "assets/images/manejo_2.png";
   static const tratamientoFracturas = "assets/images/tratamiento_fracturas.png";
+  static const trasladoMascota = "assets/images/trasladoMascota.png";
+  static const tratamientoQuemadura = "assets/images/tratamientoQuemadura.png";
+  static const tratamientoInhalacion_1 = "assets/images/tratamientoInhalacion_1.png";
+  static const tratamientoInhalacion_2 = "assets/images/tratamientoInhalacion_2.png";
+  static const tipsParaEncontrar = "assets/images/tipsParaEncontrar.png";
 
 }

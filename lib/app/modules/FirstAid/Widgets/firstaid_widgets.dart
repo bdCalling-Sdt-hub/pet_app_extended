@@ -17,7 +17,7 @@ class FirstAidAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      toolbarHeight: 80,
+      toolbarHeight: 100,
       // centerTitle: true,
       title: Padding(
         padding: const EdgeInsets.only(top: 16.0),

@@ -2,6 +2,8 @@ import 'package:felpus/app/common/size_box/custom_sizebox.dart';
 import 'package:felpus/app/common/widgets/custom_text.dart';
 import 'package:felpus/app/modules/FirstAid/Views/maniobra_screen.dart';
 import 'package:felpus/app/modules/FirstAid/Views/monitorizacion_screen.dart';
+import 'package:felpus/app/modules/FirstAid/Views/tratamiento_inhalacion.dart';
+import 'package:felpus/app/modules/FirstAid/Views/tratamiento_quemadura.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -11,6 +13,7 @@ import '../../../common/app_images/app_images.dart';
 import '../../../common/app_text_style/styles.dart';
 import '../../FirstAid/Views/manejo_screen.dart';
 import '../../FirstAid/Views/rcp_guide_screen.dart';
+import '../../FirstAid/Views/traslado_mascota.dart';
 import '../../FirstAid/Views/tratamiento_fracturas.dart';
 import '../controllers/resources_controller.dart';
 
@@ -23,9 +26,9 @@ class ResourcesView extends StatelessWidget {
     {"icon" : AppImages.heart, "title" : "RCP (Resucitación Cardiopulmonar)", "onTap": () => Get.to(()=> RCPGuideScreen())},
     {"icon" : AppImages.seizure, "title" : "Manejo de convulsiones", "onTap": () => Get.to(()=> ManejoScreen())},
     {"icon" : AppImages.boneIcon , "title" : "Tratamiento de fracturas", "onTap": () => Get.to(()=> TratamientoFracturas())},
-    {"icon" : AppImages.crossIcon , "title" : "Traslado de Mascota Lesionada"},
-    {"icon" : AppImages.aidIcon , "title" : "Tratamiento Quemaduras y Golpes de Calor"},
-    {"icon" : AppImages.smoke , "title" : "Inhalación de Humo"},
+    {"icon" : AppImages.crossIcon , "title" : "Traslado de Mascota Lesionada", "onTap": () => Get.to(()=> TrasladoMascota())},
+    {"icon" : AppImages.aidIcon , "title" : "Tratamiento Quemaduras y Golpes de Calor", "onTap": () => Get.to(()=> TratamientoQuemadura())},
+    {"icon" : AppImages.smoke , "title" : "Inhalación de Humo", "onTap": () => Get.to(()=> TratamientoInhalacion())},
     {"icon" : AppImages.lightIcon , "title" : "Tips Para Encontrar tu Mascota Perdida"},
   ];
 
