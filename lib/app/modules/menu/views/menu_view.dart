@@ -2,6 +2,7 @@ import 'package:felpus/app/common/app_color/app_colors.dart';
 import 'package:felpus/app/common/app_images/app_images.dart';
 import 'package:felpus/app/common/app_text_style/styles.dart';
 import 'package:felpus/app/common/size_box/custom_sizebox.dart';
+import 'package:felpus/app/common/widgets/CustomPopUP/pop_up.dart';
 import 'package:felpus/app/modules/menu/views/create_pet_view.dart';
 import 'package:felpus/app/modules/menu/views/faq_view.dart';
 import 'package:felpus/app/modules/menu/views/password_change_view.dart';
@@ -100,8 +101,12 @@ class MenuView extends GetView<MenuDataController> {
                   profileCard(image: AppImages.clipboard, title: 'Report Found Pet', onTap: () { Get.to(() => ReportFoundPetView()); }),
                   profileCard(image: AppImages.question, title: 'FAQ', onTap: () { Get.to(() => FaqView()); }),
                   profileCard(image: AppImages.setting, title: 'Settings', onTap: () {Get.to(() => SettingsView());   }),
-                  profileCard(image: AppImages.logout, title: 'Log Out', onTap: () {  }),
-
+                  profileCard(
+                      image: AppImages.logout,
+                      title: 'Log Out',
+                      onTap: () {
+                        PopUp.logOutPopUp();
+                      }),
                 ]
             ),
           ),
