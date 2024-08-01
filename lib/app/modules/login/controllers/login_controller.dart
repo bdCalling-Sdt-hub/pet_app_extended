@@ -1,14 +1,10 @@
 import 'dart:convert';
-
-import 'package:felpus/app/modules/home/views/home_view.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:developer' as print;
 
 import '../../../common/App_Urls/app_urls.dart';
-import '../../../common/App_Utils/app_utils.dart';
-import '../../../common/helper/other_helper.dart';
 import '../../../common/helper/prefs_helper.dart';
 import '../../../common/services/api_service.dart';
 import '../../dashboard/views/dashboard_view.dart';
@@ -43,33 +39,30 @@ class LoginController extends GetxController {
         var responseData = jsonDecode(response.body);
 
         PrefsHelper.token = responseData['data']['accessToken'];
-        PrefsHelper.setString("token", responseData['data']['accessToken']);
-
-
         print.log("Token : ================>>>${PrefsHelper.token}");
 
-        if(responseData['data']['user']['emailVerified']){
+          PrefsHelper.userId = responseData['data']['_id'];
+          PrefsHelper.userName = responseData['data']['fullName'];
+          PrefsHelper.userImageUrl = responseData['data']['photo'];
+          PrefsHelper.userEmail = responseData['data']['email'];
 
-          PrefsHelper.userId = responseData['data']['user']['_id'];
-          PrefsHelper.userName = responseData['data']['user']['name'];
-          PrefsHelper.userPhone = responseData['data']['user']['phoneNumber'];
-          PrefsHelper.userImageUrl = responseData['data']['user']['image'];
-          PrefsHelper.userEmail = responseData['data']['user']['email'];
+        if(isChecked.value){
+          PrefsHelper.setString("token", responseData['data']['accessToken']);
+          PrefsHelper.setString("userId", responseData['data']['_id']);
+          PrefsHelper.setString("userName", responseData['data']['name']);
+          PrefsHelper.setString("userImageUrl", responseData['data']['photo']);
+          PrefsHelper.setString("userEmail", responseData['data']['email']);
 
-          PrefsHelper.setString("userId", responseData['data']['user']['_id']);
-          PrefsHelper.setString("userName", responseData['data']['user']['name']);
-          PrefsHelper.setString("userPhone", responseData['data']['user']['phoneNumber']);
-          PrefsHelper.setString("userImageUrl", responseData['data']['user']['image']);
-          PrefsHelper.setString("userEmail", responseData['data']['user']['email']);
+          print.log(PrefsHelper.userId);
+          print.log(PrefsHelper.userName);
+          print.log(PrefsHelper.userImageUrl);
+          print.log(PrefsHelper.userEmail);
+        }
           // Get.to(()=> HomeView());
           Get.to(() => DashboardView());
           emailController.clear();
           passwordController.clear();
-        }else{
-          Utils.snackBarSuccessMessage("Your email isn't verified", "verify First...");
-          // await CallingOtp.getOtp(email: emailController.text);
-          // Get.toNamed(AppRoutes.oTPScreen, arguments: {"email" : emailController.text, "purpose" : "create account"});
-        }
+
       }else{
         print.log("${response.statusCode}, ${response.body}");
         Get.snackbar(response.statusCode.toString(), response.message);

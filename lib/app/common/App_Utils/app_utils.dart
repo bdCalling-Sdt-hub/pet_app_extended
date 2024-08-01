@@ -18,7 +18,44 @@ class Utils {
   }
 
   static toastMessage({required String message, IconData icon = Icons.check}) {
-    FToast fToast = FToast();
+
+    final overlay = Overlay.of(Get.context!);
+    final overlayEntry = OverlayEntry(
+      builder: (context) => Positioned(
+        bottom: 50,
+        left: MediaQuery.of(context).size.width * 0.2,
+        child: Material(
+          color: Colors.transparent,
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(25.0),
+              color: bgColor,
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SvgPicture.asset(
+                  svgPath,
+                  width: 24,
+                  height: 24,
+                  color: Colors.white,
+                ),
+                SizedBox(width: 12.0),
+                Text(
+                  message,
+                  style: TextStyle(color: Colors.white),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+
+    overlay.insert(overlayEntry);
+    Future.delayed(Duration(seconds: 2)).then((value) => overlayEntry.remove());
+
 
     if (Get.context != null) {
       fToast.init(Get.context!);
