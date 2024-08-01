@@ -122,12 +122,21 @@ class TratamientoInhalacion extends StatelessWidget {
             DotRow(titleText: "Detalles del incidente:",text: " Informa al veterinario sobre la exposición al humo, la duración y los síntomas observados."),
 
 
-            CustomTitleText(titleText: "Paso 5: Monitoreo en el camino al veterinario", isDecoration: false,),
-            CustomTitleText(titleText: "1. Lavar los ojos:", isDecoration: false, fontSize: 14, leftPadding: 6,),
-            DotRow(titleText: "Solución salina:",text: " Si los ojos están irritados, enjuágalos suavemente con solución salina o agua limpia."),
-            CustomTitleText(titleText: "1. Lavar los ojos:", isDecoration: false, fontSize: 14, leftPadding: 6,),
-            DotRow(titleText: "Solución salina:",text: " Si los ojos están irritados, enjuágalos suavemente con solución salina o agua limpia."),
-
+            Text(
+              'Paso 5: Monitoreo en el camino al veterinario',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 16,
+                fontFamily: 'Urbanist',
+                fontWeight: FontWeight.w600,
+                height: 0,
+              ),
+            ),
+            CustomTitleText(titleText: "1. Transporte adecuado:", isDecoration: false, fontSize: 14, leftPadding: 6,),
+            DotRow(titleText: "Ambiente seguro:",text: " Mantén a la mascota en una posición cómoda y tranquila durante el transporte. Asegúrate de que reciba aire fresco."),
+            CustomTitleText(titleText: "2. Observación continua:", isDecoration: false, fontSize: 14, leftPadding: 6,),
+            DotRow(titleText: "Signos de empeoramiento:",text: " Observa cualquier cambio en la respiración, el comportamiento o la condición física de la mascota."),
+            20.height
           ],
         ),
       ),

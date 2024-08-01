@@ -2,6 +2,7 @@ import 'package:felpus/app/common/size_box/custom_sizebox.dart';
 import 'package:felpus/app/common/widgets/custom_text.dart';
 import 'package:felpus/app/modules/FirstAid/Views/maniobra_screen.dart';
 import 'package:felpus/app/modules/FirstAid/Views/monitorizacion_screen.dart';
+import 'package:felpus/app/modules/FirstAid/Views/tips_para_encontrar.dart';
 import 'package:felpus/app/modules/FirstAid/Views/tratamiento_inhalacion.dart';
 import 'package:felpus/app/modules/FirstAid/Views/tratamiento_quemadura.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +30,7 @@ class ResourcesView extends StatelessWidget {
     {"icon" : AppImages.crossIcon , "title" : "Traslado de Mascota Lesionada", "onTap": () => Get.to(()=> TrasladoMascota())},
     {"icon" : AppImages.aidIcon , "title" : "Tratamiento Quemaduras y Golpes de Calor", "onTap": () => Get.to(()=> TratamientoQuemadura())},
     {"icon" : AppImages.smoke , "title" : "Inhalación de Humo", "onTap": () => Get.to(()=> TratamientoInhalacion())},
-    {"icon" : AppImages.lightIcon , "title" : "Tips Para Encontrar tu Mascota Perdida"},
+    {"icon" : AppImages.lightIcon , "title" : "Tips Para Encontrar tu Mascota Perdida", "onTap": () => Get.to(()=> TipsParaEncontrar())},
   ];
 
   final List<String> items = [
