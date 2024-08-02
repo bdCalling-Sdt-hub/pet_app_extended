@@ -96,7 +96,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
               Text(widget.optional == true? "(Optional)" : "",style: h3.copyWith(color: AppColors.light),),
             ],
           ),
-          widget.title == ""? const SizedBox() :const SizedBox(height: 12,),
+          widget.title == ""? const SizedBox() :const SizedBox(height: 8,),
           TextFormField(
 
             onTap: widget.onTap,

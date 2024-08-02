@@ -11,4 +11,5 @@ class AppUrls {
   static String notification = "$baseUrl/notification";
   static String myPet = "$baseUrl/pets/my/pet/";
   static String pet = "$baseUrl/pets";
+  static String petAdd = "$baseUrl/pets/add";
 }
