@@ -12,8 +12,10 @@ import '../../../common/size_box/custom_sizebox.dart';
 import '../../../common/widgets/custom_button.dart';
 
 class VerifyView extends GetView {
+
   const VerifyView({super.key});
   static String purpose = "";
+
   @override
   Widget build(BuildContext context) {
     

@@ -80,7 +80,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.FORGOT,
-      page: () => const ForgotView(),
+      page: () => ForgotView(),
       binding: ForgotBinding(),
     ),
     GetPage(

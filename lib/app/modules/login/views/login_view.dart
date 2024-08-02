@@ -6,6 +6,7 @@ import 'package:felpus/app/common/widgets/custom_loader.dart';
 import 'package:felpus/app/common/widgets/custom_text_field.dart';
 import 'package:felpus/app/common/widgets/custom_textfelid.dart';
 import 'package:felpus/app/modules/dashboard/views/dashboard_view.dart';
+import 'package:felpus/app/modules/forgot/controllers/forgot_controller.dart';
 import 'package:felpus/app/modules/forgot/views/forgot_view.dart';
 import 'package:felpus/app/modules/signup/views/signup_view.dart';
 import 'package:flutter/cupertino.dart';
@@ -92,7 +93,7 @@ class LoginView extends StatelessWidget {
                         ],
                       ),
                       GestureDetector(
-                          onTap: () => Get.to(() => const ForgotView()),
+                          onTap: () => Get.to(() => ForgotView()),
                           child: Text("Forgot Password",style: h3.copyWith(decoration: TextDecoration.underline,),))
                     ],
                   ),

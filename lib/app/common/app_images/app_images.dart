@@ -63,6 +63,10 @@ class AppImages{
   static const lightIcon = "assets/icons/lightIcon.png";
   static const dotPoint = "assets/icons/dotPoint.png";
 
+  /// Svg Icons
+  static const wifiOff = "assets/icons/svgIcon/wifi_off.svg";
+  static const wifiOn = "assets/icons/svgIcon/wifi_on.svg";
+
   //app images
   static const onboarding = "assets/images/onboarding.png";
   static const onboarding2 = "assets/images/onboarding2.png";

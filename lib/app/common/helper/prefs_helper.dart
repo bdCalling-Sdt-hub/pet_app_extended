@@ -1,7 +1,7 @@
 import 'package:felpus/app/modules/login/views/login_view.dart';
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:developer' as print;
 
 
 class PrefsHelper {
@@ -59,9 +59,9 @@ class PrefsHelper {
     isCoachSignIn = preferences.getBool("isCoachSignIn") ?? false;
     coachWorkingStatus = preferences.getBool("coachWorkingStatus") ?? false;
 
-    if (kDebugMode) {
-      print(userId);
-    }
+      print.log("UserID: =========>>> $userId");
+      print.log("Access Token: ======>>> $token");
+
   }
 
   ///<<<======================== Get All Data Form Shared Preference ============>

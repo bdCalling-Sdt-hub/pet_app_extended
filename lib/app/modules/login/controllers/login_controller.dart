@@ -40,6 +40,7 @@ class LoginController extends GetxController {
 
         PrefsHelper.token = responseData['data']['accessToken'];
         print.log("Token : ================>>>${PrefsHelper.token}");
+        print.log("isChecked : ================>>>${isChecked.value}");
 
           PrefsHelper.userId = responseData['data']['_id'];
           PrefsHelper.userName = responseData['data']['fullName'];

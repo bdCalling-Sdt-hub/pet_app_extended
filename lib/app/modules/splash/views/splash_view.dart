@@ -1,11 +1,13 @@
 import 'package:felpus/app/common/app_images/app_images.dart';
 import 'package:felpus/app/common/app_text_style/styles.dart';
+import 'package:felpus/app/common/helper/prefs_helper.dart';
 import 'package:felpus/app/modules/onboarding/views/onboarding_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 
+import '../../dashboard/views/dashboard_view.dart';
 import '../controllers/splash_controller.dart';
 
 class SplashView extends StatefulWidget {
@@ -25,7 +27,11 @@ class _SplashViewState extends State<SplashView> {
     super.initState();
   }
   chooseScreen() {
-    Get.offAll(() =>  OnboardingView());
+    if(PrefsHelper.token.isEmpty){
+      Get.offAll(() =>  OnboardingView());
+    }else{
+      Get.offAll(() => DashboardView());
+    }
   }
 /*    debugPrint("<<<<<<<<<<==userId: ${LocalStorage.getData(key: AppConstant.userId)}==>>>>>>>>>>>");
 
@@ -47,7 +53,6 @@ class _SplashViewState extends State<SplashView> {
           Center(child: Image.asset(AppImages.logo)),
           SizedBox(height: 78.h,),
           Text("Protect, Locate, Adopt. \nEnsuring Every Pet's Safety and Forever Home.",style: h3,textAlign: TextAlign.center,)
-
         ],
       )
     );

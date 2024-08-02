@@ -1,3 +1,4 @@
+import 'package:felpus/app/common/helper/prefs_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,6 +14,7 @@ Future<void> main() async {
   OtherService.checkConnection();
 
   await dotenv.load(fileName: 'assets/.env');
+  PrefsHelper.getAllPrefData();
 
   runApp(
     ScreenUtilInit(
