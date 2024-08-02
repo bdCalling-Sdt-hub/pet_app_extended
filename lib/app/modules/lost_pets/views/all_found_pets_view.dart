@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import '../../../common/app_color/app_colors.dart';
 import '../../../common/app_images/app_images.dart';
 import '../../../common/app_text_style/styles.dart';
+import '../../../model/pet_model.dart';
 
 class AllFoundPetsView extends GetView {
   const AllFoundPetsView({super.key});
@@ -39,7 +40,7 @@ class AllFoundPetsView extends GetView {
                       onTap: (){
                         Get.to(() => PetDetailsView());
                       },
-                      child: petsList());
+                      child: petsList(pet: PetModel.fromJson({})));
                 }),
           ),
         ],

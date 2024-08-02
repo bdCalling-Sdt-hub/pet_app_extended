@@ -7,4 +7,8 @@ class AppUrls {
   static String login = "$baseUrl/users/login";
   static String signUp = "$baseUrl/users/signup";
   static String forgotPassword = "$baseUrl/users/forget-password";
+  static String filterByTag = "$baseUrl/pets/search/for";
+  static String notification = "$baseUrl/notification";
+  static String myPet = "$baseUrl/pets/my/pet/";
+  static String pet = "$baseUrl/pets";
 }

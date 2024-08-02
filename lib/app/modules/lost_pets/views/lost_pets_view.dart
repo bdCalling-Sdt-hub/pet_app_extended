@@ -3,6 +3,7 @@ import 'package:felpus/app/common/app_images/app_images.dart';
 import 'package:felpus/app/common/app_text_style/styles.dart';
 import 'package:felpus/app/common/size_box/custom_sizebox.dart';
 import 'package:felpus/app/common/widgets/lost_pets_list_view.dart';
+import 'package:felpus/app/model/pet_model.dart';
 import 'package:felpus/app/modules/lost_pets/views/all_found_pets_view.dart';
 import 'package:felpus/app/modules/lost_pets/views/all_lost_pets_view.dart';
 import 'package:felpus/app/modules/notifications/views/notifications_view.dart';
@@ -93,7 +94,7 @@ class LostPetsView extends GetView<LostPetsController> {
                             onTap: (){
                               Get.to(() => PetDetailsView());
                             },
-                            child: petsList());
+                            child: petsList(pet: PetModel.fromJson({})));
                       }),
                 ),
                 sh10,
@@ -126,7 +127,7 @@ class LostPetsView extends GetView<LostPetsController> {
                             onTap: (){
                               Get.to(() => PetDetailsView());
                             },
-                            child: petsList());
+                            child: petsList(pet: PetModel.fromJson({})));
                       }),
                 ),
               ],

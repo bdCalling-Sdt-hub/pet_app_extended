@@ -1,5 +1,6 @@
 import 'package:felpus/app/common/size_box/custom_sizebox.dart';
 import 'package:felpus/app/common/widgets/my_pets_grid.dart';
+import 'package:felpus/app/model/pet_model.dart';
 import 'package:felpus/app/modules/pet_details/views/pet_details_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,7 @@ import '../../../common/app_text_style/styles.dart';
 
 class MyPetsView extends GetView {
   const MyPetsView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +51,7 @@ class MyPetsView extends GetView {
           sw10,
         ],
       ),
-      body:  Padding(
+      body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10.0),
         child: GridView.builder(
           shrinkWrap: true,
@@ -66,7 +68,7 @@ class MyPetsView extends GetView {
               onTap: () {
                 Get.to(() => PetDetailsView());
               },
-              child: myPetsWidget(),
+              child: myPetsWidget(pet: PetModel.fromJson({})),
             );
           },
         ),

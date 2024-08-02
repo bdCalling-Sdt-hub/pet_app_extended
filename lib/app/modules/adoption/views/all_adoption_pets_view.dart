@@ -12,6 +12,8 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
+import '../../../model/pet_model.dart';
+
 class AllAdoptionPetsView extends GetView {
   const AllAdoptionPetsView({super.key});
   @override
@@ -74,7 +76,7 @@ class AllAdoptionPetsView extends GetView {
                             onTap: (){
                               Get.to(() => PetDetailsView());
                             },
-                            child: petsList());
+                            child: petsList(pet: PetModel.fromJson({})));
                       }),
                 ),
               ],
