@@ -1,50 +1,67 @@
-import 'package:flutter/foundation.dart';
+import 'package:felpus/app/modules/login/views/login_view.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:developer' as print;
 
 
-class PrefsHelper extends GetxController {
+class PrefsHelper {
   static String token = "";
+  static bool isEmailVerified = false;
+  static bool coachWorkingStatus = false;
+
+  static String userRole = "";
   static bool isLogIn = false;
   static bool isNotifications = true;
   static String refreshToken = "";
   static String userId = "";
-  static String myImage = "";
-  static String myName = "";
-  static String myEmail = "";
-  static String myRole = "";
-  static String mySubscription = "shopping";
+  // static String myImage = "";
+  static String userName = "";
+  static String userEmail = "";
+  static String userPhone = "";
+  static String userImageUrl = "";
+  static String userDob = "";
+  static String userAge = "";
+  static String userGender = "";
+  static String userHeight = "";
+
   static String localizationLanguageCode = 'en';
   static String localizationCountryCode = 'US';
+  static bool isCoachSignIn = false;
 
   ///<<<======================== Get All Data Form Shared Preference ==============>
 
   static Future<void> getAllPrefData() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     token = preferences.getString("token") ?? "";
+    isEmailVerified = preferences.getBool("isEmailVerified") ?? false;
+
+    userRole = preferences.getString("userRole") ?? "";
     refreshToken = preferences.getString("refreshToken") ?? "";
     userId = preferences.getString("userId") ?? "";
-    myImage = preferences.getString("myImage") ?? "";
-    myName = preferences.getString("myName") ?? "";
-    myEmail = preferences.getString("myEmail") ?? "";
-    myRole = preferences.getString("myRole") ?? "";
+    // myImage = preferences.getString("myImage") ?? "";
+
+    userName = preferences.getString("userName") ?? "";
+    userEmail = preferences.getString("userEmail") ?? "";
+    userPhone = preferences.getString("userPhone") ?? "";
+    userImageUrl = preferences.getString("userImageUrl") ?? "";
+
+    userDob = preferences.getString("userDob") ?? "";
+    userAge = preferences.getString("userAge") ?? "";
+    userGender = preferences.getString("userGender") ?? "";
+    userHeight = preferences.getString("userHeight") ?? "";
+
     isLogIn = preferences.getBool("isLogIn") ?? false;
     isNotifications = preferences.getBool("isNotifications") ?? true;
-    mySubscription = preferences.getString("mySubscription") ?? "shopping";
     localizationCountryCode =
         preferences.getString("localizationCountryCode") ?? "US";
     localizationLanguageCode =
         preferences.getString("localizationLanguageCode") ?? "en";
-    isLogIn = preferences.getBool("isLogIn") ?? false;
-    isNotifications = preferences.getBool("isNotifications") ?? true;
-    mySubscription = preferences.getString("mySubscription") ?? "shopping";
-    localizationCountryCode = preferences.getString("localizationCountryCode") ?? "US";
-    localizationLanguageCode = preferences.getString("localizationLanguageCode") ?? "en";
+    isCoachSignIn = preferences.getBool("isCoachSignIn") ?? false;
+    coachWorkingStatus = preferences.getBool("coachWorkingStatus") ?? false;
 
+      print.log("UserID: =========>>> $userId");
+      print.log("Access Token: ======>>> $token");
 
-    if (kDebugMode) {
-      print(userId);
-    }
   }
 
   ///<<<======================== Get All Data Form Shared Preference ============>
@@ -54,14 +71,16 @@ class PrefsHelper extends GetxController {
     preferences.setString("token", "");
     preferences.setString("refreshToken", "");
     preferences.setString("userId", "");
-    preferences.setString("myImage", "");
-    preferences.setString("myName", "");
-    preferences.setString("myEmail", "");
+    preferences.setString("userImageUrl", "");
+    preferences.setString("userName", "");
+    preferences.setString("userEmail", "");
     preferences.setBool("isLogIn", false);
+    preferences.setBool("isEmailVerified", false);
+    preferences.setBool("isCoachSignIn", false);
     preferences.setBool("isNotifications", true);
-    preferences.setString("mySubscription", "shopping");
+    preferences.setString("userType", "doctor");
 
-    // Get.offAllNamed(AppRoutes.login);
+    Get.offAll(()=> LoginView());
     getAllPrefData();
   }
 

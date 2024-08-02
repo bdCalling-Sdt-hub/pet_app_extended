@@ -215,7 +215,7 @@ class MessageView extends GetView<MessageController> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       GestureDetector(
-                        onTap: () => Get.to(() => const ResourcesView()),
+                        onTap: () => Get.to(() => ResourcesView()),
                         child: Column(
                           children: [
                             Image.asset(AppImages.more, scale: 15),

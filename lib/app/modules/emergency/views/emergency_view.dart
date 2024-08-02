@@ -1,3 +1,4 @@
+import 'package:felpus/app/common/Extension/extension.dart';
 import 'package:felpus/app/common/app_color/app_colors.dart';
 import 'package:felpus/app/common/app_images/app_images.dart';
 import 'package:felpus/app/common/app_text_style/styles.dart';
@@ -58,7 +59,7 @@ class EmergencyView extends StatelessWidget {
       ),
       body: Stack(
         children: [
-          Image.asset(AppImages.dogCat),
+          Image.asset(AppImages.emergencyPet),
           Container(
             width: Get.width,
             height: Get.height,
@@ -68,21 +69,8 @@ class EmergencyView extends StatelessWidget {
             physics: NeverScrollableScrollPhysics(),
             child: Column(
               children: [
-                sh50,
-                Column(
-                  children: [
-                    Text("Select Your",style:  h3.copyWith(fontSize: 30,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text("Emergency",style:  h3.copyWith(fontSize: 30,color: AppColors.mainColor),textAlign: TextAlign.center,),
-                        sw10,
-                        Text("Option.",style:  h3.copyWith(fontSize: 30,color: AppColors.black),textAlign: TextAlign.center,),
-            
-                      ],
-                    )
-                  ],
-                ),
+                80.height,
+                Text("Get Help",style:  h3.copyWith(fontSize: 30,color: AppColors.mainColor),textAlign: TextAlign.center,),
                 sh50,
               SizedBox(
                 height: 500,

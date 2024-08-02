@@ -80,7 +80,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.FORGOT,
-      page: () => const ForgotView(),
+      page: () => ForgotView(),
       binding: ForgotBinding(),
     ),
     GetPage(
@@ -150,7 +150,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.RESOURCES,
-      page: () => const ResourcesView(),
+      page: () => ResourcesView(),
       binding: ResourcesBinding(),
     ),
   ];

@@ -38,7 +38,7 @@ class _SelectPetsViewState extends State<SelectPetsView> {
       ),
       body: Stack(
         children: [
-          Image.asset(AppImages.dogCat),
+          Image.asset(AppImages.emergencyPet),
           Container(
             width: Get.width,
             height: Get.height,

@@ -24,6 +24,10 @@ dependencies:
   shared_preferences: ^2.2.3
   intl_phone_field: ^3.2.0
   socket_io_client: ^2.0.3+1
+  loading_animation_widget: ^1.2.1
+  fluttertoast: ^8.2.6
+  connectivity_plus: ^6.0.4
+  font_awesome_flutter: ^10.7.0
 
 
 
@@ -42,4 +46,6 @@ flutter:
     - assets/icons/
     - assets/images/
     - assets/.env
+#    - assets/images/tratamiento_fracturas.png
+    - assets/icons/svgIcon/
 

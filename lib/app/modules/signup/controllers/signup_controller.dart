@@ -9,5 +9,8 @@ class SignupController extends GetxController {
     isChecked.value = value;
   }
 
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
 
 }
