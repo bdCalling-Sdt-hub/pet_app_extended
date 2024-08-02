@@ -7,4 +7,5 @@ class AppUrls {
   static String login = "$baseUrl/users/login";
   static String signUp = "$baseUrl/users/signup";
   static String forgotPassword = "$baseUrl/users/forget-password";
+  static String verifyOtp = "$baseUrl/users/verify-otp";
 }

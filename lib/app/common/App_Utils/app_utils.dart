@@ -1,15 +1,12 @@
-import 'package:felpus/app/common/Extension/extension.dart';
+
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../app_color/app_colors.dart';
-import '../widgets/custom_text.dart';
+
 
 
 
@@ -112,13 +109,13 @@ class Utils {
     Get.snackbar(title, message,
       snackPosition: SnackPosition.BOTTOM,
       backgroundColor: AppColors.blue,
-      colorText: AppColors.whiteGray);
+      colorText: AppColors.white);
   }
 
   static snackBarErrorMessage(String title, String message) {
-    Get.snackbar(kDebugMode ? title : 'oops!', message,
+    Get.snackbar(title , message,
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: AppColors.mainColor,
-        colorText: AppColors.whiteGray);
+        colorText: AppColors.white);
   }
 }
