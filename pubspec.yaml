@@ -47,5 +47,5 @@ flutter:
     - assets/images/
     - assets/.env
 #    - assets/images/tratamiento_fracturas.png
-    - assets/icons/svgIcon/
+#    - assets/icons/svgIcon/
 

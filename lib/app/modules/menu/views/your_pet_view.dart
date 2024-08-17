@@ -175,7 +175,7 @@ class _YourPetViewState extends State<YourPetView> {
 
                       children: [
                         30.width,
-                        Image.asset(icon, scale: icon == "assets/icons/delete.png"? 2 : 1,),
+                        Image.asset(icon, height: 24, width: 24,),
                         30.width,
                         Center(child: Text(tittle,style: h2.copyWith(color: titleColor),),),
                       ],
