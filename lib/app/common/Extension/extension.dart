@@ -41,7 +41,7 @@ extension View3 on DateTime {
       var createdAtTime = toIso8601String().split(".")[0];
       var date = createdAtTime.split("T")[0];
       var time = createdAtTime.split("T")[1];
-      return "$date at $time";
+      return date;
     }
   }
 }

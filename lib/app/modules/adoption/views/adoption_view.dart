@@ -13,6 +13,7 @@ import 'package:felpus/app/modules/pet_details/views/pet_details_view.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import '../../../model/pet_model.dart';
 import '../controllers/adoption_controller.dart';
 
 class AdoptionView extends GetView<AdoptionController> {
@@ -119,7 +120,7 @@ class AdoptionView extends GetView<AdoptionController> {
                             onTap: (){
                               Get.to(() => PetDetailsView());
                             },
-                            child: petsList());
+                            child: petsList(pet: PetModel.fromJson({})));
                       }),
                 ),
               ],

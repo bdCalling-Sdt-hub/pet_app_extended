@@ -1,11 +1,12 @@
 import 'package:felpus/app/common/app_color/app_colors.dart';
 import 'package:felpus/app/common/app_images/app_images.dart';
 import 'package:felpus/app/common/app_text_style/styles.dart';
+import 'package:felpus/app/model/pet_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-Padding myPetsWidget() {
+Padding myPetsWidget({required PetModel pet}) {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 5.0),
     child: Container(
@@ -55,7 +56,7 @@ Padding myPetsWidget() {
                   color: AppColors.mainColor,
                 ),
                 SizedBox(
-                    width: 115.w,
+                    width: 110.w,
                     child: Text(
                       "Puerta del Sol, 28013 Madrid, Spain.",
                       style: h5.copyWith(fontSize: 12),

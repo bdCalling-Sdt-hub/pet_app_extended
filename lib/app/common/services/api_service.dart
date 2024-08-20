@@ -173,8 +173,6 @@ class ApiService {
             .timeout(const Duration(seconds: timeOut));
         responseJson = handleResponse(response);
       }
-
-
     } on SocketException {
       return ApiResponseModel(503, "No internet connection", '');
     } on FormatException {
@@ -233,6 +231,13 @@ class ApiService {
   ///<<<================== Api Response Status Code Handle ====================>>>
 
   static dynamic handleResponse(http.Response response) {
+    if (kDebugMode) {
+      print(
+          "===============================================>statusCode ${response.statusCode}");
+      print(
+          "===============================================>body ${response.body}");
+    }
+
     switch (response.statusCode) {
       case 200:
         return ApiResponseModel(response.statusCode,
