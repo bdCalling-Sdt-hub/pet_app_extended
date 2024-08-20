@@ -1,11 +1,10 @@
-import 'package:felpus/app/common/helper/prefs_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'app/common/services/other_service.dart';
-import 'app/core/dependency_injection.dart';
-import 'app/routes/app_pages.dart';
+import 'core/dependency_injection.dart';
+import 'helpers/prefs_helper.dart';
+import 'services/other_service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,9 +23,9 @@ Future<void> main() async {
         builder: (_, context) {
           return GetMaterialApp(
             title: "Felpus",
-            initialRoute: AppPages.INITIAL,
+            // initialRoute: AppPages.INITIAL,
             debugShowCheckedModeBanner: false,
-            getPages: AppPages.routes,
+            // getPages: AppPages.routes,
           );
         }),
   );
