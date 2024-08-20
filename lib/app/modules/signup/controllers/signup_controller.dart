@@ -52,7 +52,7 @@ signUpRepo() async {
 
     print.log("Sign Up Token: $signUpToken");
     Get.to(() => const VerifyView());  VerifyView.purpose = "sign up";
-    Utils.toastMessage(message: "OTP is sent to you email");
+    Utils.toastMessage(message: "OTP is sent to your email");
   } else {
     Utils.snackBarErrorMessage(response.statusCode.toString(), response.message);
   }
