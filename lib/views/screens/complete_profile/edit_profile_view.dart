@@ -17,8 +17,10 @@ import '../../../controllers/complete_profile_controller.dart';
 
 class EditProfileView extends StatelessWidget {
    EditProfileView({super.key});
+
   final ImagePickerController imagePickerController = Get.put(ImagePickerController());
    final CompleteProfileController completeProfileController = Get.put(CompleteProfileController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

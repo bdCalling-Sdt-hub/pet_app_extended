@@ -9,7 +9,7 @@ import '../helpers/other_helper.dart';
 import '../services/api_service.dart';
 import '../utils/App_Urls/app_urls.dart';
 import '../utils/App_Utils/app_utils.dart';
-import '../views/screens/forgot/verify_view.dart';
+import '../views/screens/Verify/verify_view.dart';
 
 class SignupController extends GetxController {
   var isChecked = false.obs;

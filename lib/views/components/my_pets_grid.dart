@@ -1,5 +1,7 @@
 
 import 'package:felpus/models/pet_model.dart';
+import 'package:felpus/utils/App_Urls/app_urls.dart';
+import 'package:felpus/views/components/custom_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,6 +11,7 @@ import '../../utils/app_images/app_images.dart';
 import '../../utils/app_text_style/styles.dart';
 
 Padding myPetsWidget({required PetModel pet}) {
+
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 5.0),
     child: Container(
@@ -28,25 +31,24 @@ Padding myPetsWidget({required PetModel pet}) {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: Image.asset(
-                AppImages.catImage,
-                scale: 4,
+            Center(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: CustomImage(imageSrc: "${AppUrls.photoUrl}${pet.photo}", imageType: ImageType.network, height: 110.h, width: 158.w,),
               ),
             ),
             Text(
-              "Oliver",
+              pet.breed,
               style: h2.copyWith(fontWeight: FontWeight.w700),
             ),
             Row(
               children: [
                 Text(
-                  "Female,",
+                  pet.sex,
                   style: h4.copyWith(fontSize: 13),
                 ),
                 Text(
-                  " 1.5 Years.",
+                  " ${pet.age} Years.",
                   style: h4.copyWith(fontSize: 13),
                 ),
               ],
@@ -60,7 +62,7 @@ Padding myPetsWidget({required PetModel pet}) {
                 SizedBox(
                     width: 110.w,
                     child: Text(
-                      "Puerta del Sol, 28013 Madrid, Spain.",
+                      pet.address,
                       style: h5.copyWith(fontSize: 12),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'core/app_routes.dart';
 import 'core/dependency_injection.dart';
 import 'helpers/prefs_helper.dart';
 import 'services/other_service.dart';
@@ -22,10 +23,12 @@ Future<void> main() async {
         splitScreenMode: true,
         builder: (_, context) {
           return GetMaterialApp(
-            title: "Felpus",
-            // initialRoute: AppPages.INITIAL,
             debugShowCheckedModeBanner: false,
-            // getPages: AppPages.routes,
+            title: "Felpus",
+            defaultTransition: Transition.noTransition,
+            transitionDuration:  const Duration(milliseconds: 400),
+            initialRoute: AppRoutes.splashView,
+            getPages: AppRoutes.routes,
           );
         }),
   );

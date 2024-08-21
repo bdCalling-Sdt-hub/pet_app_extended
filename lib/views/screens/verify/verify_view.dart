@@ -1,7 +1,7 @@
 
 import 'package:felpus/views/components/custom_auth_appbar.dart';
 import 'package:felpus/views/components/custom_loader.dart';
-import 'package:felpus/views/screens/forgot/reset_password_view.dart';
+import 'package:felpus/views/screens/reset_password/reset_password_view.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -114,7 +114,7 @@ class VerifyView extends GetView {
                       sh100,
                       forgotController.isLoading
                           ? const CustomLoader()
-                          : CustomButton(onTap: () => purpose == "sign up"? forgotController.verifyOtpRepo():Get.to(() => const ResetPasswordView()),title: "Verify", width: Get.width, color: AppColors.mainColor),
+                          : CustomButton(onTap: () => purpose == "sign up"? forgotController.verifyOtpRepo():Get.to(() => ResetPasswordView()),title: "Verify", width: Get.width, color: AppColors.mainColor),
                       sh50,
                     ],
                   ),

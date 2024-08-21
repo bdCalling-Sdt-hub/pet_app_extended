@@ -122,7 +122,7 @@ class ApiService {
 
     Map<String, String> mainHeader = {
       'Authorization': "Bearer ${PrefsHelper.token}",
-      'Accept-Language': PrefsHelper.localizationLanguageCode
+      // 'Accept-Language': PrefsHelper.localizationLanguageCode
     };
 
     try {

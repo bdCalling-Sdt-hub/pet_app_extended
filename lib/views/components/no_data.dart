@@ -16,14 +16,17 @@ class NoData extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const CustomImage(
+          CustomImage(
             imageSrc: AppImages.noData,
             imageType: ImageType.png,
+            height: 50.h,
+            width: 50.w,
           ),
           CustomText(
             text: "No Data".tr,
-            fontSize: 16.h,
-            top: 8.h,
+            fontSize: 14.h,
+            fontWeight: FontWeight.w600,
+            top: 4.h,
           )
         ],
       ),

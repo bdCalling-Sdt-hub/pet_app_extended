@@ -14,7 +14,7 @@ class NotificationsController extends GetxController {
 
   List notifications = [];
 
-  Future getFountPetRepo() async {
+  Future getFoundPetRepo() async {
     isLoading = true;
     update();
     var response = await ApiService.getApi(AppUrls.notification);
@@ -37,7 +37,7 @@ class NotificationsController extends GetxController {
 
   @override
   void onInit() {
-    getFountPetRepo();
+    getFoundPetRepo();
     super.onInit();
   }
 

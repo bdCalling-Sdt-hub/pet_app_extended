@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import '../services/api_service.dart';
 import '../utils/App_Urls/app_urls.dart';
 import '../utils/App_Utils/app_utils.dart';
+import 'dart:developer' as print;
 
 
 class HomeController extends GetxController {
@@ -23,6 +24,7 @@ class HomeController extends GetxController {
     var response = await ApiService.getApi("${AppUrls.filterByTag}?find=lost");
 
     if (response.statusCode == 200) {
+      print.log("Lost pet response---------------------------->>>>");
       var data = jsonDecode(response.body)['data'];
 
       for (var item in data) {
@@ -35,10 +37,11 @@ class HomeController extends GetxController {
     }
   }
 
-  Future getFountPetRepo() async {
+  Future getFoundPetRepo() async {
     var response = await ApiService.getApi("${AppUrls.filterByTag}?find=found");
 
     if (response.statusCode == 200) {
+      print.log("Found pet response---------------------------->>>>");
       var data = jsonDecode(response.body)['data'];
 
       for (var item in data) {
@@ -58,6 +61,7 @@ class HomeController extends GetxController {
     var response = await ApiService.getApi(AppUrls.notification);
 
     if (response.statusCode == 200) {
+      print.log("My pet response---------------------------->>>>");
       var data = jsonDecode(response.body)['data'];
 
       for (var item in data) {
@@ -76,7 +80,7 @@ class HomeController extends GetxController {
   wait() {
     isLoading = true;
     update();
-    Future.wait([getFountPetRepo(), getLostPetRepo(), getMyPetRepo()]);
+    Future.wait([getFoundPetRepo(), getLostPetRepo(), getMyPetRepo()]);
     isLoading = false;
     update();
   }

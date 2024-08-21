@@ -1,7 +1,7 @@
-
 import 'package:felpus/views/components/lost_pets_list_view.dart';
 import 'package:felpus/views/components/my_pets_grid.dart';
 import 'package:felpus/models/pet_model.dart';
+import 'package:felpus/views/components/no_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -190,21 +190,24 @@ class HomeView extends StatelessWidget {
                               ],
                             ),
                             sh10,
-                            SizedBox(
-                              height: 190.h,
-                              child: ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  shrinkWrap: true,
-                                  itemCount: controller.myPetList.length,
-                                  itemBuilder: (context, index) {
-                                    PetModel item = controller.myPetList[index];
-                                    return GestureDetector(
-                                        onTap: () {
-                                          Get.to(() => const PetDetailsView());
-                                        },
-                                        child: myPetsWidget(pet: item));
-                                  }),
-                            ),
+                            controller.myPetList.isEmpty
+                                ? const NoData()
+                                : SizedBox(
+                                    height: 190.h,
+                                    child: ListView.builder(
+                                        scrollDirection: Axis.horizontal,
+                                        shrinkWrap: true,
+                                        itemCount: controller.myPetList.length,
+                                        itemBuilder: (context, index) {
+                                          PetModel item = controller.myPetList[index];
+                                          return GestureDetector(
+                                              onTap: () {
+                                                Get.to(() =>
+                                                    const PetDetailsView());
+                                              },
+                                              child: myPetsWidget(pet: item));
+                                        }),
+                                  ),
                             sh10,
 
                             ///<<<==================== Lost Pets ====================>>>
@@ -229,18 +232,24 @@ class HomeView extends StatelessWidget {
                               ],
                             ),
                             sh10,
-                            ListView.builder(
-                                shrinkWrap: true,
-                                itemCount: controller.lostPetList.length,
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemBuilder: (context, index) {
-                                  PetModel item = controller.lostPetList[index];
-                                  return GestureDetector(
-                                      onTap: () {
-                                        Get.to(() => const PetDetailsView());
-                                      },
-                                      child: petsList(pet: item));
-                                }),
+
+                            controller.lostPetList.isEmpty
+                                ? const NoData()
+                                : ListView.builder(
+                                    shrinkWrap: true,
+                                    itemCount: controller.lostPetList.length,
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    itemBuilder: (context, index) {
+                                      PetModel item =
+                                          controller.lostPetList[index];
+                                      return GestureDetector(
+                                          onTap: () {
+                                            Get.to(
+                                                () => const PetDetailsView());
+                                          },
+                                          child: petsList(pet: item));
+                                    }),
                             sh10,
 
                             ///<<<<================= Found Pets ====================>>>>
@@ -264,18 +273,24 @@ class HomeView extends StatelessWidget {
                               ],
                             ),
                             sh10,
-                            ListView.builder(
-                                physics: const NeverScrollableScrollPhysics(),
-                                shrinkWrap: true,
-                                itemCount: controller.foundPetList.length,
-                                itemBuilder: (context, index) {
-                                  PetModel item = controller.lostPetList[index];
-                                  return GestureDetector(
-                                      onTap: () {
-                                        Get.to(() => PetDetailsView());
-                                      },
-                                      child: petsList(pet: item));
-                                }),
+
+                            controller.foundPetList.isEmpty
+                                ? const Center(child: NoData())
+                                : ListView.builder(
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    shrinkWrap: true,
+                                    itemCount: controller.foundPetList.length,
+                                    itemBuilder: (context, index) {
+                                      PetModel item =
+                                          controller.lostPetList[index];
+                                      return GestureDetector(
+                                          onTap: () {
+                                            Get.to(
+                                                () => const PetDetailsView());
+                                          },
+                                          child: petsList(pet: item));
+                                    }),
                           ],
                         ),
                       )
