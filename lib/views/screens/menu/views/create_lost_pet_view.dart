@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:felpus/extensions/extension.dart';
 import 'package:felpus/helpers/validator_helper.dart';
 import 'package:felpus/views/components/custom_container_button.dart';
+import 'package:felpus/views/components/custom_loader.dart';
 import 'package:felpus/views/components/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -150,6 +151,22 @@ class _CreateLostPetViewState extends State<CreateLostPetView> {
                     ),
                     12.height,
                     CustomTextFormField(
+                      title: "Color",
+                      hintText: "What is your pet's color?",
+                      horizontalPadding: 0,
+                      validator: ValidatorHelper.validator,
+                      controller: controller.colorController,
+                    ),
+                    12.height,
+                    CustomTextFormField(
+                      title: "Weight",
+                      hintText: "What is your pet's weight?",
+                      horizontalPadding: 0,
+                      validator: ValidatorHelper.validator,
+                      controller: controller.weightController,
+                    ),
+                    12.height,
+                    CustomTextFormField(
                       title: "Address",
                       hintText: "Enter your address.",
                       horizontalPadding: 0,
@@ -174,24 +191,26 @@ class _CreateLostPetViewState extends State<CreateLostPetView> {
                       controller: controller.descriptionController,
                     ),
                     12.height,
-                    CustomContainerButton(
-                      text: "Create Pet Card",
-                      width: Get.width,
-                      backgroundColor: AppColors.mainColor,
-                      height: 42,
-                      onTap: () {
-
-                        if (formKey.currentState!.validate()) {
-                          controller.addLostPetRepo();
-                        }
-                      },
-                    ),
+                    controller.isLoading
+                        ? const CustomLoader()
+                        : CustomContainerButton(
+                            text: "Create Pet Card",
+                            width: Get.width,
+                            backgroundColor: AppColors.mainColor,
+                            height: 42,
+                            onTap: () {
+                              if (formKey.currentState!.validate()) {
+                                controller.addLostOrFoundPetRepo(forPets: "lost");
+                              }
+                            },
+                          ),
                     30.height,
                   ],
                 ),
               ),
             ),
           ),
-        ));
+        )
+    );
   }
 }

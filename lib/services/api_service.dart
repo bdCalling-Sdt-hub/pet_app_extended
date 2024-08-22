@@ -305,8 +305,8 @@ class ApiService {
       var response = await request.send();
 
       if (kDebugMode) {
-        print(
-            "===============================================>statusCode ${response.statusCode}");
+        print("===============================================>header ${header ?? mainHeader}");
+        print("===============================================>statusCode ${response.statusCode}");
       }
 
       if (response.statusCode == 200) {

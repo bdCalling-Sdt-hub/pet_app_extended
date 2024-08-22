@@ -93,7 +93,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(widget.title,style: h3.copyWith(color: AppColors.textColor),),
-              Text(widget.optional == true? "(Optional)" : "",style: h3.copyWith(color: AppColors.light),),
+              Text(widget.optional == true? "(Optional)" : "",style: h3.copyWith(color: AppColors.grayLight),),
             ],
           ),
           widget.title == ""? const SizedBox() :const SizedBox(height: 8,),

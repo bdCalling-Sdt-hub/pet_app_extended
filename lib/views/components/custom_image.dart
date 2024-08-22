@@ -1,5 +1,6 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:felpus/utils/App_Urls/app_urls.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -76,7 +77,7 @@ class _CustomImageState extends State<CustomImage> {
       imageWidget =  CachedNetworkImage(
         height: widget.height.h,
         width: widget.width ?? widget.height.h,
-        imageUrl: widget.imageSrc,
+        imageUrl: "${AppUrls.photoUrl}${widget.imageSrc}",
         imageBuilder: (context, imageProvider) => Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(widget.borderRadius.r),

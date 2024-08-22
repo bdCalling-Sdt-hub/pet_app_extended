@@ -32,8 +32,4 @@ class AppColors{
   static const oliveDeep = Color(0xffD2AA75);
   static const oliveLight = Color(0xffF0E8DE);
   static const pink = Color(0xffF1F1F1);
-
-
-
-
 }
