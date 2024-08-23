@@ -3,6 +3,7 @@ import 'package:felpus/extensions/extension.dart';
 import 'package:felpus/views/components/custom_image.dart';
 import 'package:felpus/views/components/custom_loader.dart';
 import 'package:felpus/views/components/custom_text.dart';
+import 'package:felpus/views/components/person_info_custom_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -194,10 +195,10 @@ class PetDetailsView extends GetView<PetDetailsController> {
                               style: h2.copyWith(fontSize: 18),
                             ),
                             sh30,
-                            ownersInfoCustomRow(iconPath: AppImages.user, imageScale: 7,title: "Name", titleInfo: controller.petModel.userId!.fullName),
-                            ownersInfoCustomRow(iconPath: AppImages.homeLocation, title: "Address", titleInfo: controller.petModel.userId!.address),
-                            ownersInfoCustomRow(iconPath: AppImages.phone, title: "Phone", titleInfo: controller.petModel.userId!.phone),
-                            ownersInfoCustomRow(iconPath: AppImages.email, title: "Email", titleInfo: controller.petModel.userId!.email),
+                            personInfoCustomRow(iconPath: AppImages.user, imageScale: 7,title: "Name", titleInfo: controller.petModel.userId!.fullName),
+                            personInfoCustomRow(iconPath: AppImages.homeLocation, title: "Address", titleInfo: controller.petModel.userId!.address),
+                            personInfoCustomRow(iconPath: AppImages.phone, title: "Phone", titleInfo: controller.petModel.userId!.phone),
+                            personInfoCustomRow(iconPath: AppImages.email, title: "Email", titleInfo: controller.petModel.userId!.email),
                           ],
                         ),
                       ),
@@ -207,41 +208,5 @@ class PetDetailsView extends GetView<PetDetailsController> {
               ),
             ),
     ));
-  }
-
-  Row ownersInfoCustomRow({required String iconPath, double imageScale = 4,required String title, required String titleInfo}) {
-    return Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(
-                                width: 100.w,
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                      iconPath,
-                                      scale: imageScale,
-                                    ),
-                                    sw5,
-                                    Text(
-                                      title,
-                                      style: h2,
-                                    ),
-                                    8.width,
-                                    Text(
-                                      ":",
-                                      style: h2,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              CustomText(text: titleInfo, maxLines: 5,)
-                              // Text(
-                              //   titleInfo,
-                              //   style: h3,
-                              // )
-                            ],
-                          );
   }
 }

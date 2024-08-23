@@ -1,4 +1,5 @@
 
+import 'package:felpus/controllers/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../controllers/menu_controller.dart';
@@ -36,7 +37,10 @@ class MenuView extends GetView<MenuDataController> {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 7.0),
                     child: GestureDetector(
-                      onTap: () => Get.to(() => const ProfileView()),
+                      onTap: () {
+                        ProfileController.instance.getProfileRepo();
+                        Get.to(() => const ProfileView());
+                      },
                       child: Container(
                         height: 65,
                         decoration: BoxDecoration(

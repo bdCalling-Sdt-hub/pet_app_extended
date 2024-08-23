@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 import 'dart:developer' as print;
 import '../utils/app_color/app_colors.dart';
 
@@ -90,5 +91,15 @@ class OtherHelper {
       controller.text =
       "${picked.hour} : ${picked.minute < 10 ? "0${picked.minute}" : picked.minute}";
     }
+  }
+
+  static String formatDate(String isoDate) {
+    // Parse the ISO date string
+    DateTime dateTime = DateTime.parse(isoDate);
+
+    // Format the date
+    String formattedDate = DateFormat('dd MMMM yyyy').format(dateTime);
+
+    return formattedDate;
   }
 }

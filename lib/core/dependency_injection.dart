@@ -1,5 +1,6 @@
 
 import 'package:felpus/controllers/my_pet_controller.dart';
+import 'package:felpus/controllers/profile_controller.dart';
 import 'package:get/get.dart';
 
 import '../controllers/auth/forgot_controller.dart';
@@ -20,5 +21,6 @@ class DependencyInjection extends Bindings{
     Get.lazyPut(() => MenuDataController(), fenix: true);
     Get.lazyPut(() => ForgotController(), fenix: true);
     Get.lazyPut(() => MyPetController(), fenix: true);
+    Get.lazyPut(() => ProfileController(), fenix: true);
   }
 }
