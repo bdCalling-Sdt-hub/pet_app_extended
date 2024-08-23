@@ -1,4 +1,7 @@
 
+import 'package:felpus/extensions/extension.dart';
+import 'package:felpus/views/components/CustomPopUP/custom_pop_up.dart';
+import 'package:felpus/views/components/CustomPopUP/pop_up.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -54,17 +57,14 @@ class SettingsView extends GetView {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Row(
-                          children: [
-                            Image.asset(
-                              AppImages.editUser,scale: 3,
-                              fit: BoxFit.fill,
-                            ),
-                            sw10,
-                            Text("Edit Profile",style: h3,),
-                          ],
+                        Image.asset(
+                          AppImages.editUser, scale: 2,
+                          fit: BoxFit.fill,
                         ),
+                        sw10,
+                        Text("Edit Profile",style: h2,),
                       ],
                     ),
                   ),
@@ -95,17 +95,53 @@ class SettingsView extends GetView {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Row(
-                          children: [
-                            Image.asset(
-                              AppImages.resetPassword,scale: 4,
-                              fit: BoxFit.fill,
-                            ),
-                            sw10,
-                            Text("Change Password",style: h3,),
-                          ],
+                        Image.asset(
+                          AppImages.resetPassword,scale: 4,
+                          fit: BoxFit.fill,
                         ),
+                        12.width,
+                        Text("Change Password",style: h2,),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 7.0),
+              child: GestureDetector(
+                onTap: (){
+                  PopUp.deleteAccountPopUp();
+                  // Get.to(() => const PasswordChangeView());
+                },
+                child: Container(
+                  height: 60,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    color: AppColors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 1,
+                        blurRadius: 3,
+                        offset: const Offset(0, 1),
+                      ),
+                    ],
+
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Image.asset(
+                          AppImages.deleteIcon,scale: 2,
+                          fit: BoxFit.fill,
+                        ),
+                        16.width,
+                        Text("Delete Account",style: h2,),
                       ],
                     ),
                   ),

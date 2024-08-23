@@ -1,4 +1,5 @@
 
+import 'package:felpus/Controllers/common_controller/setting/delete_account_controller.dart';
 import 'package:felpus/controllers/my_pet_controller.dart';
 import 'package:felpus/controllers/profile_controller.dart';
 import 'package:get/get.dart';
@@ -22,5 +23,6 @@ class DependencyInjection extends Bindings{
     Get.lazyPut(() => ForgotController(), fenix: true);
     Get.lazyPut(() => MyPetController(), fenix: true);
     Get.lazyPut(() => ProfileController(), fenix: true);
+    Get.lazyPut(() => DeleteAccountController(), fenix: true);
   }
 }

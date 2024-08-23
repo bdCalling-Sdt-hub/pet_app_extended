@@ -4,6 +4,7 @@ class AppColors{
 
   static const mainColor = Color(0xffD31C22);
   static const secondaryColor = Color(0xfffdfdfd);
+  static const grayUltraLight = Color(0xffdddddd);
 
   //fixed color
   static const Color transparent = Colors.transparent;

@@ -25,6 +25,7 @@ class DeleteAccountController extends GetxController{
     var response = await ApiService.deleteApi("${AppUrls.users}/${PrefsHelper.userId}", header: header);
 
     if(response.statusCode == 200){
+
       PrefsHelper.removeAllPrefData();
       Get.offAll(()=> SignupView());
       Utils.snackBarSuccessMessage("Success:", "Your account has been deleted!");
