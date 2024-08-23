@@ -1,6 +1,7 @@
 
 import 'package:felpus/extensions/extension.dart';
 import 'package:felpus/models/pet_model.dart';
+import 'package:felpus/views/components/custom_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -41,12 +42,12 @@ Padding petsList({required PetModel pet}) {
                 Row(
                   children: [
                     Text(
-                      pet.sex,
+                      "${pet.sex},",
                       style: h4.copyWith(fontSize: 13),
                     ),
-                    6.width,
+                    4 .width,
                     Text(
-                      pet.age,
+                      "${pet.age} years",
                       style: h4.copyWith(fontSize: 13),
                     ),
                   ],
@@ -54,6 +55,7 @@ Padding petsList({required PetModel pet}) {
               ],
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Icon(
@@ -75,10 +77,7 @@ Padding petsList({required PetModel pet}) {
                 bottomRight: Radius.circular(10),
                 topRight: Radius.circular(10),
               ),
-              child: Image.asset(
-                AppImages.catImage,
-                scale: 4,
-              ),
+              child: CustomImage(imageSrc: pet.photo, imageType: ImageType.network, height: 80.h, width: 120.w,),
             ),
           ],
         ),
