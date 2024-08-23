@@ -21,6 +21,7 @@ class CustomImage extends StatefulWidget {
   final double height;
   final double? width;
   final double borderRadius;
+  final double scale;
   final ImageType imageType;
   final BoxFit fill;
 
@@ -32,6 +33,7 @@ class CustomImage extends StatefulWidget {
     this.width,
     this.imageType = ImageType.svg,
     this.fill = BoxFit.fill,
+    this.scale = 4,
     this.defaultImage = AppImages.noImage,
     super.key,
   });
@@ -75,13 +77,14 @@ class _CustomImageState extends State<CustomImage> {
 
     if (widget.imageType == ImageType.network) {
       imageWidget =  CachedNetworkImage(
-        height: widget.height.h,
-        width: widget.width ?? widget.height.h,
+        height: widget.height,
+        width: widget.width ?? widget.height,
         imageUrl: "${AppUrls.photoUrl}${widget.imageSrc}",
         imageBuilder: (context, imageProvider) => Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(widget.borderRadius.r),
             image: DecorationImage(
+              scale: widget.scale,
               image: imageProvider,
               fit: BoxFit.fill,
             ),

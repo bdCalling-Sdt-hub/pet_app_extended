@@ -34,7 +34,7 @@ Padding myPetsWidget({required PetModel pet}) {
             Center(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                child: CustomImage(imageSrc: "${AppUrls.photoUrl}${pet.photo}", imageType: ImageType.network, height: 110.h, width: 158.w,),
+                child: CustomImage(imageSrc: pet.photo, imageType: ImageType.network, height: 110.h, width: 158.w,),
               ),
             ),
             Text(

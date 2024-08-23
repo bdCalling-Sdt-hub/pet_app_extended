@@ -1,5 +1,10 @@
 
+import 'package:felpus/extensions/extension.dart';
+import 'package:felpus/views/components/custom_image.dart';
+import 'package:felpus/views/components/custom_loader.dart';
+import 'package:felpus/views/components/custom_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../controllers/pet_details_controller.dart';
 import '../../../utils/app_color/app_colors.dart';
@@ -13,9 +18,9 @@ class PetDetailsView extends GetView<PetDetailsController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: GetBuilder<PetDetailsController>(
+        body: GetBuilder<PetDetailsController>(        
       builder: (controller) => controller.isLoading
-          ? const CircularProgressIndicator()
+          ? const CustomLoader()
           : SafeArea(
               child: SingleChildScrollView(
                 child: Column(
@@ -43,20 +48,23 @@ class PetDetailsView extends GetView<PetDetailsController> {
                                 sw50,
                               ],
                             ),
-                            sh30,
+                            20.height,
                             Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 30.0),
                               child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   ClipRRect(
                                     borderRadius: BorderRadius.circular(20),
-                                    child: Image.asset(AppImages.catWithGirl),
+                                    child: CustomImage(imageSrc: controller.petModel.photo, imageType: ImageType.network, height: 250.h, width: Get.width,),
                                   ),
                                   sh5,
-                                  Text(
-                                    controller.petModel.breed,
-                                    style: h1.copyWith(fontSize: 28),
+                                  Center(
+                                    child: Text(
+                                      controller.petModel.breed,
+                                      style: h1.copyWith(fontSize: 28),
+                                    ),
                                   ),
                                   Row(
                                     mainAxisAlignment:
@@ -71,7 +79,7 @@ class PetDetailsView extends GetView<PetDetailsController> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                "Sex: ",
+                                                "Sex : ",
                                                 style: h3,
                                               ),
                                               Text(
@@ -85,11 +93,11 @@ class PetDetailsView extends GetView<PetDetailsController> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                "Color: ",
+                                                "Color : ",
                                                 style: h3,
                                               ),
                                               Text(
-                                                "Brown",
+                                                controller.petModel.color,
                                                 style: h4,
                                               ),
                                             ],
@@ -101,29 +109,32 @@ class PetDetailsView extends GetView<PetDetailsController> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Row(
+                                            mainAxisAlignment: MainAxisAlignment.start,
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                "Age: ",
+                                                "Age : ",
                                                 style: h3,
                                               ),
-                                              Text(
-                                                controller.petModel.age,
+                                              controller.petModel.age.isEmpty? const SizedBox():                                              Text(
+                                                "${controller.petModel.age} years",
                                                 style: h4,
                                               ),
                                             ],
                                           ),
                                           Row(
+                                            mainAxisAlignment: MainAxisAlignment.start,
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                "Weight: ",
+                                                "Weight : ",
                                                 style: h3,
                                               ),
+                                              controller.petModel.weight.isEmpty? const SizedBox():
                                               Text(
-                                                "2Kg",
+                                                "${controller.petModel.weight} kg",
                                                 style: h4,
                                               ),
                                             ],
@@ -157,7 +168,7 @@ class PetDetailsView extends GetView<PetDetailsController> {
                                   ),
                                   sh5,
                                   Text(
-                                    "My 1.5-year-old brown cat is full of energy and curiosity. She loves exploring, climbing, and chasing toys with playful pounces. She's also very affectionate, often seeking attention and cuddles.",
+                                    controller.petModel.description,
                                     style: h4,
                                     textAlign: TextAlign.justify,
                                   ),
@@ -169,6 +180,7 @@ class PetDetailsView extends GetView<PetDetailsController> {
                       ),
                     ),
                     sh20,
+                    controller.petModel.userId != null?
                     Container(
                       decoration: BoxDecoration(
                           color: AppColors.oliveLight,
@@ -182,104 +194,54 @@ class PetDetailsView extends GetView<PetDetailsController> {
                               style: h2.copyWith(fontSize: 18),
                             ),
                             sh30,
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  children: [
-                                    Image.asset(
-                                      AppImages.user,
-                                      scale: 7,
-                                    ),
-                                    sw5,
-                                    Text(
-                                      "Name :",
-                                      style: h2,
-                                    )
-                                  ],
-                                ),
-                                Text(
-                                  "Samim",
-                                  style: h3,
-                                )
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Image.asset(
-                                      AppImages.homeLocation,
-                                      scale: 4,
-                                    ),
-                                    sw5,
-                                    Text(
-                                      "Address :",
-                                      style: h2,
-                                    )
-                                  ],
-                                ),
-                                Text(
-                                  "Avenida Cervantes 5,\n Elantxobe, Biscay, 48310",
-                                  style: h3,
-                                  textAlign: TextAlign.end,
-                                )
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  children: [
-                                    Image.asset(
-                                      AppImages.phone,
-                                      scale: 4,
-                                    ),
-                                    sw5,
-                                    Text(
-                                      "Phone :",
-                                      style: h2,
-                                    )
-                                  ],
-                                ),
-                                Text(
-                                  "+85298563784",
-                                  style: h3,
-                                )
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  children: [
-                                    Image.asset(
-                                      AppImages.email,
-                                      scale: 4,
-                                    ),
-                                    sw5,
-                                    Text(
-                                      "Email :",
-                                      style: h2,
-                                    )
-                                  ],
-                                ),
-                                Text(
-                                  "admin@gmail.com",
-                                  style: h3,
-                                )
-                              ],
-                            ),
+                            ownersInfoCustomRow(iconPath: AppImages.user, imageScale: 7,title: "Name", titleInfo: controller.petModel.userId!.fullName),
+                            ownersInfoCustomRow(iconPath: AppImages.homeLocation, title: "Address", titleInfo: controller.petModel.userId!.address),
+                            ownersInfoCustomRow(iconPath: AppImages.phone, title: "Phone", titleInfo: controller.petModel.userId!.phone),
+                            ownersInfoCustomRow(iconPath: AppImages.email, title: "Email", titleInfo: controller.petModel.userId!.email),
                           ],
                         ),
                       ),
-                    ),
+                    ) : const SizedBox(),
                   ],
                 ),
               ),
             ),
     ));
+  }
+
+  Row ownersInfoCustomRow({required String iconPath, double imageScale = 4,required String title, required String titleInfo}) {
+    return Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                width: 100.w,
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Image.asset(
+                                      iconPath,
+                                      scale: imageScale,
+                                    ),
+                                    sw5,
+                                    Text(
+                                      title,
+                                      style: h2,
+                                    ),
+                                    8.width,
+                                    Text(
+                                      ":",
+                                      style: h2,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              CustomText(text: titleInfo, maxLines: 5,)
+                              // Text(
+                              //   titleInfo,
+                              //   style: h3,
+                              // )
+                            ],
+                          );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:felpus/controllers/pet_details_controller.dart';
 import 'package:felpus/views/components/lost_pets_list_view.dart';
 import 'package:felpus/views/components/my_pets_grid.dart';
 import 'package:felpus/models/pet_model.dart';
@@ -20,6 +21,7 @@ import '../message/chat_list_view.dart';
 import '../notifications/notifications_view.dart';
 import '../pet_details/pet_details_view.dart';
 import 'my_pets_view.dart';
+import 'dart:developer' as print;
 
 class HomeView extends StatelessWidget {
   HomeView({super.key});
@@ -199,11 +201,14 @@ class HomeView extends StatelessWidget {
                                         shrinkWrap: true,
                                         itemCount: controller.myPetList.length,
                                         itemBuilder: (context, index) {
-                                          PetModel item = controller.myPetList[index];
+                                          PetModel item =
+                                              controller.myPetList[index];
                                           return GestureDetector(
                                               onTap: () {
+                                                PetDetailsController.instance
+                                                    .getPetDetailsRepo(petId: item.id);
                                                 Get.to(() =>
-                                                    const PetDetailsView());
+                                                const PetDetailsView());
                                               },
                                               child: myPetsWidget(pet: item));
                                         }),
@@ -233,6 +238,7 @@ class HomeView extends StatelessWidget {
                             ),
                             sh10,
 
+                            ///<<<<================= Lost Pets ====================>>>>
                             controller.lostPetList.isEmpty
                                 ? const NoData()
                                 : ListView.builder(
@@ -245,8 +251,8 @@ class HomeView extends StatelessWidget {
                                           controller.lostPetList[index];
                                       return GestureDetector(
                                           onTap: () {
-                                            Get.to(
-                                                () => const PetDetailsView());
+                                            PetDetailsController.instance.getPetDetailsRepo(petId: item.id);
+                                            Get.to(() => const PetDetailsView());
                                           },
                                           child: petsList(pet: item));
                                     }),
@@ -262,8 +268,7 @@ class HomeView extends StatelessWidget {
                                       fontSize: 20, color: AppColors.mainColor),
                                 ),
                                 GestureDetector(
-                                  onTap: () =>
-                                      Get.to(() => const AllFoundPetsView()),
+                                  onTap: () => Get.to(() => const AllFoundPetsView()),
                                   child: Text(
                                     "See all",
                                     style: h2.copyWith(
@@ -286,8 +291,8 @@ class HomeView extends StatelessWidget {
                                           controller.lostPetList[index];
                                       return GestureDetector(
                                           onTap: () {
-                                            Get.to(
-                                                () => const PetDetailsView());
+                                            PetDetailsController.instance.getPetDetailsRepo(petId: item.id);
+                                            Get.to(() => const PetDetailsView());
                                           },
                                           child: petsList(pet: item));
                                     }),

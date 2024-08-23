@@ -1,6 +1,8 @@
 
+import 'package:felpus/controllers/home_controller.dart';
 import 'package:felpus/views/components/my_pets_grid.dart';
 import 'package:felpus/models/pet_model.dart';
+import 'package:felpus/views/components/no_data.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -50,28 +52,33 @@ class MyPetsView extends GetView {
           sw10,
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10.0),
-        child: GridView.builder(
-          shrinkWrap: true,
-          itemCount: 8,
-          physics: const BouncingScrollPhysics(),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            crossAxisSpacing: 8.0,
-            mainAxisSpacing: 18.0,
-            mainAxisExtent: 220,
+      body: GetBuilder<HomeController>(builder: (controller) {
+        return  controller.myPetList.isEmpty
+            ? const NoData()
+            : Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          child: GridView.builder(
+            shrinkWrap: true,
+            itemCount: controller.myPetList.length,
+            physics: const BouncingScrollPhysics(),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 8.0,
+              mainAxisSpacing: 18.0,
+              mainAxisExtent: 220,
+            ),
+            itemBuilder: (context, index) {
+              PetModel item = controller.myPetList[index];
+              return GestureDetector(
+                onTap: () {
+                  Get.to(() => const PetDetailsView());
+                },
+                child: myPetsWidget(pet: item),
+              );
+            },
           ),
-          itemBuilder: (context, index) {
-            return GestureDetector(
-              onTap: () {
-                Get.to(() => const PetDetailsView());
-              },
-              child: myPetsWidget(pet: PetModel.fromJson({})),
-            );
-          },
-        ),
-      ),
+        );
+      },),
     );
   }
 }

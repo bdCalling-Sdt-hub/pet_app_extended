@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:felpus/helpers/prefs_helper.dart';
 import 'package:felpus/models/pet_model.dart';
 import 'package:get/get.dart';
 
@@ -58,7 +59,7 @@ class HomeController extends GetxController {
     isLoading = true;
     update();
 
-    var response = await ApiService.getApi(AppUrls.notification);
+    var response = await ApiService.getApi("${AppUrls.myPet}${PrefsHelper.userId}");
 
     if (response.statusCode == 200) {
       print.log("My pet response---------------------------->>>>");
