@@ -1,5 +1,7 @@
 
 import 'package:felpus/controllers/profile_controller.dart';
+import 'package:felpus/helpers/prefs_helper.dart';
+import 'package:felpus/views/components/custom_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../controllers/menu_controller.dart';
@@ -71,14 +73,11 @@ class MenuView extends GetView<MenuDataController> {
                                       shape: BoxShape.circle,
                                     ),
                                     child: ClipOval(
-                                      child: Image.asset(
-                                        AppImages.boy,
-                                        fit: BoxFit.fill,
-                                      ),
+                                      child: CustomImage(imageSrc: PrefsHelper.userImageUrl, imageType: ImageType.network,),
                                     ),
                                   ),
                                   sw10,
-                                  Text("Samim Jaman",style: h3,),
+                                  Text(PrefsHelper.userName,style: h3,),
                                 ],
                               ),
                               GestureDetector(

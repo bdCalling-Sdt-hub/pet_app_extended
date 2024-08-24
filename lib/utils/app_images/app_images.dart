@@ -109,5 +109,6 @@ class AppImages{
   static const tratamientoInhalacion_1 = "assets/images/tratamientoInhalacion_1.png";
   static const tratamientoInhalacion_2 = "assets/images/tratamientoInhalacion_2.png";
   static const tipsParaEncontrar = "assets/images/tipsParaEncontrar.png";
+  static const profile = "assets/images/profile.jpg";
 
 }

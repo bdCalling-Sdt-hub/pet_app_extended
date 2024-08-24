@@ -59,7 +59,7 @@ class HomeController extends GetxController {
     isLoading = true;
     update();
 
-    var response = await ApiService.getApi("${AppUrls.myPet}${PrefsHelper.userId}");
+    var response = await ApiService.getApi("${AppUrls.myPets}${PrefsHelper.userId}");
 
     if (response.statusCode == 200) {
       print.log("My pet response---------------------------->>>>");

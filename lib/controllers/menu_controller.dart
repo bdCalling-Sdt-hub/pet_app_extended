@@ -1,6 +1,11 @@
 
+import 'package:felpus/controllers/my_pet_controller.dart';
 import 'package:felpus/core/app_routes.dart';
 import 'package:felpus/utils/App_Utils/app_utils.dart';
+import 'package:felpus/views/screens/adoption/adoption_view.dart';
+import 'package:felpus/views/screens/adoption/create_adoption_view.dart';
+import 'package:felpus/views/screens/menu/views/create_lost_pet_view.dart';
+import 'package:felpus/views/screens/menu/views/create_pet_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'dart:developer' as print;
@@ -13,6 +18,8 @@ import '../utils/App_Urls/app_urls.dart';
 
 class MenuDataController extends GetxController {
   //TODO: Implement MenuController
+
+  static MenuDataController get instance => Get.put(MenuDataController());
 
   final count = 0.obs;
 
@@ -107,7 +114,7 @@ class MenuDataController extends GetxController {
     };
 
     var response = await ApiService.multipartRequest(
-      url: AppUrls.petAdd,
+      url: AppUrls.petsAdd,
       body: body,
       method: "POST",
       imageName: "photo",
@@ -121,6 +128,67 @@ class MenuDataController extends GetxController {
       Get.back();
       Utils.snackBarSuccessMessage("Success:", response.message);
       makeEmptyTextField();
+    } else {
+      Get.snackbar(response.statusCode.toString(), response.message);
+    }
+
+    isLoading = false;
+    update();
+  }
+
+
+  Future<void> updatePetDetailsRepo({required String petId}) async {
+    isLoading = true;
+    update();
+
+    Map<String, String> header = {
+      'Authorization': PrefsHelper.token,
+    };
+
+    Map<String, String> body = {
+      "age": ageController.text,
+      "breed": breedController.text,
+      "sex": genderController.text,
+      "address": addressController.text,
+      "description": descriptionController.text,
+      "petName": nameController.text,
+      "petType": petTypeController.text,
+      "color" : colorController.text,
+      "weight" : weightController.text,
+      "microchipNumber" : microchipNumberController.text,
+
+      ///<<<============ Additional information to add adaptation pet =================>>>
+      "healthCondition" : healthConditionController.text,
+      "neuter" : neuterController.text,
+      "vaccine" : vaccineController.text,
+      "temper" : temperController.text,
+      "activityLevel" : activityLevelController.text,
+      "behavior" : behaviorController.text,
+      "specialNeeds" : specialNeedsController.text,
+      "petHistory" : petHistoryController.text,
+      "contactInformation" : contactInfoController.text
+    };
+
+    var response = await ApiService.multipartRequest(
+        url: "${AppUrls.pets}/$petId",
+        body: body,
+        method: "PATCH",
+        imageName: "photo",
+        imagePath: image,
+        header: header
+    );
+
+    print.log("Update Pet Response: ${response.message}, ${response.body}");
+
+    if (response.statusCode == 200) {
+      MyPetController.instance.getMyPet();
+
+      Get.back();
+      Utils.snackBarSuccessMessage("Success:", response.message);
+      makeEmptyTextField();
+      CreateLostPetView.isUpdate = false;
+      CreateAdoptionView.isUpdate = false;
+
     } else {
       Get.snackbar(response.statusCode.toString(), response.message);
     }

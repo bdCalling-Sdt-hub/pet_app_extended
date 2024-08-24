@@ -289,7 +289,7 @@ class ApiService {
         request.fields[key] = value;
       });
 
-      if (imagePath != null) {
+      if (imagePath != null && imagePath.isNotEmpty) {
         var mimeType = lookupMimeType(imagePath);
         var shopImage = await http.MultipartFile.fromPath(imageName, imagePath,
             contentType: MediaType.parse(mimeType!));

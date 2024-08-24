@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:felpus/controllers/menu_controller.dart';
 import 'package:felpus/extensions/extension.dart';
 import 'package:felpus/helpers/validator_helper.dart';
+import 'package:felpus/models/pet_model.dart';
 import 'package:felpus/utils/App_Utils/app_utils.dart';
 import 'package:felpus/views/components/custom_container_button.dart';
 import 'package:felpus/views/components/custom_loader.dart';
@@ -20,6 +21,9 @@ import '../../../utils/size_box/custom_sizebox.dart';
 class CreateAdoptionView extends StatefulWidget {
   const CreateAdoptionView({super.key});
 
+  static bool isUpdate = false;
+  static var petListDetails = PetModel();
+
   @override
   State<CreateAdoptionView> createState() => _CreateAdoptionViewState();
 }
@@ -35,6 +39,7 @@ class _CreateAdoptionViewState extends State<CreateAdoptionView> {
         appBar: AppBar(
           backgroundColor: AppColors.white,
           title: Text(
+            CreateAdoptionView.isUpdate? "Update Your Pet Card" :
             'Create Card For Pet Adoption',
             style: h2.copyWith(fontSize: 20, color: AppColors.mainColor),
           ),
@@ -134,7 +139,7 @@ class _CreateAdoptionViewState extends State<CreateAdoptionView> {
 
                     CustomTextFormField(
                       title: "Name",
-                      hintText: "Enter your pet’s name.",
+                      hintText: CreateAdoptionView.isUpdate? CreateAdoptionView.petListDetails.petName : "Enter your pet’s name.",
                       horizontalPadding: 0,
                       validator: ValidatorHelper.validator,
                       controller: controller.nameController,
@@ -142,7 +147,7 @@ class _CreateAdoptionViewState extends State<CreateAdoptionView> {
                     12.height,
                     CustomTextFormField(
                       title: "Age",
-                      hintText: "Enter your pet’s age.",
+                      hintText: CreateAdoptionView.isUpdate? CreateAdoptionView.petListDetails.age :"Enter your pet’s age.",
                       horizontalPadding: 0,
                       validator: ValidatorHelper.validator,
                       controller: controller.ageController,
@@ -150,7 +155,7 @@ class _CreateAdoptionViewState extends State<CreateAdoptionView> {
                     12.height,
                     CustomTextFormField(
                       title: "Breed",
-                      hintText: "What breed is your pet?",
+                      hintText: CreateAdoptionView.isUpdate? CreateAdoptionView.petListDetails.breed : "What breed is your pet?",
                       horizontalPadding: 0,
                       validator: ValidatorHelper.validator,
                       controller: controller.breedController,
@@ -158,7 +163,7 @@ class _CreateAdoptionViewState extends State<CreateAdoptionView> {
                     12.height,
                     CustomTextFormField(
                       title: "Gender",
-                      hintText: "What is your pet's gender?",
+                      hintText: CreateAdoptionView.isUpdate? CreateAdoptionView.petListDetails.sex :"What is your pet's gender?",
                       horizontalPadding: 0,
                       validator: ValidatorHelper.validator,
                       controller: controller.genderController,
@@ -166,7 +171,7 @@ class _CreateAdoptionViewState extends State<CreateAdoptionView> {
                     12.height,
                     CustomTextFormField(
                       title: "Color",
-                      hintText: "What is your pet's color?",
+                      hintText: CreateAdoptionView.isUpdate? CreateAdoptionView.petListDetails.color :"What is your pet's color?",
                       horizontalPadding: 0,
                       validator: ValidatorHelper.validator,
                       controller: controller.colorController,
@@ -174,7 +179,7 @@ class _CreateAdoptionViewState extends State<CreateAdoptionView> {
                     12.height,
                     CustomTextFormField(
                       title: "Weight",
-                      hintText: "What is your pet's weight?",
+                      hintText: CreateAdoptionView.isUpdate? CreateAdoptionView.petListDetails.weight :"What is your pet's weight?",
                       horizontalPadding: 0,
                       validator: ValidatorHelper.validator,
                       controller: controller.weightController,
@@ -182,7 +187,7 @@ class _CreateAdoptionViewState extends State<CreateAdoptionView> {
                     12.height,
                     CustomTextFormField(
                       title: "Address",
-                      hintText: "Enter your address.",
+                      hintText: CreateAdoptionView.isUpdate? CreateAdoptionView.petListDetails.address :"Enter your address.",
                       horizontalPadding: 0,
                       validator: ValidatorHelper.validator,
                       controller: controller.addressController,
@@ -199,7 +204,7 @@ class _CreateAdoptionViewState extends State<CreateAdoptionView> {
                     12.height,
                     CustomTextFormField(
                       title: "Health Condition",
-                      hintText: "Write about your pet’s health condition",
+                      hintText: CreateAdoptionView.isUpdate? CreateAdoptionView.petListDetails.healthCondition : "Write about your pet’s health condition",
                       validator: ValidatorHelper.validator,
                       horizontalPadding: 0,
                       controller: controller.healthConditionController,
@@ -207,7 +212,7 @@ class _CreateAdoptionViewState extends State<CreateAdoptionView> {
                     12.height,
                     CustomTextFormField(
                       title: "Spay/Neuter",
-                      hintText: "Is spaying/neutering safe for my pet?",
+                      hintText: CreateAdoptionView.isUpdate? CreateAdoptionView.petListDetails.neuter :"Is spaying/neutering safe for my pet?",
                       validator: ValidatorHelper.validator,
                       horizontalPadding: 0,
                       controller: controller.neuterController,
@@ -215,7 +220,7 @@ class _CreateAdoptionViewState extends State<CreateAdoptionView> {
                     12.height,
                     CustomTextFormField(
                       title: "Vaccine",
-                      hintText: "Is your pet vaccinated?",
+                      hintText: CreateAdoptionView.isUpdate? CreateAdoptionView.petListDetails.vaccine :"Is your pet vaccinated?",
                       validator: ValidatorHelper.validator,
                       horizontalPadding: 0,
                       controller: controller.vaccineController,
@@ -223,7 +228,7 @@ class _CreateAdoptionViewState extends State<CreateAdoptionView> {
                     12.height,
                     CustomTextFormField(
                       title: "Microchip",
-                      hintText: "Enter your pets microchip number",
+                      hintText: CreateAdoptionView.isUpdate? CreateAdoptionView.petListDetails.microchipNumber :"Enter your pets microchip number",
                       validator: ValidatorHelper.validator,
                       horizontalPadding: 0,
                       controller: controller.microchipNumberController,
@@ -241,7 +246,7 @@ class _CreateAdoptionViewState extends State<CreateAdoptionView> {
                     12.height,
                     CustomTextFormField(
                       title: "Temper",
-                      hintText: "Is your pet calm or energetic?",
+                      hintText: CreateAdoptionView.isUpdate? CreateAdoptionView.petListDetails.temper :"Is your pet calm or energetic?",
                       validator: ValidatorHelper.validator,
                       horizontalPadding: 0,
                       controller: controller.temperController,
@@ -249,7 +254,7 @@ class _CreateAdoptionViewState extends State<CreateAdoptionView> {
                     12.height,
                     CustomTextFormField(
                       title: "Activity Level",
-                      hintText: "What is your pet's activity level?",
+                      hintText: CreateAdoptionView.isUpdate? CreateAdoptionView.petListDetails.activityLevel :"What is your pet's activity level?",
                       validator: ValidatorHelper.validator,
                       horizontalPadding: 0,
                       controller: controller.activityLevelController,
@@ -257,7 +262,7 @@ class _CreateAdoptionViewState extends State<CreateAdoptionView> {
                     12.height,
                     CustomTextFormField(
                       title: "Behavior with other Creatures",
-                      hintText: "Is the pet good with kids and other animals?",
+                      hintText: CreateAdoptionView.isUpdate? CreateAdoptionView.petListDetails.behavior :"Is the pet good with kids and other animals?",
                       validator: ValidatorHelper.validator,
                       horizontalPadding: 0,
                       controller: controller.behaviorController,
@@ -265,7 +270,7 @@ class _CreateAdoptionViewState extends State<CreateAdoptionView> {
                     12.height,
                     CustomTextFormField(
                       title: "Special Needs",
-                      hintText: "Does your pet have any special needs?",
+                      hintText: CreateAdoptionView.isUpdate? CreateAdoptionView.petListDetails.specialNeeds :"Does your pet have any special needs?",
                       validator: ValidatorHelper.validator,
                       horizontalPadding: 0,
                       controller: controller.specialNeedsController,
@@ -282,7 +287,7 @@ class _CreateAdoptionViewState extends State<CreateAdoptionView> {
                     12.height,
                     CustomTextFormField(
                       title: "Pet History",
-                      hintText: "Previous medical issues?",
+                      hintText: CreateAdoptionView.isUpdate? CreateAdoptionView.petListDetails.petHistory :"Previous medical issues?",
                       validator: ValidatorHelper.validator,
                       horizontalPadding: 0,
                       controller: controller.petHistoryController,
@@ -290,7 +295,7 @@ class _CreateAdoptionViewState extends State<CreateAdoptionView> {
                     12.height,
                     CustomTextFormField(
                       title: "Organization or Contact Information",
-                      hintText: "Need adoption details, please provide.",
+                      hintText: CreateAdoptionView.isUpdate? CreateAdoptionView.petListDetails.contactInformation :"Need adoption details, please provide.",
                       validator: ValidatorHelper.validator,
                       horizontalPadding: 0,
                       controller: controller.contactInfoController,
@@ -300,16 +305,20 @@ class _CreateAdoptionViewState extends State<CreateAdoptionView> {
                     controller.isLoading
                         ? const CustomLoader()
                         : CustomContainerButton(
-                      text: "Create Pet Card",
+                      text: CreateAdoptionView.isUpdate? "Update" : "Create Pet Card",
                       width: Get.width,
                       backgroundColor: AppColors.mainColor,
                       height: 42,
                       onTap: () {
-                        if (formKey.currentState!.validate()) {
-                          if(controller.image != null){
-                            controller.addLostOrFoundPetRepo(forPets: "adopt");
-                          }else{
-                            Utils.snackBarErrorMessage("Select your pet image first!", "");
+                        if(CreateAdoptionView.isUpdate){
+                          controller.updatePetDetailsRepo(petId: CreateAdoptionView.petListDetails.id);
+                        }else{
+                          if (formKey.currentState!.validate()) {
+                            if(controller.image != null){
+                              controller.addLostOrFoundPetRepo(forPets: "adopt");
+                            }else{
+                              Utils.snackBarErrorMessage("Select your pet image first!", "");
+                            }
                           }
                         }
                       },

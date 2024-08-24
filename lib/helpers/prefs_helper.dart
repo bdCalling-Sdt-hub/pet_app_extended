@@ -25,6 +25,7 @@ class PrefsHelper {
   static String userAge = "";
   static String userGender = "";
   static String userHeight = "";
+  static String address = "";
 
   static String localizationLanguageCode = 'en';
   static String localizationCountryCode = 'US';
@@ -51,6 +52,7 @@ class PrefsHelper {
     userAge = preferences.getString("userAge") ?? "";
     userGender = preferences.getString("userGender") ?? "";
     userHeight = preferences.getString("userHeight") ?? "";
+    address = preferences.getString("address") ?? "";
 
     isLogIn = preferences.getBool("isLogIn") ?? false;
     isNotifications = preferences.getBool("isNotifications") ?? true;

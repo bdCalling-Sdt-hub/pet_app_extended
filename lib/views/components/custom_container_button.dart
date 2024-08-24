@@ -36,7 +36,7 @@ class CustomContainerButton extends StatelessWidget {
     this.borderRadius = 8,
     required this.onTap,
     this.text = "Get Started",
-    this.height = 56,
+    this.height = 48,
     this.width = double.infinity,
     this.top = 0,
     this.left = 0,

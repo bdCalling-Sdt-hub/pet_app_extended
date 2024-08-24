@@ -20,7 +20,7 @@ class PetDetailsController extends GetxController {
   Future getPetDetailsRepo({required String petId}) async {
     isLoading = true;
     update();
-    var response = await ApiService.getApi("${AppUrls.pet}/$petId");
+    var response = await ApiService.getApi("${AppUrls.pets}/$petId");
 
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body)['data'];

@@ -5,6 +5,7 @@ import 'package:felpus/helpers/prefs_helper.dart';
 import 'package:felpus/models/pet_model.dart';
 import 'package:felpus/services/api_service.dart';
 import 'package:felpus/utils/App_Urls/app_urls.dart';
+import 'package:felpus/utils/App_Utils/app_utils.dart';
 import 'package:get/get.dart';
 import 'dart:developer' as print;
 
@@ -16,11 +17,13 @@ class MyPetController extends GetxController{
 
   static MyPetController get instance => Get.put(MyPetController());
 
+  ///<<<=============== Get My Pet List =============================>>>
+
   Future<void> getMyPet() async {
     isLoading = true;
     update();
 
-    var response = await ApiService.getApi("${AppUrls.myPet}${PrefsHelper.userId}");
+    var response = await ApiService.getApi("${AppUrls.myPets}${PrefsHelper.userId}");
 
     print.log("Create Lost Pet Response: ${response.message}, ${response.body}");
 
@@ -32,6 +35,29 @@ class MyPetController extends GetxController{
       print.log("My pet list: $myPetList");
       
 
+    } else {
+      Get.snackbar(response.statusCode.toString(), response.message);
+    }
+
+    isLoading = false;
+    update();
+  }
+
+  ///<<<==================== Delete My Pet =======================>>>
+
+  Future<void> deleteMyPet({required String petId}) async {
+    isLoading = true;
+    update();
+
+    var response = await ApiService.deleteApi("${AppUrls.pets}/$petId");
+
+    print.log("Delete Pet Response: ${response.message}, ${response.body}");
+
+    if (response.statusCode == 200) {
+      var responseData = jsonDecode(response.body);
+
+      Utils.snackBarSuccessMessage("Success:", "Your pet named '${responseData["data"]["petName"]}' has been deleted");
+      getMyPet();
     } else {
       Get.snackbar(response.statusCode.toString(), response.message);
     }

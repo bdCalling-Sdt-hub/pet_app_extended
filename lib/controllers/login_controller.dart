@@ -48,13 +48,17 @@ class LoginController extends GetxController {
           PrefsHelper.userName = responseData['data']['fullName'];
           PrefsHelper.userImageUrl = responseData['data']['photo'];
           PrefsHelper.userEmail = responseData['data']['email'];
+          PrefsHelper.address = responseData['data']['address'];
+          PrefsHelper.userPhone = responseData['data']['phone'];
 
         if(isChecked.value){
           PrefsHelper.setString("token", responseData['data']['accessToken']);
           PrefsHelper.setString("userId", responseData['data']['_id']);
-          PrefsHelper.setString("userName", responseData['data']['name']);
+          PrefsHelper.setString("userName", responseData['data']['fullName']);
           PrefsHelper.setString("userImageUrl", responseData['data']['photo']);
           PrefsHelper.setString("userEmail", responseData['data']['email']);
+          PrefsHelper.setString("address", responseData['data']['address']);
+          PrefsHelper.setString("userPhone", responseData['data']['phone']);
 
           print.log(PrefsHelper.userId);
           print.log(PrefsHelper.userName);

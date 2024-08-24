@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:felpus/extensions/extension.dart';
 import 'package:felpus/helpers/validator_helper.dart';
+import 'package:felpus/models/pet_model.dart';
 import 'package:felpus/views/components/custom_container_button.dart';
 import 'package:felpus/views/components/custom_loader.dart';
 import 'package:felpus/views/components/custom_text_field.dart';
@@ -14,6 +15,9 @@ import '../../../../utils/size_box/custom_sizebox.dart';
 
 class CreateLostPetView extends StatefulWidget {
   const CreateLostPetView({super.key});
+
+  static bool isUpdate = false;
+  static var petListDetails = PetModel();
 
   @override
   State<CreateLostPetView> createState() => _CreateLostPetViewState();
@@ -29,6 +33,7 @@ class _CreateLostPetViewState extends State<CreateLostPetView> {
         appBar: AppBar(
           backgroundColor: AppColors.white,
           title: Text(
+            CreateLostPetView.isUpdate? "Update Your Pet Card" :
             'Create Lost Pet Card',
             style: h2.copyWith(fontSize: 20, color: AppColors.mainColor),
           ),
@@ -120,7 +125,7 @@ class _CreateLostPetViewState extends State<CreateLostPetView> {
                     sh10,
                     CustomTextFormField(
                       title: "Name",
-                      hintText: "Enter your pet’s name.",
+                      hintText: CreateLostPetView.isUpdate? CreateLostPetView.petListDetails.petName : "Enter your pet’s name.",
                       horizontalPadding: 0,
                       validator: ValidatorHelper.validator,
                       controller: controller.nameController,
@@ -128,7 +133,7 @@ class _CreateLostPetViewState extends State<CreateLostPetView> {
                     12.height,
                     CustomTextFormField(
                       title: "Age",
-                      hintText: "Enter your pet’s age.",
+                      hintText: CreateLostPetView.isUpdate? CreateLostPetView.petListDetails.age : "Enter your pet’s age.",
                       horizontalPadding: 0,
                       validator: ValidatorHelper.validator,
                       controller: controller.ageController,
@@ -136,7 +141,7 @@ class _CreateLostPetViewState extends State<CreateLostPetView> {
                     12.height,
                     CustomTextFormField(
                       title: "Breed",
-                      hintText: "What breed is your pet?",
+                      hintText: CreateLostPetView.isUpdate? CreateLostPetView.petListDetails.breed :"What breed is your pet?",
                       horizontalPadding: 0,
                       validator: ValidatorHelper.validator,
                       controller: controller.breedController,
@@ -144,7 +149,7 @@ class _CreateLostPetViewState extends State<CreateLostPetView> {
                     12.height,
                     CustomTextFormField(
                       title: "Gender",
-                      hintText: "What is your pet's gender?",
+                      hintText: CreateLostPetView.isUpdate? CreateLostPetView.petListDetails.sex :"What is your pet's gender?",
                       horizontalPadding: 0,
                       validator: ValidatorHelper.validator,
                       controller: controller.genderController,
@@ -152,7 +157,7 @@ class _CreateLostPetViewState extends State<CreateLostPetView> {
                     12.height,
                     CustomTextFormField(
                       title: "Color",
-                      hintText: "What is your pet's color?",
+                      hintText: CreateLostPetView.isUpdate? CreateLostPetView.petListDetails.color :"What is your pet's color?",
                       horizontalPadding: 0,
                       validator: ValidatorHelper.validator,
                       controller: controller.colorController,
@@ -160,7 +165,7 @@ class _CreateLostPetViewState extends State<CreateLostPetView> {
                     12.height,
                     CustomTextFormField(
                       title: "Weight",
-                      hintText: "What is your pet's weight?",
+                      hintText: CreateLostPetView.isUpdate? CreateLostPetView.petListDetails.weight :"What is your pet's weight?",
                       horizontalPadding: 0,
                       validator: ValidatorHelper.validator,
                       controller: controller.weightController,
@@ -168,7 +173,7 @@ class _CreateLostPetViewState extends State<CreateLostPetView> {
                     12.height,
                     CustomTextFormField(
                       title: "Address",
-                      hintText: "Enter your address.",
+                      hintText: CreateLostPetView.isUpdate? CreateLostPetView.petListDetails.address :"Enter your address.",
                       horizontalPadding: 0,
                       validator: ValidatorHelper.validator,
                       controller: controller.addressController,
@@ -177,7 +182,7 @@ class _CreateLostPetViewState extends State<CreateLostPetView> {
                     CustomTextFormField(
                       title: "Microchip Number",
                       optional: true,
-                      hintText: "Enter your pets microchip number",
+                      hintText: CreateLostPetView.isUpdate? CreateLostPetView.petListDetails.microchipNumber :"Enter your pets microchip number",
                       horizontalPadding: 0,
                       validator: ValidatorHelper.validator,
                       controller: controller.microchipNumberController,
@@ -185,7 +190,7 @@ class _CreateLostPetViewState extends State<CreateLostPetView> {
                     12.height,
                     CustomTextFormField(
                       title: "Description",
-                      hintText: "Write a short description about your pet",
+                      hintText: CreateLostPetView.isUpdate? CreateLostPetView.petListDetails.description :"Write a short description about your pet",
                       horizontalPadding: 0,
                       validator: ValidatorHelper.validator,
                       controller: controller.descriptionController,
@@ -194,13 +199,17 @@ class _CreateLostPetViewState extends State<CreateLostPetView> {
                     controller.isLoading
                         ? const CustomLoader()
                         : CustomContainerButton(
-                            text: "Create Pet Card",
+                            text: CreateLostPetView.isUpdate? "Update" : "Create Pet Card",
                             width: Get.width,
                             backgroundColor: AppColors.mainColor,
                             height: 42,
                             onTap: () {
-                              if (formKey.currentState!.validate()) {
-                                controller.addLostOrFoundPetRepo(forPets: "lost");
+                              if(CreateLostPetView.isUpdate){
+                                controller.updatePetDetailsRepo(petId: CreateLostPetView.petListDetails.id);
+                              }else{
+                                if (formKey.currentState!.validate()) {
+                                  controller.addLostOrFoundPetRepo(forPets: "lost");
+                                }
                               }
                             },
                           ),
