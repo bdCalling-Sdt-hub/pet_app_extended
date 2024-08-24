@@ -49,6 +49,7 @@ class ForgotController extends GetxController {
   TextEditingController otpController = TextEditingController();
   TextEditingController newPasswordController = TextEditingController();
   TextEditingController confirmNewPasswordController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   ///<<<================= Timer Repo ========================>>>
 

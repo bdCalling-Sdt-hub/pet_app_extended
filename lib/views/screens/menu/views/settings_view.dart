@@ -75,7 +75,7 @@ class SettingsView extends GetView {
               padding: const EdgeInsets.symmetric(vertical: 7.0),
               child: GestureDetector(
                 onTap: (){
-                  Get.to(() => const PasswordChangeView());
+                  Get.to(() => PasswordChangeView());
                 },
                 child: Container(
                   height: 60,

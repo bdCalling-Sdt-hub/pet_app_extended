@@ -38,7 +38,7 @@ class CustomTextFormField extends StatefulWidget {
         this.vertical,
         this.title = "",
         this.optional,
-        this.horizontalPadding = 20,
+        this.horizontalPadding = 16,
       });
 
   final TextEditingController? controller;
