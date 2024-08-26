@@ -216,4 +216,40 @@ class ForgotController extends GetxController {
       update();
     }
   }
+
+
+  ///==============>>> Change Pass Repo <<<=======================
+  Future<void> changePasswordRepo() async {
+    try {
+      isLoading = true;
+      update();
+
+      Map<String, String> header = {
+        'Authorization' : PrefsHelper.token
+      };
+
+      Map<String, String> body = {
+        "oldPassword": passwordController.text,
+        "newPassword": newPasswordController.text,
+      };
+      var response = await ApiService.patchApi(AppUrls.changePassword, body: body, header: header);
+
+      if (response.statusCode == 200) {
+        Get.back();
+        Utils.toastMessage(message: response.message);
+        passwordController.clear();
+        newPasswordController.clear();
+        confirmNewPasswordController.clear();
+      } else {
+        Get.snackbar(response.statusCode.toString(), response.message);
+      }
+      isLoading = false;
+      update();
+    } catch (e) {
+      Utils.snackBarErrorMessage("Oops!", "$e");
+      print.log("Error : $e");
+      isLoading = false;
+      update();
+    }
+  }
 }

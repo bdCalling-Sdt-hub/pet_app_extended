@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:felpus/helpers/prefs_helper.dart';
+import 'package:felpus/models/pagination_model.dart';
 import 'package:felpus/models/pet_model.dart';
 import 'package:get/get.dart';
 
@@ -15,23 +16,31 @@ class HomeController extends GetxController {
   final count = 0.obs;
 
   bool isLoading = false;
+  Pagination? pagination;
 
-  List lostPetList = [];
+  List<PetModel>lostPetList = [];
   List foundPetList = [];
   List myPetList = [];
 
-  Future getLostPetRepo() async {
+
+  ///<<<=================== Get Lost Pet Repo ============================>>>
+  Future getLostPetRepo({int page = 1, int limit = 10}) async {
 
     var response = await ApiService.getApi("${AppUrls.filterByTag}?find=lost");
 
     if (response.statusCode == 200) {
       print.log("Lost pet response---------------------------->>>>");
       var data = jsonDecode(response.body)['data'];
+      var responseData = jsonDecode(response.body);
+
+      final Pagination fetchedPagination = Pagination.fromJson(responseData['meta']);
 
       for (var item in data) {
         lostPetList.add(PetModel.fromJson(item));
       }
       update();
+      pagination = fetchedPagination;
+
     } else {
       Utils.snackBarErrorMessage(
           response.statusCode.toString(), response.message);

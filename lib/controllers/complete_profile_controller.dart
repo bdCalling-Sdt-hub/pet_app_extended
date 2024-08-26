@@ -34,8 +34,8 @@ class CompleteProfileController extends GetxController {
       TextEditingController(text: PrefsHelper.address);
   TextEditingController fullNameController =
       TextEditingController(text: PrefsHelper.userName);
-  TextEditingController phoneController =
-      TextEditingController(text: PrefsHelper.userPhone);
+  TextEditingController phoneController = TextEditingController(text: PrefsHelper.userPhone);
+  TextEditingController bioController = TextEditingController();
 
   setLocation({required String address}) {
     locationController.text = address;
@@ -57,6 +57,7 @@ class CompleteProfileController extends GetxController {
       "fullName": fullNameController.text,
       "phone": phoneController.text,
       "address": locationController.text,
+      "bio" : bioController.text
     };
 
     String? imagePath = ImagePickerController.instance.selectedImagePath.value;

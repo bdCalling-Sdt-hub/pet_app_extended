@@ -174,6 +174,13 @@ class EditProfileView extends StatelessWidget {
                 width: Get.width,
                 hintText: "Enter your address",
               ),
+              CustomTextField(
+                maxLines: 10,
+                controller: completeProfileController.bioController,
+                title: "Bio",
+                width: Get.width,
+                hintText: "Write something about you...",
+              ),
               sh20,
               completeProfileController.isLoading
                   ? const CustomLoader()

@@ -226,8 +226,10 @@ class HomeView extends StatelessWidget {
                                       fontSize: 20, color: AppColors.mainColor),
                                 ),
                                 GestureDetector(
-                                  onTap: () =>
-                                      Get.to(() => const AllLostPetsView()),
+                                  onTap: () {
+                                    AllLostPetsView.petList.addAll(controller.lostPetList);
+                                      Get.to(() => AllLostPetsView());
+                                  },
                                   child: Text(
                                     "See all",
                                     style: h2.copyWith(

@@ -68,7 +68,7 @@ class LostPetsView extends GetView<LostPetsController> {
                           fontSize: 20, color: AppColors.mainColor),
                     ),
                     GestureDetector(
-                      onTap: () => Get.to(() => const AllLostPetsView()),
+                      onTap: () => Get.to(() => AllLostPetsView()),
                       child: Text(
                         "See all",
                         style:
