@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class NearbyMapScreen extends StatelessWidget {
+class NearbyMapScreen extends StatefulWidget {
   NearbyMapScreen( {super.key,
     this.latitude = 0,
     this.longitude = 0,
@@ -15,8 +15,20 @@ class NearbyMapScreen extends StatelessWidget {
   final double longitude;
   Function(LatLng value)? onTapLatLong;
 
+  @override
+  State<NearbyMapScreen> createState() => _NearbyMapScreenState();
+}
+
+class _NearbyMapScreenState extends State<NearbyMapScreen> {
   ShowGoogleMapController showGoogleMapController =
   Get.put(ShowGoogleMapController());
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    showGoogleMapController.getCurrentLocation();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +45,8 @@ class NearbyMapScreen extends StatelessWidget {
           myLocationButtonEnabled: true,
           cameraTargetBounds: CameraTargetBounds.unbounded,
           onTap: (LatLng latLng) {
-            if(onTapLatLong != null){
-              onTapLatLong!(latLng);
+            if(widget.onTapLatLong != null){
+              widget.onTapLatLong!(latLng);
             }
             // controller.setMarker(latLng);
           },

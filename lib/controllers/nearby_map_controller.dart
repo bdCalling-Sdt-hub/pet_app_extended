@@ -16,6 +16,7 @@ class ShowGoogleMapController extends GetxController {
   num latitude = 0;
   num longitude = 0;
 
+
   static ShowGoogleMapController get instance =>
       Get.put(ShowGoogleMapController());
 
@@ -34,6 +35,7 @@ class ShowGoogleMapController extends GetxController {
   }
 
   getCurrentLocation() async {
+    print("Current location is called-1");
     Position? positions = await LocationService.getCurrentPosition();
     if (positions != null) {
       latitude = positions.latitude;
@@ -43,6 +45,7 @@ class ShowGoogleMapController extends GetxController {
         target: LatLng(positions.latitude, positions.longitude),
         zoom: 14,
       );
+      print("Current location is called-2");
       CameraPosition newCameraPosition = CameraPosition(
           target: LatLng(positions.latitude, positions.longitude), zoom: 14);
 
@@ -64,7 +67,7 @@ class ShowGoogleMapController extends GetxController {
     var request = http.Request('POST',
         Uri.parse('https://places.googleapis.com/v1/places:searchNearby'));
     request.body = json.encode({
-      "includedTypes": ["hardware_store"],
+      "includedTypes": ["restaurant"],
       "maxResultCount": 10,
       "locationRestriction": {
         "circle": {
@@ -107,5 +110,11 @@ class ShowGoogleMapController extends GetxController {
       update();
     } else {
     }
+  }
+
+  @override
+  void onInit() {
+
+    super.onInit();
   }
 }

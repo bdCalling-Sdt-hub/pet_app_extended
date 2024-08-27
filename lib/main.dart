@@ -1,3 +1,5 @@
+import 'package:felpus/services/location_service.dart';
+import 'package:felpus/views/screens/nearby_map_screen/nearby_map_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,6 +12,7 @@ import 'services/other_service.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   OtherService.checkConnection();
+  LocationService.locationPermission() ;
 
   await dotenv.load(fileName: 'assets/.env');
   await PrefsHelper.getAllPrefData();
@@ -27,8 +30,9 @@ Future<void> main() async {
             title: "Felpus",
             defaultTransition: Transition.noTransition,
             transitionDuration:  const Duration(milliseconds: 400),
-            initialRoute: AppRoutes.splashView,
-            getPages: AppRoutes.routes,
+            // initialRoute: AppRoutes.splashView,
+            // getPages: AppRoutes.routes,
+            home: NearbyMapScreen(),
           );
         }),
   );
