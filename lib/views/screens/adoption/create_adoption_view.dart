@@ -315,7 +315,7 @@ class _CreateAdoptionViewState extends State<CreateAdoptionView> {
                         }else{
                           if (formKey.currentState!.validate()) {
                             if(controller.image != null){
-                              controller.addLostOrFoundPetRepo(forPets: "adopt");
+                              controller.addPetsRepo(forPets: "adopt");
                             }else{
                               Utils.snackBarErrorMessage("Select your pet image first!", "");
                             }

@@ -31,7 +31,7 @@ class AppRoutes{
     GetPage(name: splashView, page: () => const SplashView()),
 
     GetPage(name: adoptionView, page: () => const AdoptionView()),
-    GetPage(name: allAdoptionPetsView, page: () => const AllAdoptionPetsView()),
+    GetPage(name: allAdoptionPetsView, page: () => AllAdoptionPetsView()),
     GetPage(name: createAdoptionView, page: () => const CreateAdoptionView()),
     GetPage(name: completeProfileView, page: () => CompleteProfileView()),
     GetPage(name: editProfileView, page: () => EditProfileView()),

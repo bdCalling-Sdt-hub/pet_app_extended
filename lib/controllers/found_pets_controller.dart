@@ -1,3 +1,4 @@
+
 import 'dart:convert';
 
 import 'package:felpus/models/pagination_model.dart';
@@ -8,45 +9,41 @@ import 'package:felpus/utils/App_Utils/app_utils.dart';
 import 'package:get/get.dart';
 import 'dart:developer' as print;
 
-class LostPetsController extends GetxController {
-  //TODO: Implement LostPetsController
-
-  final count = 0.obs;
+class FoundPetsController extends GetxController{
 
   bool isLoading = false;
   Pagination? pagination;
 
-  List<PetModel>lostPetList = [];
+  List<PetModel>foundPetList = [];
+  List myPetList = [];
 
   bool isMoreLoading = false;
 
+  ///<<<=================== Get Found Pet Repo ===========================>>>
 
-  ///<<<=================== Get Lost Pet Repo ============================>>>
-  Future getLostPetRepo({int page = 1, int limit = 10}) async {
-
+  Future getFoundPetRepo({int page = 1, int limit = 10}) async {
     if(page == 1){
       isLoading = true;
       update();
-      lostPetList.clear();
+      foundPetList.clear();
     }else{
       isMoreLoading = true;
       update();
     }
-    var response = await ApiService.getApi("${AppUrls.filterByTag}?find=lost&page=$page&limit=$limit");
+
+    var response = await ApiService.getApi("${AppUrls.filterByTag}?find=found&page=$page&limit=$limit");
 
     if (response.statusCode == 200) {
-      print.log("Lost pet response---------------------------->>>>");
+      print.log("Found pet response---------------------------->>>>");
       var data = jsonDecode(response.body)['data'];
       var responseData = jsonDecode(response.body);
-
       final Pagination fetchedPagination = Pagination.fromJson(responseData['meta']);
 
       for (var item in data) {
-        lostPetList.add(PetModel.fromJson(item));
+        foundPetList.add(PetModel.fromJson(item));
       }
       pagination = fetchedPagination;
       update();
-
     } else {
       Utils.snackBarErrorMessage(
           response.statusCode.toString(), response.message);
@@ -56,21 +53,11 @@ class LostPetsController extends GetxController {
     isLoading = false;
     update();
   }
+
   @override
   void onInit() {
-    getLostPetRepo();
+    // TODO: implement onInit
+    getFoundPetRepo();
     super.onInit();
   }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }

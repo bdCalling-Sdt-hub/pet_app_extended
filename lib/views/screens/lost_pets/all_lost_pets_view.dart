@@ -1,5 +1,7 @@
 import 'package:felpus/controllers/home_controller.dart';
+import 'package:felpus/controllers/lost_pets_controller.dart';
 import 'package:felpus/controllers/pet_details_controller.dart';
+import 'package:felpus/views/components/custom_loader.dart';
 import 'package:felpus/views/components/lost_pets_list_view.dart';
 import 'package:flutter/material.dart';
 
@@ -11,23 +13,21 @@ import '../../../utils/app_images/app_images.dart';
 import '../../../utils/app_text_style/styles.dart';
 import '../pet_details/pet_details_view.dart';
 
-class AllLostPetsView extends GetView {
-  HomeController homeController = Get.put(HomeController());
-
+class AllLostPetsView extends StatelessWidget {
+  final LostPetsController lostPetsController = Get.put(LostPetsController());
   final ScrollController scrollController = ScrollController();
-  AllLostPetsView({super.key})
-  {
+
+  AllLostPetsView({super.key}) {
     scrollController.addListener(() {
       if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
-        if (homeController.pagination != null &&
-            homeController.pagination!.page < homeController.pagination!.totalPage) {
-          homeController.getLostPetRepo(page: homeController.pagination!.page + 1);
+        if (lostPetsController.pagination != null &&
+            lostPetsController.pagination!.currentPage < lostPetsController.pagination!.totalPages &&
+            !lostPetsController.isMoreLoading) {
+          lostPetsController.getLostPetRepo(page: lostPetsController.pagination!.currentPage + 1);
         }
       }
     });
   }
-
-  static List<PetModel> petList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -41,14 +41,15 @@ class AllLostPetsView extends GetView {
         centerTitle: true,
         leading: InkWell(
             onTap: () {
-              petList.clear();
               Get.back();
             },
             child: const Icon(Icons.arrow_back_ios)),
       ),
-      body: GetBuilder<HomeController>(
+      body: GetBuilder<LostPetsController>(
         builder: (controller) {
-          return Stack(
+          return controller.isLoading
+              ? const CustomLoader()
+              : Stack(
             children: [
               Image.asset(AppImages.dogCat),
               Container(
@@ -59,16 +60,30 @@ class AllLostPetsView extends GetView {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 14.0),
                 child: ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: petList.length,
-                    itemBuilder: (context, index) {
+                  controller: scrollController,
+                  shrinkWrap: true,
+                  itemCount: controller.lostPetList.length + 1,
+                  itemBuilder: (context, index) {
+                    if (index < controller.lostPetList.length) {
                       return GestureDetector(
-                          onTap: () {
-                            PetDetailsController.instance.getPetDetailsRepo(petId: petList[index].id);
-                            Get.to(() => const PetDetailsView());
-                          },
-                          child: petsList(pet: petList[index]));
-                    }),
+                        onTap: () {
+                          PetDetailsController.instance.getPetDetailsRepo(
+                            petId: controller.lostPetList[index].id,
+                          );
+                          Get.to(() => const PetDetailsView());
+                        },
+                        child: petsList(pet: controller.lostPetList[index]),
+                      );
+                    } else {
+                      return controller.isMoreLoading
+                          ? const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 20),
+                        child: Center(child: CustomLoader()),
+                      )
+                          : const SizedBox.shrink();
+                    }
+                  },
+                ),
               ),
             ],
           );
@@ -81,3 +96,4 @@ class AllLostPetsView extends GetView {
     );
   }
 }
+

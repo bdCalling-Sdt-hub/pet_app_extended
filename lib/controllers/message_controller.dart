@@ -5,6 +5,9 @@ class MessageController extends GetxController {
 
   static MessageController get instance => Get.put(MessageController());
 
+
+
+
   final count = 0.obs;
   @override
   void onInit() {

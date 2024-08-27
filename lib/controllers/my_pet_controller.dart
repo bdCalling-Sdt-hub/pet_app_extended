@@ -18,12 +18,13 @@ class MyPetController extends GetxController{
   static MyPetController get instance => Get.put(MyPetController());
 
   ///<<<=============== Get My Pet List =============================>>>
+  static String? petType;
 
   Future<void> getMyPet() async {
     isLoading = true;
     update();
 
-    var response = await ApiService.getApi("${AppUrls.myPets}${PrefsHelper.userId}");
+    var response = await ApiService.getApi("${AppUrls.myPets}${PrefsHelper.userId}?forPets=$petType");
 
     print.log("Create Lost Pet Response: ${response.message}, ${response.body}");
 
@@ -33,7 +34,7 @@ class MyPetController extends GetxController{
       myPetList = List<PetModel>.from(responseData['data'].map((json) => PetModel.fromJson(json)));
 
       print.log("My pet list: $myPetList");
-      
+      petType = '';
 
     } else {
       Get.snackbar(response.statusCode.toString(), response.message);
@@ -45,7 +46,7 @@ class MyPetController extends GetxController{
 
   ///<<<==================== Delete My Pet =======================>>>
 
-  Future<void> deleteMyPet({required String petId}) async {
+  Future<void> deleteMyPet({required String petId, String petStatus = 'delete'}) async {
     isLoading = true;
     update();
 
@@ -56,7 +57,13 @@ class MyPetController extends GetxController{
     if (response.statusCode == 200) {
       var responseData = jsonDecode(response.body);
 
-      Utils.snackBarSuccessMessage("Success:", "Your pet named '${responseData["data"]["petName"]}' has been deleted");
+      if(petStatus == 'delete'){
+        Utils.snackBarSuccessMessage("Success:", "Your pet named '${responseData["data"]["petName"]}' has been deleted");
+      }else if(petStatus == 'lost'){
+        Utils.snackBarSuccessMessage("Success:", "Your pet has been found the pet, named '${responseData["data"]["petName"]}'");
+      }else if(petStatus == 'found'){
+        Utils.snackBarSuccessMessage("Success:", "You returned the pet, named '${responseData["data"]["petName"]}'");
+      }
       getMyPet();
     } else {
       Get.snackbar(response.statusCode.toString(), response.message);

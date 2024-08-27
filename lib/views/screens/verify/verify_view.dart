@@ -57,6 +57,7 @@ class VerifyView extends GetView {
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 18.0),
                           child: PinCodeTextField(
+                            controller: forgotController.otpController,
                             autoDisposeControllers: false,
                             cursorColor: AppColors.black,
                             appContext: (context),

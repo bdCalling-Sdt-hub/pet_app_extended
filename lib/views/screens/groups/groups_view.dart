@@ -1,8 +1,10 @@
 import 'package:dotted_border/dotted_border.dart';
+import 'package:felpus/views/components/custom_loader.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import '../../../controllers/groups_controller.dart';
+import '../../../controllers/groups_n_contacts_controller.dart';
 import '../../../utils/app_color/app_colors.dart';
 import '../../../utils/app_images/app_images.dart';
 import '../../../utils/app_text_style/styles.dart';
@@ -10,7 +12,7 @@ import '../../../utils/size_box/custom_sizebox.dart';
 import '../notifications/notifications_view.dart';
 import 'create_group_view.dart';
 
-class GroupsView extends GetView<GroupsController> {
+class GroupsView extends GetView<GroupsNContactsController> {
   const GroupsView({super.key});
   @override
   Widget build(BuildContext context) {
@@ -126,45 +128,47 @@ class GroupsView extends GetView<GroupsController> {
             sh5,
             Text('Contacts',style: h2.copyWith(fontSize: 20,color: AppColors.mainColor),),
             sh10,
-            Flexible(
-              child: GridView.builder(
-                  shrinkWrap: true,
-                  itemCount: 26,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3,
-                      crossAxisSpacing: 8.0,
-                      mainAxisSpacing: 18.0,
-                      mainAxisExtent: 45
-                  ),
-                 // physics: NeverScrollableScrollPhysics(),
-                  itemBuilder: (context,index){
-                    return Padding(
-                      padding:
-                      const EdgeInsets.symmetric(horizontal: 15.0),
-                      child: GestureDetector(
-                        onTap: (){
-
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(25),
-                              color: AppColors.lowGray),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 10.0, vertical: 10),
-                            child: Center(
-                              child: Text(
-                                "Olivia",
-                                style: h2.copyWith(fontSize: 14,color:  AppColors.black),
+            GetBuilder<GroupsNContactsController>(builder: (controller) {
+              return controller.isLoading? const CustomLoader() : Flexible(
+                child: GridView.builder(
+                    shrinkWrap: true,
+                    itemCount: controller.contactsList.length,
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+                        crossAxisSpacing: 8.0,
+                        mainAxisSpacing: 18.0,
+                        mainAxisExtent: 45
+                    ),
+                    // physics: NeverScrollableScrollPhysics(),
+                    itemBuilder: (context,index){
+                      return Padding(
+                        padding:
+                        const EdgeInsets.symmetric(horizontal: 15.0),
+                        child: controller.contactsList[index].phone.isEmpty? const SizedBox() : InkWell(
+                          onTap: (){
+                            FlutterPhoneDirectCaller.callNumber(controller.contactsList[index].phone);
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(25),
+                                color: AppColors.lowGray),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10.0, vertical: 10),
+                              child: Center(
+                                child: Text(
+                                  controller.contactsList[index].fullName,
+                                  style: h2.copyWith(fontSize: 14,color:  AppColors.black),
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                    );
-                  }
-              ),
-            ),
+                      );
+                    }
+                ),
+              );
+            },),
           ],
         ),
       )

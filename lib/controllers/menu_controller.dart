@@ -79,7 +79,7 @@ class MenuDataController extends GetxController {
 
 
   ///<<<=================== Add Lost/ Found Pet Repo ======================>>>
-  Future<void> addLostOrFoundPetRepo({required String forPets}) async {
+  Future<void> addPetsRepo({required String forPets}) async {
     isLoading = true;
     update();
 

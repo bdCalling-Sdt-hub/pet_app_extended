@@ -1,17 +1,31 @@
 class Pagination {
-  final int page;
   final int limit;
-  final int totalPage;
-  final int total;
+  final int currentPage;
+  final int totalPages;
+  final int totalCount;
 
-  Pagination({required this.page, required this.limit, required this.totalPage, required this.total});
+  Pagination({
+    required this.limit,
+    required this.currentPage,
+    required this.totalPages,
+    required this.totalCount,
+  });
 
   factory Pagination.fromJson(Map<String, dynamic> json) {
     return Pagination(
-      page: json['page'],
       limit: json['limit'],
-      totalPage: json['totalPage'],
-      total: json['total'],
+      currentPage: json['currentPage'],
+      totalPages: json['totalPages'],
+      totalCount: json['totalCount'],
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'limit': limit,
+      'currentPage': currentPage,
+      'totalPages': totalPages,
+      'totalCount': totalCount,
+    };
   }
 }

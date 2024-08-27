@@ -1,5 +1,9 @@
 
 import 'package:felpus/Controllers/common_controller/setting/delete_account_controller.dart';
+import 'package:felpus/controllers/adoption_controller.dart';
+import 'package:felpus/controllers/found_pets_controller.dart';
+import 'package:felpus/controllers/groups_n_contacts_controller.dart';
+import 'package:felpus/controllers/lost_pets_controller.dart';
 import 'package:felpus/controllers/my_pet_controller.dart';
 import 'package:felpus/controllers/profile_controller.dart';
 import 'package:get/get.dart';
@@ -24,5 +28,9 @@ class DependencyInjection extends Bindings{
     Get.lazyPut(() => MyPetController(), fenix: true);
     Get.lazyPut(() => ProfileController(), fenix: true);
     Get.lazyPut(() => DeleteAccountController(), fenix: true);
+    Get.lazyPut(() => AdoptionController(), fenix: true);
+    Get.lazyPut(() => LostPetsController(), fenix: true);
+    Get.lazyPut(() => FoundPetsController(), fenix: true);
+    Get.lazyPut(() => GroupsNContactsController(), fenix: true);
   }
 }

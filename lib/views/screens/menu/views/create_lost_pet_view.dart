@@ -208,7 +208,7 @@ class _CreateLostPetViewState extends State<CreateLostPetView> {
                                 controller.updatePetDetailsRepo(petId: CreateLostPetView.petListDetails.id);
                               }else{
                                 if (formKey.currentState!.validate()) {
-                                  controller.addLostOrFoundPetRepo(forPets: "lost");
+                                  controller.addPetsRepo(forPets: "lost");
                                 }
                               }
                             },

@@ -7,11 +7,10 @@ import '../../../utils/app_images/app_images.dart';
 import '../../../utils/app_text_style/styles.dart';
 import '../../../utils/size_box/custom_sizebox.dart';
 import '../../../views/components/custom_button.dart';
-import '../../../controllers/welcome_controller.dart';
 import '../login/login_view.dart';
 import '../signup/signup_view.dart';
 
-class WelcomeView extends GetView<WelcomeController> {
+class WelcomeView extends GetView {
   const WelcomeView({super.key});
   @override
   Widget build(BuildContext context) {

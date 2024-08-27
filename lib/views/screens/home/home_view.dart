@@ -227,7 +227,6 @@ class HomeView extends StatelessWidget {
                                 ),
                                 GestureDetector(
                                   onTap: () {
-                                    AllLostPetsView.petList.addAll(controller.lostPetList);
                                       Get.to(() => AllLostPetsView());
                                   },
                                   child: Text(
@@ -270,7 +269,7 @@ class HomeView extends StatelessWidget {
                                       fontSize: 20, color: AppColors.mainColor),
                                 ),
                                 GestureDetector(
-                                  onTap: () => Get.to(() => const AllFoundPetsView()),
+                                  onTap: () => Get.to(() => AllFoundPetsView()),
                                   child: Text(
                                     "See all",
                                     style: h2.copyWith(
@@ -290,7 +289,7 @@ class HomeView extends StatelessWidget {
                                     itemCount: controller.foundPetList.length,
                                     itemBuilder: (context, index) {
                                       PetModel item =
-                                          controller.lostPetList[index];
+                                          controller.foundPetList[index];
                                       return GestureDetector(
                                           onTap: () {
                                             PetDetailsController.instance.getPetDetailsRepo(petId: item.id);

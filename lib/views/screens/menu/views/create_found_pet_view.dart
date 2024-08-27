@@ -207,7 +207,7 @@ class _CreateFoundPetViewState extends State<CreateFoundPetView> {
                       height: 42,
                       onTap: () {
                         if (formKey.currentState!.validate()) {
-                          controller.addLostOrFoundPetRepo(forPets: "found");
+                          controller.addPetsRepo(forPets: "found");
                         }
                       },
                     ),

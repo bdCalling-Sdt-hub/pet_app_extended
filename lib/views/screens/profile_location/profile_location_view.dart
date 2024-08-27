@@ -87,7 +87,7 @@ class ProfileLocationView extends GetView<ProfileLocationController> {
                           position: LatLng(latlng.latitude, latlng.longitude),
                           icon: customMarker,
                           infoWindow: InfoWindow(
-                              title: "${tappedAddress.first.subLocality}: ${latlng.latitude}, ${latlng.longitude}"
+                              title: "${tappedAddress.last.subLocality}: ${latlng.latitude}, ${latlng.longitude}"
                           ),
                         )
                     );
@@ -95,7 +95,7 @@ class ProfileLocationView extends GetView<ProfileLocationController> {
                     final GoogleMapController controller = await mapController.googleMapController.future;
                     await controller.animateCamera(CameraUpdate.newCameraPosition(mapController.kRandom));
 
-                    String address = "${tappedAddress.first.street}, ${tappedAddress.last.subLocality}, ${tappedAddress.last.locality}, ${tappedAddress.last.postalCode}";
+                    String address = "${tappedAddress.last.street}, ${tappedAddress.last.subLocality}, ${tappedAddress.last.locality}, ${tappedAddress.last.postalCode}";
                     completeProfileController.setLocation(address: address);
 
                     print.log("==============Map Tapped Here: ${mapController.placeAddress} ====================");

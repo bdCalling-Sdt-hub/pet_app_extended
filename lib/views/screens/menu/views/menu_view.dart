@@ -1,4 +1,5 @@
 
+import 'package:felpus/controllers/my_pet_controller.dart';
 import 'package:felpus/controllers/profile_controller.dart';
 import 'package:felpus/helpers/prefs_helper.dart';
 import 'package:felpus/views/components/custom_image.dart';
@@ -98,8 +99,8 @@ class MenuView extends GetView<MenuDataController> {
                   ),
                   profileCard(image: AppImages.memberCard, title: 'Your Pet Cards', onTap: () { Get.to(() => const YourPetView()); }),
                   profileCard(image: AppImages.vaccinations, title: 'Create Pet Cards', onTap: () { Get.to(() => const CreatePetView()); }),
-                  profileCard(image: AppImages.report, title: 'Report Lost Pet', onTap: () { Get.to(() => const ReportLosPetView()); }),
-                  profileCard(image: AppImages.clipboard, title: 'Report Found Pet', onTap: () { Get.to(() => const ReportFoundPetView()); }),
+                  profileCard(image: AppImages.report, title: 'Report Lost Pet', onTap: () { MyPetController.petType = "lost"; Get.to(() => const ReportLosPetView()); }),
+                  profileCard(image: AppImages.clipboard, title: 'Report Found Pet', onTap: () {MyPetController.petType = "found"; Get.to(() => const ReportFoundPetView()); }),
                   profileCard(image: AppImages.question, title: 'FAQ', onTap: () { Get.to(() => const FaqView()); }),
                   profileCard(image: AppImages.setting, title: 'Settings', onTap: () {Get.to(() => const SettingsView());   }),
                   profileCard(

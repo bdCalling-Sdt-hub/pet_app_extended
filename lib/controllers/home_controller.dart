@@ -19,14 +19,24 @@ class HomeController extends GetxController {
   Pagination? pagination;
 
   List<PetModel>lostPetList = [];
-  List foundPetList = [];
+  List<PetModel>foundPetList = [];
   List myPetList = [];
+
+  bool isMoreLoading = false;
 
 
   ///<<<=================== Get Lost Pet Repo ============================>>>
   Future getLostPetRepo({int page = 1, int limit = 10}) async {
 
-    var response = await ApiService.getApi("${AppUrls.filterByTag}?find=lost");
+    if(page == 1){
+      isLoading = true;
+      update();
+      lostPetList.clear();
+    }else{
+      isMoreLoading = true;
+      update();
+    }
+    var response = await ApiService.getApi("${AppUrls.filterByTag}?find=lost&page=$page&limit=$limit");
 
     if (response.statusCode == 200) {
       print.log("Lost pet response---------------------------->>>>");
@@ -38,31 +48,55 @@ class HomeController extends GetxController {
       for (var item in data) {
         lostPetList.add(PetModel.fromJson(item));
       }
-      update();
       pagination = fetchedPagination;
+      update();
 
     } else {
       Utils.snackBarErrorMessage(
           response.statusCode.toString(), response.message);
     }
+    isMoreLoading = false;
+    update();
+    isLoading = false;
+    update();
   }
 
-  Future getFoundPetRepo() async {
-    var response = await ApiService.getApi("${AppUrls.filterByTag}?find=found");
+  ///<<<=================== Get Found Pet Repo ===========================>>>
+
+  Future getFoundPetRepo({int page = 1, int limit = 10}) async {
+    if(page == 1){
+      isLoading = true;
+      update();
+      foundPetList.clear();
+    }else{
+      isMoreLoading = true;
+      update();
+    }
+
+    var response = await ApiService.getApi("${AppUrls.filterByTag}?find=found&page=$page&limit=$limit");
 
     if (response.statusCode == 200) {
       print.log("Found pet response---------------------------->>>>");
       var data = jsonDecode(response.body)['data'];
+      var responseData = jsonDecode(response.body);
+      final Pagination fetchedPagination = Pagination.fromJson(responseData['meta']);
 
       for (var item in data) {
         foundPetList.add(PetModel.fromJson(item));
       }
+      pagination = fetchedPagination;
       update();
     } else {
       Utils.snackBarErrorMessage(
           response.statusCode.toString(), response.message);
     }
+    isMoreLoading = false;
+    update();
+    isLoading = false;
+    update();
   }
+
+  ///<<<================ Get My Pet Repo =========================>>>
 
   Future getMyPetRepo() async {
     isLoading = true;
@@ -87,7 +121,7 @@ class HomeController extends GetxController {
     update();
   }
 
-  wait() {
+  wait(){
     isLoading = true;
     update();
     Future.wait([getFoundPetRepo(), getLostPetRepo(), getMyPetRepo()]);

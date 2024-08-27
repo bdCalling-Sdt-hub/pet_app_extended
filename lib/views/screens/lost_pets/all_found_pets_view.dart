@@ -1,3 +1,7 @@
+import 'package:felpus/controllers/found_pets_controller.dart';
+import 'package:felpus/controllers/home_controller.dart';
+import 'package:felpus/controllers/pet_details_controller.dart';
+import 'package:felpus/views/components/custom_loader.dart';
 import 'package:felpus/views/components/lost_pets_list_view.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +13,20 @@ import '../../../utils/app_text_style/styles.dart';
 import '../pet_details/pet_details_view.dart';
 
 class AllFoundPetsView extends GetView {
-  const AllFoundPetsView({super.key});
+
+  final FoundPetsController foundPetsController = Get.put(FoundPetsController());
+  final ScrollController scrollController = ScrollController();
+  AllFoundPetsView({super.key}){
+    scrollController.addListener(() {
+      if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
+        if (foundPetsController.pagination != null &&
+            foundPetsController.pagination!.currentPage < foundPetsController.pagination!.totalPages &&
+            !foundPetsController.isMoreLoading) {
+          foundPetsController.getFoundPetRepo(page: foundPetsController.pagination!.currentPage + 1);
+        }
+      }
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,29 +38,47 @@ class AllFoundPetsView extends GetView {
             onTap: () => Get.back(),
             child: const Icon(Icons.arrow_back_ios)),
       ),
-      body: Stack(
-        children: [
-          Image.asset(AppImages.dogCat),
-          Container(
-            width: Get.width,
-            height: Get.height,
-            color: AppColors.white.withOpacity(0.7),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 14.0),
-            child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: 12,
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                      onTap: (){
-                        Get.to(() => const PetDetailsView());
-                      },
-                      child: petsList(pet: PetModel.fromJson({})));
-                }),
-          ),
-        ],
-      ),
+      body:  GetBuilder<FoundPetsController>(builder: (controller) {
+        return controller.isLoading
+            ? const CustomLoader()
+            : Stack(
+          children: [
+            Image.asset(AppImages.dogCat),
+            Container(
+              width: Get.width,
+              height: Get.height,
+              color: AppColors.white.withOpacity(0.7),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 14.0),
+              child: ListView.builder(
+                controller: scrollController,
+                  shrinkWrap: true,
+                  itemCount: controller.foundPetList.length + 1,
+                  itemBuilder: (context, index) {
+                    if (index < controller.foundPetList.length) {
+                      return GestureDetector(
+                        onTap: () {
+                          PetDetailsController.instance.getPetDetailsRepo(
+                            petId: controller.foundPetList[index].id,
+                          );
+                          Get.to(() => const PetDetailsView());
+                        },
+                        child: petsList(pet: controller.foundPetList[index]),
+                      );
+                    } else {
+                      return controller.isMoreLoading
+                          ? const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 20),
+                        child: Center(child: CustomLoader()),
+                      )
+                          : const SizedBox.shrink();
+                    }
+                  }),
+            ),
+          ],
+        );
+      },),
       bottomNavigationBar: Image.asset(AppImages.ads, scale: 4,),
     );
   }
