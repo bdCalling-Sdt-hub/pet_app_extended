@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:felpus/controllers/groups_n_contacts_controller.dart';
 import 'package:felpus/helpers/prefs_helper.dart';
 import 'package:felpus/models/pagination_model.dart';
 import 'package:felpus/models/pet_model.dart';
@@ -124,7 +125,7 @@ class HomeController extends GetxController {
   wait(){
     isLoading = true;
     update();
-    Future.wait([getFoundPetRepo(), getLostPetRepo(), getMyPetRepo()]);
+    Future.wait([getFoundPetRepo(), getLostPetRepo(), getMyPetRepo(), GroupsNContactsController.instance.getGroupsRepo()]);
     isLoading = false;
     update();
   }

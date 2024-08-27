@@ -199,12 +199,12 @@ class _CreateGroupViewState extends State<CreateGroupView> {
                               ),
                               trailing: GestureDetector(
                                 onTap: () {
-                                  if (_selectedItems[index] == false) {
-                                    controller.selectedContacts.add(contact.id);
+                                  if (_selectedItems[index] ?? false) {
+                                    controller.selectedContacts.remove(contact.id);
                                   } else {
-                                    controller.selectedContacts
-                                        .remove(contact.id);
+                                    controller.selectedContacts.add(contact.id);
                                   }
+
                                   print.log(
                                       "Selected Contacts : ${controller.selectedContacts}");
                                   setState(() {

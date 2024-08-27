@@ -1,3 +1,4 @@
+import 'package:felpus/controllers/groups_n_contacts_controller.dart';
 import 'package:felpus/controllers/pet_details_controller.dart';
 import 'package:felpus/views/components/lost_pets_list_view.dart';
 import 'package:felpus/views/components/my_pets_grid.dart';
@@ -124,20 +125,13 @@ class HomeView extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 18.0),
                         child: Column(
                           children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "My Groups",
-                                  style: h2.copyWith(
-                                      fontSize: 20, color: AppColors.mainColor),
-                                ),
-                                Text(
-                                  "See all",
-                                  style: h2.copyWith(
-                                      fontSize: 18, color: AppColors.ash),
-                                ),
-                              ],
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                "My Groups",
+                                style: h2.copyWith(
+                                    fontSize: 20, color: AppColors.mainColor),
+                              ),
                             ),
                             sh10,
                             SizedBox(
@@ -145,7 +139,7 @@ class HomeView extends StatelessWidget {
                               child: ListView.builder(
                                   shrinkWrap: true,
                                   scrollDirection: Axis.horizontal,
-                                  itemCount: categoryList.length,
+                                  itemCount: GroupsNContactsController.instance.groupsList.length,
                                   itemBuilder: (context, index) {
                                     return Padding(
                                       padding: const EdgeInsets.symmetric(
@@ -160,7 +154,7 @@ class HomeView extends StatelessWidget {
                                               horizontal: 10.0, vertical: 10),
                                           child: Center(
                                             child: Text(
-                                              categoryList[index],
+                                              GroupsNContactsController.instance.groupsList[index].groupName,
                                               style: h2.copyWith(fontSize: 14),
                                             ),
                                           ),

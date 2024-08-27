@@ -6,7 +6,9 @@ import 'package:felpus/views/components/custom_text.dart';
 import 'package:felpus/views/screens/FirstAid/Views/tips_para_encontrar.dart';
 import 'package:felpus/views/screens/FirstAid/Views/tratamiento_inhalacion.dart';
 import 'package:felpus/views/screens/FirstAid/Views/tratamiento_quemadura.dart';
+import 'package:felpus/views/screens/nearby_map_screen/nearby_map_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:get/get.dart';
 import '../../../utils/app_images/app_images.dart';
 import '../FirstAid/Views/manejo_screen.dart';
@@ -83,63 +85,83 @@ class ResourcesView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Container(
-                  height: 122,
-                  width: 142,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: AppColors.pinkExtraLight
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(AppImages.fireTruck,scale: 4,),
-                      sh5,
-                      Text("Call Fireman",style: h2.copyWith(fontSize: 20),)
-                    ],
-                  ),
-                ),
-                sh15,
-                Container(
-                  height: 122,
-                  width: 142,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: AppColors.pinkExtraLight
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(AppImages.petHome,scale: 4,),
-                      sh5,
-                      Text("Pet Shelter\n Nearby",style: h2.copyWith(fontSize: 20),textAlign: TextAlign.center,)
-                    ],
-                  ),
+                GestureDetector(
+                  onTap: () {
+                    isFirstAidTapped.value = false;
+                    isPetSheltersTapped.value = false;
+                    isVetsNearbyTapped.value = false;
+                    isCallFiremanTapped.value = !isCallFiremanTapped.value;
+                    if(isCallFiremanTapped.value){
+                      FlutterPhoneDirectCaller.callNumber("999");
+                    }
+                  },
+                  child: Obx(() => Container(
+                    height: 122,
+                    width: 142,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: isCallFiremanTapped.value? AppColors.mainColor : AppColors.pinkExtraLight
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(AppImages.fireTruck,scale: 4, color: isCallFiremanTapped.value? AppColors.white : null),
+                        sh5,
+                        Text("Call Fireman",style: h2.copyWith(fontSize: 20, color: isCallFiremanTapped.value? AppColors.white : AppColors.black),)
+                      ],
+                    ),
+                  ),),
                 ),
                 sh15,
                 GestureDetector(
                   onTap: () {
                     isFirstAidTapped.value = false;
+                    isPetSheltersTapped.value = !isPetSheltersTapped.value;
                     isVetsNearbyTapped.value = false;
-                    isPetSheltersTapped.value = false;
                     isCallFiremanTapped.value = false;
+                    Get.to(()=> NearbyMapScreen());
                   },
-                  child: Container(
+                  child: Obx(() => Container(
                     height: 122,
                     width: 142,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        color: AppColors.pinkExtraLight
+                        color: isPetSheltersTapped.value? AppColors.mainColor : AppColors.pinkExtraLight
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Image.asset(AppImages.petLeg,scale: 4,),
+                        Image.asset(AppImages.petHome,scale: 4, color: isPetSheltersTapped.value? AppColors.white : null,),
                         sh5,
-                        Text("Vets Nearby",style: h2.copyWith(fontSize: 20),textAlign: TextAlign.center,)
+                        Text("Pet Shelter\n Nearby",style: h2.copyWith(fontSize: 20, color: isPetSheltersTapped.value? AppColors.white : AppColors.black),textAlign: TextAlign.center,)
                       ],
                     ),
-                  ),
+                  ),),
+                ),
+                sh15,
+                GestureDetector(
+                  onTap: () {
+                    isFirstAidTapped.value = false;
+                    isPetSheltersTapped.value = false;
+                    isVetsNearbyTapped.value = !isVetsNearbyTapped.value;
+                    isCallFiremanTapped.value = false;
+                  },
+                  child: Obx(() => Container(
+                    height: 122,
+                    width: 142,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: isVetsNearbyTapped.value ? AppColors.mainColor : AppColors.pinkExtraLight
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(AppImages.petLeg,scale: 4, color: isVetsNearbyTapped.value ? AppColors.white : null),
+                        sh5,
+                        Text("Vets Nearby",style: h2.copyWith(fontSize: 20, color: isVetsNearbyTapped.value ? AppColors.white : AppColors.black),textAlign: TextAlign.center,)
+                      ],
+                    ),
+                  ),),
                 ),
                 sh15,
                 GestureDetector(

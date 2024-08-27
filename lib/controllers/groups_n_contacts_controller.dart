@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:felpus/helpers/image_picker.dart';
 import 'package:felpus/helpers/prefs_helper.dart';
+import 'package:felpus/models/group_model.dart';
 import 'package:felpus/models/pet_model.dart';
 import 'package:felpus/services/api_service.dart';
 import 'package:felpus/utils/App_Urls/app_urls.dart';
@@ -13,10 +14,15 @@ import 'dart:developer' as print;
 class GroupsNContactsController extends GetxController {
   //TODO: Implement GroupsController
 
+  static GroupsNContactsController get instance => Get.put(GroupsNContactsController());
+
   final count = 0.obs;
 
   bool isLoading = false;
+  bool isGettingGroups = false;
+
   List<UserModel> contactsList = [];
+  List<GroupModel> groupsList = [];
 
   List<UserModel> filteredContacts = [];
   List<String>selectedContacts = [];
@@ -26,6 +32,7 @@ class GroupsNContactsController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    getGroupsRepo();
     getContactsRepo();
     filteredContacts = contactsList;
   }
@@ -84,6 +91,7 @@ class GroupsNContactsController extends GetxController {
 
   ///<<<=============== Get Contacts Repo ======================>>>
   Future getContactsRepo() async {
+    contactsList.clear();
     isLoading = true;
     update();
 
@@ -105,6 +113,35 @@ class GroupsNContactsController extends GetxController {
     }
 
     isLoading = false;
+    update();
+  }
+
+  ///<<<=============== Get Groups Repo ======================>>>
+  Future getGroupsRepo() async {
+    groupsList.clear();
+    isGettingGroups = true;
+    update();
+
+    Map<String, String> header = {
+      'Authorization': PrefsHelper.token,
+    };
+
+    var response = await ApiService.getApi(AppUrls.myGroups, header: header);
+
+    if (response.statusCode == 200) {
+      print.log("Get groups response---------------------------->>>>");
+      var data = jsonDecode(response.body)['data'];
+
+      for (var item in data) {
+        groupsList.add(GroupModel.fromJson(item));
+      }
+      update();
+
+    } else {
+      Utils.snackBarErrorMessage(response.statusCode.toString(), response.message);
+    }
+
+    isGettingGroups = false;
     update();
   }
 
