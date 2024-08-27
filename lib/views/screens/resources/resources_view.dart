@@ -117,20 +117,28 @@ class ResourcesView extends StatelessWidget {
                   ),
                 ),
                 sh15,
-                Container(
-                  height: 122,
-                  width: 142,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: AppColors.pinkExtraLight
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(AppImages.petLeg,scale: 4,),
-                      sh5,
-                      Text("Vets Nearby",style: h2.copyWith(fontSize: 20),textAlign: TextAlign.center,)
-                    ],
+                GestureDetector(
+                  onTap: () {
+                    isFirstAidTapped.value = false;
+                    isVetsNearbyTapped.value = false;
+                    isPetSheltersTapped.value = false;
+                    isCallFiremanTapped.value = false;
+                  },
+                  child: Container(
+                    height: 122,
+                    width: 142,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: AppColors.pinkExtraLight
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(AppImages.petLeg,scale: 4,),
+                        sh5,
+                        Text("Vets Nearby",style: h2.copyWith(fontSize: 20),textAlign: TextAlign.center,)
+                      ],
+                    ),
                   ),
                 ),
                 sh15,
