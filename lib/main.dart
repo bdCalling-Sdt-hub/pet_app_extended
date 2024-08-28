@@ -30,9 +30,9 @@ Future<void> main() async {
             title: "Felpus",
             defaultTransition: Transition.noTransition,
             transitionDuration:  const Duration(milliseconds: 400),
-            // initialRoute: AppRoutes.splashView,
-            // getPages: AppRoutes.routes,
-            home: NearbyMapScreen(),
+            initialRoute: AppRoutes.splashView,
+            getPages: AppRoutes.routes,
+            // home: NearbyMapScreen(),
           );
         }),
   );
