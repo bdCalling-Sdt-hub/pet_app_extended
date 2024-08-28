@@ -1,5 +1,4 @@
 import 'package:felpus/services/location_service.dart';
-import 'package:felpus/views/screens/nearby_map_screen/nearby_map_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
