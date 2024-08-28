@@ -14,7 +14,10 @@ import 'package:http/http.dart' as http;
 
 class ShowGoogleMapController extends GetxController {
   List<Marker> marker = [];
-  String searchFor = "Pet Shelter";
+  String searchForText = "Pet_Shelter";
+  bool isMe = false;
+  String markerAddress = "" ;
+  bool isMarkerTapped = false ;
 
   num latitude = 0;
   num longitude = 0;
@@ -27,6 +30,7 @@ class ShowGoogleMapController extends GetxController {
 
   CameraPosition? kGooglePlex;
   bool isCurrent = true;
+
   Future<BitmapDescriptor> customMarkerImage(BuildContext context) async {
     return await BitmapDescriptor.asset(
         ImageConfiguration(
@@ -36,10 +40,24 @@ class ShowGoogleMapController extends GetxController {
         width: 40);
   }
 
+  /// ================== Set Marker Method =========================
+
   setMarker(LatLng latLng, String placeId, String address) async {
     final BitmapDescriptor customMarker = await customMarkerImage(Get.context!);
     Marker newMarker = Marker(
-      onTap: () => AddressBottomSheet.showAddressBottomSheet(address),
+      onTap: () {
+        if(placeId == '1'){
+          isMe = true;
+          update();
+        }else{
+          isMe = false;
+          update();
+        }
+        markerAddress = address;
+        isMarkerTapped = true;
+        update();
+      },
+        infoWindow:  InfoWindow( title: address.split(",")[0]),
         icon: customMarker,
         markerId: MarkerId(placeId), // Use a unique MarkerId for each marker
         position: LatLng(latLng.latitude, latLng.longitude));
@@ -48,7 +66,18 @@ class ShowGoogleMapController extends GetxController {
     update();
   }
 
+  setMarkerTappedFalse(){
+    isMarkerTapped = false;
+    update();
+  }
+
+  ///=================== Get Current Location Method ====================
+  bool isLoading = false;
+
   getCurrentLocation() async {
+    isLoading = true;
+    update();
+
     print.log("Current location is called-1");
     Position? positions = await LocationService.getCurrentPosition();
     if (positions != null) {
@@ -69,57 +98,31 @@ class ShowGoogleMapController extends GetxController {
       List<AddressModel> shelters = await searchPetShelters('vet', positions);
 
       isCurrent = false;
+      update();
       for (var shelter in shelters) {
         setMarker(LatLng(shelter.latitude, shelter.longitude), shelter.placeId, "${shelter.mainText},${shelter.description}");
         print.log('Address >>>>><<<<<: ${shelter.mainText},${shelter.description}');
         print.log('Latitude >>>>><<<<<: ${shelter.latitude}');
         print.log('Longitude >>>>><<<<<: ${shelter.longitude}');
       }
+      isLoading = false;
+      update();
 
       final GoogleMapController googleMapController = await controller.future;
-      await googleMapController
-          .animateCamera(CameraUpdate.newCameraPosition(newCameraPosition));
+      await googleMapController.animateCamera(CameraUpdate.newCameraPosition(newCameraPosition));
       update();
     }
+
   }
-
-  ///<<<=====================
-  // Future<void> searchPetShelters(Position position) async {
-  //   var apiKey = 'AIzaSyBT1HkkjBVBLJVm0pWHdj6WcG_gnUmaoaE';
-  //   var url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${position.latitude},${position.longitude}&radius=5000&type=vets&key=$apiKey';
-  //
-  //   var response = await http.get(Uri.parse(url));
-  //
-  //   if (response.statusCode == 200) {
-  //     var data = jsonDecode(response.body);
-  //     var results = data['results'];
-  //     if (results.isNotEmpty) {
-  //       for (var place in results) {
-  //         var location = place['geometry']['location'];
-  //
-  //         var address = place['vicinity'] ?? 'Address not available'; // Use 'vicinity' or 'formatted_address'
-  //         print("Location: $location, Address: $address");
-  //         // Add your logic to handle the location
-  //
-  //         isCurrent = false;
-  //        await setMarker(LatLng(location['lat'], location['lng']), place['place_id']);
-  //       }
-  //     } else {
-  //       print('No results found');
-  //     }
-  //   } else {
-  //     print('Failed to fetch results');
-  //   }
-  // }
-
 
   ///<<<===================== Query Based Nearby Search =====================>>>
 
   Future<List<AddressModel>> searchPetShelters(String query, Position position) async {
+
     var apiKey = 'AIzaSyBT1HkkjBVBLJVm0pWHdj6WcG_gnUmaoaE';
     var url = 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$query&location=${position.latitude},${position.longitude}&radius=5000&key=$apiKey';
 
-    var response = await http.get(Uri.parse(url)).timeout(const Duration(seconds: 10));
+    var response = await http.get(Uri.parse(url)).timeout(const Duration(seconds: 30));
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
       List predictions = data['predictions'];
@@ -143,7 +146,7 @@ class ShowGoogleMapController extends GetxController {
     var apiKey = 'AIzaSyBT1HkkjBVBLJVm0pWHdj6WcG_gnUmaoaE';
     var url = 'https://maps.googleapis.com/maps/api/place/details/json?place_id=$placeId&key=$apiKey';
 
-    var response = await http.get(Uri.parse(url)).timeout(const Duration(seconds: 10));
+    var response = await http.get(Uri.parse(url)).timeout(const Duration(seconds: 30));
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
       var result = data['result'];
