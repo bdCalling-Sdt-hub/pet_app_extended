@@ -64,7 +64,7 @@ class ChatListView extends StatelessWidget {
                       ),
                       const Spacer(),
 
-                      ///<<<===================== Card Style Button =============>>>
+                      ///<<<===================== Card Style Button ================>>>
 
                       GestureDetector(
                         onTap: () {
