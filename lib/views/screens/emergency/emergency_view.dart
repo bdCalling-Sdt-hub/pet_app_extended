@@ -9,27 +9,24 @@ import '../../../utils/app_text_style/styles.dart';
 import 'emergency_send_sms_type_view.dart';
 
 
-class EmergencyView extends StatelessWidget {
+class EmergencyView extends StatefulWidget {
    EmergencyView({super.key});
 
+  @override
+  State<EmergencyView> createState() => _EmergencyViewState();
+}
 
+class _EmergencyViewState extends State<EmergencyView> {
   final List<Map<String, String>> items = [
-    {'title': 'Lost Pets', 'icon': AppImages.search},
-    {'title': 'Injured Pet', 'icon': AppImages.injured},
-    {'title': 'Abused Pet', 'icon': AppImages.abused},
-    {'title': 'Fire', 'icon': AppImages.fire,  },       // Add correct path for icons
+    {'title': 'Lost Pets', 'icon': AppImages.lostPets},
+    {'title': 'Injured Pet', 'icon': AppImages.injuredPet},
+    {'title': 'Abused Pet', 'icon': AppImages.abusedPet},
+    {'title': 'Fire', 'icon': AppImages.fire},       // Add correct path for icons
     {'title': 'Earthquake', 'icon': AppImages.earthquake},
     {'title': 'Flood', 'icon': AppImages.flood},
   ];
 
-/*   final List<Map<String, String>> items = [
-     {'title': 'Fire', 'icon': 'assets/fire.png', 'route': '/fire'},
-     {'title': 'Earthquake', 'icon': 'assets/earthquake.png', 'route': '/earthquake'},
-     {'title': 'Flood', 'icon': 'assets/flood.png', 'route': '/flood'},
-     {'title': 'Lost Pets', 'icon': 'assets/lost_pets.png', 'route': '/lost_pets'},
-     {'title': 'Injured Pet', 'icon': 'assets/injured_pet.png', 'route': '/injured_pet'},
-     {'title': 'Abused Pet', 'icon': 'assets/abused_pet.png', 'route': '/abused_pet'},
-   ];*/
+  int selectedIndex = -1;
 
  /* final List routePage = [
 
@@ -39,9 +36,9 @@ class EmergencyView extends StatelessWidget {
     Get.to(() => NotificationsView()),
     Get.to(() => NotificationsView()),
   ];*/
-
   @override
   Widget build(BuildContext context) {
+    // selectedIndex = -1;
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
@@ -81,11 +78,14 @@ class EmergencyView extends StatelessWidget {
                     final item = items[index];
                     return GestureDetector(
                       onTap: () {
+                        setState(() {
+                          selectedIndex = index;
+                        });
                         Get.to(() => const EmergencySendSmsTypeView());
                       },
                       child: Container(
                         decoration: BoxDecoration(
-                          color:  AppColors.pinkLight,  // Highlight Lost Pets in red
+                          color:  selectedIndex == index? AppColors.mainColor :AppColors.pinkLight,  // Highlight Lost Pets in red
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         child: Column(
@@ -95,11 +95,12 @@ class EmergencyView extends StatelessWidget {
                               item['icon']!,
                               width: 50,
                               height: 50,
+                              color: selectedIndex == index? AppColors.white : AppColors.black,
                             ),
                             const SizedBox(height: 10),
                             Text(
                               item['title']!,
-                              style: h2
+                              style: h2.copyWith(color: selectedIndex == index? AppColors.white : AppColors.black)
                             ),
                           ],
                         ),

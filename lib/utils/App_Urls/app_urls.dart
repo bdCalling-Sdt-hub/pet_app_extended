@@ -35,4 +35,6 @@ class AppUrls {
   static String createGroup = "$baseUrl/chats/group";
 
   static String myGroups = "$baseUrl/chats/my-group";
+
+  static String chatUsers = "$baseUrl/chats/myChat";
 }

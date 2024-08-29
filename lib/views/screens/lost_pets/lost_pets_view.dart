@@ -1,12 +1,16 @@
 
 import 'package:felpus/controllers/home_controller.dart';
 import 'package:felpus/controllers/pet_details_controller.dart';
+import 'package:felpus/helpers/prefs_helper.dart';
+import 'package:felpus/services/ads_service.dart';
+import 'package:felpus/views/components/custom_image.dart';
 import 'package:felpus/views/components/custom_loader.dart';
 import 'package:felpus/views/components/lost_pets_list_view.dart';
 import 'package:felpus/models/pet_model.dart';
 import 'package:felpus/views/components/no_data.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../../../controllers/lost_pets_controller.dart';
 import '../../../utils/app_color/app_colors.dart';
 import '../../../utils/app_images/app_images.dart';
@@ -19,6 +23,7 @@ import 'all_lost_pets_view.dart';
 
 class LostPetsView extends GetView<LostPetsController> {
   const LostPetsView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,27 +40,15 @@ class LostPetsView extends GetView<LostPetsController> {
             ),
           ),
           sw15,
-          Container(
-            height: 40,
-            width: 40,
-            decoration: BoxDecoration(
-              color: AppColors.grayLight.withOpacity(0.2),
-              shape: BoxShape.circle,
-              border: Border.all(
-                  color: AppColors.grayLight.withOpacity(0.1), width: 2),
-            ),
-            child: ClipOval(
-              child: Image.asset(
-                AppImages.boy,
-                fit: BoxFit.fill,
-              ),
-            ),
-          ),
+          ClipRRect(
+              borderRadius: BorderRadius.circular(100),
+              child: CustomImage(imageSrc: PrefsHelper.userImageUrl, imageType: ImageType.network,  height: 40,
+                width: 40,)),
           sw10,
         ],
       ),
       body: GetBuilder<HomeController>(builder: (controller) {
-        return controller.isLoading? const CustomLoader() : Stack(
+        return Stack(
 
           children: [
             Image.asset(AppImages.backgroundImage, fit: BoxFit.fill, height: Get.height, width: Get.width,),
@@ -89,7 +82,7 @@ class LostPetsView extends GetView<LostPetsController> {
                   sh10,
 
                   ///<<<<================= Lost Pets ====================>>>>
-                  controller.lostPetList.isEmpty
+                   controller.isLostPetGetting? const CustomLoader() : controller.lostPetList.isEmpty
                       ? const NoData()
                       : Expanded(
                     child: ListView.builder(
@@ -129,7 +122,7 @@ class LostPetsView extends GetView<LostPetsController> {
                   ),
                   sh10,
 
-                  controller.foundPetList.isEmpty
+                  controller.isFoundPetGetting? const CustomLoader() :controller.foundPetList.isEmpty
                       ? const Center(child: NoData())
                       : Expanded(
                     child: ListView.builder(
@@ -146,14 +139,24 @@ class LostPetsView extends GetView<LostPetsController> {
                               child: petsList(pet: item));
                         }),
                   ),
+                  Obx(() {
+                    return AdsServices.isBannerAdReady.value
+                        ? Container(
+                      alignment: Alignment.center,
+                      width: AdsServices.bannerAdFirst.size.width.toDouble(),
+                      height: AdsServices.bannerAdFirst.size.height.toDouble(),
+                      child: AdWidget(ad: AdsServices.bannerAdFirst),
+                    )
+                        : const SizedBox();
+                  }),
                 ],
               ),
             ),
-            Positioned(
-                bottom: 0,
-                right: 0,
-                left: 0,
-                child: Image.asset(AppImages.ads, scale: 4,)),
+            // Positioned(
+            //     bottom: 0,
+            //     right: 0,
+            //     left: 0,
+            //     child: Image.asset(AppImages.ads, scale: 4,)),
           ],
         );
       },),

@@ -1,11 +1,13 @@
+import 'package:felpus/helpers/prefs_helper.dart';
+import 'package:felpus/services/ads_service.dart';
 import 'package:felpus/services/location_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'core/app_routes.dart';
 import 'core/dependency_injection.dart';
-import 'helpers/prefs_helper.dart';
 import 'services/other_service.dart';
 
 Future<void> main() async {
@@ -17,6 +19,8 @@ Future<void> main() async {
   await PrefsHelper.getAllPrefData();
   DependencyInjection dI = DependencyInjection();
   dI.dependencies();
+  await MobileAds.instance.initialize();
+  AdsServices.loadBannerAd();
 
   runApp(
     ScreenUtilInit(
@@ -31,7 +35,7 @@ Future<void> main() async {
             transitionDuration:  const Duration(milliseconds: 400),
             initialRoute: AppRoutes.splashView,
             getPages: AppRoutes.routes,
-            // home: NearbyMapScreen(),
+            // home: ProfileLocationView(),
           );
         }),
   );

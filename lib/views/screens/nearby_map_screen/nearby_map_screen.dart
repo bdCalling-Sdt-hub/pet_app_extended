@@ -1,5 +1,5 @@
 
-import 'package:felpus/controllers/nearby_map_controller.dart';
+import 'package:felpus/controllers/GoogleMapControllers/nearby_map_controller.dart';
 import 'package:felpus/extensions/extension.dart';
 import 'package:felpus/utils/app_color/app_colors.dart';
 import 'package:felpus/utils/app_images/app_images.dart';

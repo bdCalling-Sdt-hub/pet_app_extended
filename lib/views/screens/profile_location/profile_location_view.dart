@@ -20,13 +20,14 @@ import '../dashboard/dashboard_view.dart';
 
 
 
-class ProfileLocationView extends GetView<ProfileLocationController> {
+class ProfileLocationView extends StatelessWidget{
   ProfileLocationView({super.key});
 
   final CompleteProfileController completeProfileController = Get.put(CompleteProfileController());
   final ImagePickerController imagePickerController = Get.put(ImagePickerController());
   final MapController mapController = Get.put(MapController());
   String mapTheme = "";
+
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +58,7 @@ class ProfileLocationView extends GetView<ProfileLocationController> {
                   borderRadius: BorderRadius.circular(24)
                 ),
                 child: Obx(() => GoogleMap(
-                  initialCameraPosition: mapController.initialCameraPosition,
+                  initialCameraPosition: mapController.kGooglePlex ?? mapController.initialCameraPosition,
                   compassEnabled: true,
                   myLocationEnabled: true,
                   myLocationButtonEnabled: true,
@@ -80,6 +81,7 @@ class ProfileLocationView extends GetView<ProfileLocationController> {
                     var tappedAddress = mapController.placeAddress;
 
                     final BitmapDescriptor customMarker = await mapController.customMarkerImage(Get.context!);
+                    String address = "${tappedAddress.first.street}, ${tappedAddress.first.locality}, ${tappedAddress.first.subAdministrativeArea}, ${tappedAddress.first.administrativeArea}, ${tappedAddress.first.postalCode}";
 
                     mapController.marker.add(
                         Marker(
@@ -87,15 +89,13 @@ class ProfileLocationView extends GetView<ProfileLocationController> {
                           position: LatLng(latlng.latitude, latlng.longitude),
                           icon: customMarker,
                           infoWindow: InfoWindow(
-                              title: "${tappedAddress.last.subLocality}: ${latlng.latitude}, ${latlng.longitude}"
+                              title: address
                           ),
                         )
                     );
 
                     final GoogleMapController controller = await mapController.googleMapController.future;
                     await controller.animateCamera(CameraUpdate.newCameraPosition(mapController.kRandom));
-
-                    String address = "${tappedAddress.last.street}, ${tappedAddress.last.subLocality}, ${tappedAddress.last.locality}, ${tappedAddress.last.postalCode}";
                     completeProfileController.setLocation(address: address);
 
                     print.log("==============Map Tapped Here: ${mapController.placeAddress} ====================");

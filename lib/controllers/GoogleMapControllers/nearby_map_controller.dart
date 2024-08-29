@@ -93,7 +93,7 @@ class ShowGoogleMapController extends GetxController {
       setMarker(
           LatLng(positions.latitude, positions.longitude),
           '1',
-          "${myCurrentLocation.last.street},${myCurrentLocation.last.locality},${myCurrentLocation.last.subLocality}");
+          "${myCurrentLocation.first.street}, ${myCurrentLocation.first.locality}, ${myCurrentLocation.first.subAdministrativeArea}, ${myCurrentLocation.first.administrativeArea}, ${myCurrentLocation.first.postalCode}");
 
       kGooglePlex = CameraPosition(
         target: LatLng(positions.latitude, positions.longitude),

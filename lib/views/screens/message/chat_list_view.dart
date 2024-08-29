@@ -1,4 +1,5 @@
 
+import 'package:felpus/views/components/custom_loader.dart';
 import 'package:felpus/views/components/custom_textfelid.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -87,19 +88,20 @@ class ChatListView extends StatelessWidget {
                 ),
 
                 controller.isInformation.value
-                    ? Expanded(
+                    ? controller.isLoading? const CustomLoader() : Expanded(
                   child: ListView.builder(
                     // controller: _scrollController,
-                    itemCount: 10,
+                    itemCount: controller.chatUsersList.length,
                     itemBuilder: (context, index) {
+                      var chatUserDetails = controller.chatUsersList[index];
                       return GestureDetector(
                         onTap: () {
                           Get.to(() => const MessageView());
                         },
                         child: ChatListItem(
-                          image: "https://shorturl.at/2iMPa",
-                          name: "Henry",
-                          message: "They are at my place.",
+                          image: chatUserDetails.type == "single"? chatUserDetails.partner.photo : chatUserDetails.photo,
+                          name: chatUserDetails.type == "single"? chatUserDetails.partner.fullName : chatUserDetails.groupName,
+                          message: chatUserDetails.lastMessage,
                           time: "10 :15",
                           numberOfMessages: 5,
                         ),

@@ -1,5 +1,8 @@
 import 'package:felpus/controllers/groups_n_contacts_controller.dart';
 import 'package:felpus/controllers/pet_details_controller.dart';
+import 'package:felpus/helpers/prefs_helper.dart';
+import 'package:felpus/views/components/custom_image.dart';
+import 'package:felpus/views/components/custom_text.dart';
 import 'package:felpus/views/components/lost_pets_list_view.dart';
 import 'package:felpus/views/components/my_pets_grid.dart';
 import 'package:felpus/models/pet_model.dart';
@@ -58,22 +61,10 @@ class HomeView extends StatelessWidget {
               ),
             ),
             sw15,
-            Container(
-              height: 40,
-              width: 40,
-              decoration: BoxDecoration(
-                color: AppColors.grayLight.withOpacity(0.2),
-                shape: BoxShape.circle,
-                border: Border.all(
-                    color: AppColors.grayLight.withOpacity(0.1), width: 2),
-              ),
-              child: ClipOval(
-                child: Image.asset(
-                  AppImages.boy,
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
+            ClipRRect(
+                borderRadius: BorderRadius.circular(100),
+                child: CustomImage(imageSrc: PrefsHelper.userImageUrl, imageType: ImageType.network,  height: 40,
+                  width: 40,)),
             sw10,
           ],
         ),
@@ -136,7 +127,7 @@ class HomeView extends StatelessWidget {
                             sh10,
                             SizedBox(
                               height: 45,
-                              child: ListView.builder(
+                              child: GroupsNContactsController.instance.groupsList.isEmpty? CustomText(text: "No groups found") : ListView.builder(
                                   shrinkWrap: true,
                                   scrollDirection: Axis.horizontal,
                                   itemCount: GroupsNContactsController.instance.groupsList.length,

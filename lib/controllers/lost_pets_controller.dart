@@ -56,6 +56,8 @@ class LostPetsController extends GetxController {
     isLoading = false;
     update();
   }
+
+
   @override
   void onInit() {
     getLostPetRepo();

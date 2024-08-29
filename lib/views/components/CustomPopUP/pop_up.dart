@@ -1,5 +1,6 @@
 
 import 'package:felpus/extensions/extension.dart';
+import 'package:felpus/services/ads_service.dart';
 import 'package:felpus/views/components/custom_button.dart';
 import 'package:felpus/views/components/custom_container_button.dart';
 import 'package:flutter/material.dart';
@@ -115,6 +116,7 @@ class PopUp {
                     height: 48,
                     text: "Yes".tr,
                     onTap: () {
+                      AdsServices.disposeBannerAd();
                       PrefsHelper.removeAllPrefData();
                       Get.offAll(()=> LoginView());
                       // Get.offAllNamed(AppRoutes.signInScreen);

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:felpus/controllers/complete_profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
@@ -32,6 +33,7 @@ class MapController extends GetxController {
   List<Marker> marker = [];
   List<Placemark> placeAddress = [];
   List<Location> locationCoOrdinates = [];
+  CameraPosition? kGooglePlex;
 
   void updateLocation(double lat, double lng) {
     userLatitude.value = lat;
@@ -67,6 +69,7 @@ class MapController extends GetxController {
   @override
   void onInit() {
     // TODO: implement onInit
+    getUserCurrentLocation().then((value) => getCurrentLocation(),);
     searchText.value.addListener(() {
       onChange();
     });
@@ -81,6 +84,19 @@ class MapController extends GetxController {
   Future<BitmapDescriptor> customMarkerImage(BuildContext context) async {
     return await BitmapDescriptor.asset(ImageConfiguration(devicePixelRatio: MediaQuery.of(context).devicePixelRatio),
       AppImages.icon, height: 40, width: 40);
+  }
+
+  setMarker({required LatLng latlng}) async {
+    final BitmapDescriptor customMarker = await customMarkerImage(Get.context!);
+
+    marker.add(
+        Marker(
+          markerId: const MarkerId('customMarker'),
+          position: LatLng(latlng.latitude, latlng.longitude),
+          icon: customMarker,
+          infoWindow: const InfoWindow(title: "My current location"),
+        )
+    );
   }
 
   void getSuggestion(String inputText) async {
@@ -107,19 +123,25 @@ class MapController extends GetxController {
         .onError((error, stackTrace) {
       print.log("Error ${error.toString()}");
     });
+    print.log("============>>>${Geolocator.getCurrentPosition}");
     return await Geolocator.getCurrentPosition();
   }
 
   getCurrentLocation() {
     getUserCurrentLocation().then((value) async {
+      kGooglePlex = CameraPosition(
+        target: LatLng(value.latitude, value.longitude),
+        zoom: 14,
+      );
       updateLocation(value.latitude, value.longitude);
-      print.log('My current location');
-      print.log(
-          "My Current Location:^^^^^^^^^^^^^^^^^^${value.latitude}, ${value.longitude}");
-      marker.add(Marker(
-          markerId: MarkerId("My location"),
-          position: LatLng(value.latitude, value.longitude),
-          infoWindow: const InfoWindow(title: 'My current location')));
+      setMarker(latlng: LatLng(value.latitude, value.longitude));
+      placeAddress = await placemarkFromCoordinates(value.latitude, value.longitude);
+
+      print.log("My Current Location:>>>>>$placeAddress");
+
+      String address = "${placeAddress.first.street}, ${placeAddress.first.locality}, ${placeAddress.first.subAdministrativeArea}, ${placeAddress.first.administrativeArea}, ${placeAddress.first.postalCode}";
+
+      CompleteProfileController.instance.setLocation(address: address);
       final GoogleMapController controller = await googleMapController.future;
       await controller.animateCamera(CameraUpdate.newCameraPosition(kRandom));
     });

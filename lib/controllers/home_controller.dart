@@ -17,6 +17,9 @@ class HomeController extends GetxController {
   final count = 0.obs;
 
   bool isLoading = false;
+  bool isLostPetGetting = false;
+  bool isFoundPetGetting = true;
+
   Pagination? pagination;
 
   List<PetModel>lostPetList = [];
@@ -30,7 +33,7 @@ class HomeController extends GetxController {
   Future getLostPetRepo({int page = 1, int limit = 10}) async {
 
     if(page == 1){
-      isLoading = true;
+      isLostPetGetting = true;
       update();
       lostPetList.clear();
     }else{
@@ -58,7 +61,7 @@ class HomeController extends GetxController {
     }
     isMoreLoading = false;
     update();
-    isLoading = false;
+    isLostPetGetting = false;
     update();
   }
 
@@ -66,7 +69,7 @@ class HomeController extends GetxController {
 
   Future getFoundPetRepo({int page = 1, int limit = 10}) async {
     if(page == 1){
-      isLoading = true;
+      isFoundPetGetting = true;
       update();
       foundPetList.clear();
     }else{
@@ -93,7 +96,7 @@ class HomeController extends GetxController {
     }
     isMoreLoading = false;
     update();
-    isLoading = false;
+    isFoundPetGetting = false;
     update();
   }
 

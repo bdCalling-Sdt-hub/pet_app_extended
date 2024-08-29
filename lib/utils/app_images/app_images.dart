@@ -15,9 +15,9 @@ class AppImages{
   static const notification = "assets/icons/bell.png";
   static const boy = "assets/icons/boy.png";
   static const emergency = "assets/icons/emergency.png";
-  static const fire = "assets/icons/fire.png";
-  static const earthquake = "assets/icons/earthquake.png";
-  static const flood = "assets/icons/flood.png";
+  // static const fire = "assets/icons/fire.png";
+  // static const earthquake = "assets/icons/earthquake.png";
+  // static const flood = "assets/icons/flood.png";
   static const injured = "assets/icons/injured.png";
   static const abused = "assets/icons/abused.png";
   static const editInfo = "assets/icons/edit-info.png";
@@ -91,6 +91,12 @@ class AppImages{
   static const emergencyPet = "assets/images/emergencyPet.png";
   static const lotsOfPets = "assets/images/lotsOfPets.png";
   static const noData = "assets/images/noData.png";
+  static const abusedPet = "assets/images/abusedPet.png";
+  static const earthquake = "assets/images/earthquake.png";
+  static const fire = "assets/images/fire.png";
+  static const flood = "assets/images/flood.png";
+  static const injuredPet = "assets/images/injuredPet.png";
+  static const lostPets = "assets/images/lostPets.png";
 
   ///First aid images
 

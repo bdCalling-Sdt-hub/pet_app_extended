@@ -1,4 +1,6 @@
 import 'package:dotted_border/dotted_border.dart';
+import 'package:felpus/helpers/prefs_helper.dart';
+import 'package:felpus/views/components/custom_image.dart';
 import 'package:felpus/views/components/custom_loader.dart';
 import 'package:felpus/views/components/no_data.dart';
 import 'package:flutter/material.dart';
@@ -33,22 +35,10 @@ class GroupsView extends GetView<GroupsNContactsController> {
             ),
           ),
           sw15,
-          Container(
-            height: 40,
-            width: 40,
-            decoration: BoxDecoration(
-              color: AppColors.grayLight.withOpacity(0.2),
-              shape: BoxShape.circle,
-              border: Border.all(
-                  color: AppColors.grayLight.withOpacity(0.1), width: 2),
-            ),
-            child: ClipOval(
-              child: Image.asset(
-                AppImages.boy,
-                fit: BoxFit.fill,
-              ),
-            ),
-          ),
+          ClipRRect(
+              borderRadius: BorderRadius.circular(100),
+              child: CustomImage(imageSrc: PrefsHelper.userImageUrl, imageType: ImageType.network,  height: 40,
+                width: 40,)),
           sw10,
         ],
       ),

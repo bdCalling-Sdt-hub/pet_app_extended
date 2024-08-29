@@ -1,10 +1,15 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:felpus/controllers/pet_details_controller.dart';
+import 'package:felpus/helpers/prefs_helper.dart';
+import 'package:felpus/services/ads_service.dart';
+import 'package:felpus/views/components/custom_image.dart';
 import 'package:felpus/views/components/custom_loader.dart';
 import 'package:felpus/views/components/lost_pets_list_view.dart';
 import 'package:felpus/views/components/no_data.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../../../models/pet_model.dart';
 import '../../../controllers/adoption_controller.dart';
 import '../../../utils/app_color/app_colors.dart';
@@ -36,27 +41,15 @@ class AdoptionView extends GetView<AdoptionController> {
             ),
           ),
           sw15,
-          Container(
-            height: 40,
-            width: 40,
-            decoration: BoxDecoration(
-              color: AppColors.grayLight.withOpacity(0.2),
-              shape: BoxShape.circle,
-              border: Border.all(
-                  color: AppColors.grayLight.withOpacity(0.1), width: 2),
-            ),
-            child: ClipOval(
-              child: Image.asset(
-                AppImages.boy,
-                fit: BoxFit.fill,
-              ),
-            ),
-          ),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(100),
+              child: CustomImage(imageSrc: PrefsHelper.userImageUrl, imageType: ImageType.network,  height: 40,
+                width: 40,)),
           sw10,
         ],
       ),
       body: GetBuilder<AdoptionController>(builder: (controller) {
-        return controller.isLoading? const CustomLoader() : controller.adoptPetList.isEmpty? const NoData() : Stack(
+        return Stack(
 
           children: [
             Image.asset(AppImages.backgroundImage),
@@ -111,7 +104,10 @@ class AdoptionView extends GetView<AdoptionController> {
                     ],
                   ),
                   sh10,
-                  Expanded(
+                  controller.isLoading? const CustomLoader() : controller.adoptPetList.isEmpty? Center(child: Padding(
+                    padding: EdgeInsets.only(top: 52.h),
+                    child: const NoData(),
+                  )) : Expanded(
                     flex: 1,
                     child: ListView.builder(
                         shrinkWrap: true,
@@ -134,7 +130,16 @@ class AdoptionView extends GetView<AdoptionController> {
                 bottom: 0,
                 left: 0,
                 right: 0,
-                child: Image.asset(AppImages.ads, scale: 4,))
+                child: Obx(() {
+                  return AdsServices.isBannerAdReady.value
+                      ? Container(
+                    alignment: Alignment.center,
+                    width: AdsServices.bannerAdThird.size.width.toDouble(),
+                    height: AdsServices.bannerAdThird.size.height.toDouble(),
+                    child: AdWidget(ad: AdsServices.bannerAdThird),
+                  )
+                      : const SizedBox();
+                }),)
           ],
         );
       },),
