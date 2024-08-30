@@ -15,8 +15,9 @@ import 'package:http/http.dart' as http;
 
 ///============================ Nearby Search ========================
 
-class ShowGoogleMapController extends GetxController {
+class NearByMapController extends GetxController {
   List<Marker> marker = [];
+
   static String searchForText = "vets";
   bool isMe = false;
   String markerAddress = "";
@@ -25,8 +26,8 @@ class ShowGoogleMapController extends GetxController {
   num latitude = 0;
   num longitude = 0;
 
-  static ShowGoogleMapController get instance =>
-      Get.put(ShowGoogleMapController());
+  static NearByMapController get instance =>
+      Get.put(NearByMapController());
 
   final Completer<GoogleMapController> controller =
   Completer<GoogleMapController>();

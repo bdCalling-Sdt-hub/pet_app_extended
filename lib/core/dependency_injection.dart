@@ -33,6 +33,6 @@ class DependencyInjection extends Bindings{
     Get.lazyPut(() => LostPetsController(), fenix: true);
     Get.lazyPut(() => FoundPetsController(), fenix: true);
     Get.lazyPut(() => GroupsNContactsController(), fenix: true);
-    Get.lazyPut(() => ShowGoogleMapController(), fenix: true);
+    Get.lazyPut(() => NearByMapController(), fenix: true);
   }
 }

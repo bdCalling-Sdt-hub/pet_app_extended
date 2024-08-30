@@ -1,4 +1,5 @@
 
+import 'package:felpus/controllers/GoogleMapControllers/nearby_map_controller.dart';
 import 'package:felpus/utils/app_color/app_colors.dart';
 import 'package:felpus/utils/app_text_style/styles.dart';
 import 'package:felpus/utils/size_box/custom_sizebox.dart';
@@ -119,6 +120,8 @@ class ResourcesView extends StatelessWidget {
                     isPetSheltersTapped.value = !isPetSheltersTapped.value;
                     isVetsNearbyTapped.value = false;
                     isCallFiremanTapped.value = false;
+
+                    NearByMapController.searchForText = "Pet Shelters";
                     Get.to(()=> NearbyMapScreen());
                   },
                   child: Obx(() => Container(
@@ -145,6 +148,9 @@ class ResourcesView extends StatelessWidget {
                     isPetSheltersTapped.value = false;
                     isVetsNearbyTapped.value = !isVetsNearbyTapped.value;
                     isCallFiremanTapped.value = false;
+
+                    NearByMapController.searchForText = "Vets";
+                    Get.to(()=> NearbyMapScreen());
                   },
                   child: Obx(() => Container(
                     height: 122,

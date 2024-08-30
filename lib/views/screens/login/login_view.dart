@@ -122,9 +122,9 @@ class LoginView extends StatelessWidget {
                         : CustomButton(
                             onTap: () {
                               print(PrefsHelper.token);
-                              // if (_formKey.currentState!.validate()) {
-                              //   loginController.logInRepo();
-                              // }
+                              if (_formKey.currentState!.validate()) {
+                                loginController.logInRepo();
+                              }
                             },
                             title: "Sign In",
                             width: Get.width,
