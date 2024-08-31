@@ -1,4 +1,5 @@
 import 'package:felpus/controllers/my_pet_controller.dart';
+import 'package:felpus/utils/App_Utils/app_utils.dart';
 import 'package:felpus/views/components/custom_button.dart';
 import 'package:felpus/views/components/custom_image.dart';
 import 'package:felpus/views/components/custom_loader.dart';
@@ -193,7 +194,14 @@ class _SelectPetsViewState extends State<SelectPetsView> {
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 14.0),
               child: CustomButton(
-                onTap: () => Get.to(() => const MessageView()),
+                onTap: () {
+                  if (selectedPet == -1) {
+                    Utils.toastMessage(
+                        message: "A pet must be selected before sending a message");
+                  } else {
+                    Get.to(() => const MessageView());
+                  }
+                },
                 title: "New Message",
                 width: Get.width,
                 color: AppColors.mainColor,

@@ -63,6 +63,9 @@ class AppImages{
   static const lightIcon = "assets/icons/lightIcon.png";
   static const dotPoint = "assets/icons/dotPoint.png";
   static const shelterIcon = "assets/icons/shelterIcon.png";
+  static const policeAlarm = "assets/icons/policeAlarm.png";
+  static const pawSearchIcon = "assets/icons/pawSearchIcon.png";
+  static const tipsLightIcon = "assets/icons/tipsLightIcon.png";
 
   /// Svg Icons
   static const wifiOff = "assets/icons/svgIcon/wifi_off.svg";

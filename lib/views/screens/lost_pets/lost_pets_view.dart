@@ -8,6 +8,7 @@ import 'package:felpus/views/components/custom_loader.dart';
 import 'package:felpus/views/components/lost_pets_list_view.dart';
 import 'package:felpus/models/pet_model.dart';
 import 'package:felpus/views/components/no_data.dart';
+import 'package:felpus/views/screens/resources/resources_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -29,7 +30,11 @@ class LostPetsView extends GetView<LostPetsController> {
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: ResourcesView.isLost? true : false,
+        leading: ResourcesView.isLost? InkWell( onTap: () {
+          Get.back();
+          ResourcesView.isLost = false;
+        },child: Icon(Icons.arrow_back_ios)) : null,
         backgroundColor: AppColors.white,
         actions: [
           GestureDetector(

@@ -7,9 +7,11 @@ import 'package:felpus/views/components/custom_text.dart';
 import 'package:felpus/views/screens/FirstAid/Views/tips_para_encontrar.dart';
 import 'package:felpus/views/screens/FirstAid/Views/tratamiento_inhalacion.dart';
 import 'package:felpus/views/screens/FirstAid/Views/tratamiento_quemadura.dart';
+import 'package:felpus/views/screens/lost_pets/lost_pets_view.dart';
 import 'package:felpus/views/screens/nearby_map_screen/nearby_map_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../utils/app_images/app_images.dart';
 import '../FirstAid/Views/manejo_screen.dart';
@@ -42,6 +44,14 @@ class ResourcesView extends StatelessWidget {
     'Item 3',
     'Item 4',
   ];
+
+  static bool isFire = false;
+  static bool isEarthQuake = false;
+  static bool isFlood = false;
+
+  static bool isLost = false;
+  // static bool isInjured = false;
+  // static bool isAbused = false;
 
   RxBool isFirstAidTapped = false.obs;
 
@@ -93,11 +103,15 @@ class ResourcesView extends StatelessWidget {
                     isVetsNearbyTapped.value = false;
                     isCallFiremanTapped.value = !isCallFiremanTapped.value;
                     if(isCallFiremanTapped.value){
-                      FlutterPhoneDirectCaller.callNumber("999");
+                      if(isFire || isEarthQuake || isFlood){
+                        FlutterPhoneDirectCaller.callNumber("999");
+                      }else{
+                        FlutterPhoneDirectCaller.callNumber("191");
+                      }
                     }
                   },
                   child: Obx(() => Container(
-                    height: 122,
+                    height: 132,
                     width: 142,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
@@ -106,9 +120,9 @@ class ResourcesView extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Image.asset(AppImages.fireTruck,scale: 4, color: isCallFiremanTapped.value? AppColors.white : null),
+                        Image.asset(isFire || isEarthQuake || isFlood? AppImages.fireTruck : AppImages.policeAlarm, scale: isFire || isEarthQuake || isFlood? 4 : 8, color: isCallFiremanTapped.value? AppColors.white : null),
                         sh5,
-                        Text("Call Fireman",style: h2.copyWith(fontSize: 20, color: isCallFiremanTapped.value? AppColors.white : AppColors.black),)
+                        Text(isFire || isEarthQuake || isFlood? "Call Fireman" : "Call Police",style: h2.copyWith(fontSize: 20, color: isCallFiremanTapped.value? AppColors.white : AppColors.black),)
                       ],
                     ),
                   ),),
@@ -125,8 +139,8 @@ class ResourcesView extends StatelessWidget {
                     Get.to(()=> NearbyMapScreen());
                   },
                   child: Obx(() => Container(
-                    height: 122,
                     width: 142,
+                    padding: EdgeInsets.symmetric(vertical: 4.h),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: isPetSheltersTapped.value? AppColors.mainColor : AppColors.pinkExtraLight
@@ -149,11 +163,15 @@ class ResourcesView extends StatelessWidget {
                     isVetsNearbyTapped.value = !isVetsNearbyTapped.value;
                     isCallFiremanTapped.value = false;
 
-                    NearByMapController.searchForText = "Vets";
-                    Get.to(()=> NearbyMapScreen());
+                    if(isFire || isEarthQuake || isFlood){
+                      NearByMapController.searchForText = "Vets";
+                      Get.to(()=> NearbyMapScreen());
+                    }else{
+                      Get.to(()=> LostPetsView());
+                    }
                   },
                   child: Obx(() => Container(
-                    height: 122,
+                    padding: EdgeInsets.symmetric(vertical: 4.h),
                     width: 142,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
@@ -162,9 +180,9 @@ class ResourcesView extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Image.asset(AppImages.petLeg,scale: 4, color: isVetsNearbyTapped.value ? AppColors.white : null),
+                        Image.asset(isFire || isEarthQuake || isFlood? AppImages.petLeg : AppImages.pawSearchIcon ,scale: isFire || isEarthQuake || isFlood? 4 : 8, color: isVetsNearbyTapped.value ? AppColors.white : null),
                         sh5,
-                        Text("Vets Nearby",style: h2.copyWith(fontSize: 20, color: isVetsNearbyTapped.value ? AppColors.white : AppColors.black),textAlign: TextAlign.center,)
+                        Text(isFire || isEarthQuake || isFlood? "Vets Nearby" : "Check Lost & Found Pets",style: h2.copyWith(fontSize: 20, color: isVetsNearbyTapped.value ? AppColors.white : AppColors.black),textAlign: TextAlign.center,)
                       ],
                     ),
                   ),),
@@ -178,97 +196,101 @@ class ResourcesView extends StatelessWidget {
                     isCallFiremanTapped.value = false;
 
                     if(isFirstAidTapped.value){
-                      Get.bottomSheet(
-                        Container(
-                          width: Get.width,
-                          height: 600,
-                          decoration: const BoxDecoration(
-                            color: AppColors.white,
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(40),
-                              topRight: Radius.circular(40),
+                      if(isFire || isEarthQuake || isFlood){
+                        Get.bottomSheet(
+                          Container(
+                            width: Get.width,
+                            height: 600,
+                            decoration: const BoxDecoration(
+                              color: AppColors.white,
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(40),
+                                topRight: Radius.circular(40),
+                              ),
                             ),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10),
-                            child: Column(
-                              children: [
-                                sh10,
-                                Container(
-                                  height: 2,
-                                  width: 100,
-                                  color: AppColors.grayLight,
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      "First Aid",
-                                      style: h3.copyWith(fontSize: 26, color: AppColors.mainColor),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                    sw5,
-                                    Text(
-                                      "Resources.",
-                                      style: h3.copyWith(fontSize: 26, color: AppColors.black),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ],
-                                ),
-                                sh10,
-                                Expanded(
-                                  child: ListView.builder(
-                                    itemCount: firstAidItems.length,
-                                    itemBuilder: (context, index) {
-                                      return GestureDetector(
-                                        onTap: firstAidItems[index]["onTap"],
-                                        child: ListTile(
-                                          title: CustomText(text: firstAidItems[index]["title"]),
-                                          leading: Image.asset(
-                                            firstAidItems[index]["icon"],
-                                            scale: 4,
-                                          ),
-                                          trailing: Container(
-                                            decoration: const ShapeDecoration(
-                                              shape: CircleBorder(
-                                                side: BorderSide(
-                                                  width: 2.0,
-                                                  color: AppColors.mainColor,
-                                                ),
-                                              ),
-                                            ),
-                                            child: Padding(
-                                              padding: const EdgeInsets.all(1.0),
-                                              child: Container(
-                                                decoration: const ShapeDecoration(
-                                                  shape: CircleBorder(),
-                                                  color: AppColors.mainColor,
-                                                ),
-                                                child: const SizedBox(
-                                                  width: 16.0,
-                                                  height: 16.0,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      );
-                                    },
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10),
+                              child: Column(
+                                children: [
+                                  sh10,
+                                  Container(
+                                    height: 2,
+                                    width: 100,
+                                    color: AppColors.grayLight,
                                   ),
-                                ),
-                              ],
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "First Aid",
+                                        style: h3.copyWith(fontSize: 26, color: AppColors.mainColor),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      sw5,
+                                      Text(
+                                        "Resources.",
+                                        style: h3.copyWith(fontSize: 26, color: AppColors.black),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ],
+                                  ),
+                                  sh10,
+                                  Expanded(
+                                    child: ListView.builder(
+                                      itemCount: firstAidItems.length,
+                                      itemBuilder: (context, index) {
+                                        return GestureDetector(
+                                          onTap: firstAidItems[index]["onTap"],
+                                          child: ListTile(
+                                            title: CustomText(text: firstAidItems[index]["title"]),
+                                            leading: Image.asset(
+                                              firstAidItems[index]["icon"],
+                                              scale: 4,
+                                            ),
+                                            trailing: Container(
+                                              decoration: const ShapeDecoration(
+                                                shape: CircleBorder(
+                                                  side: BorderSide(
+                                                    width: 2.0,
+                                                    color: AppColors.mainColor,
+                                                  ),
+                                                ),
+                                              ),
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(1.0),
+                                                child: Container(
+                                                  decoration: const ShapeDecoration(
+                                                    shape: CircleBorder(),
+                                                    color: AppColors.mainColor,
+                                                  ),
+                                                  child: const SizedBox(
+                                                    width: 16.0,
+                                                    height: 16.0,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                        barrierColor: Colors.black.withOpacity(0.5),
-                        isDismissible: true,
-                        isScrollControlled: true, // Allows the bottom sheet to take the full height
-                      );
+                          barrierColor: Colors.black.withOpacity(0.5),
+                          isDismissible: true,
+                          isScrollControlled: true, // Allows the bottom sheet to take the full height
+                        );
+                      }else{
+                        Get.to(()=> TipsParaEncontrar());
+                      }
                     }
                   },
                   child: Obx(() => Container(
-                    height: 122,
                     width: 142,
+                    padding: EdgeInsets.symmetric(vertical: 4.h),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: isFirstAidTapped.value? AppColors.mainColor : AppColors.pinkExtraLight
@@ -276,9 +298,9 @@ class ResourcesView extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Image.asset(AppImages.firstAidKit,scale: 4, color: isFirstAidTapped.value? AppColors.white : null),
+                        Image.asset(isFire || isEarthQuake || isFlood? AppImages.firstAidKit : AppImages.tipsLightIcon,scale: isFire || isEarthQuake || isFlood? 4 : 8, color: isFirstAidTapped.value? AppColors.white : null),
                         sh5,
-                        Text("First Aid",style: h2.copyWith(fontSize: 20, color: isFirstAidTapped.value? AppColors.white : AppColors.black),textAlign: TextAlign.center, )
+                        Text(isFire || isEarthQuake || isFlood? "First Aid" : "Tips To Find Lost Pets",style: h2.copyWith(fontSize: 20, color: isFirstAidTapped.value? AppColors.white : AppColors.black),textAlign: TextAlign.center, )
                       ],
                     ),
                   )),

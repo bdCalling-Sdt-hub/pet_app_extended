@@ -48,7 +48,10 @@ class _YourPetViewState extends State<YourPetView> {
                   ? const NoData()
                   : Stack(
                       children: [
-                        Image.asset(AppImages.dogCat),
+                        SizedBox(
+                            height: Get.height,
+                            width: Get.width,
+                            child: Image.asset(AppImages.backgroundImage, fit: BoxFit.fill,)),
                         Container(
                           width: Get.width,
                           height: Get.height,

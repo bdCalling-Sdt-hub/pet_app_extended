@@ -1,5 +1,6 @@
 
 import 'package:felpus/extensions/extension.dart';
+import 'package:felpus/views/screens/resources/resources_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -81,6 +82,13 @@ class _EmergencyViewState extends State<EmergencyView> {
                         setState(() {
                           selectedIndex = index;
                         });
+                        if(index == 3 || index == 4 || index == 5){
+                          ResourcesView.isFlood = true;
+                          ResourcesView.isLost = false;
+                        }else{
+                          ResourcesView.isFlood = false;
+                          ResourcesView.isLost = true;
+                        }
                         Get.to(() => const EmergencySendSmsTypeView());
                       },
                       child: Container(

@@ -18,7 +18,7 @@ class MyPetController extends GetxController{
   static MyPetController get instance => Get.put(MyPetController());
 
   ///<<<=============== Get My Pet List =============================>>>
-  static String? petType;
+  static String petType = '';
 
   Future<void> getMyPet() async {
     isLoading = true;
@@ -26,7 +26,7 @@ class MyPetController extends GetxController{
 
     var response = await ApiService.getApi("${AppUrls.myPets}${PrefsHelper.userId}?forPets=$petType");
 
-    print.log("Create Lost Pet Response: ${response.message}, ${response.body}");
+    print.log("Get my Pet Response: ${response.message}, ${response.body}");
 
     if (response.statusCode == 200) {
       var responseData = jsonDecode(response.body);
