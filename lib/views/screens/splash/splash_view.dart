@@ -51,7 +51,8 @@ class _SplashViewState extends State<SplashView> {
         children: [
           Center(child: Image.asset(AppImages.logo)),
           SizedBox(height: 78.h,),
-          Text("Protect, Locate, Adopt. \nEnsuring Every Pet's Safety and Forever Home.",style: h3,textAlign: TextAlign.center,)
+          Text("Protect, Locate, Adopt.".tr,style: h3,textAlign: TextAlign.center,),
+          Text("Ensuring Every Pet's Safety and Forever Home.".tr,style: h3,textAlign: TextAlign.center,)
         ],
       )
     );

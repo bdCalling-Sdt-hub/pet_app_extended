@@ -62,7 +62,7 @@ class OnboardingView extends GetView<OnboardingController> {
                               Get.to(() => const WelcomeView());
                             }
                           },
-                          title: index != 2? "Next" : "Get Started",
+                          title: index != 2? "Next".tr : "Get Started".tr,
                           width: Get.width / 2.5,
                           color: AppColors.mainColor)
 
