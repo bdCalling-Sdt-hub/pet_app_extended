@@ -1,5 +1,7 @@
-
+import 'package:felpus/extensions/extension.dart';
+import 'package:felpus/views/components/custom_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 import '../../../utils/app_color/app_colors.dart';
@@ -12,39 +14,78 @@ import '../signup/signup_view.dart';
 
 class WelcomeView extends GetView {
   const WelcomeView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(child: Image.asset(AppImages.logo)),
-          sh20,
-          Column(
-            children: [
-              Text("Now continue after",style:  h3.copyWith(fontSize: 30,),textAlign: TextAlign.center,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("register in",style:  h3.copyWith(fontSize: 30),textAlign: TextAlign.center,),
-                  sw10,
-                  Text("Felpus.",style:  h3.copyWith(fontSize: 30,color: AppColors.mainColor),textAlign: TextAlign.center,),
+        body: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            32.width,
+            Image.asset(AppImages.logo),
+            GestureDetector(
+              onTap: () {
 
-                ],
-              )
-            ],
-          ),
-          sh50,
-          Padding(
+              },
+              child: Padding(
+                padding: EdgeInsets.only(right: 16.w),
+                child: const CustomImage(imageSrc: AppImages.translateIcon),
+              ),
+            ),
+          ],
+        ),
+        sh20,
+        Column(
+          children: [
+            Text(
+              "Now continue after",
+              style: h3.copyWith(
+                fontSize: 30,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "register in",
+                  style: h3.copyWith(fontSize: 30),
+                  textAlign: TextAlign.center,
+                ),
+                sw10,
+                Text(
+                  "Felpus.",
+                  style: h3.copyWith(fontSize: 30, color: AppColors.mainColor),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            )
+          ],
+        ),
+        sh50,
+        Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: Image.asset(AppImages.welcomeImg)),
-          sh20,
-          CustomButton(onTap: () => Get.to(() => LoginView()),title: "Sign In", width: Get.width / 1.2, color: AppColors.mainColor),
-          sh15,
-          CustomButton(onTap: () => Get.to(() => SignupView()),title: "Sign Up", width: Get.width / 1.2, color: AppColors.white,borderColor: AppColors.mainColor,titleColor: AppColors.black,),
-
-        ],
-      )
-    );
+            child: Image.asset(AppImages.welcomeImg)),
+        sh20,
+        CustomButton(
+            onTap: () => Get.to(() => LoginView()),
+            title: "Sign In",
+            width: Get.width / 1.2,
+            color: AppColors.mainColor),
+        sh15,
+        CustomButton(
+          onTap: () => Get.to(() => SignupView()),
+          title: "Sign Up",
+          width: Get.width / 1.2,
+          color: AppColors.white,
+          borderColor: AppColors.mainColor,
+          titleColor: AppColors.black,
+        ),
+      ],
+    ));
   }
 }

@@ -66,10 +66,12 @@ class AppImages{
   static const policeAlarm = "assets/icons/policeAlarm.png";
   static const pawSearchIcon = "assets/icons/pawSearchIcon.png";
   static const tipsLightIcon = "assets/icons/tipsLightIcon.png";
+  static const translateIcon = "assets/icons/translateIcon.svg";
 
   /// Svg Icons
   static const wifiOff = "assets/icons/svgIcon/wifi_off.svg";
   static const wifiOn = "assets/icons/svgIcon/wifi_on.svg";
+
 
   //app images
   static const onboarding = "assets/images/onboarding.png";

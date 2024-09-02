@@ -2,6 +2,7 @@
 import 'package:felpus/extensions/extension.dart';
 import 'package:felpus/views/components/CustomPopUP/custom_pop_up.dart';
 import 'package:felpus/views/components/CustomPopUP/pop_up.dart';
+import 'package:felpus/views/components/custom_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -103,6 +104,41 @@ class SettingsView extends GetView {
                         ),
                         12.width,
                         Text("Change Password",style: h2,),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 7.0),
+              child: GestureDetector(
+                onTap: (){
+
+                },
+                child: Container(
+                  height: 60,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    color: AppColors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 1,
+                        blurRadius: 3,
+                        offset: const Offset(0, 1),
+                      ),
+                    ],
+
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        CustomImage(imageSrc: AppImages.translateIcon, imageColor: AppColors.black,),
+                        12.width,
+                        Text("Change Language",style: h2,),
                       ],
                     ),
                   ),
