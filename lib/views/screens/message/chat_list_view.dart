@@ -2,6 +2,7 @@
 import 'package:felpus/views/components/custom_loader.dart';
 import 'package:felpus/views/components/custom_textfelid.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../controllers/message_controller.dart';
 import '../../../utils/app_color/app_colors.dart';
@@ -88,7 +89,10 @@ class ChatListView extends StatelessWidget {
                 ),
 
                 controller.isInformation.value
-                    ? controller.isLoading? const CustomLoader() : Expanded(
+                    ? controller.isLoading? SizedBox(
+                  height: 300.h,
+                    child: CustomLoader()
+                ) : Expanded(
                   child: ListView.builder(
                     // controller: _scrollController,
                     itemCount: controller.chatUsersList.length,
@@ -96,7 +100,8 @@ class ChatListView extends StatelessWidget {
                       var chatUserDetails = controller.chatUsersList[index];
                       return GestureDetector(
                         onTap: () {
-                          Get.to(() => const MessageView());
+                          controller.createOrGetMessageRepo(chatId: chatUserDetails.id);
+                          // Get.to(() => const MessageView());
                         },
                         child: ChatListItem(
                           image: chatUserDetails.type == "single"? chatUserDetails.partner.photo : chatUserDetails.photo,

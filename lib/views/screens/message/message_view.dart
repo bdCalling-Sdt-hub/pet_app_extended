@@ -1,7 +1,9 @@
 import 'package:felpus/extensions/extension.dart';
 import 'package:felpus/helpers/other_helper.dart';
 import 'package:felpus/helpers/prefs_helper.dart';
+import 'package:felpus/utils/App_Utils/app_utils.dart';
 import 'package:felpus/views/components/custom_image.dart';
+import 'package:felpus/views/components/custom_loader.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,11 +17,14 @@ import '../../../utils/size_box/custom_sizebox.dart';
 import '../resources/resources_view.dart';
 
 class MessageView extends GetView<MessageController> {
-  const MessageView({super.key});
+  MessageView({super.key});
+
+  String chatId = "";
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<MessageController>(builder: (controller) {
+
       return Scaffold(
         backgroundColor: AppColors.white,
         appBar: AppBar(
@@ -49,6 +54,8 @@ class MessageView extends GetView<MessageController> {
                 itemCount: controller.chatDataList.length,
                 itemBuilder: (context, index) {
                   var chatDataItems = controller.chatDataList[index];
+
+                  chatId = chatDataItems.chat;
                   print(chatDataItems.helpType);
                   return Column(
                     children: [
@@ -127,6 +134,7 @@ class MessageView extends GetView<MessageController> {
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 16.0, vertical: 6),
                               child: TextField(
+                                controller: controller.sendMsgController,
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
                                   hintStyle:
@@ -138,7 +146,16 @@ class MessageView extends GetView<MessageController> {
                           ),
                         ),
                         sw10,
-                        Image.asset(AppImages.send, scale: 4),
+                        controller.isLoading? const CustomLoader() : InkWell(
+                          onTap: () {
+                            if(controller.sendMsgController.text.isEmpty){
+                              Utils.toastMessage(message: "Write something first!");
+                            }else{
+                              controller.sendMessageRepo(chatId: chatId);
+                            }
+                          },
+                            child: Image.asset(AppImages.send, scale: 4)
+                        ),
                       ],
                     ),
                     sh15,
@@ -184,7 +201,6 @@ class MessageView extends GetView<MessageController> {
       required String petAge,
       required String petAddress}) {
     return Container(
-      height: 190.h,
       width: 158.w,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10), color: AppColors.mainColor),
@@ -203,23 +219,29 @@ class MessageView extends GetView<MessageController> {
               ),
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   "$petBreed, ",
+                  maxLines: 2,
                   style: h2.copyWith(
                       fontWeight: FontWeight.w700, color: AppColors.white),
                 ),
-                Text(
-                  petName,
-                  style: h2.copyWith(
-                      fontWeight: FontWeight.w700, color: AppColors.white),
+                Expanded(
+                  child: Text(
+                    petName,
+                    maxLines: 2,
+                    style: h2.copyWith(
+                        fontWeight: FontWeight.w700, color: AppColors.white),
+                  ),
                 )
               ],
             ),
             Row(
               children: [
                 Text(
-                  "$petGender,",
+                  "$petGender, ",
                   style: h4.copyWith(fontSize: 13, color: AppColors.white),
                 ),
                 Text(
@@ -239,7 +261,7 @@ class MessageView extends GetView<MessageController> {
                     child: Text(
                       petAddress,
                       style: h5.copyWith(fontSize: 12, color: AppColors.white),
-                      maxLines: 2,
+                      maxLines: 5,
                       overflow: TextOverflow.ellipsis,
                     )),
               ],

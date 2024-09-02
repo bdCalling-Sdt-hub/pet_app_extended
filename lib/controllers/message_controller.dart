@@ -8,6 +8,7 @@ import 'package:felpus/utils/App_Urls/app_urls.dart';
 import 'package:felpus/utils/App_Utils/app_utils.dart';
 import 'package:felpus/utils/app_images/app_images.dart';
 import 'package:felpus/views/screens/message/message_view.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'dart:developer' as print;
 
@@ -30,7 +31,7 @@ class MessageController extends GetxController {
   List<ChatUserModel>chatUsersList = [];
 
 
-  ///===================== Get Chat Users ==============================
+  ///============================ Get Chat Users =============================
 
     Future getChatUsers() async {
       chatUsersList.clear();
@@ -55,7 +56,6 @@ class MessageController extends GetxController {
       update();
     }
 
-    ///=================== Create Message Repo ==========================
 
   final Map<String, String> helpTypeMapping = {
     'Lost Pets': 'lostPet',
@@ -98,6 +98,8 @@ class MessageController extends GetxController {
     return titleMapping[helpType] ?? "Unknown";
   }
 
+  ///=================== Create or Get Message Repo ==========================
+
   Future createOrGetMessageRepo({bool isNewMsg = false, required String chatId}) async {
     isLoading = true;
     update();
@@ -118,7 +120,7 @@ class MessageController extends GetxController {
 
     }
 
-    var response = await ApiService.postApi(isNewMsg? AppUrls.newMessage : "${AppUrls.messages}/$chatId", isNewMsg? body : null, header: header);
+    var response = isNewMsg ? await ApiService.postApi(AppUrls.newMessage, body, header: header) : await ApiService.getApi("${AppUrls.messages}/$chatId", header: header);
 
     if (response.statusCode == 200) {
       var responseData = jsonDecode(response.body)["data"]["allMessage"];
@@ -136,7 +138,7 @@ class MessageController extends GetxController {
       update();
 
       helpTypeTitle = getTitleFromHelpType(helpType);
-      Get.to(() => const MessageView());
+      Get.to(() => MessageView());
 
       print.log("New message created for $helpTypeTitle");
     } else {
@@ -146,8 +148,40 @@ class MessageController extends GetxController {
     update();
   }
 
-  ///=================== Get Receiver
+  ///=================== Send Message Repo ==================================
 
+  TextEditingController sendMsgController = TextEditingController();
+
+  Future sendMessageRepo({required String chatId}) async {
+    isLoading = true;
+    update();
+
+    Map<String, String> header = {
+      'Authorization': PrefsHelper.token,
+      // 'Accept-Language': PrefsHelper.localizationLanguageCode,
+    };
+
+    Map<String, String> body = {
+      "text": sendMsgController.text
+    };
+
+    var response = await ApiService.postApi("${AppUrls.messages}/$chatId", body, header: header) ;
+
+    if (response.statusCode == 200) {
+      var responseData = jsonDecode(response.body)["data"];
+
+       var singleChatData = ChatDataModel.fromJson(responseData);
+
+      chatDataList.add(singleChatData);
+      update();
+      sendMsgController.clear();
+      print.log("Message sent successfully");
+    } else {
+      Utils.snackBarErrorMessage(response.statusCode.toString(), response.message);
+    }
+    isLoading = false;
+    update();
+  }
 
   final count = 0.obs;
   @override
