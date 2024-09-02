@@ -39,4 +39,6 @@ class AppUrls {
   static String chatUsers = "$baseUrl/chats/myChat";
 
   static String newMessage = "$baseUrl/chats/new-message";
+
+  static String messages = "$baseUrl/messages";
 }

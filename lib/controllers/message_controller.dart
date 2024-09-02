@@ -87,7 +87,7 @@ class MessageController extends GetxController {
     assignHelpType(title);
 
     // Now MessageController.helpType will be correctly assigned
-    print.log("disujf ${MessageController.helpType}"); // This will print the corresponding helpType
+    print.log(MessageController.helpType); // This will print the corresponding helpType
   }
 
 
@@ -98,7 +98,7 @@ class MessageController extends GetxController {
     return titleMapping[helpType] ?? "Unknown";
   }
 
-  Future createMessageRepo() async {
+  Future createOrGetMessageRepo({bool isNewMsg = false, required String chatId}) async {
     isLoading = true;
     update();
 
@@ -107,14 +107,18 @@ class MessageController extends GetxController {
       // 'Accept-Language': PrefsHelper.localizationLanguageCode,
     };
 
-    Map<String, String> body = {
-      "helpType": helpType,
-      "chatType": chatType,
-      "alertId": chatId,
-      "petId": petId
-    };
+    Map<String, String> body = {};
+    if(isNewMsg){
+     body = {
+        "helpType": helpType,
+        "chatType": chatType,
+        "alertId": chatId,
+        "petId": petId
+      };
 
-    var response = await ApiService.postApi(AppUrls.newMessage, body, header: header);
+    }
+
+    var response = await ApiService.postApi(isNewMsg? AppUrls.newMessage : "${AppUrls.messages}/$chatId", isNewMsg? body : null, header: header);
 
     if (response.statusCode == 200) {
       var responseData = jsonDecode(response.body)["data"]["allMessage"];
@@ -122,7 +126,7 @@ class MessageController extends GetxController {
 
       final Map<String, dynamic> data = jsonDecode(response.body)["data"];
 
-// Ensure that chatInfo is a Map<String, dynamic>
+      // Ensure that chatInfo is a Map<String, dynamic>
       if (data["chatInfo"] is Map<String, dynamic>) {
         chatPersonInfo = ChatInfo.fromJson(data["chatInfo"]);
       } else {

@@ -202,7 +202,7 @@ class _SelectPetsViewState extends State<SelectPetsView> {
                       Utils.toastMessage(
                           message: "A pet must be selected before sending a message");
                     } else {
-                      controller.createMessageRepo();
+                      controller.createOrGetMessageRepo(isNewMsg: true, chatId: "");
                     }
                   },
                   title: "New Message",
