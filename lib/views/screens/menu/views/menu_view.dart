@@ -101,7 +101,7 @@ class MenuView extends GetView<MenuDataController> {
                   profileCard(image: AppImages.report, title: 'Report Lost Pet'.tr, onTap: () { MyPetController.petType = "lost"; Get.to(() => const ReportLosPetView()); }),
                   profileCard(image: AppImages.clipboard, title: 'Report Found Pet'.tr, onTap: () { MyPetController.petType = "found"; Get.to(() => const ReportFoundPetView()); }),
                   profileCard(image: AppImages.question, title: 'FAQ'.tr, onTap: () { Get.to(() => const FaqView()); }),
-                  profileCard(image: AppImages.setting, title: 'Settings'.tr, onTap: () { Get.to(() => const SettingsView()); }),
+                  profileCard(image: AppImages.setting, title: 'Settings'.tr, onTap: () { Get.to(() =>  SettingsView()); }),
                   profileCard(
                       image: AppImages.logout,
                       title: 'Log Out'.tr,

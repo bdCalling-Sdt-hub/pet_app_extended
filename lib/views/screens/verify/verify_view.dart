@@ -1,4 +1,3 @@
-
 import 'package:felpus/views/components/custom_auth_appbar.dart';
 import 'package:felpus/views/components/custom_loader.dart';
 import 'package:felpus/views/screens/reset_password/reset_password_view.dart';
@@ -24,10 +23,10 @@ class VerifyView extends GetView {
   Widget build(BuildContext context) {
 
     ForgotController forgotController = Get.put(ForgotController());
-    
+
     return Scaffold(
-      backgroundColor: AppColors.white,
-      appBar: CustomAuthAppBar(),
+        backgroundColor: AppColors.white,
+        appBar: CustomAuthAppBar(),
         body: SingleChildScrollView(
           child: GetBuilder<ForgotController>(builder: (forgetController) {
             return Column(
@@ -41,16 +40,16 @@ class VerifyView extends GetView {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("Get",style:  h3.copyWith(fontSize: 30)),
+                          Text("Get".tr,style:  h3.copyWith(fontSize: 30)),
                           sw5,
-                          Text("OTP",style:  h3.copyWith(fontSize: 30,color: AppColors.mainColor),textAlign: TextAlign.center,),
+                          Text("OTP".tr,style:  h3.copyWith(fontSize: 30,color: AppColors.mainColor),textAlign: TextAlign.center,),
                           sw5,
-                          Text("Code.",style:  h3.copyWith(fontSize: 30)),
+                          Text("Code.".tr,style:  h3.copyWith(fontSize: 30)),
 
                         ],
                       ),
                       sh10,
-                      Text("Enter the OTP code that you get in your\n email address.",style:  h4,textAlign: TextAlign.center,),
+                      Text("Enter the OTP code that you get in your\n email address.".tr,style:  h4,textAlign: TextAlign.center,),
                       sh50,
                       Flexible(
                         flex: 0,
@@ -86,7 +85,7 @@ class VerifyView extends GetView {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("Didn’t receive the code?",style: h4,),
+                          Text("Didn’t receive the code?".tr,style: h4,),
                           sw5,
                           forgetController.start == 0
                               ? GetBuilder<SignupController>(builder: (controller) {
@@ -94,8 +93,8 @@ class VerifyView extends GetView {
                               onTap: () {
                                 controller.signUpRepo();
                               },
-                              child: const CustomText(
-                                text: "Resend",
+                              child:  CustomText(
+                                text: "Resend".tr,
                                 isTextDecoration: true,
                                 fontWeight: FontWeight.w500,
                                 fontSize: 16,
@@ -115,7 +114,7 @@ class VerifyView extends GetView {
                       sh100,
                       forgotController.isLoading
                           ? const CustomLoader()
-                          : CustomButton(onTap: () => purpose == "sign up"? forgotController.verifyOtpRepo():Get.to(() => ResetPasswordView()),title: "Verify", width: Get.width, color: AppColors.mainColor),
+                          : CustomButton(onTap: () => purpose == "sign up"? forgotController.verifyOtpRepo():Get.to(() => ResetPasswordView()),title: "Verify".tr, width: Get.width, color: AppColors.mainColor),
                       sh50,
                     ],
                   ),

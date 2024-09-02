@@ -2,15 +2,12 @@ import 'dart:io';
 import 'package:felpus/controllers/menu_controller.dart';
 import 'package:felpus/extensions/extension.dart';
 import 'package:felpus/helpers/validator_helper.dart';
-import 'package:felpus/views/components/custom_button.dart';
 import 'package:felpus/views/components/custom_container_button.dart';
 import 'package:felpus/views/components/custom_loader.dart';
 import 'package:felpus/views/components/custom_text_field.dart';
-import 'package:felpus/views/components/custom_textfelid.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import '../../../../helpers/image_picker.dart';
 import '../../../../utils/app_color/app_colors.dart';
 import '../../../../utils/app_images/app_images.dart';

@@ -21,7 +21,7 @@ class NotificationsView extends GetView<NotificationsController> {
         appBar: AppBar(
           backgroundColor: AppColors.white,
           title: Text(
-            'Notifications',
+            'Notifications'.tr,
             style: h2.copyWith(fontSize: 26, color: AppColors.mainColor),
           ),
           centerTitle: true,

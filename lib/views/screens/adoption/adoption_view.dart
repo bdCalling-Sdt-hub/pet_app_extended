@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import '../../../models/pet_model.dart';
 import '../../../controllers/adoption_controller.dart';
 import '../../../utils/app_color/app_colors.dart';
 import '../../../utils/app_images/app_images.dart';

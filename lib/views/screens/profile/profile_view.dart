@@ -111,7 +111,8 @@ class ProfileView extends GetView<ProfileController> {
                                       style: h1.copyWith(fontSize: 22),
                                     ),
                                     Text(
-                                      "Joined : ${OtherHelper.formatDate(controller.userModel.createdAt)}",
+                                      "Joined : ${OtherHelper.formatDate(controller.userModel.createdAt)}"
+                                          .tr,
                                       style: h4.copyWith(
                                           fontSize: 15,
                                           color: AppColors.grayLight),
@@ -136,7 +137,7 @@ class ProfileView extends GetView<ProfileController> {
                                             ),
                                             sw5,
                                             Text(
-                                              "Message",
+                                              "Message".tr,
                                               style: h3,
                                             )
                                           ],
@@ -169,46 +170,45 @@ class ProfileView extends GetView<ProfileController> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Information",
+                                    "Information".tr,
                                     style: h2.copyWith(fontSize: 18),
                                   ),
                                   sh20,
                                   personInfoCustomRow(
                                       iconPath: AppImages.user,
-                                      title: "Name",
+                                      title: "Name".tr,
                                       titleInfo: controller.userModel.fullName,
                                       imageScale: 7),
 
                                   personInfoCustomRow(
                                     iconPath: AppImages.calender,
-                                    title: "Date of Birth",
+                                    title: "Date of Birth".tr,
                                     titleInfo: controller.userModel.dob,
                                   ),
 
                                   personInfoCustomRow(
                                     iconPath: AppImages.homeLocation,
-                                    title: "Address",
+                                    title: "Address".tr,
                                     titleInfo: controller.userModel.address,
                                   ),
 
                                   personInfoCustomRow(
                                     iconPath: AppImages.phone,
-                                    title: "Phone",
+                                    title: "Phone".tr,
                                     titleInfo: controller.userModel.phone,
                                   ),
 
                                   personInfoCustomRow(
                                     iconPath: AppImages.email,
-                                    title: "Email",
+                                    title: "Email".tr,
                                     titleInfo: controller.userModel.email,
                                   ),
 
                                   // personInfoCustomRow(
                                   //   iconPath: AppImages.web,
-                                  //   title: "Website",
-                                  //   titleInfo: "www.felpusapp.com",
+                                  //   title: "Website".tr,
+                                  //   titleInfo: "www.felpusapp.com".tr,
                                   // ),
-
                                 ],
                               ),
                             ),

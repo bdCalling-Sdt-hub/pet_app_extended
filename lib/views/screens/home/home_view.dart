@@ -25,7 +25,6 @@ import '../message/chat_list_view.dart';
 import '../notifications/notifications_view.dart';
 import '../pet_details/pet_details_view.dart';
 import 'my_pets_view.dart';
-import 'dart:developer' as print;
 
 class HomeView extends StatelessWidget {
   HomeView({super.key});

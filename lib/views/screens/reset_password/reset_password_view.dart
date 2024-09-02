@@ -1,5 +1,3 @@
-
-
 import 'package:felpus/controllers/auth/forgot_controller.dart';
 import 'package:felpus/extensions/extension.dart';
 import 'package:felpus/helpers/validator_helper.dart';
@@ -29,37 +27,37 @@ class ResetPasswordView extends StatelessWidget {
           key: _formKey,
           child: Column(
             children: [
-              Text("Now Reset Your",style:  h3.copyWith(fontSize: 30,),textAlign: TextAlign.center,),
-              Text("Password?",style:  h3.copyWith(fontSize: 30,color: AppColors.mainColor),textAlign: TextAlign.center,),
+              Text("Now Reset Your".tr,style:  h3.copyWith(fontSize: 30,),textAlign: TextAlign.center,),
+              Text("Password?".tr,style:  h3.copyWith(fontSize: 30,color: AppColors.mainColor),textAlign: TextAlign.center,),
               sh10,
-              Text("Password must have 8-10 charecters.",style:  h4,textAlign: TextAlign.center,),
+              Text("Password must have 8-10 characters.".tr,style:  h4,textAlign: TextAlign.center,),
               sh50,
               CustomTextFormField(
-                title: "New Password",
+                title: "New Password".tr,
                 validator: ValidatorHelper.passwordValidator,
                 controller: forgotController.newPasswordController,
-                hintText: "Enter new password",
+                hintText: "Enter new password".tr,
                 isPassword: true,
               ),
               16.height,
               CustomTextFormField(
-                title: "Confirm New Password",
+                title: "Confirm New Password".tr,
                 validator: (value) =>
                     ValidatorHelper.confirmPasswordValidator(
                         value, forgotController.newPasswordController),
                 controller: forgotController.confirmNewPasswordController,
-                hintText: "Re-enter new password",
+                hintText: "Re-enter new password".tr,
                 isPassword: true,
               ),
               Spacer(),
               forgotController.isLoading? const CustomLoader() :
               CustomButton(
-                onTap: () {
-                  if(_formKey.currentState!.validate()){
-                    forgotController.resetPasswordRepo();
-                  }
-                },
-                  title: "Reset Password", width: Get.width, color: AppColors.mainColor),
+                  onTap: () {
+                    if(_formKey.currentState!.validate()){
+                      forgotController.resetPasswordRepo();
+                    }
+                  },
+                  title: "Reset Password".tr, width: Get.width, color: AppColors.mainColor),
               sh50,
             ],
           ),

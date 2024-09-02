@@ -2,13 +2,11 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:felpus/services/location_service.dart';
 import 'package:felpus/utils/app_images/app_images.dart';
-import 'package:felpus/views/screens/nearby_map_screen/widget/address_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'dart:developer' as print;
 
 import 'package:http/http.dart' as http;
 

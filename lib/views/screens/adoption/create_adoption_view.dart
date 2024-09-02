@@ -15,7 +15,6 @@ import '../../../helpers/image_picker.dart';
 import '../../../utils/app_color/app_colors.dart';
 import '../../../utils/app_images/app_images.dart';
 import '../../../utils/app_text_style/styles.dart';
-import '../../../utils/size_box/custom_sizebox.dart';
 
 
 class CreateAdoptionView extends StatefulWidget {

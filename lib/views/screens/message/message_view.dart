@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -39,7 +38,7 @@ class MessageView extends GetView<MessageController> {
             ),
             sw10,
             Text(
-              'Samim',
+              'Samim'.tr,
               style: h2.copyWith(fontSize: 20, color: AppColors.black),
             ),
           ],
@@ -59,7 +58,7 @@ class MessageView extends GetView<MessageController> {
                   Column(
                     children: [
                       Center(
-                        child: Text("06:35 PM", style: h2.copyWith(color: AppColors.grayLight)),
+                        child: Text("06:35 PM".tr, style: h2.copyWith(color: AppColors.grayLight)),
                       ),
                       sh5,
                       Align(
@@ -68,14 +67,14 @@ class MessageView extends GetView<MessageController> {
                           height: 110,
                           width: 110,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: AppColors.olive
+                              borderRadius: BorderRadius.circular(20),
+                              color: AppColors.olive
                           ),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Image.asset(AppImages.search,scale: 2,),
-                              Text("Lost Pets",style: h2,)
+                              Text("Lost Pets".tr,style: h2,)
                             ],
                           ),
                         ),
@@ -87,8 +86,8 @@ class MessageView extends GetView<MessageController> {
                           height: 190.h,
                           width: 158.w,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: AppColors.mainColor
+                              borderRadius: BorderRadius.circular(10),
+                              color: AppColors.mainColor
                           ),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 6),
@@ -103,17 +102,17 @@ class MessageView extends GetView<MessageController> {
                                   ),
                                 ),
                                 Text(
-                                  "Oliver",
+                                  "Oliver".tr,
                                   style: h2.copyWith(fontWeight: FontWeight.w700,color: AppColors.white),
                                 ),
                                 Row(
                                   children: [
                                     Text(
-                                      "Female,",
+                                      "Female,".tr,
                                       style: h4.copyWith(fontSize: 13,color: AppColors.white),
                                     ),
                                     Text(
-                                      "1.5 Years.",
+                                      "1.5 Years.".tr,
                                       style: h4.copyWith(fontSize: 13,color: AppColors.white),
                                     ),
                                   ],
@@ -127,7 +126,7 @@ class MessageView extends GetView<MessageController> {
                                     SizedBox(
                                         width: 115.w,
                                         child: Text(
-                                          "Puerta del Sol, 28013 Madrid, Spain.",
+                                          "Puerta del Sol, 28013 Madrid, Spain.".tr,
                                           style: h5.copyWith(fontSize: 12,color: AppColors.white),
                                           maxLines: 2,
                                           overflow: TextOverflow.ellipsis,
@@ -140,35 +139,36 @@ class MessageView extends GetView<MessageController> {
                         ),
                       ),
                       sh10,
-                      const ChatMessage(
-                          text: "I arrived home after work and my pets aren't here. Has anyone seen them?",
-                          time: "06:35 PM",
+                       ChatMessage(
+                          text: "I arrived home after work and my pets aren't here. Has anyone seen them?".tr,
+                          time: "06:35 PM".tr,
                           isSentByMe: true),
-                      const ChatMessage(
-                          text: "Hey, Santiago! I saw someone at your door an hour ago.",
-                          time: "06:55 PM",
+                       ChatMessage(
+                          text: "Hey, Santiago! I saw someone at your door an hour ago.".tr,
+                          time: "06:55 PM".tr,
                           isSentByMe: false),
-                      const ChatMessage(
-                          text: "I arrived home after work and my pets aren't here. Has anyone seen them?",
-                          time: "06:35 PM",
+                       ChatMessage(
+                          text: "I arrived home after work and my pets aren't here. Has anyone seen them?".tr,
+                          time: "06:35 PM".tr,
                           isSentByMe: true),
-                      const ChatMessage(
-                          text: "Hey, Santiago! I saw someone at your door an hour ago.",
-                          time: "06:55 PM",
-                          isSentByMe: false), const ChatMessage(
-                          text: "I arrived home after work and my pets aren't here. Has anyone seen them?",
-                          time: "06:35 PM",
+                       ChatMessage(
+                          text: "Hey, Santiago! I saw someone at your door an hour ago.".tr,
+                          time: "06:55 PM".tr,
+                          isSentByMe: false),  ChatMessage(
+                          text: "I arrived home after work and my pets aren't here. Has anyone seen them?".tr,
+                          time: "06:35 PM".tr,
                           isSentByMe: true),
-                      const ChatMessage(
-                          text: "Hey, Santiago! I saw someone at your door an hour ago.",
-                          time: "06:55 PM",
-                          isSentByMe: false), const ChatMessage(
-                          text: "I arrived home after work and my pets aren't here. Has anyone seen them?",
-                          time: "06:35 PM",
+                       ChatMessage(
+                          text: "Hey, Santiago! I saw someone at your door an hour ago.".tr,
+                          time: "06:55 PM".tr,
+                          isSentByMe: false),
+                      ChatMessage(
+                          text: "I arrived home after work and my pets aren't here. Has anyone seen them?".tr,
+                          time: "06:35 PM".tr,
                           isSentByMe: true),
-                      const ChatMessage(
-                          text: "Hey, Santiago! I saw someone at your door an hour ago.",
-                          time: "06:55 PM",
+                       ChatMessage(
+                          text: "Hey, Santiago! I saw someone at your door an hour ago.".tr,
+                          time: "06:55 PM".tr,
                           isSentByMe: false),
                     ],
                   ),
@@ -200,7 +200,7 @@ class MessageView extends GetView<MessageController> {
                               decoration: InputDecoration(
                                 border: InputBorder.none,
                                 hintStyle: h3.copyWith(color: AppColors.grayLight),
-                                hintText: "Write your message...",
+                                hintText: "Write your message...".tr,
                               ),
                             ),
                           ),
@@ -219,7 +219,7 @@ class MessageView extends GetView<MessageController> {
                         child: Column(
                           children: [
                             Image.asset(AppImages.more, scale: 15),
-                            Text("More Resources", style: h3.copyWith(fontSize: 13)),
+                            Text("More Resources".tr, style: h3.copyWith(fontSize: 13)),
                           ],
                         ),
                       ),
@@ -228,7 +228,7 @@ class MessageView extends GetView<MessageController> {
                         children: [
                           Image.asset(AppImages.check, scale: 4),
                           sh5,
-                          Text("Pets Are Safe?", style: h3.copyWith(fontSize: 13)),
+                          Text("Pets Are Safe?".tr, style: h3.copyWith(fontSize: 13)),
                         ],
                       ),
                     ],
@@ -258,7 +258,7 @@ class ChatMessage extends StatelessWidget {
         crossAxisAlignment: isSentByMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: [
           Center(
-            child: Text(time, style: h2.copyWith(color: AppColors.grayLight)),
+            child: Text(time.tr, style: h2.copyWith(color: AppColors.grayLight)),
           ),
           sh5,
           Container(
@@ -270,7 +270,7 @@ class ChatMessage extends StatelessWidget {
             child: SizedBox(
                 width: Get.width / 1.8,
                 child: Text(
-                  text,
+                  text.tr,
                   style: h3.copyWith(
                     fontSize: 14,
                     color: isSentByMe ? AppColors.white : AppColors.black,
