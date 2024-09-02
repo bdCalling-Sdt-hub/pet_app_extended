@@ -20,9 +20,9 @@ class EditProfileView extends StatelessWidget {
   EditProfileView({super.key});
 
   final ImagePickerController imagePickerController =
-      Get.put(ImagePickerController());
+  Get.put(ImagePickerController());
   final CompleteProfileController completeProfileController =
-      Get.put(CompleteProfileController());
+  Get.put(CompleteProfileController());
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class EditProfileView extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: AppColors.white,
           title: Text(
-            'Edit Your Profile',
+            'Edit Your Profile'.tr,
             style: h2.copyWith(fontSize: 20, color: AppColors.mainColor),
           ),
           centerTitle: true,
@@ -47,41 +47,41 @@ class EditProfileView extends StatelessWidget {
                 children: [
                   Obx(() => imagePickerController.selectedImagePath.value == ''
                       ? Container(
-                          height: 128,
-                          width: 128,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                                color: AppColors.mainColor.withOpacity(0.2),
-                                width: 2),
-                          ),
-                          child: PrefsHelper.userImageUrl != ""
-                              ? ClipRRect(
-                                borderRadius: BorderRadius.circular(100),
-                                child: CustomImage(
-                                  defaultImage: AppImages.profile,
-                                    imageSrc: PrefsHelper.userImageUrl,
-                                    imageType: ImageType.network,
-                                  ),
-                              )
-                              : Icon(
-                                  CupertinoIcons.person,
-                                  size: 100,
-                                  color: AppColors.mainColor.withOpacity(0.2),
-                                ),
-                        )
+                    height: 128,
+                    width: 128,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                          color: AppColors.mainColor.withOpacity(0.2),
+                          width: 2),
+                    ),
+                    child: PrefsHelper.userImageUrl != ""
+                        ? ClipRRect(
+                      borderRadius: BorderRadius.circular(100),
+                      child: CustomImage(
+                        defaultImage: AppImages.profile,
+                        imageSrc: PrefsHelper.userImageUrl,
+                        imageType: ImageType.network,
+                      ),
+                    )
+                        : Icon(
+                      CupertinoIcons.person,
+                      size: 100,
+                      color: AppColors.mainColor.withOpacity(0.2),
+                    ),
+                  )
                       : Container(
-                          height: 128,
-                          width: 128,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                                color: AppColors.mainColor.withOpacity(0.2),
-                                width: 2),
-                          ),
-                          child: ClipOval(
-                              child: Image.file(File(imagePickerController
-                                  .selectedImagePath.value))))),
+                      height: 128,
+                      width: 128,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                            color: AppColors.mainColor.withOpacity(0.2),
+                            width: 2),
+                      ),
+                      child: ClipOval(
+                          child: Image.file(File(imagePickerController
+                              .selectedImagePath.value))))),
                   Positioned(
                     bottom: 0,
                     right: 0,
@@ -110,15 +110,15 @@ class EditProfileView extends StatelessWidget {
               sh10,
               CustomTextField(
                 controller: completeProfileController.fullNameController,
-                title: "Full Name",
+                title: "Full Name".tr,
                 width: Get.width,
-                hintText: "Enter your full name",
+                hintText: "Enter your full name".tr,
               ),
               CustomTextField(
                 controller: completeProfileController.phoneController,
-                title: "Phone",
+                title: "Phone".tr,
                 width: Get.width,
-                hintText: "Enter your phone number",
+                hintText: "Enter your phone number".tr,
               ),
               // Padding(
               //   padding:
@@ -127,7 +127,7 @@ class EditProfileView extends StatelessWidget {
               //     crossAxisAlignment: CrossAxisAlignment.start,
               //     children: [
               //       Text(
-              //         "Date of Birth",
+              //         "Date of Birth".tr,
               //         style: h3.copyWith(color: AppColors.textColor),
               //       ),
               //       const SizedBox(
@@ -170,28 +170,28 @@ class EditProfileView extends StatelessWidget {
               // ),
               CustomTextField(
                 controller: completeProfileController.locationController,
-                title: "Address",
+                title: "Address".tr,
                 width: Get.width,
-                hintText: "Enter your address",
+                hintText: "Enter your address".tr,
               ),
               CustomTextField(
                 maxLines: 10,
                 controller: completeProfileController.bioController,
-                title: "Bio",
+                title: "Bio".tr,
                 width: Get.width,
-                hintText: "Write something about you...",
+                hintText: "Write something about you...".tr,
               ),
               sh20,
               completeProfileController.isLoading
                   ? const CustomLoader()
                   : CustomButton(
-                      onTap: () {
-                        completeProfileController.updateProfileRepo();
-                      },
-                      title: "Update",
-                      width: Get.width,
-                      color: AppColors.mainColor,
-                    ),
+                onTap: () {
+                  completeProfileController.updateProfileRepo();
+                },
+                title: "Update".tr,
+                width: Get.width,
+                color: AppColors.mainColor,
+              ),
               sh10,
             ],
           ),

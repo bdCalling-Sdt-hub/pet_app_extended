@@ -5,6 +5,7 @@ import 'package:felpus/views/components/custom_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import '../../utils/app_color/app_colors.dart';
 import '../../utils/app_images/app_images.dart';
@@ -48,7 +49,7 @@ Padding myPetsWidget({required PetModel pet}) {
                   style: h4.copyWith(fontSize: 13),
                 ),
                 Text(
-                  " ${pet.age} Years.",
+                  " ${pet.age} ${"Years".tr}.",
                   style: h4.copyWith(fontSize: 13),
                 ),
               ],

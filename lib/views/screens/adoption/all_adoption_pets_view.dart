@@ -40,7 +40,7 @@ class AllAdoptionPetsView extends GetView {
       appBar: AppBar(
         backgroundColor: AppColors.white,
         title: Text(
-          'Pets For Adoption',
+          'Pets For Adoption'.tr,
           style: h2.copyWith(fontSize: 22, color: AppColors.mainColor),
         ),
         centerTitle: true,

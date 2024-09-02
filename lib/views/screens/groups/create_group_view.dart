@@ -23,7 +23,7 @@ class CreateGroupView extends StatefulWidget {
 
 class _CreateGroupViewState extends State<CreateGroupView> {
   final ImagePickerController imagePickerController =
-      Get.put(ImagePickerController());
+  Get.put(ImagePickerController());
 
   final Map<int, bool> _selectedItems = {};
 
@@ -44,7 +44,7 @@ class _CreateGroupViewState extends State<CreateGroupView> {
           appBar: AppBar(
             backgroundColor: AppColors.white,
             title: Text(
-              'Create Group',
+              'Create Group'.tr,
               style: h2.copyWith(fontSize: 26, color: AppColors.mainColor),
             ),
             centerTitle: true,
@@ -59,9 +59,9 @@ class _CreateGroupViewState extends State<CreateGroupView> {
               children: [
                 Center(
                     child: Text(
-                  "Group Name",
-                  style: h2.copyWith(fontSize: 18),
-                )),
+                      "Group Name".tr,
+                      style: h2.copyWith(fontSize: 18),
+                    )),
                 sh5,
                 Container(
                   height: 50,
@@ -82,68 +82,68 @@ class _CreateGroupViewState extends State<CreateGroupView> {
                 sh10,
                 Center(
                     child: Text(
-                  "Upload Group Image",
-                  style: h2.copyWith(fontSize: 18),
-                )),
+                      "Upload Group Image".tr,
+                      style: h2.copyWith(fontSize: 18),
+                    )),
                 sh5,
                 Obx(
-                  () => imagePickerController.selectedImagePath.value == ''
+                      () => imagePickerController.selectedImagePath.value == ''
                       ? GestureDetector(
-                          onTap: () {
-                            imagePickerController
-                                .pickImage(ImageSource.gallery);
-                          },
-                          child: Container(
-                            height: 110,
-                            width: Get.width,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all(
-                                    color: AppColors.gray,
-                                    style: BorderStyle.solid,
-                                    width: 1)),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  AppImages.photo,
-                                  scale: 4,
-                                  color: AppColors.black,
-                                ),
-                                Text(
-                                  "Upload a picture for your group",
-                                  style: h3,
-                                  textAlign: TextAlign.center,
-                                )
-                              ],
-                            ),
+                    onTap: () {
+                      imagePickerController
+                          .pickImage(ImageSource.gallery);
+                    },
+                    child: Container(
+                      height: 110,
+                      width: Get.width,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(
+                              color: AppColors.gray,
+                              style: BorderStyle.solid,
+                              width: 1)),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            AppImages.photo,
+                            scale: 4,
+                            color: AppColors.black,
                           ),
-                        )
+                          Text(
+                            "Upload a picture for your group".tr,
+                            style: h3,
+                            textAlign: TextAlign.center,
+                          )
+                        ],
+                      ),
+                    ),
+                  )
                       : GestureDetector(
-                          onTap: () {
-                            imagePickerController
-                                .pickImage(ImageSource.gallery);
-                          },
-                          child: Container(
-                              height: 110,
-                              width: Get.width,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  border: Border.all(
-                                      color: AppColors.gray,
-                                      style: BorderStyle.solid,
-                                      width: 1)),
-                              child: ClipOval(
-                                  child: Image.file(File(imagePickerController
-                                      .selectedImagePath.value)))),
-                        ),
+                    onTap: () {
+                      imagePickerController
+                          .pickImage(ImageSource.gallery);
+                    },
+                    child: Container(
+                        height: 110,
+                        width: Get.width,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(
+                                color: AppColors.gray,
+                                style: BorderStyle.solid,
+                                width: 1)),
+                        child: ClipOval(
+                            child: Image.file(File(imagePickerController
+                                .selectedImagePath.value)))),
+                  ),
                 ),
                 sh10,
                 Center(
                     child: Text(
-                  "Add Members",
-                  style: h2.copyWith(fontSize: 18),
-                )),
+                      "Add Members".tr,
+                      style: h2.copyWith(fontSize: 18),
+                    )),
                 sh5,
                 Card(
                   elevation: 2,
@@ -161,7 +161,7 @@ class _CreateGroupViewState extends State<CreateGroupView> {
                       controller: controller.searchController,
                       decoration: InputDecoration(
                         border: InputBorder.none,
-                        hintText: "Search Your Contacts",
+                        hintText: "Search Your Contacts".tr,
                         hintStyle: h4.copyWith(color: AppColors.grayLight),
                         prefixIcon: const Icon(Icons.search,
                             color: AppColors.grayLight),
@@ -182,64 +182,64 @@ class _CreateGroupViewState extends State<CreateGroupView> {
                       return contact.phone.isEmpty
                           ? const SizedBox()
                           : ListTile(
-                              title: Text(contact.fullName),
-                              leading: Container(
-                                height: 40,
-                                width: 40,
-                                decoration: BoxDecoration(
-                                  color: AppColors.grayLight.withOpacity(0.2),
-                                  shape: BoxShape.circle,
-                                ),
-                                child: ClipOval(
-                                  child: CustomImage(
-                                    imageSrc: contact.photo,
-                                    imageType: ImageType.network,
-                                  ),
-                                ),
-                              ),
-                              trailing: GestureDetector(
-                                onTap: () {
-                                  if (_selectedItems[index] ?? false) {
-                                    controller.selectedContacts.remove(contact.id);
-                                  } else {
-                                    controller.selectedContacts.add(contact.id);
-                                  }
+                        title: Text(contact.fullName),
+                        leading: Container(
+                          height: 40,
+                          width: 40,
+                          decoration: BoxDecoration(
+                            color: AppColors.grayLight.withOpacity(0.2),
+                            shape: BoxShape.circle,
+                          ),
+                          child: ClipOval(
+                            child: CustomImage(
+                              imageSrc: contact.photo,
+                              imageType: ImageType.network,
+                            ),
+                          ),
+                        ),
+                        trailing: GestureDetector(
+                          onTap: () {
+                            if (_selectedItems[index] ?? false) {
+                              controller.selectedContacts.remove(contact.id);
+                            } else {
+                              controller.selectedContacts.add(contact.id);
+                            }
 
-                                  print.log(
-                                      "Selected Contacts : ${controller.selectedContacts}");
-                                  setState(() {
-                                    _selectedItems[index] =
-                                        !(_selectedItems[index] ?? false);
-                                    print.log("$_selectedItems");
-                                  });
-                                },
-                                child: Container(
-                                  decoration: const ShapeDecoration(
-                                    shape: CircleBorder(
-                                      side: BorderSide(
-                                        width: 2.0,
-                                        color: AppColors.mainColor,
-                                      ),
-                                    ),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(1.0),
-                                    child: Container(
-                                      decoration: ShapeDecoration(
-                                        shape: const CircleBorder(),
-                                        color: _selectedItems[index] ?? false
-                                            ? AppColors.mainColor
-                                            : Colors.transparent,
-                                      ),
-                                      child: const SizedBox(
-                                        width: 16.0,
-                                        height: 16.0,
-                                      ),
-                                    ),
-                                  ),
+                            print.log(
+                                "Selected Contacts : ${controller.selectedContacts}");
+                            setState(() {
+                              _selectedItems[index] =
+                              !(_selectedItems[index] ?? false);
+                              print.log("$_selectedItems");
+                            });
+                          },
+                          child: Container(
+                            decoration: const ShapeDecoration(
+                              shape: CircleBorder(
+                                side: BorderSide(
+                                  width: 2.0,
+                                  color: AppColors.mainColor,
                                 ),
                               ),
-                            );
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(1.0),
+                              child: Container(
+                                decoration: ShapeDecoration(
+                                  shape: const CircleBorder(),
+                                  color: _selectedItems[index] ?? false
+                                      ? AppColors.mainColor
+                                      : Colors.transparent,
+                                ),
+                                child: const SizedBox(
+                                  width: 16.0,
+                                  height: 16.0,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
                     },
                   ),
                 )
@@ -255,7 +255,7 @@ class _CreateGroupViewState extends State<CreateGroupView> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CustomButton(
-                    title: "Cancel",
+                    title: "Cancel".tr,
                     width: Get.width / 2.8,
                     color: AppColors.light,
                     titleColor: AppColors.black,
@@ -263,13 +263,13 @@ class _CreateGroupViewState extends State<CreateGroupView> {
                   controller.isLoading
                       ? const CustomLoader()
                       : CustomButton(
-                          onTap: () {
-                            controller.createGroupRepo();
-                            _printSelectedIndices();
-                          },
-                          title: "Create Group",
-                          width: Get.width / 2.8,
-                          color: AppColors.mainColor),
+                      onTap: () {
+                        controller.createGroupRepo();
+                        _printSelectedIndices();
+                      },
+                      title: "Create Group".tr,
+                      width: Get.width / 2.8,
+                      color: AppColors.mainColor),
                 ],
               ),
             ),

@@ -5,7 +5,6 @@ import 'package:felpus/views/components/CustomPopUP/pop_up.dart';
 import 'package:felpus/views/components/custom_button.dart';
 import 'package:felpus/views/components/custom_image.dart';
 import 'package:felpus/views/components/custom_loader.dart';
-import 'package:felpus/views/components/custom_textfelid.dart';
 import 'package:felpus/views/components/no_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,9 +13,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../utils/app_color/app_colors.dart';
-import '../../../../utils/app_images/app_images.dart';
 import '../../../../utils/app_text_style/styles.dart';
-import '../../../../utils/size_box/custom_sizebox.dart';
 
 
 class ReportLosPetView extends StatefulWidget {

@@ -68,7 +68,7 @@ class LostPetsView extends GetView<LostPetsController> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Lost Pets",
+                        "Lost Pets".tr,
                         style: h2.copyWith(
                             fontSize: 20, color: AppColors.mainColor),
                       ),
@@ -77,7 +77,7 @@ class LostPetsView extends GetView<LostPetsController> {
                           Get.to(() => AllLostPetsView());
                         },
                         child: Text(
-                          "See all",
+                          "See all".tr,
                           style: h2.copyWith(
                               fontSize: 18, color: AppColors.ash),
                         ),
@@ -111,7 +111,7 @@ class LostPetsView extends GetView<LostPetsController> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Found Pets",
+                        "Found Pets".tr,
                         style: h2.copyWith(
                             fontSize: 20, color: AppColors.mainColor),
                       ),

@@ -41,7 +41,7 @@ class AllFoundPetsView extends GetView {
       appBar: AppBar(
         backgroundColor: AppColors.white,
         title: Text(
-          'Found Pets',
+          'Found Pets'.tr,
           style: h2.copyWith(fontSize: 22, color: AppColors.mainColor),
         ),
         centerTitle: true,

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../controllers/dashboard_controller.dart';
@@ -21,24 +20,24 @@ class DashboardView extends StatelessWidget{
           type: BottomNavigationBarType.fixed,
           items:  <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Image.asset(AppImages.home,scale: 4,color: dashboardController.selectedIndex.value == 0?  AppColors.mainColor : AppColors.black,),
-              label: 'Home',
+              icon: Image.asset(AppImages.home, scale: 4, color: dashboardController.selectedIndex.value == 0 ? AppColors.mainColor : AppColors.black),
+              label: 'Home'.tr,
             ),
             BottomNavigationBarItem(
-              icon: Image.asset(AppImages.search,scale: 4,color: dashboardController.selectedIndex.value == 1?  AppColors.mainColor : AppColors.black,),
-              label: 'Lost Pets',
+              icon: Image.asset(AppImages.search, scale: 4, color: dashboardController.selectedIndex.value == 1 ? AppColors.mainColor : AppColors.black),
+              label: 'Lost Pets'.tr,
             ),
             BottomNavigationBarItem(
-              icon: Image.asset(AppImages.favorite,scale: 4,color: dashboardController.selectedIndex.value == 2?  AppColors.mainColor : AppColors.black,),
-              label: 'Adoption',
+              icon: Image.asset(AppImages.favorite, scale: 4, color: dashboardController.selectedIndex.value == 2 ? AppColors.mainColor : AppColors.black),
+              label: 'Adoption'.tr,
             ),
             BottomNavigationBarItem(
-              icon: Image.asset(AppImages.groupPerson ,scale: 4, color: dashboardController.selectedIndex.value == 3?  AppColors.mainColor : AppColors.black,),
-              label: 'Groups',
+              icon: Image.asset(AppImages.groupPerson, scale: 4, color: dashboardController.selectedIndex.value == 3 ? AppColors.mainColor : AppColors.black),
+              label: 'Groups'.tr,
             ),
             BottomNavigationBarItem(
-              icon: Image.asset(AppImages.user, scale: 4,color: dashboardController.selectedIndex.value == 4?  AppColors.mainColor : AppColors.black,),
-              label: 'Profile',
+              icon: Image.asset(AppImages.user, scale: 4, color: dashboardController.selectedIndex.value == 4 ? AppColors.mainColor : AppColors.black),
+              label: 'Profile'.tr,
             ),
           ],
           currentIndex: dashboardController.selectedIndex.value,

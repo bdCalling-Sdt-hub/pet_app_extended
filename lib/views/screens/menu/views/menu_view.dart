@@ -1,4 +1,3 @@
-
 import 'package:felpus/controllers/my_pet_controller.dart';
 import 'package:felpus/controllers/profile_controller.dart';
 import 'package:felpus/helpers/prefs_helper.dart';
@@ -29,8 +28,8 @@ class MenuView extends GetView<MenuDataController> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           backgroundColor: AppColors.white,
-          title:  Text('Menu',style: h2.copyWith(fontSize: 22,color: AppColors.mainColor),),
-       //   centerTitle: true,
+          title:  Text('Menu'.tr, style: h2.copyWith(fontSize: 22, color: AppColors.mainColor)),
+          // centerTitle: true,
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 14.0),
@@ -74,11 +73,11 @@ class MenuView extends GetView<MenuDataController> {
                                       shape: BoxShape.circle,
                                     ),
                                     child: ClipOval(
-                                      child: CustomImage(imageSrc: PrefsHelper.userImageUrl, imageType: ImageType.network,),
+                                      child: CustomImage(imageSrc: PrefsHelper.userImageUrl, imageType: ImageType.network),
                                     ),
                                   ),
                                   sw10,
-                                  Text(PrefsHelper.userName,style: h3,),
+                                  Text(PrefsHelper.userName, style: h3),
                                 ],
                               ),
                               GestureDetector(
@@ -86,8 +85,8 @@ class MenuView extends GetView<MenuDataController> {
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Image.asset(AppImages.editUser,scale: 3,),
-                                    Text("Edit Profile",style: h3.copyWith(fontSize: 10),)
+                                    Image.asset(AppImages.editUser, scale: 3),
+                                    Text("Edit Profile".tr, style: h3.copyWith(fontSize: 10))
                                   ],
                                 ),
                               )
@@ -97,15 +96,15 @@ class MenuView extends GetView<MenuDataController> {
                       ),
                     ),
                   ),
-                  profileCard(image: AppImages.memberCard, title: 'Your Pet Cards', onTap: () { Get.to(() => const YourPetView()); }),
-                  profileCard(image: AppImages.vaccinations, title: 'Create Pet Cards', onTap: () { Get.to(() => const CreatePetView()); }),
-                  profileCard(image: AppImages.report, title: 'Report Lost Pet', onTap: () { MyPetController.petType = "lost"; Get.to(() => const ReportLosPetView()); }),
-                  profileCard(image: AppImages.clipboard, title: 'Report Found Pet', onTap: () {MyPetController.petType = "found"; Get.to(() => const ReportFoundPetView()); }),
-                  profileCard(image: AppImages.question, title: 'FAQ', onTap: () { Get.to(() => const FaqView()); }),
-                  profileCard(image: AppImages.setting, title: 'Settings', onTap: () {Get.to(() => const SettingsView());   }),
+                  profileCard(image: AppImages.memberCard, title: 'Your Pet Cards'.tr, onTap: () { Get.to(() => const YourPetView()); }),
+                  profileCard(image: AppImages.vaccinations, title: 'Create Pet Cards'.tr, onTap: () { Get.to(() => const CreatePetView()); }),
+                  profileCard(image: AppImages.report, title: 'Report Lost Pet'.tr, onTap: () { MyPetController.petType = "lost"; Get.to(() => const ReportLosPetView()); }),
+                  profileCard(image: AppImages.clipboard, title: 'Report Found Pet'.tr, onTap: () { MyPetController.petType = "found"; Get.to(() => const ReportFoundPetView()); }),
+                  profileCard(image: AppImages.question, title: 'FAQ'.tr, onTap: () { Get.to(() => const FaqView()); }),
+                  profileCard(image: AppImages.setting, title: 'Settings'.tr, onTap: () { Get.to(() => const SettingsView()); }),
                   profileCard(
                       image: AppImages.logout,
-                      title: 'Log Out',
+                      title: 'Log Out'.tr,
                       onTap: () {
                         PopUp.logOutPopUp();
                       }),
@@ -116,7 +115,7 @@ class MenuView extends GetView<MenuDataController> {
     );
   }
 
-  Padding profileCard({required String image, required String title,required Function()? onTap,}) {
+  Padding profileCard({required String image, required String title, required Function()? onTap}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 7.0),
       child: GestureDetector(
@@ -150,12 +149,12 @@ class MenuView extends GetView<MenuDataController> {
                         //shape: BoxShape.circle,
                       ),
                       child: Image.asset(
-                        image,scale: 4,
+                        image, scale: 4,
                         fit: BoxFit.fill,
                       ),
                     ),
                     sw10,
-                    Text(title,style: h3,),
+                    Text(title, style: h3),
                   ],
                 ),
               ],

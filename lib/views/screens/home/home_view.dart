@@ -30,7 +30,7 @@ import 'dart:developer' as print;
 class HomeView extends StatelessWidget {
   HomeView({super.key});
 
-  List categoryList = ["Family", "Neighbor", "Friends"];
+  List categoryList = ["Family".tr, "Neighbor".tr, "Friends".tr];
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +53,7 @@ class HomeView extends StatelessWidget {
             sw15,
             GestureDetector(
               onTap: () => Get.to(
-                () => const NotificationsView(),
+                    () => const NotificationsView(),
               ),
               child: Image.asset(
                 AppImages.notification,
@@ -73,220 +73,220 @@ class HomeView extends StatelessWidget {
             child: controller.isLoading
                 ? const Center(child: CircularProgressIndicator())
                 : Column(
-                    children: [
-                      Stack(
-                        children: [
-                          Image.asset(
-                            AppImages.homeBanner,
-                            scale: 1,
+              children: [
+                Stack(
+                  children: [
+                    Image.asset(
+                      AppImages.homeBanner,
+                      scale: 1,
+                    ),
+                    Positioned(
+                        right: 36,
+                        left: 36,
+                        top: 40,
+                        bottom: 40,
+                        child: GestureDetector(
+                          onTap: () => Get.to(() => EmergencyView()),
+                          child: Container(
+                            height: 155,
+                            width: 320,
+                            decoration: BoxDecoration(
+                                image: const DecorationImage(
+                                    fit: BoxFit.fill,
+                                    image: AssetImage(
+                                        AppImages.emergencyTab)),
+                                borderRadius: BorderRadius.circular(10)),
+                            child: Center(
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 48.0),
+                                child: Text(
+                                  "Emergency!".tr,
+                                  style: h2.copyWith(
+                                      fontSize: 32,
+                                      color: AppColors.white),
+                                ),
+                              ),
+                            ),
                           ),
-                          Positioned(
-                              right: 36,
-                              left: 36,
-                              top: 40,
-                              bottom: 40,
-                              child: GestureDetector(
-                                onTap: () => Get.to(() => EmergencyView()),
+                        ))
+                  ],
+                ),
+                sh5,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                  child: Column(
+                    children: [
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "My Groups".tr,
+                          style: h2.copyWith(
+                              fontSize: 20, color: AppColors.mainColor),
+                        ),
+                      ),
+                      sh10,
+                      SizedBox(
+                        height: 45,
+                        child: GroupsNContactsController.instance.groupsList.isEmpty? CustomText(text: "No groups found".tr) : ListView.builder(
+                            shrinkWrap: true,
+                            scrollDirection: Axis.horizontal,
+                            itemCount: GroupsNContactsController.instance.groupsList.length,
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 15.0),
                                 child: Container(
-                                  height: 155,
-                                  width: 320,
                                   decoration: BoxDecoration(
-                                      image: const DecorationImage(
-                                          fit: BoxFit.fill,
-                                          image: AssetImage(
-                                              AppImages.emergencyTab)),
-                                      borderRadius: BorderRadius.circular(10)),
-                                  child: Center(
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(top: 48.0),
+                                      borderRadius:
+                                      BorderRadius.circular(25),
+                                      color: AppColors.lowGray),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10.0, vertical: 10),
+                                    child: Center(
                                       child: Text(
-                                        "Emergency!",
-                                        style: h2.copyWith(
-                                            fontSize: 32,
-                                            color: AppColors.white),
+                                        GroupsNContactsController.instance.groupsList[index].groupName,
+                                        style: h2.copyWith(fontSize: 14),
                                       ),
                                     ),
                                   ),
                                 ),
-                              ))
+                              );
+                            }),
+                      ),
+                      sh10,
+
+                      ///<<<================ My Pets ==========================>>>
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "My Pets".tr,
+                            style: h2.copyWith(
+                                fontSize: 20, color: AppColors.mainColor),
+                          ),
+                          InkWell(
+                            onTap: () => Get.to(() => const MyPetsView()),
+                            child: Text(
+                              "See all".tr,
+                              style: h2.copyWith(
+                                  fontSize: 18, color: AppColors.ash),
+                            ),
+                          ),
                         ],
                       ),
-                      sh5,
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                        child: Column(
-                          children: [
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                "My Groups",
-                                style: h2.copyWith(
-                                    fontSize: 20, color: AppColors.mainColor),
-                              ),
-                            ),
-                            sh10,
-                            SizedBox(
-                              height: 45,
-                              child: GroupsNContactsController.instance.groupsList.isEmpty? CustomText(text: "No groups found") : ListView.builder(
-                                  shrinkWrap: true,
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: GroupsNContactsController.instance.groupsList.length,
-                                  itemBuilder: (context, index) {
-                                    return Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 15.0),
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(25),
-                                            color: AppColors.lowGray),
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 10.0, vertical: 10),
-                                          child: Center(
-                                            child: Text(
-                                              GroupsNContactsController.instance.groupsList[index].groupName,
-                                              style: h2.copyWith(fontSize: 14),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  }),
-                            ),
-                            sh10,
-
-                            ///<<<================ My Pets ==========================>>>
-
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "My Pets",
-                                  style: h2.copyWith(
-                                      fontSize: 20, color: AppColors.mainColor),
-                                ),
-                                InkWell(
-                                  onTap: () => Get.to(() => const MyPetsView()),
-                                  child: Text(
-                                    "See all",
-                                    style: h2.copyWith(
-                                        fontSize: 18, color: AppColors.ash),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            sh10,
-                            controller.myPetList.isEmpty
-                                ? const NoData()
-                                : SizedBox(
-                                    height: 190.h,
-                                    child: ListView.builder(
-                                        scrollDirection: Axis.horizontal,
-                                        shrinkWrap: true,
-                                        itemCount: controller.myPetList.length,
-                                        itemBuilder: (context, index) {
-                                          PetModel item =
-                                              controller.myPetList[index];
-                                          return GestureDetector(
-                                              onTap: () {
-                                                PetDetailsController.instance
-                                                    .getPetDetailsRepo(petId: item.id);
-                                                Get.to(() =>
-                                                const PetDetailsView());
-                                              },
-                                              child: myPetsWidget(pet: item));
-                                        }),
-                                  ),
-                            sh10,
-
-                            ///<<<==================== Lost Pets ====================>>>
-
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "Lost Pets",
-                                  style: h2.copyWith(
-                                      fontSize: 20, color: AppColors.mainColor),
-                                ),
-                                GestureDetector(
+                      sh10,
+                      controller.myPetList.isEmpty
+                          ? const NoData()
+                          : SizedBox(
+                        height: 190.h,
+                        child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            shrinkWrap: true,
+                            itemCount: controller.myPetList.length,
+                            itemBuilder: (context, index) {
+                              PetModel item =
+                              controller.myPetList[index];
+                              return GestureDetector(
                                   onTap: () {
-                                      Get.to(() => AllLostPetsView());
+                                    PetDetailsController.instance
+                                        .getPetDetailsRepo(petId: item.id);
+                                    Get.to(() =>
+                                    const PetDetailsView());
                                   },
-                                  child: Text(
-                                    "See all",
-                                    style: h2.copyWith(
-                                        fontSize: 18, color: AppColors.ash),
-                                  ),
-                                ),
-                              ],
+                                  child: myPetsWidget(pet: item));
+                            }),
+                      ),
+                      sh10,
+
+                      ///<<<==================== Lost Pets ====================>>>
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Lost Pets".tr,
+                            style: h2.copyWith(
+                                fontSize: 20, color: AppColors.mainColor),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Get.to(() => AllLostPetsView());
+                            },
+                            child: Text(
+                              "See all".tr,
+                              style: h2.copyWith(
+                                  fontSize: 18, color: AppColors.ash),
                             ),
-                            sh10,
+                          ),
+                        ],
+                      ),
+                      sh10,
 
-                            ///<<<<================= Lost Pets ====================>>>>
-                            controller.lostPetList.isEmpty
-                                ? const NoData()
-                                : ListView.builder(
-                                    shrinkWrap: true,
-                                    itemCount: controller.lostPetList.length,
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
-                                    itemBuilder: (context, index) {
-                                      PetModel item =
-                                          controller.lostPetList[index];
-                                      return GestureDetector(
-                                          onTap: () {
-                                            PetDetailsController.instance.getPetDetailsRepo(petId: item.id);
-                                            Get.to(() => const PetDetailsView());
-                                          },
-                                          child: petsList(pet: item));
-                                    }),
-                            sh10,
+                      ///<<<<================= Lost Pets ====================>>>>
+                      controller.lostPetList.isEmpty
+                          ? const NoData()
+                          : ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: controller.lostPetList.length,
+                          physics:
+                          const NeverScrollableScrollPhysics(),
+                          itemBuilder: (context, index) {
+                            PetModel item =
+                            controller.lostPetList[index];
+                            return GestureDetector(
+                                onTap: () {
+                                  PetDetailsController.instance.getPetDetailsRepo(petId: item.id);
+                                  Get.to(() => const PetDetailsView());
+                                },
+                                child: petsList(pet: item));
+                          }),
+                      sh10,
 
-                            ///<<<<================= Found Pets ====================>>>>
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "Found Pets",
-                                  style: h2.copyWith(
-                                      fontSize: 20, color: AppColors.mainColor),
-                                ),
-                                GestureDetector(
-                                  onTap: () => Get.to(() => AllFoundPetsView()),
-                                  child: Text(
-                                    "See all",
-                                    style: h2.copyWith(
-                                        fontSize: 18, color: AppColors.ash),
-                                  ),
-                                ),
-                              ],
+                      ///<<<<================= Found Pets ====================>>>>
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Found Pets".tr,
+                            style: h2.copyWith(
+                                fontSize: 20, color: AppColors.mainColor),
+                          ),
+                          GestureDetector(
+                            onTap: () => Get.to(() => AllFoundPetsView()),
+                            child: Text(
+                              "See all".tr,
+                              style: h2.copyWith(
+                                  fontSize: 18, color: AppColors.ash),
                             ),
-                            sh10,
+                          ),
+                        ],
+                      ),
+                      sh10,
 
-                            controller.foundPetList.isEmpty
-                                ? const Center(child: NoData())
-                                : ListView.builder(
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
-                                    shrinkWrap: true,
-                                    itemCount: controller.foundPetList.length,
-                                    itemBuilder: (context, index) {
-                                      PetModel item =
-                                          controller.foundPetList[index];
-                                      return GestureDetector(
-                                          onTap: () {
-                                            PetDetailsController.instance.getPetDetailsRepo(petId: item.id);
-                                            Get.to(() => const PetDetailsView());
-                                          },
-                                          child: petsList(pet: item));
-                                    }),
-                          ],
-                        ),
-                      )
+                      controller.foundPetList.isEmpty
+                          ? const Center(child: NoData())
+                          : ListView.builder(
+                          physics:
+                          const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: controller.foundPetList.length,
+                          itemBuilder: (context, index) {
+                            PetModel item =
+                            controller.foundPetList[index];
+                            return GestureDetector(
+                                onTap: () {
+                                  PetDetailsController.instance.getPetDetailsRepo(petId: item.id);
+                                  Get.to(() => const PetDetailsView());
+                                },
+                                child: petsList(pet: item));
+                          }),
                     ],
                   ),
+                )
+              ],
+            ),
           ),
         ));
   }

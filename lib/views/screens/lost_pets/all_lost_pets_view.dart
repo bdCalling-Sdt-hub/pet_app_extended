@@ -41,7 +41,7 @@ class AllLostPetsView extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: AppColors.white,
         title: Text(
-          'Lost Pets',
+          'Lost Pets'.tr,
           style: h2.copyWith(fontSize: 22, color: AppColors.mainColor),
         ),
         centerTitle: true,
@@ -100,14 +100,14 @@ class AllLostPetsView extends StatelessWidget {
                     );
         },
       ),
-      bottomNavigationBar:  Obx(() {
+      bottomNavigationBar: Obx(() {
         return AdsServices.isBannerAdReady.value
             ? Container(
-          alignment: Alignment.center,
-          width: AdsServices.bannerAdSecond.size.width.toDouble(),
-          height: AdsServices.bannerAdSecond.size.height.toDouble(),
-          child: AdWidget(ad: AdsServices.bannerAdSecond),
-        )
+                alignment: Alignment.center,
+                width: AdsServices.bannerAdSecond.size.width.toDouble(),
+                height: AdsServices.bannerAdSecond.size.height.toDouble(),
+                child: AdWidget(ad: AdsServices.bannerAdSecond),
+              )
             : const SizedBox();
       }),
     );
