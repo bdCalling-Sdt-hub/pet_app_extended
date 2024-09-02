@@ -21,7 +21,7 @@ class EmergencyView extends StatefulWidget {
 class _EmergencyViewState extends State<EmergencyView> {
   final List<Map<String, String>> items = [
     {'title': 'Lost Pets', 'icon': AppImages.lostPets},
-    {'title': 'Injured Pet', 'icon': AppImages.injuredPet},
+    {'title': 'Injured Pet', 'icon':  AppImages.injuredPet},
     {'title': 'Abused Pet', 'icon': AppImages.abusedPet},
     {'title': 'Fire', 'icon': AppImages.fire},       // Add correct path for icons
     {'title': 'Earthquake', 'icon': AppImages.earthquake},

@@ -20,11 +20,6 @@ Padding myPetsWidget({required PetModel pet}) {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: AppColors.olive
-        // gradient: const LinearGradient(
-        //   begin: Alignment.topCenter,
-        //   end: Alignment.bottomCenter,
-        //   colors: [AppColors.gradient2, AppColors.gradient1],
-        // ),
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 6),

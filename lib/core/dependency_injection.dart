@@ -4,6 +4,7 @@ import 'package:felpus/controllers/adoption_controller.dart';
 import 'package:felpus/controllers/found_pets_controller.dart';
 import 'package:felpus/controllers/groups_n_contacts_controller.dart';
 import 'package:felpus/controllers/lost_pets_controller.dart';
+import 'package:felpus/controllers/message_controller.dart';
 import 'package:felpus/controllers/my_pet_controller.dart';
 import 'package:felpus/controllers/GoogleMapControllers/nearby_map_controller.dart';
 import 'package:felpus/controllers/profile_controller.dart';
@@ -34,5 +35,6 @@ class DependencyInjection extends Bindings{
     Get.lazyPut(() => FoundPetsController(), fenix: true);
     Get.lazyPut(() => GroupsNContactsController(), fenix: true);
     Get.lazyPut(() => NearByMapController(), fenix: true);
+    Get.lazyPut(() => MessageController(), fenix: true);
   }
 }

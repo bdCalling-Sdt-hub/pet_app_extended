@@ -178,5 +178,30 @@ class PetModel {
   }
 }
 
+class ChatInfo {
+  final String name;
+  final String photo;
+
+  ChatInfo({
+    this.name = 'Unknown',
+    this.photo = '/uploads/default/profile.jpg',
+  });
+
+  factory ChatInfo.fromJson(Map<String, dynamic> json) {
+    return ChatInfo(
+      name: json['name'] ?? 'Unknown',
+      photo: json['photo'] ?? '/uploads/default/profile.jpg',
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'photo': photo,
+    };
+  }
+}
+
+
 
 

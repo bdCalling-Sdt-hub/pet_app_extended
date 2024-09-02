@@ -6,6 +6,7 @@ import 'package:felpus/models/chat_user_model.dart';
 import 'package:felpus/services/api_service.dart';
 import 'package:felpus/utils/App_Urls/app_urls.dart';
 import 'package:felpus/utils/App_Utils/app_utils.dart';
+import 'package:felpus/utils/app_images/app_images.dart';
 import 'package:felpus/views/screens/message/message_view.dart';
 import 'package:get/get.dart';
 import 'dart:developer' as print;
@@ -23,6 +24,8 @@ class MessageController extends GetxController {
   String helpTypeTitle = "";
 
   List<ChatDataModel> chatDataList = [];
+  ChatInfo chatPersonInfo = ChatInfo.fromJson({});
+
   bool isLoading = false;
   List<ChatUserModel>chatUsersList = [];
 
@@ -63,6 +66,15 @@ class MessageController extends GetxController {
     'Flood': 'flood',
   };
 
+  final Map<String, String> helpTypeIcons = {
+    'lostPet' : AppImages.lostPets,
+    'injuredPet' :  AppImages.injuredPet,
+    'abusedPet' : AppImages.abusedPet,
+    'fire' : AppImages.fire,
+    'earthquake' : AppImages.earthquake,
+    'flood' : AppImages.flood,
+  };
+
   void assignHelpType(String title) {
     MessageController.helpType = helpTypeMapping[title] ?? "";
   }
@@ -75,7 +87,7 @@ class MessageController extends GetxController {
     assignHelpType(title);
 
     // Now MessageController.helpType will be correctly assigned
-    print.log(MessageController.helpType); // This will print the corresponding helpType
+    print.log("disujf ${MessageController.helpType}"); // This will print the corresponding helpType
   }
 
 
@@ -105,8 +117,10 @@ class MessageController extends GetxController {
     var response = await ApiService.postApi(AppUrls.newMessage, body, header: header);
 
     if (response.statusCode == 200) {
-      var responseData = jsonDecode(response.body)["data"];
+      var responseData = jsonDecode(response.body)["data"]["allMessage"];
+      chatPersonInfo = jsonDecode(response.body)["data"]["chatInfo"];
       chatDataList = (responseData as List).map((data) => ChatDataModel.fromJson(data)).toList();
+
       update();
 
       helpTypeTitle = getTitleFromHelpType(helpType);
@@ -119,6 +133,8 @@ class MessageController extends GetxController {
     isLoading = false;
     update();
   }
+
+  ///=================== Get Receiver
 
 
   final count = 0.obs;

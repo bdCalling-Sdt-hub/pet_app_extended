@@ -93,6 +93,7 @@ class OtherHelper {
     }
   }
 
+  /// Date formatter
   static String formatDate(String isoDate) {
     // Parse the ISO date string
     DateTime dateTime = DateTime.parse(isoDate);
@@ -101,5 +102,19 @@ class OtherHelper {
     String formattedDate = DateFormat('dd MMMM yyyy').format(dateTime);
 
     return formattedDate;
+  }
+
+  /// Time formatter
+  static String formatTime(String createdAt) {
+    // Parse the UTC time
+    DateTime utcTime = DateTime.parse(createdAt);
+
+    // Convert it to local time
+    DateTime localTime = utcTime.toLocal();
+
+    // Format the time to "hh:mm a" (e.g., "06:35 PM")
+    String formattedTime = DateFormat('hh:mm a').format(localTime);
+
+    return formattedTime;
   }
 }
