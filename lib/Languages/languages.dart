@@ -10,18 +10,14 @@ class LocalConstants extends Translations {
       "Protect, Locate, Adopt." : "Protect, Locate, Adopt.",
 
       "Ensuring Every Pet's Safety and Forever Home." : "Ensuring Every Pet's Safety and Forever Home.",
-        "Keep your pets safe." : "Keep your pets safe.",
-        "Protect your pets from any crisis easily by using Felpus." : "Protect your pets from any crisis easily by using Felpus.",
-        "Adopt or Foster a Pet by using" : "Adopt or Foster a Pet by using",
-        "Easily find pets available for adoption or foster care in your area." : "Easily find pets available for adoption or foster care in your area.",
-        "Resources for Crisis Pets in" : "Resources for Crisis Pets in",
-        "Access emergency resources and support for pets in crisis situations." : "Access emergency resources and support for pets in crisis situations.",
-
-
-
-
+      "Keep your pets safe." : "Keep your pets safe.",
+      "Protect your pets from any crisis easily by using Felpus." : "Protect your pets from any crisis easily by using Felpus.",
+      "Adopt or Foster a Pet by using" : "Adopt or Foster a Pet by using",
+      "Easily find pets available for adoption or foster care in your area." : "Easily find pets available for adoption or foster care in your area.",
+      "Resources for Crisis Pets in" : "Resources for Crisis Pets in",
+      "Access emergency resources and support for pets in crisis situations." : "Access emergency resources and support for pets in crisis situations.",
       "Next" : "Next",
-        "Get Started" : "Get Started",
+      "Get Started" : "Get Started",
 
 
       "No Data found": "No Data found",
