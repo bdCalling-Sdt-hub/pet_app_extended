@@ -1,5 +1,6 @@
 
 import 'package:felpus/controllers/groups_n_contacts_controller.dart';
+import 'package:felpus/controllers/message_controller.dart';
 import 'package:felpus/extensions/extension.dart';
 import 'package:felpus/views/components/custom_loader.dart';
 import 'package:felpus/views/components/custom_text.dart';
@@ -105,6 +106,8 @@ class _EmergencySendSmsTypeViewState extends State<EmergencySendSmsTypeView> {
                             children: [
                               InkWell(
                                 onTap: (){
+                                  MessageController.chatId = groupsItems.id;
+                                  MessageController.chatType = "group";
                                   Get.to(() => const SelectPetsView());
                                 },
                                 child: const CircleAvatar(
@@ -199,6 +202,8 @@ class _EmergencySendSmsTypeViewState extends State<EmergencySendSmsTypeView> {
                             children: [
                               InkWell(
                                 onTap: (){
+                                  MessageController.chatId = contactItems.id;
+                                  MessageController.chatType = "single";
                                   Get.to(() => const SelectPetsView());
                                 },
                                 child: const CircleAvatar(

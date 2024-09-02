@@ -1,4 +1,5 @@
 
+import 'package:felpus/controllers/message_controller.dart';
 import 'package:felpus/extensions/extension.dart';
 import 'package:felpus/views/screens/resources/resources_view.dart';
 import 'package:flutter/material.dart';
@@ -89,6 +90,8 @@ class _EmergencyViewState extends State<EmergencyView> {
                           ResourcesView.isFlood = false;
                           ResourcesView.isLost = true;
                         }
+
+                        MessageController.instance.handleItemSelected(item);
                         Get.to(() => const EmergencySendSmsTypeView());
                       },
                       child: Container(

@@ -1,3 +1,4 @@
+import 'package:felpus/controllers/message_controller.dart';
 import 'package:felpus/controllers/my_pet_controller.dart';
 import 'package:felpus/utils/App_Utils/app_utils.dart';
 import 'package:felpus/views/components/custom_button.dart';
@@ -72,6 +73,7 @@ class _SelectPetsViewState extends State<SelectPetsView> {
                                   setState(() {
                                     selectedPet = index;
                                   });
+                                  MessageController.petId = petListItems.id;
                                 },
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(
@@ -193,20 +195,22 @@ class _SelectPetsViewState extends State<SelectPetsView> {
             right: 0,
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 14.0),
-              child: CustomButton(
-                onTap: () {
-                  if (selectedPet == -1) {
-                    Utils.toastMessage(
-                        message: "A pet must be selected before sending a message");
-                  } else {
-                    Get.to(() => const MessageView());
-                  }
-                },
-                title: "New Message",
-                width: Get.width,
-                color: AppColors.mainColor,
-                titleColor: AppColors.white,
-              ),
+              child: GetBuilder<MessageController>(builder: (controller) {
+                return controller.isLoading? const CustomLoader() : CustomButton(
+                  onTap: () {
+                    if (selectedPet == -1) {
+                      Utils.toastMessage(
+                          message: "A pet must be selected before sending a message");
+                    } else {
+                      controller.createMessageRepo();
+                    }
+                  },
+                  title: "New Message",
+                  width: Get.width,
+                  color: AppColors.mainColor,
+                  titleColor: AppColors.white,
+                );
+              },),
             ),
           ),
         ],

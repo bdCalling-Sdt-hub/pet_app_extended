@@ -1,4 +1,5 @@
 import 'package:felpus/controllers/groups_n_contacts_controller.dart';
+import 'package:felpus/controllers/message_controller.dart';
 import 'package:felpus/controllers/pet_details_controller.dart';
 import 'package:felpus/helpers/prefs_helper.dart';
 import 'package:felpus/views/components/custom_image.dart';
@@ -42,7 +43,7 @@ class HomeView extends StatelessWidget {
           actions: [
             InkWell(
               onTap: () {
-                Get.to(() => ChatListView());
+                MessageController.instance.getChatUsers().then((value) => Get.to(() => ChatListView()));
               },
               child: Image.asset(
                 AppImages.chat,
