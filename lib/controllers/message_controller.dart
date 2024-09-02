@@ -118,9 +118,17 @@ class MessageController extends GetxController {
 
     if (response.statusCode == 200) {
       var responseData = jsonDecode(response.body)["data"]["allMessage"];
-      chatPersonInfo = jsonDecode(response.body)["data"]["chatInfo"];
       chatDataList = (responseData as List).map((data) => ChatDataModel.fromJson(data)).toList();
 
+      final Map<String, dynamic> data = jsonDecode(response.body)["data"];
+
+// Ensure that chatInfo is a Map<String, dynamic>
+      if (data["chatInfo"] is Map<String, dynamic>) {
+        chatPersonInfo = ChatInfo.fromJson(data["chatInfo"]);
+      } else {
+        // Handle the case where chatInfo is not a map (if needed)
+        chatPersonInfo = ChatInfo(); // Default instance or other logic
+      }
       update();
 
       helpTypeTitle = getTitleFromHelpType(helpType);
