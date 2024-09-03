@@ -21,23 +21,7 @@ class WelcomeView extends GetView {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                32.width,
-                Image.asset(AppImages.logo),
-                GestureDetector(
-                  onTap: () {
-
-                  },
-                  child: Padding(
-                    padding: EdgeInsets.only(right: 16.w),
-                    child: const CustomImage(imageSrc: AppImages.translateIcon),
-                  ),
-                ),
-              ],
-            ),
+            Image.asset(AppImages.logo),
             sh20,
             Column(
               children: [

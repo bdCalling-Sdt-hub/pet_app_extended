@@ -110,7 +110,8 @@ class MessageView extends GetView<MessageController> {
                                               ? true
                                               : false),
                                 if (chatDataItems.text == "") sh10,
-                                helpTypeCard(
+                                if(controller.isPetSafe.value)
+                                  helpTypeCard(
                                     helpTypeIcon: AppImages.petSaveIcon,
                                     helpTypeTitle: "Pets Are Safe".tr,
                                     alignment: Alignment.centerRight,

@@ -29,6 +29,7 @@ class MessageController extends GetxController {
   void increment() => count.value++;
   RxBool isStyle = false.obs;
   RxBool isInformation = true.obs;
+  RxBool isPetSafe = false.obs;
 
 
   static String helpType = "";

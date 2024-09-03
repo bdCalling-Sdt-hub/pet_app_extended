@@ -32,7 +32,7 @@ class GroupsNContactsController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    getGroupsRepo();
+    // getGroupsRepo();
     getContactsRepo();
     filteredContacts = contactsList;
   }
@@ -126,10 +126,10 @@ class GroupsNContactsController extends GetxController {
       'Authorization': PrefsHelper.token,
     };
 
+    print.log("Get groups response---------------------------->>>>");
     var response = await ApiService.getApi(AppUrls.myGroups, header: header);
 
     if (response.statusCode == 200) {
-      print.log("Get groups response---------------------------->>>>");
       var data = jsonDecode(response.body)['data'];
 
       for (var item in data) {
