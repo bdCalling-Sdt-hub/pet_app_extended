@@ -1,4 +1,3 @@
-
 import 'package:felpus/controllers/signup_controller.dart';
 import 'package:felpus/extensions/extension.dart';
 import 'package:felpus/helpers/validator_helper.dart';
@@ -13,7 +12,6 @@ import 'package:felpus/views/screens/login/login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:felpus/views/components/custom_auth_appbar.dart';
 import 'package:get/get.dart';
-
 
 class SignupView extends StatelessWidget {
   SignupView({super.key});
@@ -34,47 +32,47 @@ class SignupView extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(
-                      "Welcome Here!",
+                      "Welcome Here!".tr,
                       style: h3.copyWith(
                         fontSize: 30,
                       ),
                       textAlign: TextAlign.center,
                     ),
                     Text(
-                      "Create An Account.",
+                      "Create An Account.".tr,
                       style:
-                          h3.copyWith(fontSize: 30, color: AppColors.mainColor),
+                      h3.copyWith(fontSize: 30, color: AppColors.mainColor),
                       textAlign: TextAlign.center,
                     ),
                     sh5,
                     Text(
-                      "Fill up your information.",
+                      "Fill up your information.".tr,
                       style: h4,
                       textAlign: TextAlign.center,
                     ),
                     sh50,
                     CustomTextFormField(
-                        title: "Email",
+                        title: "Email".tr,
                         validator: ValidatorHelper.emailValidator,
                         controller: signUpController.emailController,
                         keyboardType: TextInputType.emailAddress,
-                        hintText: "Enter your email"),
+                        hintText: "Enter your email".tr),
                     16.height,
                     CustomTextFormField(
-                      title: "Password",
+                      title: "Password".tr,
                       validator: ValidatorHelper.passwordValidator,
                       controller: signUpController.passwordController,
-                      hintText: "Enter your password",
+                      hintText: "Enter your password".tr,
                       isPassword: true,
                     ),
                     16.height,
                     CustomTextFormField(
-                      title: "Confirm Password",
+                      title: "Confirm Password".tr,
                       validator: (value) =>
                           ValidatorHelper.confirmPasswordValidator(
                               value, signUpController.passwordController),
                       controller: signUpController.confirmPasswordController,
-                      hintText: "Re-enter your password",
+                      hintText: "Re-enter your password".tr,
                       isPassword: true,
                     ),
                     sh5,
@@ -85,8 +83,7 @@ class SignupView extends StatelessWidget {
                           Row(
                             children: [
                               Obx(
-                                () => Checkbox(
-                                  //  title: Text('Remember Me',style: h4,),
+                                    () => Checkbox(
                                   checkColor: AppColors.white,
                                   activeColor: AppColors.grayLight,
                                   shape: RoundedRectangleBorder(
@@ -100,14 +97,14 @@ class SignupView extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                "Agree with",
+                                "Agree with".tr,
                                 style: h3,
                               )
                             ],
                           ),
                           sw5,
                           Text(
-                            "Terms and Services.",
+                            "Terms and Services.".tr,
                             style: h4,
                           )
                         ],
@@ -117,33 +114,33 @@ class SignupView extends StatelessWidget {
                     signUpController.isLoading
                         ? const CustomLoader()
                         : CustomButton(
-                            onTap: () {
-                              if (_formKey.currentState!.validate() &&
-                                  signUpController.isChecked.value) {
-                                signUpController.startTimer();
-                                signUpController.signUpRepo();
-                              } else {
-                                Utils.snackBarErrorMessage(
-                                    "You must agree with terms and services",
-                                    "");
-                              }
-                            },
-                            title: "Sign Up",
-                            width: Get.width,
-                            color: AppColors.mainColor),
+                        onTap: () {
+                          if (_formKey.currentState!.validate() &&
+                              signUpController.isChecked.value) {
+                            signUpController.startTimer();
+                            signUpController.signUpRepo();
+                          } else {
+                            Utils.snackBarErrorMessage(
+                                "You must agree with terms and services".tr,
+                                "");
+                          }
+                        },
+                        title: "Sign Up".tr,
+                        width: Get.width,
+                        color: AppColors.mainColor),
                     sh10,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Already have an account?",
+                          "Already have an account?".tr,
                           style: h4,
                         ),
                         sw5,
                         InkWell(
                             onTap: () => Get.to(() => LoginView()),
                             child: Text(
-                              "Sign In",
+                              "Sign In".tr,
                               style: h3,
                             )),
                       ],

@@ -22,7 +22,7 @@ class MyPetsView extends GetView {
       appBar: AppBar(
         backgroundColor: AppColors.white,
         title: Text(
-          'My Pets',
+          'My Pets'.tr,
           style: h2.copyWith(fontSize: 22, color: AppColors.mainColor),
         ),
         centerTitle: true,

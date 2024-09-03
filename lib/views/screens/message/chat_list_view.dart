@@ -1,4 +1,3 @@
-
 import 'package:felpus/views/components/custom_loader.dart';
 import 'package:felpus/views/components/custom_textfelid.dart';
 import 'package:flutter/material.dart';
@@ -21,13 +20,13 @@ class ChatListView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: InkWell(
-          onTap: () {
-            Get.back();
-          },
+            onTap: () {
+              Get.back();
+            },
             child: const Icon(Icons.arrow_back_ios, size: 20,)),
         centerTitle: true,
         title: Text(
-          "Messages",
+          "Messages".tr,
           style: h1,
         ),
       ),
@@ -37,7 +36,7 @@ class ChatListView extends StatelessWidget {
           child: Obx(() {
             return Column(
               children: [
-                CustomTextField(title: "", hintText: "Search your message", width: Get.width, sufIcon: Icon(Icons.search),),
+                CustomTextField(title: "", hintText: "Search your message".tr, width: Get.width, sufIcon: Icon(Icons.search),),
                 sh10,
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -60,7 +59,7 @@ class ChatListView extends StatelessWidget {
                                 : AppColors.pink,
                             borderRadius: BorderRadius.circular(4),
                           ),
-                          child: Text("Conversation", style: h2.copyWith(fontSize: 20, color: controller.isInformation.value? AppColors.white : AppColors.black),),
+                          child: Text("Conversation".tr, style: h2.copyWith(fontSize: 20, color: controller.isInformation.value? AppColors.white : AppColors.black),),
                         ),
                       ),
                       const Spacer(),
@@ -81,7 +80,7 @@ class ChatListView extends StatelessWidget {
                                 ? AppColors.mainColor
                                 : AppColors.pink,
                           ),
-                          child: Text("Archived", style: h2.copyWith(fontSize: 20, color: controller.isStyle.value? AppColors.white : AppColors.black),),
+                          child: Text("Archived".tr, style: h2.copyWith(fontSize: 20, color: controller.isStyle.value? AppColors.white : AppColors.black),),
                         ),
                       ),
                     ],
@@ -107,7 +106,7 @@ class ChatListView extends StatelessWidget {
                           image: chatUserDetails.type == "single"? chatUserDetails.partner.photo : chatUserDetails.photo,
                           name: chatUserDetails.type == "single"? chatUserDetails.partner.fullName : chatUserDetails.groupName,
                           message: chatUserDetails.lastMessage,
-                          time: "10 :15",
+                          time: "10 :15".tr,
                           numberOfMessages: 5,
                         ),
                       );
@@ -124,9 +123,9 @@ class ChatListView extends StatelessWidget {
                         },
                         child: ChatListItem(
                           image: "https://shorturl.at/2iMPa",
-                          name: "Henry",
-                          message: "You: I got my pet",
-                          time: "10 :15",
+                          name: "Henry".tr,
+                          message: "You: I got my pet".tr,
+                          time: "10 :15".tr,
                           numberOfMessages: 5,
                           isArchived: true,
                         ),

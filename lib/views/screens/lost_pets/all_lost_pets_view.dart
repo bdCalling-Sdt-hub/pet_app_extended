@@ -1,4 +1,3 @@
-import 'package:felpus/controllers/home_controller.dart';
 import 'package:felpus/controllers/lost_pets_controller.dart';
 import 'package:felpus/controllers/pet_details_controller.dart';
 import 'package:felpus/services/ads_service.dart';
@@ -10,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-import '../../../models/pet_model.dart';
 import '../../../utils/app_color/app_colors.dart';
 import '../../../utils/app_images/app_images.dart';
 import '../../../utils/app_text_style/styles.dart';
@@ -41,7 +39,7 @@ class AllLostPetsView extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: AppColors.white,
         title: Text(
-          'Lost Pets',
+          'Lost Pets'.tr,
           style: h2.copyWith(fontSize: 22, color: AppColors.mainColor),
         ),
         centerTitle: true,
@@ -100,14 +98,14 @@ class AllLostPetsView extends StatelessWidget {
                     );
         },
       ),
-      bottomNavigationBar:  Obx(() {
+      bottomNavigationBar: Obx(() {
         return AdsServices.isBannerAdReady.value
             ? Container(
-          alignment: Alignment.center,
-          width: AdsServices.bannerAdSecond.size.width.toDouble(),
-          height: AdsServices.bannerAdSecond.size.height.toDouble(),
-          child: AdWidget(ad: AdsServices.bannerAdSecond),
-        )
+                alignment: Alignment.center,
+                width: AdsServices.bannerAdSecond.size.width.toDouble(),
+                height: AdsServices.bannerAdSecond.size.height.toDouble(),
+                child: AdWidget(ad: AdsServices.bannerAdSecond),
+              )
             : const SizedBox();
       }),
     );

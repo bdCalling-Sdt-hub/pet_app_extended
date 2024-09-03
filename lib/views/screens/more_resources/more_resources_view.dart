@@ -12,13 +12,13 @@ class MoreResourcesView extends GetView<MoreResourcesController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('MoreResourcesView'),
+        title:  Text('MoreResourcesView'.tr),
         centerTitle: true,
       ),
 
-      body: const Center(
+      body:  Center(
         child: Text(
-          'MoreResourcesView is working',
+          'MoreResourcesView is working'.tr,
           style: TextStyle(fontSize: 20),
         ),
       ),

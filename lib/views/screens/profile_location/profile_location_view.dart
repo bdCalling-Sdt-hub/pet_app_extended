@@ -1,7 +1,5 @@
-
 import 'package:felpus/views/components/custom_loader.dart';
 import 'package:felpus/controllers/profile_location_controllers/map_controller.dart';
-import 'package:felpus/controllers/profile_location_controllers/profile_location_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
@@ -17,8 +15,6 @@ import '../../../views/components/custom_auth_appbar.dart';
 import '../../../views/components/custom_button.dart';
 import '../../../views/components/custom_textfelid.dart';
 import '../dashboard/dashboard_view.dart';
-
-
 
 class ProfileLocationView extends StatelessWidget{
   ProfileLocationView({super.key});
@@ -42,20 +38,19 @@ class ProfileLocationView extends StatelessWidget{
               Center(
                 child: Column(
                   children: [
-                    Text("Add Your",style:  h3.copyWith(fontSize: 30,),textAlign: TextAlign.center,),
-                    Text("Location.",style:  h3.copyWith(fontSize: 30,color: AppColors.mainColor),textAlign: TextAlign.center,),
+                    Text("Add Your".tr,style:  h3.copyWith(fontSize: 30,),textAlign: TextAlign.center,),
+                    Text("Location.".tr,style:  h3.copyWith(fontSize: 30,color: AppColors.mainColor),textAlign: TextAlign.center,),
                     sh5,
-                    Text("You can edit this later in your account setting.",style:  h4,textAlign: TextAlign.center,),
+                    Text("You can edit this later in your account setting.".tr,style:  h4,textAlign: TextAlign.center,),
                   ],
                 ),
               ),
               sh15,
               Container(
-                // padding: EdgeInsets.symmetric(horizontal: 20),
                 height: 350,
                 width: Get.width,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(24)
+                    borderRadius: BorderRadius.circular(24)
                 ),
                 child: Obx(() => GoogleMap(
                   initialCameraPosition: mapController.kGooglePlex ?? mapController.initialCameraPosition,
@@ -104,15 +99,15 @@ class ProfileLocationView extends StatelessWidget{
                 ),),
               ),
               sh5,
-              Text("Select on map",style:  h4,textAlign: TextAlign.center,),
+              Text("Select on map".tr,style:  h4,textAlign: TextAlign.center,),
               CustomTextField(
                 controller: completeProfileController.locationController,
-                title: "", width: Get.width,hintText: "Location details", preIcon: const Icon(Icons.location_on, color: AppColors.hintColor,),),
+                title: "", width: Get.width,hintText: "Location details".tr, preIcon: const Icon(Icons.location_on, color: AppColors.hintColor,),),
               sh10,
               completeProfileController.isLoading? const CustomLoader():
               CustomButton(onTap: () {
                 completeProfileController.updateProfileRepo();
-                },title: "Next", width: Get.width, color: AppColors.mainColor,),
+              },title: "Next".tr, width: Get.width, color: AppColors.mainColor,),
               sh10,
 
             ],
@@ -142,14 +137,14 @@ class ProfileLocationView extends StatelessWidget{
               ),
               Image.asset(AppImages.success,scale: 4,),
               sh10,
-              Text("Your Account Has Been",style:  h3.copyWith(fontSize: 26,),textAlign: TextAlign.center,),
-              Text("Successfully Completed.",style:  h3.copyWith(fontSize: 26,color: AppColors.mainColor),textAlign: TextAlign.center,),
+              Text("Your Account Has Been".tr,style:  h3.copyWith(fontSize: 26,),textAlign: TextAlign.center,),
+              Text("Successfully Completed.".tr,style:  h3.copyWith(fontSize: 26,color: AppColors.mainColor),textAlign: TextAlign.center,),
               sh50,
               CustomButton(
-                  onTap: () => Get.to(() => DashboardView()),
-                  title: "Finish",
-                  width: Get.width,
-                  color: AppColors.mainColor,
+                onTap: () => Get.to(() => DashboardView()),
+                title: "Finish".tr,
+                width: Get.width,
+                color: AppColors.mainColor,
               ),
               sh10,
             ],

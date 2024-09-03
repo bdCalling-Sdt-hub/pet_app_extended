@@ -1,7 +1,6 @@
 
 import 'package:felpus/extensions/extension.dart';
 import 'package:felpus/services/ads_service.dart';
-import 'package:felpus/views/components/custom_button.dart';
 import 'package:felpus/views/components/custom_container_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,7 +10,6 @@ import '../../../../Controllers/common_controller/setting/delete_account_control
 import '../../../helpers/prefs_helper.dart';
 import '../../../utils/app_color/app_colors.dart';
 import '../../screens/login/login_view.dart';
-import '../custom_image.dart';
 import '../custom_loader.dart';
 import '../custom_text.dart';
 

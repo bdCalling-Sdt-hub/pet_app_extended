@@ -41,7 +41,7 @@ Padding petsList({required PetModel pet}) {
                     ),
                     4 .width,
                     Text(
-                      "${pet.age} years",
+                      "${pet.age} ${"years".tr}",
                       style: h4.copyWith(fontSize: 13),
                     ),
                   ],

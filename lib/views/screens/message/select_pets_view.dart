@@ -32,7 +32,7 @@ class _SelectPetsViewState extends State<SelectPetsView> {
       appBar: AppBar(
         backgroundColor: AppColors.white,
         title: Text(
-          'Select Pets',
+          'Select Pets'.tr,
           style: h2.copyWith(fontSize: 26, color: AppColors.black),
         ),
         centerTitle: true,

@@ -2,7 +2,6 @@
 import 'package:felpus/extensions/extension.dart';
 import 'package:felpus/views/components/custom_image.dart';
 import 'package:felpus/views/components/custom_loader.dart';
-import 'package:felpus/views/components/custom_text.dart';
 import 'package:felpus/views/components/person_info_custom_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

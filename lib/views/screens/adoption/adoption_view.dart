@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import '../../../models/pet_model.dart';
 import '../../../controllers/adoption_controller.dart';
 import '../../../utils/app_color/app_colors.dart';
 import '../../../utils/app_images/app_images.dart';
@@ -30,7 +29,7 @@ class AdoptionView extends GetView<AdoptionController> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: AppColors.white,
-        title:  Text('Adoption',style: h2.copyWith(fontSize: 22,color: AppColors.mainColor),),
+        title:  Text('Adoption'.tr,style: h2.copyWith(fontSize: 22,color: AppColors.mainColor),),
         centerTitle: true,
         actions: [
           GestureDetector(
@@ -77,7 +76,7 @@ class AdoptionView extends GetView<AdoptionController> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Image.asset(AppImages.favorite,scale: 2,color: AppColors.black,),
-                            Text("Add a pet for\n adoption",style: h3,textAlign: TextAlign.center,)
+                            Text("Add a pet for adoption".tr,style: h3,textAlign: TextAlign.center,)
 
                           ],
                         ),
@@ -89,14 +88,14 @@ class AdoptionView extends GetView<AdoptionController> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Pets For Adoption",
+                        "Pets For Adoption".tr,
                         style: h2.copyWith(
                             fontSize: 20, color: AppColors.mainColor),
                       ),
                       GestureDetector(
                         onTap: () => Get.to(() => AllAdoptionPetsView()),
                         child: Text(
-                          "See all",
+                          "See all".tr,
                           style:
                           h2.copyWith(fontSize: 18, color: AppColors.ash),
                         ),

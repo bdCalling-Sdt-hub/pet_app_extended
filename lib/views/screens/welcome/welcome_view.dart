@@ -19,73 +19,73 @@ class WelcomeView extends GetView {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            32.width,
-            Image.asset(AppImages.logo),
-            GestureDetector(
-              onTap: () {
-
-              },
-              child: Padding(
-                padding: EdgeInsets.only(right: 16.w),
-                child: const CustomImage(imageSrc: AppImages.translateIcon),
-              ),
-            ),
-          ],
-        ),
-        sh20,
-        Column(
-          children: [
-            Text(
-              "Now continue after",
-              style: h3.copyWith(
-                fontSize: 30,
-              ),
-              textAlign: TextAlign.center,
-            ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  "register in",
-                  style: h3.copyWith(fontSize: 30),
-                  textAlign: TextAlign.center,
-                ),
-                sw10,
-                Text(
-                  "Felpus.",
-                  style: h3.copyWith(fontSize: 30, color: AppColors.mainColor),
-                  textAlign: TextAlign.center,
+                32.width,
+                Image.asset(AppImages.logo),
+                GestureDetector(
+                  onTap: () {
+
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.only(right: 16.w),
+                    child: const CustomImage(imageSrc: AppImages.translateIcon),
+                  ),
                 ),
               ],
-            )
+            ),
+            sh20,
+            Column(
+              children: [
+                Text(
+                  "Now continue after".tr,
+                  style: h3.copyWith(
+                    fontSize: 30,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "register in".tr,
+                      style: h3.copyWith(fontSize: 30),
+                      textAlign: TextAlign.center,
+                    ),
+                    sw10,
+                    Text(
+                      "Felpus.".tr,
+                      style: h3.copyWith(fontSize: 30, color: AppColors.mainColor),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                )
+              ],
+            ),
+            sh50,
+            Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                child: Image.asset(AppImages.welcomeImg)),
+            sh20,
+            CustomButton(
+                onTap: () => Get.to(() => LoginView()),
+                title: "Sign In".tr,
+                width: Get.width / 1.2,
+                color: AppColors.mainColor),
+            sh15,
+            CustomButton(
+              onTap: () => Get.to(() => SignupView()),
+              title: "Sign Up".tr,
+              width: Get.width / 1.2,
+              color: AppColors.white,
+              borderColor: AppColors.mainColor,
+              titleColor: AppColors.black,
+            ),
           ],
-        ),
-        sh50,
-        Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12),
-            child: Image.asset(AppImages.welcomeImg)),
-        sh20,
-        CustomButton(
-            onTap: () => Get.to(() => LoginView()),
-            title: "Sign In",
-            width: Get.width / 1.2,
-            color: AppColors.mainColor),
-        sh15,
-        CustomButton(
-          onTap: () => Get.to(() => SignupView()),
-          title: "Sign Up",
-          width: Get.width / 1.2,
-          color: AppColors.white,
-          borderColor: AppColors.mainColor,
-          titleColor: AppColors.black,
-        ),
-      ],
-    ));
+        ));
   }
 }

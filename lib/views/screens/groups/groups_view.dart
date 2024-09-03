@@ -24,11 +24,11 @@ class GroupsView extends GetView<GroupsNContactsController> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: AppColors.white,
-        title: Text('Groups',style: h2.copyWith(fontSize: 26,color: AppColors.mainColor),),
+        title: Text('Groups'.tr, style: h2.copyWith(fontSize: 26, color: AppColors.mainColor)),
         centerTitle: true,
         actions: [
           GestureDetector(
-            onTap: () => Get.to(() => const NotificationsView(),),
+            onTap: () => Get.to(() => const NotificationsView()),
             child: Image.asset(
               AppImages.notification,
               scale: 4,
@@ -37,8 +37,7 @@ class GroupsView extends GetView<GroupsNContactsController> {
           sw15,
           ClipRRect(
               borderRadius: BorderRadius.circular(100),
-              child: CustomImage(imageSrc: PrefsHelper.userImageUrl, imageType: ImageType.network,  height: 40,
-                width: 40,)),
+              child: CustomImage(imageSrc: PrefsHelper.userImageUrl, imageType: ImageType.network, height: 40, width: 40)),
           sw10,
         ],
       ),
@@ -48,122 +47,118 @@ class GroupsView extends GetView<GroupsNContactsController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-            sh10,
-            DottedBorder(
-              color: AppColors.black,
-              strokeWidth: 1,
-              dashPattern: const [6, 6],
-              borderType: BorderType.RRect,
-              radius: const Radius.circular(10),
-              child: GestureDetector(
-                onTap: () => Get.to(() => const CreateGroupView(),),
-                child: Container(
-                  height: 110,
-                  width: Get.width,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    // border: Border.all(color: AppColors.black,style: BorderStyle.solid)
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(Icons.add_circle,size: 50,),
-                      Text("Create a new Group",style: h3,textAlign: TextAlign.center,)
-
-                    ],
+              sh10,
+              DottedBorder(
+                color: AppColors.black,
+                strokeWidth: 1,
+                dashPattern: const [6, 6],
+                borderType: BorderType.RRect,
+                radius: const Radius.circular(10),
+                child: GestureDetector(
+                  onTap: () => Get.to(() => const CreateGroupView()),
+                  child: Container(
+                    height: 110,
+                    width: Get.width,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(Icons.add_circle, size: 50),
+                        Text("Create a new Group".tr, style: h3, textAlign: TextAlign.center)
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-            sh5,
-            Text('Your Groups',style: h2.copyWith(fontSize: 20,color: AppColors.mainColor),),
-            sh10,
-            controller.isGettingGroups? const CustomLoader() : controller.groupsList.isEmpty? const NoData() : SizedBox(
-              height: 76,
-              child: ListView.builder(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: controller.groupsList.length,
-                  itemBuilder: (context, index) {
-                    var groupItems = controller.groupsList[index];
-                    return Padding(
-                      padding:
-                      const EdgeInsets.symmetric(horizontal: 7.0),
-                      child: Container(
-                        height: 76.h,
-                        width: 108.w,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: AppColors.olive
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 10.0, vertical: 10),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                groupItems.groupName,
-                                style: h1.copyWith(fontSize: 14),
-                                maxLines: 1,
-                              ),
-                              Text(
-                                "${groupItems.participants.length} Members",
-                                style: h3.copyWith(fontSize: 14),
-                              ),
-                            ],
+              sh5,
+              Text('Your Groups'.tr, style: h2.copyWith(fontSize: 20, color: AppColors.mainColor)),
+              sh10,
+              controller.isGettingGroups
+                  ? const CustomLoader()
+                  : controller.groupsList.isEmpty
+                  ? const NoData()
+                  : SizedBox(
+                height: 76,
+                child: ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: controller.groupsList.length,
+                    itemBuilder: (context, index) {
+                      var groupItems = controller.groupsList[index];
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 7.0),
+                        child: Container(
+                          height: 76.h,
+                          width: 108.w,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10), color: AppColors.olive),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  groupItems.groupName,
+                                  style: h1.copyWith(fontSize: 14),
+                                  maxLines: 1,
+                                ),
+                                Text(
+                                  "${groupItems.participants.length} Members".tr,
+                                  style: h3.copyWith(fontSize: 14),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    );
-                  }),
-            ),
-            sh5,
-            Text('Contacts',style: h2.copyWith(fontSize: 20,color: AppColors.mainColor),),
-            sh10,
-            controller.isLoading? const CustomLoader() : controller.contactsList.isEmpty? const NoData() : Flexible(
-              child: GridView.builder(
-                  shrinkWrap: true,
-                  itemCount: controller.contactsList.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3,
-                      crossAxisSpacing: 8.0,
-                      mainAxisSpacing: 18.0,
-                      mainAxisExtent: 45
-                  ),
-                  // physics: NeverScrollableScrollPhysics(),
-                  itemBuilder: (context,index){
-                    return Padding(
-                      padding:
-                      const EdgeInsets.symmetric(horizontal: 15.0),
-                      child: controller.contactsList[index].phone.isEmpty? const SizedBox() : InkWell(
-                        onTap: (){
-                          FlutterPhoneDirectCaller.callNumber(controller.contactsList[index].phone);
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(25),
-                              color: AppColors.lowGray),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 10.0, vertical: 10),
-                            child: Center(
-                              child: Text(
-                                controller.contactsList[index].fullName,
-                                style: h2.copyWith(fontSize: 14,color:  AppColors.black),
+                      );
+                    }),
+              ),
+              sh5,
+              Text('Contacts'.tr, style: h2.copyWith(fontSize: 20, color: AppColors.mainColor)),
+              sh10,
+              controller.isLoading
+                  ? const CustomLoader()
+                  : controller.contactsList.isEmpty
+                  ? const NoData()
+                  : Flexible(
+                child: GridView.builder(
+                    shrinkWrap: true,
+                    itemCount: controller.contactsList.length,
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3, crossAxisSpacing: 8.0, mainAxisSpacing: 18.0, mainAxisExtent: 45),
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                        child: controller.contactsList[index].phone.isEmpty
+                            ? const SizedBox()
+                            : InkWell(
+                          onTap: () {
+                            FlutterPhoneDirectCaller.callNumber(
+                                controller.contactsList[index].phone);
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(25), color: AppColors.lowGray),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
+                              child: Center(
+                                child: Text(
+                                  controller.contactsList[index].fullName,
+                                  style: h2.copyWith(fontSize: 14, color: AppColors.black),
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                    );
-                  }
-              ),
-            )
+                      );
+                    }),
+              )
             ],
           ),
         );
-      },)
+      }),
     );
   }
 }

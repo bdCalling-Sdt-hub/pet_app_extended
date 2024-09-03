@@ -1,5 +1,4 @@
 import 'package:felpus/controllers/found_pets_controller.dart';
-import 'package:felpus/controllers/home_controller.dart';
 import 'package:felpus/controllers/pet_details_controller.dart';
 import 'package:felpus/services/ads_service.dart';
 import 'package:felpus/views/components/custom_loader.dart';
@@ -9,7 +8,6 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import '../../../models/pet_model.dart';
 import '../../../utils/app_color/app_colors.dart';
 import '../../../utils/app_images/app_images.dart';
 import '../../../utils/app_text_style/styles.dart';
@@ -41,7 +39,7 @@ class AllFoundPetsView extends GetView {
       appBar: AppBar(
         backgroundColor: AppColors.white,
         title: Text(
-          'Found Pets',
+          'Found Pets'.tr,
           style: h2.copyWith(fontSize: 22, color: AppColors.mainColor),
         ),
         centerTitle: true,

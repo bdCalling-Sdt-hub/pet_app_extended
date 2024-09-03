@@ -33,8 +33,8 @@ class _CreateLostPetViewState extends State<CreateLostPetView> {
         appBar: AppBar(
           backgroundColor: AppColors.white,
           title: Text(
-            CreateLostPetView.isUpdate? "Update Your Pet Card" :
-            'Create Lost Pet Card',
+            CreateLostPetView.isUpdate ? "Update Your Pet Card".tr :
+            'Create Lost Pet Card'.tr,
             style: h2.copyWith(fontSize: 20, color: AppColors.mainColor),
           ),
           centerTitle: true,
@@ -71,7 +71,7 @@ class _CreateLostPetViewState extends State<CreateLostPetView> {
                               .map<DropdownMenuItem<String>>((String value) {
                             return DropdownMenuItem<String>(
                               value: value,
-                              child: Text(value),
+                              child: Text(value.tr),
                             );
                           }).toList(),
                         ),
@@ -80,117 +80,117 @@ class _CreateLostPetViewState extends State<CreateLostPetView> {
                     sh10,
                     controller.image == null
                         ? GestureDetector(
-                            onTap: controller.selectImage,
-                            child: Container(
-                              height: 110,
-                              width: Get.width,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  border: Border.all(
-                                      color: AppColors.gray,
-                                      style: BorderStyle.solid,
-                                      width: 1)),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image.asset(
-                                    AppImages.photo,
-                                    scale: 4,
-                                    color: AppColors.black,
-                                  ),
-                                  Text(
-                                    "Upload a picture of your pet",
-                                    style: h3,
-                                    textAlign: TextAlign.center,
-                                  )
-                                ],
-                              ),
+                      onTap: controller.selectImage,
+                      child: Container(
+                        height: 110,
+                        width: Get.width,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(
+                                color: AppColors.gray,
+                                style: BorderStyle.solid,
+                                width: 1)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              AppImages.photo,
+                              scale: 4,
+                              color: AppColors.black,
                             ),
-                          )
+                            Text(
+                              "Upload a picture of your pet".tr,
+                              style: h3,
+                              textAlign: TextAlign.center,
+                            )
+                          ],
+                        ),
+                      ),
+                    )
                         : GestureDetector(
-                            onTap: controller.selectImage,
-                            child: Container(
-                                height: 110,
-                                width: Get.width,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    border: Border.all(
-                                        color: AppColors.gray,
-                                        style: BorderStyle.solid,
-                                        width: 1)),
-                                child: ClipOval(
-                                    child:
-                                        Image.file(File(controller.image!)))),
-                          ),
+                      onTap: controller.selectImage,
+                      child: Container(
+                          height: 110,
+                          width: Get.width,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(
+                                  color: AppColors.gray,
+                                  style: BorderStyle.solid,
+                                  width: 1)),
+                          child: ClipOval(
+                              child:
+                              Image.file(File(controller.image!)))),
+                    ),
                     sh10,
                     CustomTextFormField(
-                      title: "Name",
-                      hintText: CreateLostPetView.isUpdate? CreateLostPetView.petListDetails.petName : "Enter your pet’s name.",
+                      title: "Name".tr,
+                      hintText: CreateLostPetView.isUpdate ? CreateLostPetView.petListDetails.petName : "Enter your pet’s name.".tr,
                       horizontalPadding: 0,
                       validator: ValidatorHelper.validator,
                       controller: controller.nameController,
                     ),
                     12.height,
                     CustomTextFormField(
-                      title: "Age",
-                      hintText: CreateLostPetView.isUpdate? CreateLostPetView.petListDetails.age : "Enter your pet’s age.",
+                      title: "Age".tr,
+                      hintText: CreateLostPetView.isUpdate ? CreateLostPetView.petListDetails.age : "Enter your pet’s age.".tr,
                       horizontalPadding: 0,
                       validator: ValidatorHelper.validator,
                       controller: controller.ageController,
                     ),
                     12.height,
                     CustomTextFormField(
-                      title: "Breed",
-                      hintText: CreateLostPetView.isUpdate? CreateLostPetView.petListDetails.breed :"What breed is your pet?",
+                      title: "Breed".tr,
+                      hintText: CreateLostPetView.isUpdate ? CreateLostPetView.petListDetails.breed :"What breed is your pet?".tr,
                       horizontalPadding: 0,
                       validator: ValidatorHelper.validator,
                       controller: controller.breedController,
                     ),
                     12.height,
                     CustomTextFormField(
-                      title: "Gender",
-                      hintText: CreateLostPetView.isUpdate? CreateLostPetView.petListDetails.sex :"What is your pet's gender?",
+                      title: "Gender".tr,
+                      hintText: CreateLostPetView.isUpdate ? CreateLostPetView.petListDetails.sex :"What is your pet's gender?".tr,
                       horizontalPadding: 0,
                       validator: ValidatorHelper.validator,
                       controller: controller.genderController,
                     ),
                     12.height,
                     CustomTextFormField(
-                      title: "Color",
-                      hintText: CreateLostPetView.isUpdate? CreateLostPetView.petListDetails.color :"What is your pet's color?",
+                      title: "Color".tr,
+                      hintText: CreateLostPetView.isUpdate ? CreateLostPetView.petListDetails.color :"What is your pet's color?".tr,
                       horizontalPadding: 0,
                       validator: ValidatorHelper.validator,
                       controller: controller.colorController,
                     ),
                     12.height,
                     CustomTextFormField(
-                      title: "Weight",
-                      hintText: CreateLostPetView.isUpdate? CreateLostPetView.petListDetails.weight :"What is your pet's weight?",
+                      title: "Weight".tr,
+                      hintText: CreateLostPetView.isUpdate ? CreateLostPetView.petListDetails.weight :"What is your pet's weight?".tr,
                       horizontalPadding: 0,
                       validator: ValidatorHelper.validator,
                       controller: controller.weightController,
                     ),
                     12.height,
                     CustomTextFormField(
-                      title: "Address",
-                      hintText: CreateLostPetView.isUpdate? CreateLostPetView.petListDetails.address :"Enter your address.",
+                      title: "Address".tr,
+                      hintText: CreateLostPetView.isUpdate ? CreateLostPetView.petListDetails.address :"Enter your address.".tr,
                       horizontalPadding: 0,
                       validator: ValidatorHelper.validator,
                       controller: controller.addressController,
                     ),
                     12.height,
                     CustomTextFormField(
-                      title: "Microchip Number",
+                      title: "Microchip Number".tr,
                       optional: true,
-                      hintText: CreateLostPetView.isUpdate? CreateLostPetView.petListDetails.microchipNumber :"Enter your pets microchip number",
+                      hintText: CreateLostPetView.isUpdate ? CreateLostPetView.petListDetails.microchipNumber :"Enter your pets microchip number".tr,
                       horizontalPadding: 0,
                       validator: ValidatorHelper.validator,
                       controller: controller.microchipNumberController,
                     ),
                     12.height,
                     CustomTextFormField(
-                      title: "Description",
-                      hintText: CreateLostPetView.isUpdate? CreateLostPetView.petListDetails.description :"Write a short description about your pet",
+                      title: "Description".tr,
+                      hintText: CreateLostPetView.isUpdate ? CreateLostPetView.petListDetails.description :"Write a short description about your pet".tr,
                       horizontalPadding: 0,
                       validator: ValidatorHelper.validator,
                       controller: controller.descriptionController,
@@ -199,20 +199,20 @@ class _CreateLostPetViewState extends State<CreateLostPetView> {
                     controller.isLoading
                         ? const CustomLoader()
                         : CustomContainerButton(
-                            text: CreateLostPetView.isUpdate? "Update" : "Create Pet Card",
-                            width: Get.width,
-                            backgroundColor: AppColors.mainColor,
-                            height: 42,
-                            onTap: () {
-                              if(CreateLostPetView.isUpdate){
-                                controller.updatePetDetailsRepo(petId: CreateLostPetView.petListDetails.id);
-                              }else{
-                                if (formKey.currentState!.validate()) {
-                                  controller.addPetsRepo(forPets: "lost");
-                                }
-                              }
-                            },
-                          ),
+                      text: CreateLostPetView.isUpdate ? "Update".tr : "Create Pet Card".tr,
+                      width: Get.width,
+                      backgroundColor: AppColors.mainColor,
+                      height: 42,
+                      onTap: () {
+                        if(CreateLostPetView.isUpdate){
+                          controller.updatePetDetailsRepo(petId: CreateLostPetView.petListDetails.id);
+                        }else{
+                          if (formKey.currentState!.validate()) {
+                            controller.addPetsRepo(forPets: "lost");
+                          }
+                        }
+                      },
+                    ),
                     30.height,
                   ],
                 ),

@@ -24,170 +24,165 @@ class SettingsView extends GetView {
         appBar: AppBar(
           backgroundColor: AppColors.white,
           title: Text(
-            'Settings',
+            'Settings'.tr,
             style: h2.copyWith(fontSize: 20, color: AppColors.mainColor),
           ),
           centerTitle: true,
           leading: InkWell(
               onTap: () => Get.back(), child: const Icon(Icons.arrow_back_ios)),
         ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 14.0),
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 7.0),
-              child: GestureDetector(
-                onTap: (){
-                  Get.to(() => EditProfileView());
-                },
-                child: Container(
-                  height: 60,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    color: AppColors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 1,
-                        blurRadius: 3,
-                        offset: const Offset(0, 1),
-                      ),
-                    ],
-
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Image.asset(
-                          AppImages.editUser, scale: 2,
-                          fit: BoxFit.fill,
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 14.0),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 7.0),
+                child: GestureDetector(
+                  onTap: (){
+                    Get.to(() => EditProfileView());
+                  },
+                  child: Container(
+                    height: 60,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: AppColors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 1,
+                          blurRadius: 3,
+                          offset: const Offset(0, 1),
                         ),
-                        sw10,
-                        Text("Edit Profile",style: h2,),
                       ],
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Image.asset(
+                            AppImages.editUser, scale: 2,
+                            fit: BoxFit.fill,
+                          ),
+                          sw10,
+                          Text("Edit Profile".tr, style: h2),
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 7.0),
-              child: GestureDetector(
-                onTap: (){
-                  Get.to(() => PasswordChangeView());
-                },
-                child: Container(
-                  height: 60,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    color: AppColors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 1,
-                        blurRadius: 3,
-                        offset: const Offset(0, 1),
-                      ),
-                    ],
-
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Image.asset(
-                          AppImages.resetPassword,scale: 4,
-                          fit: BoxFit.fill,
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 7.0),
+                child: GestureDetector(
+                  onTap: (){
+                    Get.to(() => PasswordChangeView());
+                  },
+                  child: Container(
+                    height: 60,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: AppColors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 1,
+                          blurRadius: 3,
+                          offset: const Offset(0, 1),
                         ),
-                        12.width,
-                        Text("Change Password",style: h2,),
                       ],
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Image.asset(
+                            AppImages.resetPassword, scale: 4,
+                            fit: BoxFit.fill,
+                          ),
+                          12.width,
+                          Text("Change Password".tr, style: h2),
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 7.0),
-              child: GestureDetector(
-                onTap: (){
-                  Get.to(()=> ChangeLanguageScreen());
-                },
-                child: Container(
-                  height: 60,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    color: AppColors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 1,
-                        blurRadius: 3,
-                        offset: const Offset(0, 1),
-                      ),
-                    ],
-
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        CustomImage(imageSrc: AppImages.translateIcon, imageColor: AppColors.black,),
-                        12.width,
-                        Text("Change Language",style: h2,),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 7.0),
-              child: GestureDetector(
-                onTap: (){
-                  PopUp.deleteAccountPopUp();
-                  // Get.to(() => const PasswordChangeView());
-                },
-                child: Container(
-                  height: 60,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    color: AppColors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 1,
-                        blurRadius: 3,
-                        offset: const Offset(0, 1),
-                      ),
-                    ],
-
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Image.asset(
-                          AppImages.deleteIcon,scale: 2,
-                          fit: BoxFit.fill,
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 7.0),
+                child: GestureDetector(
+                  onTap: (){
+                    Get.to(()=> ChangeLanguageScreen());
+                  },
+                  child: Container(
+                    height: 60,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: AppColors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 1,
+                          blurRadius: 3,
+                          offset: const Offset(0, 1),
                         ),
-                        16.width,
-                        Text("Delete Account",style: h2,),
                       ],
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          CustomImage(imageSrc: AppImages.translateIcon, imageColor: AppColors.black),
+                          12.width,
+                          Text("Change Language".tr, style: h2),
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
-        ),
-      )
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 7.0),
+                child: GestureDetector(
+                  onTap: (){
+                    PopUp.deleteAccountPopUp();
+                  },
+                  child: Container(
+                    height: 60,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: AppColors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 1,
+                          blurRadius: 3,
+                          offset: const Offset(0, 1),
+                        ),
+                      ],
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Image.asset(
+                            AppImages.deleteIcon, scale: 2,
+                            fit: BoxFit.fill,
+                          ),
+                          16.width,
+                          Text("Delete Account".tr, style: h2),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        )
     );
   }
 }

@@ -2,21 +2,17 @@ import 'dart:io';
 import 'package:felpus/controllers/menu_controller.dart';
 import 'package:felpus/extensions/extension.dart';
 import 'package:felpus/helpers/validator_helper.dart';
-import 'package:felpus/views/components/custom_button.dart';
 import 'package:felpus/views/components/custom_container_button.dart';
 import 'package:felpus/views/components/custom_loader.dart';
 import 'package:felpus/views/components/custom_text_field.dart';
-import 'package:felpus/views/components/custom_textfelid.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import '../../../../helpers/image_picker.dart';
 import '../../../../utils/app_color/app_colors.dart';
 import '../../../../utils/app_images/app_images.dart';
 import '../../../../utils/app_text_style/styles.dart';
 import '../../../../utils/size_box/custom_sizebox.dart';
-
 
 class CreateFoundPetView extends StatefulWidget {
   const CreateFoundPetView({super.key});
@@ -37,7 +33,7 @@ class _CreateFoundPetViewState extends State<CreateFoundPetView> {
         appBar: AppBar(
           backgroundColor: AppColors.white,
           title: Text(
-            'Create Found Pet Card',
+            'Create Found Pet Card'.tr,
             style: h2.copyWith(fontSize: 20, color: AppColors.mainColor),
           ),
           centerTitle: true,
@@ -74,7 +70,7 @@ class _CreateFoundPetViewState extends State<CreateFoundPetView> {
                               .map<DropdownMenuItem<String>>((String value) {
                             return DropdownMenuItem<String>(
                               value: value,
-                              child: Text(value),
+                              child: Text(value.tr),
                             );
                           }).toList(),
                         ),
@@ -102,7 +98,7 @@ class _CreateFoundPetViewState extends State<CreateFoundPetView> {
                               color: AppColors.black,
                             ),
                             Text(
-                              "Upload a picture of your pet",
+                              "Upload a picture of your pet".tr,
                               style: h3,
                               textAlign: TextAlign.center,
                             )
@@ -122,77 +118,77 @@ class _CreateFoundPetViewState extends State<CreateFoundPetView> {
                                   style: BorderStyle.solid,
                                   width: 1)),
                           child: ClipOval(
-                              child:
-                              Image.file(File(controller.image!)))),
+                              child: Image.file(
+                                  File(controller.image!)))),
                     ),
                     sh10,
                     CustomTextFormField(
                       optional: true,
-                      title: "Name",
-                      hintText: "Enter your pet’s name.",
+                      title: "Name".tr,
+                      hintText: "Enter your pet’s name.".tr,
                       horizontalPadding: 0,
                       controller: controller.nameController,
                     ),
                     12.height,
                     CustomTextFormField(
                       optional: true,
-                      title: "Age",
-                      hintText: "Enter your pet’s age.",
+                      title: "Age".tr,
+                      hintText: "Enter your pet’s age.".tr,
                       horizontalPadding: 0,
                       controller: controller.ageController,
                     ),
                     12.height,
                     CustomTextFormField(
-                      title: "Breed",
-                      hintText: "What breed is your pet?",
+                      title: "Breed".tr,
+                      hintText: "What breed is your pet?".tr,
                       horizontalPadding: 0,
                       validator: ValidatorHelper.validator,
                       controller: controller.breedController,
                     ),
                     12.height,
                     CustomTextFormField(
-                      title: "Gender",
-                      hintText: "What is your pet's gender?",
+                      title: "Gender".tr,
+                      hintText: "What is your pet's gender?".tr,
                       horizontalPadding: 0,
                       validator: ValidatorHelper.validator,
                       controller: controller.genderController,
                     ),
                     12.height,
                     CustomTextFormField(
-                      title: "Color",
-                      hintText: "What is your pet's color?",
+                      title: "Color".tr,
+                      hintText: "What is your pet's color?".tr,
                       horizontalPadding: 0,
                       validator: ValidatorHelper.validator,
                       controller: controller.colorController,
                     ),
                     12.height,
                     CustomTextFormField(
-                      title: "Weight",
-                      hintText: "What is your pet's weight?",
+                      title: "Weight".tr,
+                      hintText: "What is your pet's weight?".tr,
                       horizontalPadding: 0,
                       validator: ValidatorHelper.validator,
                       controller: controller.weightController,
                     ),
                     12.height,
                     CustomTextFormField(
-                      title: "Address",
-                      hintText: "Enter your address.",
+                      title: "Address".tr,
+                      hintText: "Enter your address.".tr,
                       horizontalPadding: 0,
                       validator: ValidatorHelper.validator,
                       controller: controller.addressController,
                     ),
                     12.height,
                     CustomTextFormField(
-                      title: "Microchip Number",
+                      title: "Microchip Number".tr,
                       optional: true,
-                      hintText: "Enter your pets microchip number",
+                      hintText: "Enter your pets microchip number".tr,
                       horizontalPadding: 0,
                       controller: controller.microchipNumberController,
                     ),
                     12.height,
                     CustomTextFormField(
-                      title: "Description",
-                      hintText: "Write a short description about your pet",
+                      title: "Description".tr,
+                      hintText: "Write a short description about your pet".tr,
                       horizontalPadding: 0,
                       validator: ValidatorHelper.validator,
                       controller: controller.descriptionController,
@@ -201,7 +197,7 @@ class _CreateFoundPetViewState extends State<CreateFoundPetView> {
                     controller.isLoading
                         ? const CustomLoader()
                         : CustomContainerButton(
-                      text: "Create Pet Card",
+                      text: "Create Pet Card".tr,
                       width: Get.width,
                       backgroundColor: AppColors.mainColor,
                       height: 42,
@@ -217,7 +213,6 @@ class _CreateFoundPetViewState extends State<CreateFoundPetView> {
               ),
             ),
           ),
-        )
-    );
+        ));
   }
 }

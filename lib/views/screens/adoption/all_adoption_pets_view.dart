@@ -1,12 +1,10 @@
 import 'package:felpus/controllers/adoption_controller.dart';
-import 'package:felpus/controllers/home_controller.dart';
 import 'package:felpus/controllers/pet_details_controller.dart';
 import 'package:felpus/views/components/custom_loader.dart';
 import 'package:felpus/views/components/lost_pets_list_view.dart';
 import 'package:felpus/views/components/no_data.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../models/pet_model.dart';
 import '../../../utils/app_color/app_colors.dart';
 import '../../../utils/app_images/app_images.dart';
 import '../../../utils/app_text_style/styles.dart';
@@ -40,7 +38,7 @@ class AllAdoptionPetsView extends GetView {
       appBar: AppBar(
         backgroundColor: AppColors.white,
         title: Text(
-          'Pets For Adoption',
+          'Pets For Adoption'.tr,
           style: h2.copyWith(fontSize: 22, color: AppColors.mainColor),
         ),
         centerTitle: true,

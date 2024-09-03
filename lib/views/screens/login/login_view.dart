@@ -36,7 +36,7 @@ class LoginView extends StatelessWidget {
                     Column(
                       children: [
                         Text(
-                          "Welcome Back!",
+                          "Welcome Back!".tr,
                           style: h3.copyWith(
                             fontSize: 30,
                           ),
@@ -46,13 +46,13 @@ class LoginView extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              "Let’s",
+                              "Let’s".tr,
                               style: h3.copyWith(fontSize: 30),
                               textAlign: TextAlign.center,
                             ),
                             sw10,
                             Text(
-                              "Sign In.",
+                              "Sign In.".tr,
                               style: h3.copyWith(
                                   fontSize: 30, color: AppColors.mainColor),
                               textAlign: TextAlign.center,
@@ -65,15 +65,15 @@ class LoginView extends StatelessWidget {
                     CustomTextFormField(
                       validator: ValidatorHelper.emailValidator,
                       controller: loginController.emailController,
-                      title: "Email",
-                      hintText: "Enter your email",
+                      title: "Email".tr,
+                      hintText: "Enter your email".tr,
                     ),
                     24.height,
                     CustomTextFormField(
                       validator: ValidatorHelper.passwordValidator,
                       controller: loginController.passwordController,
-                      title: "Password",
-                      hintText: "Enter your password",
+                      title: "Password".tr,
+                      hintText: "Enter your password".tr,
                       isPassword: true,
                     ),
                     sh5,
@@ -85,8 +85,7 @@ class LoginView extends StatelessWidget {
                           Row(
                             children: [
                               Obx(
-                                () => Checkbox(
-                                  //  title: Text('Remember Me',style: h4,),
+                                    () => Checkbox(
                                   checkColor: AppColors.white,
                                   activeColor: AppColors.mainColor,
                                   shape: RoundedRectangleBorder(
@@ -100,7 +99,7 @@ class LoginView extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                "Remember me",
+                                "Remember me".tr,
                                 style: h4,
                               )
                             ],
@@ -108,7 +107,7 @@ class LoginView extends StatelessWidget {
                           GestureDetector(
                               onTap: () => Get.to(() => ForgotView()),
                               child: Text(
-                                "Forgot Password",
+                                "Forgot Password".tr,
                                 style: h3.copyWith(
                                   decoration: TextDecoration.underline,
                                 ),
@@ -120,28 +119,28 @@ class LoginView extends StatelessWidget {
                     loginController.isLoading
                         ? const CustomLoader()
                         : CustomButton(
-                            onTap: () {
-                              print(PrefsHelper.token);
-                              if (_formKey.currentState!.validate()) {
-                                loginController.logInRepo();
-                              }
-                            },
-                            title: "Sign In",
-                            width: Get.width,
-                            color: AppColors.mainColor),
+                        onTap: () {
+                          print(PrefsHelper.token);
+                          if (_formKey.currentState!.validate()) {
+                            loginController.logInRepo();
+                          }
+                        },
+                        title: "Sign In".tr,
+                        width: Get.width,
+                        color: AppColors.mainColor),
                     sh100,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Don't have an account? ",
+                          "Don't have an account? ".tr,
                           style: h4,
                         ),
                         sw5,
                         InkWell(
                             onTap: () => Get.to(() => SignupView()),
                             child: Text(
-                              "Sign Up",
+                              "Sign Up".tr,
                               style: h3,
                             )),
                       ],

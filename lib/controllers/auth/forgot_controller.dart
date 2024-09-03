@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:felpus/views/screens/login/login_view.dart';
-import 'package:felpus/views/screens/reset_password/reset_password_view.dart';
 import 'package:felpus/views/screens/verify/forget_verify_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -13,7 +12,6 @@ import '../../services/api_service.dart';
 import '../../utils/App_Urls/app_urls.dart';
 import '../../utils/App_Utils/app_utils.dart';
 import '../../views/screens/complete_profile/complete_profile_view.dart';
-import '../../views/screens/Verify/verify_view.dart';
 import '../signup_controller.dart';
 
 class ForgotController extends GetxController {
