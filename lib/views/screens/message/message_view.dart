@@ -84,7 +84,7 @@ class MessageView extends GetView<MessageController> {
                               chatDataItems.sender == PrefsHelper.userId
                                   ? Alignment.centerRight
                                   : Alignment.centerLeft,
-                              child: petcardContainer(
+                              child: petCardContainer(
                                   petImageUrl: chatDataItems.pet.photo,
                                   petBreed: chatDataItems.pet.breed,
                                   petName: chatDataItems.pet.petName,
@@ -173,13 +173,18 @@ class MessageView extends GetView<MessageController> {
                           ),
                         ),
                         sw20,
-                        Column(
-                          children: [
-                            Image.asset(AppImages.check, scale: 4),
-                            sh5,
-                            Text("Pets Are Safe?",
-                                style: h3.copyWith(fontSize: 13)),
-                          ],
+                        GestureDetector(
+                          onTap: () {
+
+                          },
+                          child: Column(
+                            children: [
+                              Image.asset(AppImages.check, scale: 4),
+                              sh5,
+                              Text("Pets Are Safe?",
+                                  style: h3.copyWith(fontSize: 13)),
+                            ],
+                          ),
                         ),
                       ],
                     )
@@ -193,7 +198,7 @@ class MessageView extends GetView<MessageController> {
     },);
   }
 
-  Container petcardContainer(
+  Container petCardContainer(
       {required String petImageUrl,
       required String petBreed,
       required String petName,

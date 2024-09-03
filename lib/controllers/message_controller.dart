@@ -4,6 +4,7 @@ import 'package:felpus/helpers/prefs_helper.dart';
 import 'package:felpus/models/chat_data_model.dart';
 import 'package:felpus/models/chat_user_model.dart';
 import 'package:felpus/services/api_service.dart';
+import 'package:felpus/services/socket_service.dart';
 import 'package:felpus/utils/App_Urls/app_urls.dart';
 import 'package:felpus/utils/App_Utils/app_utils.dart';
 import 'package:felpus/utils/app_images/app_images.dart';
@@ -182,6 +183,62 @@ class MessageController extends GetxController {
     isLoading = false;
     update();
   }
+
+  // addNewMessage() async {
+  //   isMessage = true;
+  //   update();
+  //
+  //   chatDataList.insert(
+  //       0,
+  //       ChatMessage(
+  //           text: sendMsgController.text,
+  //           time: DateTime.now(),
+  //           isSentByMe: true)
+  //
+  //     // ChatMessageModel(
+  //     //     currentTime.format(context).toString(),
+  //     //     controller.messageController.text,
+  //     //     true),
+  //   );
+  //
+  //   isMessage = false;
+  //   update();
+  //
+  //   var body = {
+  //     "chat": chatId,
+  //     "message":  sendMsgController.text,
+  //     "sender": PrefsHelper.userId
+  //   };
+  //
+  //   sendMsgController.clear();
+  //
+  //   SocketServices.socket.emitWithAck("add-new-message", body, ack: (data) {
+  //     if (kDebugMode) {
+  //       print(
+  //           "===============================================================> Received acknowledgment: $data");
+  //     }
+  //   });
+  // }
+  //
+  // listenMessage() async {
+  //   SocketServices.socket.on('new-message::$chatId', (data) {
+  //     status = Status.loading;
+  //     update();
+  //
+  //     DateTime time = DateTime.tryParse(data['createdAt']) ?? DateTime.now();
+  //     chatDataList.insert(
+  //         0,
+  //         ChatMessageModel(
+  //             isNotice: data['messageType'] == "notice" ? true : false,
+  //             time: time.toLocal(),
+  //             text: data['message'],
+  //             image: data['sender']['image'],
+  //             isMe: false));
+  //
+  //     status = Status.completed;
+  //     update();
+  //   });
+  // }
 
   final count = 0.obs;
   @override

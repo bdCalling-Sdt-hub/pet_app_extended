@@ -3,6 +3,7 @@ import 'package:felpus/extensions/extension.dart';
 import 'package:felpus/views/components/CustomPopUP/custom_pop_up.dart';
 import 'package:felpus/views/components/CustomPopUP/pop_up.dart';
 import 'package:felpus/views/components/custom_image.dart';
+import 'package:felpus/views/screens/menu/views/change_language_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -114,7 +115,7 @@ class SettingsView extends GetView {
               padding: const EdgeInsets.symmetric(vertical: 7.0),
               child: GestureDetector(
                 onTap: (){
-
+                  Get.to(()=> ChangeLanguageScreen());
                 },
                 child: Container(
                   height: 60,
