@@ -13,17 +13,18 @@ import 'message_view.dart';
 class ChatListView extends StatelessWidget {
   ChatListView({super.key});
 
-  MessageController controller = Get.put(MessageController());
+  final MessageController controller = Get.put(MessageController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: InkWell(
-            onTap: () {
-              Get.back();
-            },
-            child: const Icon(Icons.arrow_back_ios, size: 20,)),
+          onTap: () {
+            Get.back();
+          },
+          child: const Icon(Icons.arrow_back_ios, size: 20),
+        ),
         centerTitle: true,
         title: Text(
           "Messages".tr,
@@ -36,108 +37,178 @@ class ChatListView extends StatelessWidget {
           child: Obx(() {
             return Column(
               children: [
-                CustomTextField(title: "", hintText: "Search your message".tr, width: Get.width, sufIcon: Icon(Icons.search),),
-                sh10,
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    children: [
+                CustomTextField(
+                  controller: controller.searchController,
+                  title: "",
+                  hintText: "Search".tr,
+                  width: Get.width,
+                  sufIcon: const Icon(Icons.search),
 
-                      ///<<<=================== Card Information Button ===========>>>
-
-                      GestureDetector(
-                        onTap: () {
-                          controller.isStyle.value = false;
-                          controller.isInformation.value = true;
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 4),
-                          decoration: BoxDecoration(
-                            color: controller.isInformation.value
-                                ? AppColors.mainColor
-                                : AppColors.pink,
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          child: Text("Conversation".tr, style: h2.copyWith(fontSize: 20, color: controller.isInformation.value? AppColors.white : AppColors.black),),
-                        ),
-                      ),
-                      const Spacer(),
-
-                      ///<<<===================== Card Style Button ================>>>
-
-                      GestureDetector(
-                        onTap: () {
-                          controller.isStyle.value = true;
-                          controller.isInformation.value = false;
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 4),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(4),
-                            color: controller.isStyle.value
-                                ? AppColors.mainColor
-                                : AppColors.pink,
-                          ),
-                          child: Text("Archived".tr, style: h2.copyWith(fontSize: 20, color: controller.isStyle.value? AppColors.white : AppColors.black),),
-                        ),
-                      ),
-                    ],
-                  ),
                 ),
+                SizedBox(height: 10),
 
-                controller.isInformation.value
-                    ? controller.isLoading? SizedBox(
-                  height: 300.h,
-                    child: CustomLoader()
-                ) : Expanded(
+                // Display filtered chat users under the search bar
+                controller.filteredChatUsersList.isNotEmpty && controller.searchController.text.isNotEmpty
+                    ? Expanded(
                   child: ListView.builder(
-                    // controller: _scrollController,
-                    itemCount: controller.chatUsersList.length,
+                    shrinkWrap: true,
+                    itemCount: controller.filteredChatUsersList.length,
                     itemBuilder: (context, index) {
-                      var chatUserDetails = controller.chatUsersList[index];
+                      var chatUserDetails =
+                      controller.filteredChatUsersList[index];
                       return GestureDetector(
                         onTap: () {
-                          controller.createOrGetMessageRepo(chatId: chatUserDetails.id);
-                          // Get.to(() => const MessageView());
+                          FocusScope.of(context).unfocus();
+                          controller.createOrGetMessageRepo(
+                              chatId: chatUserDetails.id);
                         },
-                        child: ChatListItem(
-                          image: chatUserDetails.type == "single"? chatUserDetails.partner.photo : chatUserDetails.photo,
-                          name: chatUserDetails.type == "single"? chatUserDetails.partner.fullName : chatUserDetails.groupName,
-                          message: chatUserDetails.lastMessage,
-                          time: "10 :15".tr,
-                          numberOfMessages: 5,
+                        child: ListTile(
+                          leading: CircleAvatar(
+                            backgroundImage: NetworkImage(
+                              chatUserDetails.type == "single"
+                                  ? chatUserDetails.partner.photo
+                                  : chatUserDetails.photo,
+                            ),
+                          ),
+                          title: Text(
+                            chatUserDetails.type == "single"
+                                ? chatUserDetails.partner.fullName
+                                : chatUserDetails.groupName,
+                          ),
+                          subtitle: Text(chatUserDetails.lastMessage),
                         ),
                       );
                     },
                   ),
                 )
                     : Expanded(
-                  child: ListView.builder(
-                    // controller: _scrollController,
-                    itemCount: 10,
-                    itemBuilder: (context, index) {
-                      return GestureDetector(
-                        onTap: () {
-                        },
-                        child: ChatListItem(
-                          image: "https://shorturl.at/2iMPa",
-                          name: "Henry".tr,
-                          message: "You: I got my pet".tr,
-                          time: "10 :15".tr,
-                          numberOfMessages: 5,
-                          isArchived: true,
+                      child: Column(
+                                        children: [ Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Row(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              controller.isStyle.value = false;
+                              controller.isInformation.value = true;
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 4),
+                              decoration: BoxDecoration(
+                                color: controller.isInformation.value
+                                    ? AppColors.mainColor
+                                    : AppColors.pink,
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                              child: Text(
+                                "Conversation".tr,
+                                style: h2.copyWith(
+                                    fontSize: 20,
+                                    color: controller.isInformation.value
+                                        ? AppColors.white
+                                        : AppColors.black),
+                              ),
+                            ),
+                          ),
+                          const Spacer(),
+                          GestureDetector(
+                            onTap: () {
+                              controller.isStyle.value = true;
+                              controller.isInformation.value = false;
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 4),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(4),
+                                color: controller.isStyle.value
+                                    ? AppColors.mainColor
+                                    : AppColors.pink,
+                              ),
+                              child: Text(
+                                "Archived".tr,
+                                style: h2.copyWith(
+                                    fontSize: 20,
+                                    color: controller.isStyle.value
+                                        ? AppColors.white
+                                        : AppColors.black),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                                        ),
+                      controller.isInformation.value
+                          ? controller.isLoading
+                          ? SizedBox(
+                        height: 300.h,
+                        child: CustomLoader(),
+                      )
+                          : Expanded(
+                        child: ListView.builder(
+                          itemCount:
+                          controller.chatActiveUsersList.length,
+                          itemBuilder: (context, index) {
+                            var chatUserDetails =
+                            controller.chatActiveUsersList[index];
+                            return GestureDetector(
+                              onTap: () {
+                                controller.createOrGetMessageRepo(
+                                    chatId: chatUserDetails.id);
+                                // Get.to(() => const MessageView());
+                              },
+                              child: ChatListItem(
+                                image: chatUserDetails.type == "single"
+                                    ? chatUserDetails.partner.photo
+                                    : chatUserDetails.photo,
+                                name: chatUserDetails.type == "single"
+                                    ? chatUserDetails.partner.fullName
+                                    : chatUserDetails.groupName,
+                                message: chatUserDetails.lastMessage,
+                                time: "10 :15".tr,
+                                numberOfMessages: 5,
+                              ),
+                            );
+                          },
                         ),
-                      );
-                    },
-                  ),
-                )
+                      )
+                          : Expanded(
+                        child: ListView.builder(
+                          itemCount: controller.chatArchivedUsersList.length,
+                          itemBuilder: (context, index) {
+                            var chatUserDetails =
+                            controller.chatArchivedUsersList[index];
+                            return GestureDetector(
+                              onTap: () {
+                                controller.createOrGetMessageRepo(
+                                    chatId: chatUserDetails.id);
+                              },
+                              child: ChatListItem(
+                                image: chatUserDetails.type == "single"
+                                    ? chatUserDetails.partner.photo
+                                    : chatUserDetails.photo,
+                                name: chatUserDetails.type == "single"
+                                    ? chatUserDetails.partner.fullName
+                                    : chatUserDetails.groupName,
+                                message: chatUserDetails.lastMessage,
+                                time: "10 :15".tr,
+                                numberOfMessages: 5,
+                                isArchived: true,
+                              ),
+                            );
+                          },
+                        ),
+                      ),],
+                                      ),
+                    ),
+
               ],
             );
-          },),
+          }),
         );
-      },),
+      }),
     );
   }
 }
+

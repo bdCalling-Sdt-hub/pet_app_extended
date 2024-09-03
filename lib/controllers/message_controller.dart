@@ -10,6 +10,7 @@ import 'package:felpus/utils/App_Utils/app_utils.dart';
 import 'package:felpus/utils/app_images/app_images.dart';
 import 'package:felpus/views/screens/message/message_view.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:developer' as print;
 
@@ -18,9 +19,20 @@ class MessageController extends GetxController {
 
   static MessageController get instance => Get.put(MessageController());
 
+  final count = 0.obs;
+  @override
+  void onInit() {
+    searchController.addListener(_filterChatUsers);
+    super.onInit();
+  }
+
+  void increment() => count.value++;
+  RxBool isStyle = false.obs;
+  RxBool isInformation = true.obs;
+
 
   static String helpType = "";
-  static String chatId = "";
+  static String chatUserId = "";
   static String chatType = "";
   static String petId = "";
   String helpTypeTitle = "";
@@ -28,26 +40,57 @@ class MessageController extends GetxController {
   List<ChatDataModel> chatDataList = [];
   ChatInfo chatPersonInfo = ChatInfo.fromJson({});
 
-  bool isLoading = false;
-  List<ChatUserModel>chatUsersList = [];
+  TextEditingController searchController = TextEditingController();
+  TextEditingController sendMsgController = TextEditingController();
 
+  bool isLoading = false;
+  List<ChatUserModel>chatArchivedUsersList = [];
+  RxList<ChatUserModel> chatActiveUsersList = <ChatUserModel>[].obs;
+  RxList<ChatUserModel> filteredChatUsersList = <ChatUserModel>[].obs;
+
+
+
+  void _filterChatUsers() {
+    String query = searchController.text.toLowerCase();
+    if (query.isEmpty) {
+      filteredChatUsersList.value = chatActiveUsersList;
+    } else {
+      filteredChatUsersList.value = chatActiveUsersList.where((chatUser) {
+        String name = chatUser.type == 'single'
+            ? chatUser.partner.fullName.toLowerCase()
+            : chatUser.groupName.toLowerCase();
+        return name.contains(query);
+      }).toList();
+    }
+  }
+
+  @override
+  void onClose() {
+    searchController.removeListener(_filterChatUsers);
+    searchController.dispose();
+    super.onClose();
+  }
 
   ///============================ Get Chat Users =============================
 
-    Future getChatUsers() async {
-      chatUsersList.clear();
+    Future getChatUsers({required String status}) async {
+      chatActiveUsersList.clear();
       isLoading = true;
       update();
 
 
       print.log("Get Chat Users response---------------------------->>>>");
-      var response = await ApiService.getApi(AppUrls.chatUsers);
+      var response = await ApiService.getApi("${AppUrls.chatUsers}?status=$status");
 
       if (response.statusCode == 200) {
 
         var responseData = jsonDecode(response.body)['data'];
+        if(status == "active"){
+          chatActiveUsersList.value = (responseData as List).map((data) => ChatUserModel.fromJson(data)).toList();
+        }else{
+          chatArchivedUsersList = (responseData as List).map((data) => ChatUserModel.fromJson(data)).toList();
+        }
 
-        chatUsersList = (responseData as List).map((data) => ChatUserModel.fromJson(data)).toList();
         update();
       } else {
         Utils.snackBarErrorMessage(response.statusCode.toString(), response.message);
@@ -110,12 +153,13 @@ class MessageController extends GetxController {
       // 'Accept-Language': PrefsHelper.localizationLanguageCode,
     };
 
+    print.log("===>>> $helpType, $chatType, $chatUserId, $petId");
     Map<String, String> body = {};
     if(isNewMsg){
      body = {
         "helpType": helpType,
         "chatType": chatType,
-        "alertId": chatId,
+        "alertId": chatUserId,
         "petId": petId
       };
 
@@ -150,8 +194,6 @@ class MessageController extends GetxController {
   }
 
   ///=================== Send Message Repo ==================================
-
-  TextEditingController sendMsgController = TextEditingController();
 
   Future sendMessageRepo({required String chatId}) async {
     isLoading = true;
@@ -240,13 +282,4 @@ class MessageController extends GetxController {
   //   });
   // }
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
-  void increment() => count.value++;
-  RxBool isStyle = false.obs;
-  RxBool isInformation = true.obs;
 }

@@ -67,6 +67,7 @@ class AppImages{
   static const pawSearchIcon = "assets/icons/pawSearchIcon.png";
   static const tipsLightIcon = "assets/icons/tipsLightIcon.png";
   static const translateIcon = "assets/icons/translateIcon.svg";
+  static const petSaveIcon = "assets/icons/petSaveIcon.png";
 
   /// Svg Icons
   static const wifiOff = "assets/icons/svgIcon/wifi_off.svg";

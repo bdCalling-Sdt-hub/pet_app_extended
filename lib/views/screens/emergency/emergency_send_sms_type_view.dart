@@ -123,8 +123,9 @@ class _EmergencySendSmsTypeViewState extends State<EmergencySendSmsTypeView> {
                                               children: [
                                                 InkWell(
                                                   onTap: () {
-                                                    Get.to(() =>
-                                                        const SelectPetsView());
+                                                    MessageController.chatUserId = groupsItems.id;
+                                                    MessageController.chatType = "group";
+                                                    Get.to(() => const SelectPetsView());
                                                   },
                                                   child: const CircleAvatar(
                                                     backgroundColor:
@@ -246,8 +247,9 @@ class _EmergencySendSmsTypeViewState extends State<EmergencySendSmsTypeView> {
                                               children: [
                                                 InkWell(
                                                   onTap: () {
-                                                    Get.to(() =>
-                                                        const SelectPetsView());
+                                                    MessageController.chatUserId = contactItems.id;
+                                                    MessageController.chatType = "single";
+                                                    Get.to(() => const SelectPetsView());
                                                   },
                                                   child: const CircleAvatar(
                                                     backgroundColor:

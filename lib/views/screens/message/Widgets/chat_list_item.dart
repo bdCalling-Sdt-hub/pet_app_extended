@@ -37,33 +37,16 @@ class ChatListItem extends StatelessWidget {
       padding: EdgeInsets.all(12.w),
       child: Row(
         children: [
-          Stack(
-            children: [
-              CircleAvatar(
-                radius: 30.r,
-                child: ClipOval(
-                  child: CustomImage(
-                    imageSrc: image,
-                    imageType: ImageType.network,
-                    height: 60.h,
-                    width: 60.w,
-                  ),
-                ),
+          CircleAvatar(
+            radius: 30.r,
+            child: ClipOval(
+              child: CustomImage(
+                imageSrc: image,
+                imageType: ImageType.network,
+                height: 60.h,
+                width: 60.w,
               ),
-              Positioned(
-                bottom: 0,
-                right: 5,
-                child: Container(
-                  height: 12.h,
-                  width: 12.w,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: AppColors.oliveLight, width: 2),
-                    color: isOnline ? AppColors.blue : AppColors.grayLight,
-                    borderRadius: BorderRadius.circular(100.r)
-                  ),
-                ),
-              )
-            ],
+            ),
           ),
           SizedBox(
             width: 12.w,

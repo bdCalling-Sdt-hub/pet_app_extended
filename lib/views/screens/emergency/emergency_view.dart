@@ -80,6 +80,7 @@ class _EmergencyViewState extends State<EmergencyView> {
                             ResourcesView.isFlood = false;
                             ResourcesView.isLost = true;
                           }
+                          MessageController.instance.handleItemSelected(item);
                           Get.to(() => const EmergencySendSmsTypeView());
                         },
                         child: Container(

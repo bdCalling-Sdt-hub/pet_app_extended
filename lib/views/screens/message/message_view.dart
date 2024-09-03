@@ -23,179 +23,198 @@ class MessageView extends GetView<MessageController> {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<MessageController>(builder: (controller) {
-
-      return Scaffold(
-        backgroundColor: AppColors.white,
-        appBar: AppBar(
+    return GetBuilder<MessageController>(
+      builder: (controller) {
+        return Scaffold(
           backgroundColor: AppColors.white,
-          title: Row(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(100),
-                child: CustomImage(imageSrc: controller.chatPersonInfo.photo, imageType: ImageType.network, height: 40, width: 40,),
-              ),
-              sw10,
-              Text(
-                controller.chatPersonInfo.name,
-                style: h2.copyWith(fontSize: 20, color: AppColors.black),
-              ),
-            ],
-          ),
-          centerTitle: true,
-          leading: InkWell(
-              onTap: () => Get.back(), child: const Icon(Icons.arrow_back_ios)),
-        ),
-        body: Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 14.0),
-              child: ListView.builder(
-                itemCount: controller.chatDataList.length,
-                itemBuilder: (context, index) {
-                  var chatDataItems = controller.chatDataList[index];
-
-                  chatId = chatDataItems.chat;
-                  print(chatDataItems.helpType);
-                  return Column(
-                    children: [
-                      Column(
-                        children: [
-                          if (chatDataItems.text == "")
-                            timeStamp(
-                                sendReceiveTime: OtherHelper.formatTime(
-                                    chatDataItems.createdAt)),
-                          if (chatDataItems.text == "") sh5,
-                          if (chatDataItems.text == "")
-                            helpTypeCard(
-                                alignment:
-                                chatDataItems.sender == PrefsHelper.userId
-                                    ? Alignment.centerRight
-                                    : Alignment.centerLeft,
-                                helpTypeTitle:
-                                controller.getTitleFromHelpType(
-                                    chatDataItems.helpType),
-                                helpTypeIcon:
-                                "${controller.helpTypeIcons[chatDataItems.helpType]}"),
-                          if (chatDataItems.text == "") sh10,
-                          if (chatDataItems.text == "")
-                            Align(
-                              alignment:
-                              chatDataItems.sender == PrefsHelper.userId
-                                  ? Alignment.centerRight
-                                  : Alignment.centerLeft,
-                              child: petCardContainer(
-                                  petImageUrl: chatDataItems.pet.photo,
-                                  petBreed: chatDataItems.pet.breed,
-                                  petName: chatDataItems.pet.petName,
-                                  petGender: chatDataItems.pet.sex,
-                                  petAge: chatDataItems.pet.age,
-                                  petAddress: chatDataItems.pet.address),
-                            ),
-                          if (chatDataItems.text == "") sh10,
-                          if (chatDataItems.text != "")
-                            ChatMessage(
-                                text: chatDataItems.text,
-                                time: OtherHelper.formatTime(
-                                    chatDataItems.createdAt),
-                                isSentByMe:
-                                chatDataItems.sender == PrefsHelper.userId
-                                    ? true
-                                    : false),
-                        ],
-                      ),
-                      const SizedBox(height: 160),
-                      // Add some space at the bottom
-                    ],
-                  );
-                },
-              ),
+          appBar: AppBar(
+            backgroundColor: AppColors.white,
+            title: Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(100),
+                  child: CustomImage(
+                    imageSrc: controller.chatPersonInfo.photo,
+                    imageType: ImageType.network,
+                    height: 40,
+                    width: 40,
+                  ),
+                ),
+                sw10,
+                Text(
+                  controller.chatPersonInfo.name,
+                  style: h2.copyWith(fontSize: 20, color: AppColors.black),
+                ),
+              ],
             ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                color: Colors.white,
-                // Background color for the bottom container
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 14.0, vertical: 10.0),
+            centerTitle: true,
+            leading: InkWell(
+                onTap: () => Get.back(),
+                child: const Icon(Icons.arrow_back_ios)),
+          ),
+          body: Stack(
+            children: [
+              Expanded(
                 child: Column(
-                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Container(
-                            height: 40,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(50),
-                              border: Border.all(color: AppColors.light),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 16.0, vertical: 6),
-                              child: TextField(
-                                controller: controller.sendMsgController,
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintStyle:
-                                  h3.copyWith(color: AppColors.grayLight),
-                                  hintText: "Write your message...",
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                        child: ListView.builder(
+                          itemCount: controller.chatDataList.length,
+                          itemBuilder: (context, index) {
+                            var chatDataItems = controller.chatDataList[index];
+                                      
+                            chatId = chatDataItems.chat;
+                            print(chatDataItems.helpType);
+                            return Column(
+                              children: [
+                                if (chatDataItems.text == "")
+                                  timeStamp(
+                                      sendReceiveTime: OtherHelper.formatTime(
+                                          chatDataItems.createdAt)),
+                                if (chatDataItems.text == "") sh5,
+                                if (chatDataItems.text == "")
+                                  helpTypeCard(
+                                      alignment:
+                                          chatDataItems.sender == PrefsHelper.userId
+                                              ? Alignment.centerRight
+                                              : Alignment.centerLeft,
+                                      helpTypeTitle:
+                                          controller.getTitleFromHelpType(
+                                              chatDataItems.helpType),
+                                      helpTypeIcon:
+                                          "${controller.helpTypeIcons[chatDataItems.helpType]}"),
+                                if (chatDataItems.text == "") sh10,
+                                if (chatDataItems.text == "")
+                                  Align(
+                                    alignment:
+                                        chatDataItems.sender == PrefsHelper.userId
+                                            ? Alignment.centerRight
+                                            : Alignment.centerLeft,
+                                    child: petCardContainer(
+                                        petImageUrl: chatDataItems.pet.photo,
+                                        petBreed: chatDataItems.pet.breed,
+                                        petName: chatDataItems.pet.petName,
+                                        petGender: chatDataItems.pet.sex,
+                                        petAge: chatDataItems.pet.age,
+                                        petAddress: chatDataItems.pet.address),
+                                  ),
+                                if (chatDataItems.text != "")
+                                  ChatMessage(
+                                      text: chatDataItems.text,
+                                      time: OtherHelper.formatTime(
+                                          chatDataItems.createdAt),
+                                      isSentByMe:
+                                          chatDataItems.sender == PrefsHelper.userId
+                                              ? true
+                                              : false),
+                                if (chatDataItems.text == "") sh10,
+                                helpTypeCard(
+                                    helpTypeIcon: AppImages.petSaveIcon,
+                                    helpTypeTitle: "Pets Are Safe".tr,
+                                    alignment: Alignment.centerRight,
+                                    textColor: AppColors.white,
+                                    cardColor: AppColors.green)
+                              ],
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                    100.height
+                  ],
+                ),
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  color: Colors.white,
+                  // Background color for the bottom container
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 14.0, vertical: 10.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Container(
+                              height: 40,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
+                                border: Border.all(color: AppColors.light),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 16.0, vertical: 6),
+                                child: TextField(
+                                  controller: controller.sendMsgController,
+                                  decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    hintStyle:
+                                        h3.copyWith(color: AppColors.grayLight),
+                                    hintText: "Write your message...",
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                        sw10,
-                        controller.isLoading? const CustomLoader() : InkWell(
-                          onTap: () {
-                            if(controller.sendMsgController.text.isEmpty){
-                              Utils.toastMessage(message: "Write something first!");
-                            }else{
-                              controller.sendMessageRepo(chatId: chatId);
-                            }
-                          },
-                            child: Image.asset(AppImages.send, scale: 4)
-                        ),
-                      ],
-                    ),
-                    sh15,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        GestureDetector(
-                          onTap: () => Get.to(() => ResourcesView()),
-                          child: Column(
-                            children: [
-                              Image.asset(AppImages.more, scale: 15),
-                              Text("More Resources",
-                                  style: h3.copyWith(fontSize: 13)),
-                            ],
+                          sw10,
+                          controller.isLoading
+                              ? const CustomLoader()
+                              : InkWell(
+                                  onTap: () {
+                                    if (controller
+                                        .sendMsgController.text.isEmpty) {
+                                      Utils.toastMessage(
+                                          message: "Write something first!");
+                                    } else {
+                                      controller.sendMessageRepo(
+                                          chatId: chatId);
+                                    }
+                                  },
+                                  child: Image.asset(AppImages.send, scale: 4)),
+                        ],
+                      ),
+                      sh15,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          GestureDetector(
+                            onTap: () => Get.to(() => ResourcesView()),
+                            child: Column(
+                              children: [
+                                Image.asset(AppImages.more, scale: 15),
+                                Text("More Resources",
+                                    style: h3.copyWith(fontSize: 13)),
+                              ],
+                            ),
                           ),
-                        ),
-                        sw20,
-                        GestureDetector(
-                          onTap: () {
+                          sw20,
+                          GestureDetector(
+                            onTap: () {},
+                            child: Column(
+                              children: [
+                                Image.asset(AppImages.check, scale: 4),
+                                sh5,
+                                Text("Pets Are Safe?".tr,
+                                    style: h3.copyWith(fontSize: 13)),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
 
-                          },
-                          child: Column(
-                            children: [
-                              Image.asset(AppImages.check, scale: 4),
-                              sh5,
-                              Text("Pets Are Safe?",
-                                  style: h3.copyWith(fontSize: 13)),
-                            ],
-                          ),
-                        ),
-                      ],
-                    )
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
-      );
-    },);
+            ],
+          ),
+        );
+      },
+    );
   }
 
   Container petCardContainer(
@@ -280,14 +299,16 @@ class MessageView extends GetView<MessageController> {
   Align helpTypeCard(
       {required AlignmentGeometry alignment,
       required String helpTypeTitle,
-      required String helpTypeIcon}) {
+      required String helpTypeIcon,
+        Color textColor = AppColors.black,
+      Color cardColor = AppColors.olive}) {
     return Align(
       alignment: alignment,
       child: Container(
         height: 110,
         width: 110,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20), color: AppColors.olive),
+            borderRadius: BorderRadius.circular(20), color: cardColor),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -300,7 +321,7 @@ class MessageView extends GetView<MessageController> {
             8.height,
             Text(
               helpTypeTitle,
-              style: h2.copyWith(fontWeight: FontWeight.w700),
+              style: h2.copyWith(fontWeight: FontWeight.w700, color: textColor),
             )
           ],
         ),
