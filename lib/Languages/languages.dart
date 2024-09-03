@@ -355,6 +355,7 @@ class LocalConstants extends Translations {
           "Now continue after": "Now continue after",
           "register in": "register in",
           "Felpus.": "Felpus.",
+          "Conversation ends here for this pet, thank you" : "Conversation ends here for this pet, thank you"
         },
       };
 }

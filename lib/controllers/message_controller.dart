@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:felpus/helpers/prefs_helper.dart';
+import 'package:felpus/models/ChatMessageModel.dart';
 import 'package:felpus/models/chat_data_model.dart';
 import 'package:felpus/models/chat_user_model.dart';
 import 'package:felpus/services/api_service.dart';
@@ -45,6 +46,7 @@ class MessageController extends GetxController {
   TextEditingController sendMsgController = TextEditingController();
 
   bool isLoading = false;
+  List<ChatMessageModel>chatItemsList = [];
   List<ChatUserModel>chatArchivedUsersList = [];
   RxList<ChatUserModel> chatActiveUsersList = <ChatUserModel>[].obs;
   RxList<ChatUserModel> filteredChatUsersList = <ChatUserModel>[].obs;
@@ -171,6 +173,10 @@ class MessageController extends GetxController {
     if (response.statusCode == 200) {
       var responseData = jsonDecode(response.body)["data"]["allMessage"];
       chatDataList = (responseData as List).map((data) => ChatDataModel.fromJson(data)).toList();
+
+      for(var item in chatDataList){
+
+      }
 
       final Map<String, dynamic> data = jsonDecode(response.body)["data"];
 

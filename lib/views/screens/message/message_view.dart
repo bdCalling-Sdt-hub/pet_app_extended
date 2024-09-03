@@ -1,9 +1,11 @@
 import 'package:felpus/extensions/extension.dart';
 import 'package:felpus/helpers/other_helper.dart';
 import 'package:felpus/helpers/prefs_helper.dart';
+import 'package:felpus/models/chat_data_model.dart';
 import 'package:felpus/utils/App_Utils/app_utils.dart';
 import 'package:felpus/views/components/custom_image.dart';
 import 'package:felpus/views/components/custom_loader.dart';
+import 'package:felpus/views/components/custom_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -64,61 +66,10 @@ class MessageView extends GetView<MessageController> {
                           itemCount: controller.chatDataList.length,
                           itemBuilder: (context, index) {
                             var chatDataItems = controller.chatDataList[index];
-                                      
+
                             chatId = chatDataItems.chat;
                             print(chatDataItems.helpType);
-                            return Column(
-                              children: [
-                                if (chatDataItems.text == "")
-                                  timeStamp(
-                                      sendReceiveTime: OtherHelper.formatTime(
-                                          chatDataItems.createdAt)),
-                                if (chatDataItems.text == "") sh5,
-                                if (chatDataItems.text == "")
-                                  helpTypeCard(
-                                      alignment:
-                                          chatDataItems.sender == PrefsHelper.userId
-                                              ? Alignment.centerRight
-                                              : Alignment.centerLeft,
-                                      helpTypeTitle:
-                                          controller.getTitleFromHelpType(
-                                              chatDataItems.helpType),
-                                      helpTypeIcon:
-                                          "${controller.helpTypeIcons[chatDataItems.helpType]}"),
-                                if (chatDataItems.text == "") sh10,
-                                if (chatDataItems.text == "")
-                                  Align(
-                                    alignment:
-                                        chatDataItems.sender == PrefsHelper.userId
-                                            ? Alignment.centerRight
-                                            : Alignment.centerLeft,
-                                    child: petCardContainer(
-                                        petImageUrl: chatDataItems.pet.photo,
-                                        petBreed: chatDataItems.pet.breed,
-                                        petName: chatDataItems.pet.petName,
-                                        petGender: chatDataItems.pet.sex,
-                                        petAge: chatDataItems.pet.age,
-                                        petAddress: chatDataItems.pet.address),
-                                  ),
-                                if (chatDataItems.text != "")
-                                  ChatMessage(
-                                      text: chatDataItems.text,
-                                      time: OtherHelper.formatTime(
-                                          chatDataItems.createdAt),
-                                      isSentByMe:
-                                          chatDataItems.sender == PrefsHelper.userId
-                                              ? true
-                                              : false),
-                                if (chatDataItems.text == "") sh10,
-                                if(controller.isPetSafe.value)
-                                  helpTypeCard(
-                                    helpTypeIcon: AppImages.petSaveIcon,
-                                    helpTypeTitle: "Pets Are Safe".tr,
-                                    alignment: Alignment.centerRight,
-                                    textColor: AppColors.white,
-                                    cardColor: AppColors.green)
-                              ],
-                            );
+                            return chatItems(chatDataItems, controller);
                           },
                         ),
                       ),
@@ -216,6 +167,86 @@ class MessageView extends GetView<MessageController> {
         );
       },
     );
+  }
+
+  Column chatItems(ChatDataModel chatDataItems, MessageController controller) {
+    return Column(
+                            children: [
+                              if (chatDataItems.text == "")
+                                timeStamp(
+                                    sendReceiveTime: OtherHelper.formatTime(
+                                        chatDataItems.createdAt)),
+                              if (chatDataItems.text == "") 10.height,
+                              if (chatDataItems.text == "")
+                                helpTypeCard(
+                                    alignment:
+                                        chatDataItems.sender == PrefsHelper.userId
+                                            ? Alignment.centerRight
+                                            : Alignment.centerLeft,
+                                    helpTypeTitle:
+                                        controller.getTitleFromHelpType(
+                                            chatDataItems.helpType),
+                                    helpTypeIcon:
+                                        "${controller.helpTypeIcons[chatDataItems.helpType]}"),
+                              if (chatDataItems.text == "") 10.height,
+                              if (chatDataItems.text == "")
+                                Align(
+                                  alignment:
+                                      chatDataItems.sender == PrefsHelper.userId
+                                          ? Alignment.centerRight
+                                          : Alignment.centerLeft,
+                                  child: petCardContainer(
+                                      petImageUrl: chatDataItems.pet.photo,
+                                      petBreed: chatDataItems.pet.breed,
+                                      petName: chatDataItems.pet.petName,
+                                      petGender: chatDataItems.pet.sex,
+                                      petAge: chatDataItems.pet.age,
+                                      petAddress: chatDataItems.pet.address),
+                                ),
+                              if (chatDataItems.text != "")
+                                ChatMessage(
+                                    text: chatDataItems.text,
+                                    time: OtherHelper.formatTime(
+                                        chatDataItems.createdAt),
+                                    isSentByMe:
+                                        chatDataItems.sender == PrefsHelper.userId
+                                            ? true
+                                            : false),
+                              if (chatDataItems.text == "") 10.height,
+                              if(controller.isPetSafe.value)
+                                helpTypeCard(
+                                  alignment: chatDataItems.sender == PrefsHelper.userId
+                                      ? Alignment.centerRight
+                                      : Alignment.centerLeft,
+                                  helpTypeIcon: AppImages.petSaveIcon,
+                                  helpTypeTitle: "Pets Are Safe".tr,
+                                  textColor: AppColors.white,
+                                  cardColor: AppColors.green),
+                              if(controller.isPetSafe.value)
+                                10.height,
+                              if(controller.isPetSafe.value)
+                                Align(
+                                  alignment:
+                                  chatDataItems.sender == PrefsHelper.userId
+                                      ? Alignment.centerRight
+                                      : Alignment.centerLeft,
+                                  child: petCardContainer(
+                                      petImageUrl: chatDataItems.pet.photo,
+                                      petBreed: chatDataItems.pet.breed,
+                                      petName: chatDataItems.pet.petName,
+                                      petGender: chatDataItems.pet.sex,
+                                      petAge: chatDataItems.pet.age,
+                                      petAddress: chatDataItems.pet.address),
+                                ),
+                              if(controller.isPetSafe.value)
+                                16.height,
+                              if(controller.isPetSafe.value)
+                                CustomText(
+                                  textAlign: TextAlign.center,
+                                    text: "Conversation ends here for this pet, thank you".tr, fontWeight: FontWeight.w600,),
+                              10.height,
+                            ],
+                          );
   }
 
   Container petCardContainer(

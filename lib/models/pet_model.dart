@@ -61,7 +61,7 @@ class PetModel {
   factory PetModel.fromJson(Map<String, dynamic> json) {
     return PetModel(
       id: json['_id'] ?? '',
-      userId: json['userId'] != null ? UserModel.fromJson(json['userId']) : UserModel(),
+      userId: json['userId'] ?? "",
       forPets: json['forPets'] ?? '',
       photo: json['photo'] ?? '',
       petName: json['petName'] ?? '',
