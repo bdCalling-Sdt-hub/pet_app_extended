@@ -19,16 +19,43 @@ import '../../../utils/app_text_style/styles.dart';
 import '../../../utils/size_box/custom_sizebox.dart';
 import '../resources/resources_view.dart';
 
-class MessageView extends GetView<MessageController> {
-  MessageView({super.key});
+class MessageView extends StatefulWidget {
+  const MessageView({super.key});
 
-  String chatId = "";
+  @override
+  State<MessageView> createState() => _MessageViewState();
+}
+
+class _MessageViewState extends State<MessageView> {
+  MessageController messageController = Get.find<MessageController>();
+
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Scroll to the bottom of the list after the page is loaded
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (messageController.scrollController.hasClients) {
+        messageController.scrollController.jumpTo(messageController.scrollController.position.maxScrollExtent);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    messageController.scrollController.dispose(); // Dispose the controller when not needed
+    super.dispose();
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<MessageController>(
       builder: (controller) {
         return Scaffold(
+          resizeToAvoidBottomInset: true,
           backgroundColor: AppColors.white,
           appBar: AppBar(
             backgroundColor: AppColors.white,
@@ -55,128 +82,119 @@ class MessageView extends GetView<MessageController> {
                 onTap: () => Get.back(),
                 child: const Icon(Icons.arrow_back_ios)),
           ),
-          body: Stack(
+          body: Column(
             children: [
               Expanded(
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 14.0),
-                        child: controller.chatItemsList.isNotEmpty
-                            ? ListView.builder(
-                                itemCount: controller.chatItemsList.length,
-                                itemBuilder: (context, index) {
-                                  var chatDataItems =
-                                      controller.chatItemsList[index];
-                                  chatId = chatDataItems.chatId;
-                                  print("===============>>>> ${chatDataItems}");
-                                  return chatItems(
-                                    controller: controller,
-                                    text: chatDataItems.text,
-                                    helpType: chatDataItems.helpType,
-                                    time: chatDataItems.time,
-                                    petPhoto: chatDataItems.pet.photo,
-                                    petName: chatDataItems.pet.petName,
-                                    petBreed: chatDataItems.pet.breed,
-                                    petAddress: chatDataItems.pet.address,
-                                    petAge: chatDataItems.pet.age,
-                                    petGender: chatDataItems.pet.sex,
-                                    senderId: chatDataItems.sender.id,
-                                    senderImage: chatDataItems.sender.photo,
-                                  );
-                                },
-                              )
-                            : const NoData(),
-                      ),
-                    ),
-                    100.height
-                  ],
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                  child: controller.chatItemsList.isNotEmpty
+                      ? ListView.builder(
+                    controller: controller.scrollController,
+                    itemCount: controller.chatItemsList.length,
+                    itemBuilder: (context, index) {
+                      var chatDataItems =
+                      controller.chatItemsList[index];
+                      return chatItems(
+                        controller: controller,
+                        text: chatDataItems.text,
+                        helpType: chatDataItems.helpType,
+                        time: chatDataItems.time,
+                        petPhoto: chatDataItems.pet.photo,
+                        petName: chatDataItems.pet.petName,
+                        petBreed: chatDataItems.pet.breed,
+                        petAddress: chatDataItems.pet.address,
+                        petAge: chatDataItems.pet.age,
+                        petGender: chatDataItems.pet.sex,
+                        senderId: chatDataItems.sender.id == ""
+                            ? PrefsHelper.userId
+                            : chatDataItems.sender.id,
+                        senderImage: chatDataItems.sender.photo,
+                      );
+                    },
+                  )
+                      : const NoData(),
                 ),
               ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                  color: Colors.white,
-                  // Background color for the bottom container
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 14.0, vertical: 10.0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Container(
-                              height: 40,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(50),
-                                border: Border.all(color: AppColors.light),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 16.0, vertical: 6),
-                                child: TextField(
-                                  controller: controller.sendMsgController,
-                                  decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    hintStyle:
-                                        h3.copyWith(color: AppColors.grayLight),
-                                    hintText: "Write your message...",
-                                  ),
+              Container(
+                color: Colors.white,
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 14.0, vertical: 10.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: 9,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50),
+                              border: Border.all(color: AppColors.light),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 16.0),
+                              child: TextFormField(
+                                controller: controller.sendMsgController,
+                                maxLines: 4,
+                                minLines: 1,
+                                decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  hintStyle:
+                                  h3.copyWith(color: AppColors.grayLight),
+                                  hintText: "Write your message...",
                                 ),
                               ),
                             ),
                           ),
-                          sw10,
-                          controller.isLoading
-                              ? const CustomLoader()
-                              : InkWell(
-                                  onTap: () {
-                                    if (controller
-                                        .sendMsgController.text.isEmpty) {
-                                      Utils.toastMessage(
-                                          message: "Write something first!");
-                                    } else {
-                                      controller.sendMessageRepo(
-                                          chatId: chatId);
-                                    }
-                                  },
-                                  child: Image.asset(AppImages.send, scale: 4)),
-                        ],
-                      ),
-                      sh15,
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          GestureDetector(
-                            onTap: () => Get.to(() => ResourcesView()),
-                            child: Column(
-                              children: [
-                                Image.asset(AppImages.more, scale: 15),
-                                Text("More Resources",
-                                    style: h3.copyWith(fontSize: 13)),
-                              ],
-                            ),
+                        ),
+                        sw10,
+                        Expanded(
+                          flex: 1,
+                          child: InkWell(
+                              onTap: () {
+                                if (controller.sendMsgController.text.isEmpty) {
+                                  Utils.toastMessage(
+                                      message: "Write something first!");
+                                } else {
+                                  controller.sendMessageRepo().then((value) => controller.scrollToBottom());
+                                }
+                              },
+                              child: Image.asset(AppImages.send, scale: 3)),
+                        ),
+                      ],
+                    ),
+                    sh15,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        GestureDetector(
+                          onTap: () => Get.to(() => ResourcesView()),
+                          child: Column(
+                            children: [
+                              Image.asset(AppImages.more, scale: 15),
+                              Text("More Resources",
+                                  style: h3.copyWith(fontSize: 13)),
+                            ],
                           ),
-                          sw20,
-                          GestureDetector(
-                            onTap: () {},
-                            child: Column(
-                              children: [
-                                Image.asset(AppImages.check, scale: 4),
-                                sh5,
-                                Text("Pets Are Safe?".tr,
-                                    style: h3.copyWith(fontSize: 13)),
-                              ],
-                            ),
+                        ),
+                        sw20,
+                        GestureDetector(
+                          onTap: () {},
+                          child: Column(
+                            children: [
+                              Image.asset(AppImages.check, scale: 4),
+                              sh5,
+                              Text("Pets Are Safe?".tr,
+                                  style: h3.copyWith(fontSize: 13)),
+                            ],
                           ),
-                        ],
-                      ),
-                    ],
-                  ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-              ),
+              ),// Adjust the space for the bottom bar
             ],
           ),
         );
@@ -186,17 +204,17 @@ class MessageView extends GetView<MessageController> {
 
   Column chatItems(
       {required MessageController controller,
-      String time = "",
-      String helpType = "",
-      String petPhoto = "",
-      String petBreed = "",
-      String petName = "",
-      String petGender = "",
-      String petAge = "",
-      String petAddress = "",
-      String text = "",
-      String senderId = "",
-      String senderImage = ""}) {
+        String time = "",
+        String helpType = "",
+        String petPhoto = "",
+        String petBreed = "",
+        String petName = "",
+        String petGender = "",
+        String petAge = "",
+        String petAddress = "",
+        String text = "",
+        String senderId = "",
+        String senderImage = ""}) {
     return Column(
       children: [
         if (text == "") timeStamp(sendReceiveTime: time),
@@ -267,11 +285,11 @@ class MessageView extends GetView<MessageController> {
 
   Container petCardContainer(
       {required String petImageUrl,
-      required String petBreed,
-      required String petName,
-      required String petGender,
-      required String petAge,
-      required String petAddress}) {
+        required String petBreed,
+        required String petName,
+        required String petGender,
+        required String petAge,
+        required String petAddress}) {
     return Container(
       margin: EdgeInsets.only(top: 10.h, bottom: 10.h),
       width: 158.w,
@@ -329,14 +347,16 @@ class MessageView extends GetView<MessageController> {
                   CupertinoIcons.location_solid,
                   color: AppColors.white,
                 ),
-                SizedBox(
-                    width: 115.w,
-                    child: Text(
-                      petAddress,
-                      style: h5.copyWith(fontSize: 12, color: AppColors.white),
-                      maxLines: 5,
-                      overflow: TextOverflow.ellipsis,
-                    )),
+                Expanded(
+                  child: SizedBox(
+                      width: 115.w,
+                      child: Text(
+                        petAddress,
+                        style: h5.copyWith(fontSize: 12, color: AppColors.white),
+                        maxLines: 5,
+                        overflow: TextOverflow.ellipsis,
+                      )),
+                ),
               ],
             ),
           ],
@@ -347,12 +367,12 @@ class MessageView extends GetView<MessageController> {
 
   Align helpTypeCard(
       {required AlignmentGeometry alignment,
-      required String helpTypeTitle,
-      required String helpTypeIcon,
-      Color textColor = AppColors.black,
-      Color cardColor = AppColors.olive,
-      bool isSentByMe = false,
-      String senderImage = ""}) {
+        required String helpTypeTitle,
+        required String helpTypeIcon,
+        Color textColor = AppColors.black,
+        Color cardColor = AppColors.olive,
+        bool isSentByMe = false,
+        String senderImage = ""}) {
     return Align(
       alignment: alignment,
       child: Row(
@@ -361,17 +381,17 @@ class MessageView extends GetView<MessageController> {
           isSentByMe
               ? const SizedBox.shrink()
               : ClipRRect(
-                  borderRadius: BorderRadius.circular(100.r),
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: 8.0),
-                    child: CustomImage(
-                      imageSrc: senderImage,
-                      imageType: ImageType.network,
-                      height: 36.h,
-                      width: 36.w,
-                    ),
-                  ),
-                ),
+            borderRadius: BorderRadius.circular(100.r),
+            child: Padding(
+              padding: const EdgeInsets.only(right: 8.0),
+              child: CustomImage(
+                imageSrc: senderImage,
+                imageType: ImageType.network,
+                height: 36.h,
+                width: 36.w,
+              ),
+            ),
+          ),
           Container(
             margin: EdgeInsets.only(top: 10.h),
             height: 110,
@@ -404,10 +424,11 @@ class MessageView extends GetView<MessageController> {
   Center timeStamp({required String sendReceiveTime}) {
     return Center(
       child:
-          Text(sendReceiveTime, style: h2.copyWith(color: AppColors.grayLight)),
+      Text(sendReceiveTime, style: h2.copyWith(color: AppColors.grayLight)),
     );
   }
 }
+
 
 class ChatMessage extends StatelessWidget {
   final String text;
@@ -435,7 +456,7 @@ class ChatMessage extends StatelessWidget {
           ),
           sh5,
           Row(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: isSentByMe ? MainAxisAlignment.end : MainAxisAlignment.start,
             children: [
               isSentByMe
                   ? const SizedBox.shrink()

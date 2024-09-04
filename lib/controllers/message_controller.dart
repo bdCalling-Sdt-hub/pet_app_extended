@@ -16,6 +16,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:developer' as print;
 
+import 'package:get/state_manager.dart';
+
 class MessageController extends GetxController {
   //TODO: Implement MessageController
 
@@ -25,6 +27,8 @@ class MessageController extends GetxController {
   @override
   void onInit() {
     searchController.addListener(_filterChatUsers);
+    listenMessage();
+    print.log("Mr. Chat ID Is Printing ===========  $chatId") ;
     super.onInit();
   }
 
@@ -38,6 +42,7 @@ class MessageController extends GetxController {
   static String chatUserId = "";
   static String chatType = "";
   static String petId = "";
+  String chatId = "";
 
   String helpTypeTitle = "";
 
@@ -54,6 +59,8 @@ class MessageController extends GetxController {
   List<ChatUserModel>chatArchivedUsersList = [];
   RxList<ChatUserModel> chatActiveUsersList = <ChatUserModel>[].obs;
   RxList<ChatUserModel> filteredChatUsersList = <ChatUserModel>[].obs;
+
+  final ScrollController scrollController = ScrollController();
 
 
 
@@ -202,6 +209,8 @@ class MessageController extends GetxController {
       }
       update();
 
+      listenMessage();
+      print.log("Mr. Chat ID Is Printing ===========  $chatId") ;
       helpTypeTitle = getTitleFromHelpType(helpType);
       Get.to(() => MessageView());
 
@@ -215,7 +224,7 @@ class MessageController extends GetxController {
 
   ///=================== Send Message Repo ==================================
 
-  Future sendMessageRepo({required String chatId}) async {
+  Future sendMessageRepo() async {
     isLoading = true;
     update();
 
@@ -227,6 +236,13 @@ class MessageController extends GetxController {
     Map<String, String> body = {
       "text": sendMsgController.text
     };
+
+    chatItemsList.add(ChatMessageModel(
+      chatId: chatId,
+      time: OtherHelper.formatTime(DateTime.now().toLocal().toString()),
+      text: sendMsgController.text,
+    ));
+    update();
 
     var response = await ApiService.postApi("${AppUrls.messages}/$chatId", body, header: header) ;
 
@@ -281,25 +297,38 @@ class MessageController extends GetxController {
   //     }
   //   });
   // }
-  //
-  // listenMessage() async {
-  //   SocketServices.socket.on('new-message::$chatId', (data) {
-  //     status = Status.loading;
-  //     update();
-  //
-  //     DateTime time = DateTime.tryParse(data['createdAt']) ?? DateTime.now();
-  //     chatDataList.insert(
-  //         0,
-  //         ChatMessageModel(
-  //             isNotice: data['messageType'] == "notice" ? true : false,
-  //             time: time.toLocal(),
-  //             text: data['message'],
-  //             image: data['sender']['image'],
-  //             isMe: false));
-  //
-  //     status = Status.completed;
-  //     update();
-  //   });
-  // }
+
+  listenMessage() async {
+    SocketServices.socket.on("user-message::$chatId", (data) {
+      isLoading = true;
+      update();
+
+      var singleChatData = ChatDataModel.fromJson(data);
+      print.log("Data from socket : =========>>>> $singleChatData");
+
+      DateTime time = DateTime.tryParse(data['createdAt']) ?? DateTime.now();
+      chatItemsList.add(
+          ChatMessageModel(
+            chatId: singleChatData.chat,
+            time: OtherHelper.formatTime(singleChatData.createdAt),
+            text: singleChatData.text,
+            sender: singleChatData.sender,
+          )
+      );
+      scrollToBottom();
+      isLoading = false;
+      update();
+    });
+  }
+
+  void scrollToBottom() {
+    if (scrollController.hasClients) {
+      scrollController.animateTo(
+        scrollController.position.maxScrollExtent,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeOut,
+      );
+    }
+  }
 
 }

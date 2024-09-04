@@ -49,6 +49,8 @@ class ChatListView extends StatelessWidget {
                 SizedBox(height: 10),
 
                 // Display filtered chat users under the search bar
+
+                /// ======================== Search List ======================
                 controller.filteredChatUsersList.isNotEmpty && controller.searchController.text.isNotEmpty
                     ? Expanded(
                   child: ListView.builder(
@@ -158,6 +160,7 @@ class ChatListView extends StatelessWidget {
                             controller.chatActiveUsersList[index];
                             return GestureDetector(
                               onTap: () {
+                                controller.chatId = chatUserDetails.id;
                                 controller.createOrGetMessageRepo(
                                     chatId: chatUserDetails.id);
                                 // Get.to(() => const MessageView());
@@ -188,6 +191,7 @@ class ChatListView extends StatelessWidget {
                             controller.chatArchivedUsersList[index];
                             return GestureDetector(
                               onTap: () {
+                                controller.chatId = chatUserDetails.id;
                                 controller.createOrGetMessageRepo(
                                     chatId: chatUserDetails.id);
                               },

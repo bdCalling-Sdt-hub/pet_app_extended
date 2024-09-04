@@ -4,6 +4,7 @@ import 'package:felpus/extensions/extension.dart';
 import 'package:felpus/views/components/custom_loader.dart';
 import 'package:felpus/views/components/custom_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../utils/app_color/app_colors.dart';
@@ -64,15 +65,14 @@ class _EmergencySendSmsTypeViewState extends State<EmergencySendSmsTypeView> {
                                 shrinkWrap: true,
                                 itemCount: controller.groupsList.length,
                                 gridDelegate:
-                                    const SliverGridDelegateWithFixedCrossAxisCount(
+                                    SliverGridDelegateWithFixedCrossAxisCount(
                                         crossAxisCount: 3,
-                                        crossAxisSpacing: 8.0,
-                                        mainAxisSpacing: 18.0,
-                                        mainAxisExtent: 100),
+                                        crossAxisSpacing: 8.w,
+                                        mainAxisSpacing: 18.h,
+                                        mainAxisExtent: 100.h),
                                 physics: const NeverScrollableScrollPhysics(),
                                 itemBuilder: (context, index) {
-                                  var groupsItems =
-                                      controller.groupsList[index];
+                                  var groupsItems = controller.groupsList[index];
                                   return Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
@@ -177,8 +177,7 @@ class _EmergencySendSmsTypeViewState extends State<EmergencySendSmsTypeView> {
                     ? const CustomLoader()
                     : controller.contactsList.isEmpty
                         ? Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 32.0),
+                            padding: const EdgeInsets.symmetric(horizontal: 32.0),
                             child: CustomText(text: "No contacts found".tr),
                           )
                         : Flexible(
@@ -187,11 +186,11 @@ class _EmergencySendSmsTypeViewState extends State<EmergencySendSmsTypeView> {
                                 shrinkWrap: true,
                                 itemCount: controller.contactsList.length,
                                 gridDelegate:
-                                    const SliverGridDelegateWithFixedCrossAxisCount(
+                                    SliverGridDelegateWithFixedCrossAxisCount(
                                         crossAxisCount: 3,
-                                        crossAxisSpacing: 8.0,
-                                        mainAxisSpacing: 8.0,
-                                        mainAxisExtent: 70),
+                                        crossAxisSpacing: 8.w,
+                                        mainAxisSpacing: 8.h,
+                                        mainAxisExtent: 70.h),
                                 itemBuilder: (context, index) {
                                   var contactItems =
                                       controller.contactsList[index];

@@ -1,6 +1,7 @@
 import 'package:felpus/helpers/prefs_helper.dart';
 import 'package:felpus/services/ads_service.dart';
 import 'package:felpus/services/location_service.dart';
+import 'package:felpus/services/socket_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,6 +16,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   OtherService.checkConnection();
   LocationService.locationPermission() ;
+  SocketServices.connectToSocket();
 
   await dotenv.load(fileName: 'assets/.env');
   await PrefsHelper.getAllPrefData();

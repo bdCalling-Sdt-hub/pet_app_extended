@@ -161,19 +161,21 @@ class _SelectPetsViewState extends State<SelectPetsView> {
                                                     ? AppColors.white
                                                     : AppColors.mainColor,
                                               ),
-                                              SizedBox(
-                                                width: 115.w,
-                                                child: Text(
-                                                  petListItems.address,
-                                                  style: h5.copyWith(
-                                                    fontSize: 12,
-                                                    color: selectedPet == index
-                                                        ? AppColors.white
-                                                        : AppColors.black,
+                                              Expanded(
+                                                child: SizedBox(
+                                                  width: 115.w,
+                                                  child: Text(
+                                                    petListItems.address,
+                                                    style: h5.copyWith(
+                                                      fontSize: 12,
+                                                      color: selectedPet == index
+                                                          ? AppColors.white
+                                                          : AppColors.black,
+                                                    ),
+                                                    maxLines: 2,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
                                                   ),
-                                                  maxLines: 2,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
                                                 ),
                                               ),
                                             ],

@@ -3,11 +3,9 @@ import 'package:socket_io_client/socket_io_client.dart' as io;
 
 import '../utils/App_Urls/app_urls.dart';
 
-
 class SocketServices {
   static late io.Socket socket;
   bool show = false;
-
 
   ///<<<============ Connect with socket ====================>>>
   static void connectToSocket() {
@@ -27,7 +25,7 @@ class SocketServices {
       }
     });
 
-    socket.connect();
 
+    socket.connect();
   }
 }
