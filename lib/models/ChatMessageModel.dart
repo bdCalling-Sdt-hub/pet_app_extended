@@ -1,38 +1,31 @@
-import 'package:felpus/models/pet_model.dart';
+import 'chat_data_model.dart';
 
 class ChatMessageModel {
+  final String chatId;
   final String time;
-  final String? helpType;
-  final PetModel? pet;
-  final String? text;
-  final String? senderId;
+  final String helpType;
+  final PetModel pet;
+  final String text;
+  final Sender sender;
 
   ChatMessageModel({
+    required this.chatId,
     required this.time,
-    this.helpType,
-    this.pet,
-    this.text,
-    this.senderId,
-  });
+    this.helpType = "",
+    PetModel? pet,
+    this.text = "",
+    Sender? sender,
+  })  : pet = pet ?? PetModel(),
+        sender = sender ?? Sender();
 
   factory ChatMessageModel.fromJson(Map<String, dynamic> json) {
     return ChatMessageModel(
+      chatId: json['chatId'] ?? '',
       time: json['time'] ?? '',
       helpType: json['helpType'],
       pet: json['pet'] != null ? PetModel.fromJson(json['pet']) : null,
       text: json['text'],
-      senderId: json['senderId'],
+      sender: json['senderId'] != null ? Sender.fromJson(json['sender']) : null,
     );
   }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'time': time,
-      'helpType': helpType,
-      'pet': pet?.toJson(),
-      'text': text,
-      'senderId': senderId,
-    };
-  }
 }
-

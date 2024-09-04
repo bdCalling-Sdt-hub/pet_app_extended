@@ -6,6 +6,7 @@ import 'package:felpus/utils/App_Utils/app_utils.dart';
 import 'package:felpus/views/components/custom_image.dart';
 import 'package:felpus/views/components/custom_loader.dart';
 import 'package:felpus/views/components/custom_text.dart';
+import 'package:felpus/views/components/no_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -62,23 +63,31 @@ class MessageView extends GetView<MessageController> {
                     Expanded(
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 14.0),
-                        child: ListView.builder(
-                          itemCount: controller.chatDataList.length,
-                          itemBuilder: (context, index) {
-                            var chatDataItems = controller.chatDataList[index];
-
-                            chatId = chatDataItems.chat;
-                            print(chatDataItems.helpType);
-                            return chatItems(
-                                controller: controller,
-                              text: "",
-                              helpType: "",
-                              petModel: PetModel(),
-                              sender: Sender(),
-                              time: ""
-                            );
-                          },
-                        ),
+                        child: controller.chatItemsList.isNotEmpty
+                            ? ListView.builder(
+                                itemCount: controller.chatItemsList.length,
+                                itemBuilder: (context, index) {
+                                  var chatDataItems =
+                                      controller.chatItemsList[index];
+                                  chatId = chatDataItems.chatId;
+                                  print("===============>>>> ${chatDataItems}");
+                                  return chatItems(
+                                    controller: controller,
+                                    text: chatDataItems.text,
+                                    helpType: chatDataItems.helpType,
+                                    time: chatDataItems.time,
+                                    petPhoto: chatDataItems.pet.photo,
+                                    petName: chatDataItems.pet.petName,
+                                    petBreed: chatDataItems.pet.breed,
+                                    petAddress: chatDataItems.pet.address,
+                                    petAge: chatDataItems.pet.age,
+                                    petGender: chatDataItems.pet.sex,
+                                    senderId: chatDataItems.sender.id,
+                                    senderImage: chatDataItems.sender.photo,
+                                  );
+                                },
+                              )
+                            : const NoData(),
                       ),
                     ),
                     100.height
@@ -164,7 +173,6 @@ class MessageView extends GetView<MessageController> {
                           ),
                         ],
                       ),
-
                     ],
                   ),
                 ),
@@ -176,88 +184,85 @@ class MessageView extends GetView<MessageController> {
     );
   }
 
-  Column chatItems({
-    required MessageController controller,
-    String time = "",
-    String helpType = "",
-    String petPhoto = "",
-    String petBreed = "",
-    String petName = "",
-    String petSex = "",
-    String petAge = "",
-    String petAddress = "",
-    String text = "",
-    Sender? senderModel,
-  }) {
-
+  Column chatItems(
+      {required MessageController controller,
+      String time = "",
+      String helpType = "",
+      String petPhoto = "",
+      String petBreed = "",
+      String petName = "",
+      String petGender = "",
+      String petAge = "",
+      String petAddress = "",
+      String text = "",
+      String senderId = "",
+      String senderImage = ""}) {
     return Column(
-                            children: [
-                              if (text == "")
-                                timeStamp(sendReceiveTime: OtherHelper.formatTime(time)),
-
-                              if (text == "" && senderModel != null)
-                                helpTypeCard(
-                                    alignment: senderModel.id == PrefsHelper.userId
-                                            ? Alignment.centerRight
-                                            : Alignment.centerLeft,
-                                    helpTypeTitle: controller.getTitleFromHelpType(helpType),
-                                    helpTypeIcon: "${controller.helpTypeIcons[helpType]}"),
-
-                              if (text == "" && petModel != null)
-                                Align(
-                                  alignment: senderModel.id == PrefsHelper.userId
-                                          ? Alignment.centerRight
-                                          : Alignment.centerLeft,
-                                  child: petCardContainer(
-                                      petImageUrl: petModel.photo,
-                                      petBreed: petModel.breed,
-                                      petName: petModel.petName,
-                                      petGender: petModel.sex,
-                                      petAge: petModel.age,
-                                      petAddress: petModel.address),
-                                ),
-                              if (text != "" && senderModel != null)
-                                ChatMessage(
-                                    text: text,
-                                    time: OtherHelper.formatTime(time),
-                                    isSentByMe:
-                                    senderModel.id == PrefsHelper.userId
-                                            ? true
-                                            : false),
-
-                              if(text == "safe" && senderModel != null)
-                                helpTypeCard(
-                                  alignment: senderModel.id == PrefsHelper.userId
-                                      ? Alignment.centerRight
-                                      : Alignment.centerLeft,
-                                  helpTypeIcon: AppImages.petSaveIcon,
-                                  helpTypeTitle: "Pets Are Safe".tr,
-                                  textColor: AppColors.white,
-                                  cardColor: AppColors.green),
-
-                              if(text == "safe" && petModel != null && senderModel != null)
-                                Align(
-                                  alignment:
-                                  senderModel.id == PrefsHelper.userId
-                                      ? Alignment.centerRight
-                                      : Alignment.centerLeft,
-                                  child: petCardContainer(
-                                      petImageUrl: petModel.photo,
-                                      petBreed: petModel.breed,
-                                      petName: petModel.petName,
-                                      petGender: petModel.sex,
-                                      petAge: petModel.age,
-                                      petAddress: petModel.address),
-                                ),
-                              if(text == "safe")
-                                16.height,
-                              if(text == "safe")
-                                CustomText(
-                                  textAlign: TextAlign.center,
-                                    text: "Conversation ends here for this pet, thank you".tr, fontWeight: FontWeight.w600,),
-                              10.height,
-                            ],
-                          );
+      children: [
+        if (text == "") timeStamp(sendReceiveTime: time),
+        if (text == "")
+          helpTypeCard(
+              alignment: senderId == PrefsHelper.userId
+                  ? Alignment.centerRight
+                  : Alignment.centerLeft,
+              helpTypeTitle: controller.getTitleFromHelpType(helpType),
+              helpTypeIcon: "${controller.helpTypeIcons[helpType]}",
+              isSentByMe: senderId == PrefsHelper.userId ? true : false,
+              senderImage: senderImage),
+        if (text == "")
+          Align(
+            alignment: senderId == PrefsHelper.userId
+                ? Alignment.centerRight
+                : Alignment.centerLeft,
+            child: petCardContainer(
+                petImageUrl: petPhoto,
+                petBreed: petBreed,
+                petName: petName,
+                petGender: petGender,
+                petAge: petAge,
+                petAddress: petAddress),
+          ),
+        if (text != "")
+          ChatMessage(
+            text: text,
+            time: time,
+            isSentByMe: senderId == PrefsHelper.userId ? true : false,
+            senderImage: senderImage,
+          ),
+        if (text == "safe")
+          helpTypeCard(
+              alignment: senderId == PrefsHelper.userId
+                  ? Alignment.centerRight
+                  : Alignment.centerLeft,
+              helpTypeIcon: AppImages.petSaveIcon,
+              helpTypeTitle: "Pets Are Safe".tr,
+              textColor: AppColors.white,
+              cardColor: AppColors.green,
+              isSentByMe: senderId == PrefsHelper.userId ? true : false,
+              senderImage: senderImage),
+        if (text == "safe")
+          Align(
+            alignment: senderId == PrefsHelper.userId
+                ? Alignment.centerRight
+                : Alignment.centerLeft,
+            child: petCardContainer(
+                petImageUrl: petPhoto,
+                petBreed: petBreed,
+                petName: petName,
+                petGender: petGender,
+                petAge: petAge,
+                petAddress: petAddress),
+          ),
+        if (text == "safe") 16.height,
+        if (text == "safe")
+          CustomText(
+            textAlign: TextAlign.center,
+            text: "Conversation ends here for this pet, thank you".tr,
+            fontWeight: FontWeight.w600,
+          ),
+        10.height,
+      ],
+    );
   }
 
   Container petCardContainer(
@@ -344,32 +349,54 @@ class MessageView extends GetView<MessageController> {
       {required AlignmentGeometry alignment,
       required String helpTypeTitle,
       required String helpTypeIcon,
-        Color textColor = AppColors.black,
-      Color cardColor = AppColors.olive}) {
+      Color textColor = AppColors.black,
+      Color cardColor = AppColors.olive,
+      bool isSentByMe = false,
+      String senderImage = ""}) {
     return Align(
       alignment: alignment,
-      child: Container(
-        margin: EdgeInsets.only(top: 10.h),
-        height: 110,
-        width: 110,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20), color: cardColor),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CustomImage(
-              imageSrc: helpTypeIcon,
-              imageType: ImageType.png,
-              height: 30,
-              width: 30,
+      child: Row(
+        mainAxisAlignment: isSentByMe? MainAxisAlignment.end : MainAxisAlignment.start,
+        children: [
+          isSentByMe
+              ? const SizedBox.shrink()
+              : ClipRRect(
+                  borderRadius: BorderRadius.circular(100.r),
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: CustomImage(
+                      imageSrc: senderImage,
+                      imageType: ImageType.network,
+                      height: 36.h,
+                      width: 36.w,
+                    ),
+                  ),
+                ),
+          Container(
+            margin: EdgeInsets.only(top: 10.h),
+            height: 110,
+            width: 110,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20), color: cardColor),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CustomImage(
+                  imageSrc: helpTypeIcon,
+                  imageType: ImageType.png,
+                  height: 30,
+                  width: 30,
+                ),
+                8.height,
+                Text(
+                  helpTypeTitle,
+                  style: h2.copyWith(
+                      fontWeight: FontWeight.w700, color: textColor),
+                )
+              ],
             ),
-            8.height,
-            Text(
-              helpTypeTitle,
-              style: h2.copyWith(fontWeight: FontWeight.w700, color: textColor),
-            )
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -386,11 +413,13 @@ class ChatMessage extends StatelessWidget {
   final String text;
   final String time;
   final bool isSentByMe;
+  final String senderImage;
 
   const ChatMessage(
       {super.key,
       required this.text,
       required this.time,
+      this.senderImage = '',
       required this.isSentByMe});
 
   @override
@@ -405,21 +434,41 @@ class ChatMessage extends StatelessWidget {
             child: Text(time, style: h2.copyWith(color: AppColors.grayLight)),
           ),
           sh5,
-          Container(
-            padding: const EdgeInsets.all(12.0),
-            decoration: BoxDecoration(
-              color: isSentByMe ? AppColors.chatColor2 : AppColors.chatColor1,
-              borderRadius: BorderRadius.circular(8.0),
-            ),
-            child: SizedBox(
-                width: Get.width / 1.8,
-                child: Text(
-                  text,
-                  style: h3.copyWith(
-                    fontSize: 14,
-                    color: isSentByMe ? AppColors.white : AppColors.black,
-                  ),
-                )),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              isSentByMe
+                  ? const SizedBox.shrink()
+                  : ClipRRect(
+                      borderRadius: BorderRadius.circular(100.r),
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child: CustomImage(
+                          imageSrc: senderImage,
+                          imageType: ImageType.network,
+                          height: 36.h,
+                          width: 36.w,
+                        ),
+                      ),
+                    ),
+              Container(
+                padding: const EdgeInsets.all(12.0),
+                decoration: BoxDecoration(
+                  color:
+                      isSentByMe ? AppColors.chatColor2 : AppColors.chatColor1,
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+                child: SizedBox(
+                    width: Get.width / 1.8,
+                    child: Text(
+                      text,
+                      style: h3.copyWith(
+                        fontSize: 14,
+                        color: isSentByMe ? AppColors.white : AppColors.black,
+                      ),
+                    )),
+              ),
+            ],
           ),
           sh5,
         ],

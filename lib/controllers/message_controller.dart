@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:felpus/helpers/other_helper.dart';
 import 'package:felpus/helpers/prefs_helper.dart';
 import 'package:felpus/models/ChatMessageModel.dart';
 import 'package:felpus/models/chat_data_model.dart';
@@ -40,6 +41,8 @@ class MessageController extends GetxController {
 
   String helpTypeTitle = "";
 
+  List<ChatMessageModel>chatItemsList = [];
+
   List<ChatDataModel> chatDataList = [];
   ChatInfo chatPersonInfo = ChatInfo.fromJson({});
 
@@ -47,7 +50,6 @@ class MessageController extends GetxController {
   TextEditingController sendMsgController = TextEditingController();
 
   bool isLoading = false;
-  // List<ChatMessageModel>chatItemsList = [];
 
   List<ChatUserModel>chatArchivedUsersList = [];
   RxList<ChatUserModel> chatActiveUsersList = <ChatUserModel>[].obs;
@@ -176,9 +178,18 @@ class MessageController extends GetxController {
       var responseData = jsonDecode(response.body)["data"]["allMessage"];
       chatDataList = (responseData as List).map((data) => ChatDataModel.fromJson(data)).toList();
 
-      for(var item in chatDataList){
-
-      }
+      chatItemsList = chatDataList.map((chatData) {
+        return ChatMessageModel(
+          // map the fields from chatData to ChatMessageModel fields
+          chatId: chatId,
+          time: OtherHelper.formatTime(chatData.createdAt),
+          helpType: chatData.helpType,
+          text: chatData.text,
+          pet: chatData.pet,
+          sender: chatData.sender,
+          // add any other required fields
+        );
+      }).toList();
 
       final Map<String, dynamic> data = jsonDecode(response.body)["data"];
 
