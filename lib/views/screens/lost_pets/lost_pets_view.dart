@@ -118,7 +118,7 @@ class LostPetsView extends GetView<LostPetsController> {
                       GestureDetector(
                         onTap: () => Get.to(() => AllFoundPetsView()),
                         child: Text(
-                          "See all",
+                          "See all".tr,
                           style: h2.copyWith(
                               fontSize: 18, color: AppColors.ash),
                         ),

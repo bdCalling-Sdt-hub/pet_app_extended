@@ -1,5 +1,6 @@
 import 'package:felpus/views/components/custom_loader.dart';
 import 'package:felpus/views/components/custom_textfelid.dart';
+import 'package:felpus/views/components/no_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -145,7 +146,10 @@ class ChatListView extends StatelessWidget {
                         height: 300.h,
                         child: CustomLoader(),
                       )
-                          : Expanded(
+                          : controller.chatActiveUsersList.isEmpty? const SizedBox(
+                        height: 100,
+                          child: NoData()
+                      ) : Expanded(
                         child: ListView.builder(
                           itemCount:
                           controller.chatActiveUsersList.length,
@@ -173,7 +177,10 @@ class ChatListView extends StatelessWidget {
                           },
                         ),
                       )
-                          : Expanded(
+                          : controller.chatArchivedUsersList.isEmpty? const SizedBox(
+                          height: 100,
+                          child: NoData()
+                      ) : Expanded(
                         child: ListView.builder(
                           itemCount: controller.chatArchivedUsersList.length,
                           itemBuilder: (context, index) {

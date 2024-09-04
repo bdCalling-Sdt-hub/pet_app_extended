@@ -69,7 +69,14 @@ class MessageView extends GetView<MessageController> {
 
                             chatId = chatDataItems.chat;
                             print(chatDataItems.helpType);
-                            return chatItems(chatDataItems, controller);
+                            return chatItems(
+                                controller: controller,
+                              text: "",
+                              helpType: "",
+                              petModel: PetModel(),
+                              sender: Sender(),
+                              time: ""
+                            );
                           },
                         ),
                       ),
@@ -169,78 +176,82 @@ class MessageView extends GetView<MessageController> {
     );
   }
 
-  Column chatItems(ChatDataModel chatDataItems, MessageController controller) {
+  Column chatItems({
+    required MessageController controller,
+    String time = "",
+    String helpType = "",
+    String petPhoto = "",
+    String petBreed = "",
+    String petName = "",
+    String petSex = "",
+    String petAge = "",
+    String petAddress = "",
+    String text = "",
+    Sender? senderModel,
+  }) {
+
     return Column(
                             children: [
-                              if (chatDataItems.text == "")
-                                timeStamp(
-                                    sendReceiveTime: OtherHelper.formatTime(
-                                        chatDataItems.createdAt)),
-                              if (chatDataItems.text == "") 10.height,
-                              if (chatDataItems.text == "")
+                              if (text == "")
+                                timeStamp(sendReceiveTime: OtherHelper.formatTime(time)),
+
+                              if (text == "" && senderModel != null)
                                 helpTypeCard(
-                                    alignment:
-                                        chatDataItems.sender == PrefsHelper.userId
+                                    alignment: senderModel.id == PrefsHelper.userId
                                             ? Alignment.centerRight
                                             : Alignment.centerLeft,
-                                    helpTypeTitle:
-                                        controller.getTitleFromHelpType(
-                                            chatDataItems.helpType),
-                                    helpTypeIcon:
-                                        "${controller.helpTypeIcons[chatDataItems.helpType]}"),
-                              if (chatDataItems.text == "") 10.height,
-                              if (chatDataItems.text == "")
+                                    helpTypeTitle: controller.getTitleFromHelpType(helpType),
+                                    helpTypeIcon: "${controller.helpTypeIcons[helpType]}"),
+
+                              if (text == "" && petModel != null)
                                 Align(
-                                  alignment:
-                                      chatDataItems.sender == PrefsHelper.userId
+                                  alignment: senderModel.id == PrefsHelper.userId
                                           ? Alignment.centerRight
                                           : Alignment.centerLeft,
                                   child: petCardContainer(
-                                      petImageUrl: chatDataItems.pet.photo,
-                                      petBreed: chatDataItems.pet.breed,
-                                      petName: chatDataItems.pet.petName,
-                                      petGender: chatDataItems.pet.sex,
-                                      petAge: chatDataItems.pet.age,
-                                      petAddress: chatDataItems.pet.address),
+                                      petImageUrl: petModel.photo,
+                                      petBreed: petModel.breed,
+                                      petName: petModel.petName,
+                                      petGender: petModel.sex,
+                                      petAge: petModel.age,
+                                      petAddress: petModel.address),
                                 ),
-                              if (chatDataItems.text != "")
+                              if (text != "" && senderModel != null)
                                 ChatMessage(
-                                    text: chatDataItems.text,
-                                    time: OtherHelper.formatTime(
-                                        chatDataItems.createdAt),
+                                    text: text,
+                                    time: OtherHelper.formatTime(time),
                                     isSentByMe:
-                                        chatDataItems.sender == PrefsHelper.userId
+                                    senderModel.id == PrefsHelper.userId
                                             ? true
                                             : false),
-                              if (chatDataItems.text == "") 10.height,
-                              if(controller.isPetSafe.value)
+
+                              if(text == "safe" && senderModel != null)
                                 helpTypeCard(
-                                  alignment: chatDataItems.sender == PrefsHelper.userId
+                                  alignment: senderModel.id == PrefsHelper.userId
                                       ? Alignment.centerRight
                                       : Alignment.centerLeft,
                                   helpTypeIcon: AppImages.petSaveIcon,
                                   helpTypeTitle: "Pets Are Safe".tr,
                                   textColor: AppColors.white,
                                   cardColor: AppColors.green),
-                              if(controller.isPetSafe.value)
-                                10.height,
-                              if(controller.isPetSafe.value)
+
+                              if(text == "safe" && petModel != null && senderModel != null)
                                 Align(
                                   alignment:
-                                  chatDataItems.sender == PrefsHelper.userId
+                                  senderModel.id == PrefsHelper.userId
                                       ? Alignment.centerRight
                                       : Alignment.centerLeft,
                                   child: petCardContainer(
-                                      petImageUrl: chatDataItems.pet.photo,
-                                      petBreed: chatDataItems.pet.breed,
-                                      petName: chatDataItems.pet.petName,
-                                      petGender: chatDataItems.pet.sex,
-                                      petAge: chatDataItems.pet.age,
-                                      petAddress: chatDataItems.pet.address),
+                                      petImageUrl: petModel.photo,
+                                      petBreed: petModel.breed,
+                                      petName: petModel.petName,
+                                      petGender: petModel.sex,
+                                      petAge: petModel.age,
+                                      petAddress: petModel.address),
                                 ),
-                              if(controller.isPetSafe.value)
+                              if(text == "safe")
                                 16.height,
-                              if(controller.isPetSafe.value)
+                              if(text == "safe")
                                 CustomText(
                                   textAlign: TextAlign.center,
                                     text: "Conversation ends here for this pet, thank you".tr, fontWeight: FontWeight.w600,),
@@ -257,6 +268,7 @@ class MessageView extends GetView<MessageController> {
       required String petAge,
       required String petAddress}) {
     return Container(
+      margin: EdgeInsets.only(top: 10.h, bottom: 10.h),
       width: 158.w,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10), color: AppColors.mainColor),
@@ -337,6 +349,7 @@ class MessageView extends GetView<MessageController> {
     return Align(
       alignment: alignment,
       child: Container(
+        margin: EdgeInsets.only(top: 10.h),
         height: 110,
         width: 110,
         decoration: BoxDecoration(

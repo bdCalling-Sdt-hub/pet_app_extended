@@ -1,16 +1,16 @@
 
 import 'package:felpus/models/pet_model.dart';
 
+
 class ChatDataModel {
-  String id;
-  String chat;
-  String text;
-  PetModel pet;
-  String helpType;
-  String sender;
-  String createdAt;
-  String updatedAt;
-  int v;
+  final String id;
+  final String chat;
+  final String text;
+  final PetModel pet;
+  final String helpType;
+  final Sender sender;
+  final String createdAt;  // Kept as String
+  final String updatedAt;  // Kept as String
 
   ChatDataModel({
     this.id = '',
@@ -18,11 +18,13 @@ class ChatDataModel {
     this.text = '',
     PetModel? pet,
     this.helpType = '',
-    this.sender = '',
-    this.createdAt = '',
-    this.updatedAt = '',
-    this.v = 0,
-  }) : pet = pet ?? PetModel();
+    Sender? sender,
+    String? createdAt,
+    String? updatedAt,
+  })  : pet = pet ?? PetModel(),
+        sender = sender ?? Sender(),
+        createdAt = createdAt ?? DateTime.now().toIso8601String(),
+        updatedAt = updatedAt ?? DateTime.now().toIso8601String();
 
   factory ChatDataModel.fromJson(Map<String, dynamic> json) {
     return ChatDataModel(
@@ -31,83 +33,95 @@ class ChatDataModel {
       text: json['text'] ?? '',
       pet: json['pet'] != null ? PetModel.fromJson(json['pet']) : PetModel(),
       helpType: json['helpType'] ?? '',
-      sender: json['sender'] ?? '',
-      createdAt: json['createdAt'] ?? '',
-      updatedAt: json['updatedAt'] ?? '',
-      v: json['__v'] ?? 0,
+      sender: json['sender'] != null ? Sender.fromJson(json['sender']) : Sender(),
+      createdAt: json['createdAt'] ?? DateTime.now().toIso8601String(),
+      updatedAt: json['updatedAt'] ?? DateTime.now().toIso8601String(),
     );
   }
+}
 
-  Map<String, dynamic> toJson() {
-    return {
-      '_id': id,
-      'chat': chat,
-      'text': text,
-      'pet': pet.toJson(),
-      'helpType': helpType,
-      'sender': sender,
-      'createdAt': createdAt,
-      'updatedAt': updatedAt,
-      '__v': v,
-    };
+
+class Sender {
+  final String id;
+  final String fullName;
+  final String email;
+  final String role;
+  final String photo;
+  final String isOnline;
+  final String isDelete;
+  final String isBlock;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+  final String address;
+  final String phone;
+
+  Sender({
+    this.id = '',
+    this.fullName = '',
+    this.email = '',
+    this.role = '',
+    this.photo = '',
+    this.isOnline = '',
+    this.isDelete = '',
+    this.isBlock = '',
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    this.address = '',
+    this.phone = '',
+  })  : createdAt = createdAt ?? DateTime.now(),
+        updatedAt = updatedAt ?? DateTime.now();
+
+  factory Sender.fromJson(Map<String, dynamic> json) {
+    return Sender(
+      id: json['_id'] ?? '',
+      fullName: json['fullName'] ?? '',
+      email: json['email'] ?? '',
+      role: json['role'] ?? '',
+      photo: json['photo'] ?? '',
+      isOnline: json['isOnline'] ?? '',
+      isDelete: json['isDelete'] ?? '',
+      isBlock: json['isBlock'] ?? '',
+      createdAt: json['createdAt'] != null ? DateTime.parse(json['createdAt']) : DateTime.now(),
+      updatedAt: json['updatedAt'] != null ? DateTime.parse(json['updatedAt']) : DateTime.now(),
+      address: json['address'] ?? '',
+      phone: json['phone'] ?? '',
+    );
   }
 }
 
 class PetModel {
-  String id;
-  String userId;
-  String forPets;
-  String petType;
-  String photo;
-  String color;
-  String petName;
-  String age;
-  String breed;
-  String sex;
-  String weight;
-  String address;
-  String healthCondition;
-  String neuter;
-  String vaccine;
-  String microchipNumber;
-  String temper;
-  String activityLevel;
-  String behavior;
-  String specialNeeds;
-  String petHistory;
-  String contactInformation;
-  String description;
-  String isDelete;
-  String report;
-  DateTime createdAt;
-  DateTime updatedAt;
+  final String id;
+  final String userId;
+  final String forPets;
+  final String petType;
+  final String photo;
+  final String color;
+  final String petName;
+  final String age;
+  final String breed;
+  final String sex;
+  final String address;
+  final String description;
+  final String isDelete;
+  final String report;
+  final DateTime createdAt;
+  final DateTime updatedAt;
 
   PetModel({
-    this.id = "",
-    this.userId = "",
-    this.forPets = "",
-    this.petType = "",
-    this.photo = "",
-    this.color = "",
-    this.petName = "",
-    this.age = "",
-    this.breed = "",
-    this.sex = "",
-    this.weight = "",
-    this.address = "",
-    this.healthCondition = "",
-    this.neuter = "Yes",
-    this.vaccine = "Yes",
-    this.microchipNumber = "",
-    this.temper = "",
-    this.activityLevel = "",
-    this.behavior = "",
-    this.specialNeeds = "no",
-    this.petHistory = "no",
-    this.contactInformation = "",
-    this.description = "",
-    this.isDelete = "no",
-    this.report = "pending",
+    this.id = '',
+    this.userId = '',
+    this.forPets = '',
+    this.petType = '',
+    this.photo = '',
+    this.color = '',
+    this.petName = '',
+    this.age = '',
+    this.breed = '',
+    this.sex = '',
+    this.address = '',
+    this.description = '',
+    this.isDelete = '',
+    this.report = '',
     DateTime? createdAt,
     DateTime? updatedAt,
   })  : createdAt = createdAt ?? DateTime.now(),
@@ -115,66 +129,23 @@ class PetModel {
 
   factory PetModel.fromJson(Map<String, dynamic> json) {
     return PetModel(
-      id: json['_id'] ?? "",
-      userId: json['userId'] ?? "",
-      forPets: json['forPets'] ?? "",
-      petType: json['petType'] ?? "",
-      photo: json['photo'] ?? "",
-      color: json['color'] ?? "",
-      petName: json['petName'] ?? "",
-      age: json['age'] ?? "",
-      breed: json['breed'] ?? "",
-      sex: json['sex'] ?? "",
-      weight: json['weight'] ?? "",
-      address: json['address'] ?? "",
-      healthCondition: json['healthCondition'] ?? "",
-      neuter: json['neuter'] ?? "Yes",
-      vaccine: json['vaccine'] ?? "Yes",
-      microchipNumber: json['microchipNumber'] ?? "",
-      temper: json['temper'] ?? "",
-      activityLevel: json['activityLevel'] ?? "",
-      behavior: json['behavior'] ?? "",
-      specialNeeds: json['specialNeeds'] ?? "no",
-      petHistory: json['petHistory'] ?? "no",
-      contactInformation: json['contactInformation'] ?? "",
-      description: json['description'] ?? "",
-      isDelete: json['isDelete'] ?? "no",
-      report: json['report'] ?? "pending",
-      createdAt: DateTime.tryParse(json['createdAt'] ?? "") ?? DateTime.now(),
-      updatedAt: DateTime.tryParse(json['updatedAt'] ?? "") ?? DateTime.now(),
+      id: json['_id'] ?? '',
+      userId: json['userId'] ?? '',
+      forPets: json['forPets'] ?? '',
+      petType: json['petType'] ?? '',
+      photo: json['photo'] ?? '',
+      color: json['color'] ?? '',
+      petName: json['petName'] ?? '',
+      age: json['age'] ?? '',
+      breed: json['breed'] ?? '',
+      sex: json['sex'] ?? '',
+      address: json['address'] ?? '',
+      description: json['description'] ?? '',
+      isDelete: json['isDelete'] ?? '',
+      report: json['report'] ?? '',
+      createdAt: json['createdAt'] != null ? DateTime.parse(json['createdAt']) : DateTime.now(),
+      updatedAt: json['updatedAt'] != null ? DateTime.parse(json['updatedAt']) : DateTime.now(),
     );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      '_id': id,
-      'userId': userId,
-      'forPets': forPets,
-      'petType': petType,
-      'photo': photo,
-      'color': color,
-      'petName': petName,
-      'age': age,
-      'breed': breed,
-      'sex': sex,
-      'weight': weight,
-      'address': address,
-      'healthCondition': healthCondition,
-      'neuter': neuter,
-      'vaccine': vaccine,
-      'microchipNumber': microchipNumber,
-      'temper': temper,
-      'activityLevel': activityLevel,
-      'behavior': behavior,
-      'specialNeeds': specialNeeds,
-      'petHistory': petHistory,
-      'contactInformation': contactInformation,
-      'description': description,
-      'isDelete': isDelete,
-      'report': report,
-      'createdAt': createdAt.toIso8601String(),
-      'updatedAt': updatedAt.toIso8601String(),
-    };
   }
 }
 

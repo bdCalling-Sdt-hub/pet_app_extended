@@ -2,7 +2,6 @@ import 'package:felpus/models/pet_model.dart';
 
 class ChatMessageModel {
   final String time;
-  final String? icon;
   final String? helpType;
   final PetModel? pet;
   final String? text;
@@ -10,7 +9,6 @@ class ChatMessageModel {
 
   ChatMessageModel({
     required this.time,
-    this.icon,
     this.helpType,
     this.pet,
     this.text,
@@ -20,7 +18,6 @@ class ChatMessageModel {
   factory ChatMessageModel.fromJson(Map<String, dynamic> json) {
     return ChatMessageModel(
       time: json['time'] ?? '',
-      icon: json['icon'],
       helpType: json['helpType'],
       pet: json['pet'] != null ? PetModel.fromJson(json['pet']) : null,
       text: json['text'],
@@ -31,7 +28,6 @@ class ChatMessageModel {
   Map<String, dynamic> toJson() {
     return {
       'time': time,
-      'icon': icon,
       'helpType': helpType,
       'pet': pet?.toJson(),
       'text': text,

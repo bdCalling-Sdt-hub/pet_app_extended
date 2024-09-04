@@ -37,6 +37,7 @@ class MessageController extends GetxController {
   static String chatUserId = "";
   static String chatType = "";
   static String petId = "";
+
   String helpTypeTitle = "";
 
   List<ChatDataModel> chatDataList = [];
@@ -46,7 +47,8 @@ class MessageController extends GetxController {
   TextEditingController sendMsgController = TextEditingController();
 
   bool isLoading = false;
-  List<ChatMessageModel>chatItemsList = [];
+  // List<ChatMessageModel>chatItemsList = [];
+
   List<ChatUserModel>chatArchivedUsersList = [];
   RxList<ChatUserModel> chatActiveUsersList = <ChatUserModel>[].obs;
   RxList<ChatUserModel> filteredChatUsersList = <ChatUserModel>[].obs;

@@ -6,6 +6,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'Languages/languages.dart';
 import 'core/app_routes.dart';
 import 'core/dependency_injection.dart';
 import 'services/other_service.dart';
@@ -31,6 +32,10 @@ Future<void> main() async {
           return GetMaterialApp(
             debugShowCheckedModeBanner: false,
             title: "Felpus",
+            locale: Locale(PrefsHelper.localizationLanguageCode,
+                PrefsHelper.localizationCountryCode),
+            fallbackLocale: const Locale("en", "US"),
+            translations: LocalConstants(),
             defaultTransition: Transition.noTransition,
             transitionDuration:  const Duration(milliseconds: 400),
             initialRoute: AppRoutes.splashView,

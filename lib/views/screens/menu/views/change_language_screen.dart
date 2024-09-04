@@ -74,7 +74,7 @@ class ChangeLanguageScreen extends StatelessWidget {
 
                           if (kDebugMode) {
                             print(
-                                "Language is: ---------------->> ${locale[index]["name"]}, ${locale[index]["locale"]}");
+                                "Language is: >>>>> ${locale[index]["name"]}, ${locale[index]["locale"]}");
                           }
                         },
                         child: SizedBox(

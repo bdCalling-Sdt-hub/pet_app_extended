@@ -141,7 +141,7 @@ class _SelectPetsViewState extends State<SelectPetsView> {
                                                 ),
                                               ),
                                               Text(
-                                                "${petListItems.age} Years.",
+                                                "${petListItems.age} ${"Years.".tr}",
                                                 style: h4.copyWith(
                                                   fontSize: 13,
                                                   color: selectedPet == index
@@ -200,12 +200,12 @@ class _SelectPetsViewState extends State<SelectPetsView> {
                   onTap: () {
                     if (selectedPet == -1) {
                       Utils.toastMessage(
-                          message: "A pet must be selected before sending a message");
+                          message: "A pet must be selected before sending a message".tr);
                     } else {
                       controller.createOrGetMessageRepo(isNewMsg: true, chatId: "");
                     }
                   },
-                  title: "New Message",
+                  title: "New Message".tr,
                   width: Get.width,
                   color: AppColors.mainColor,
                   titleColor: AppColors.white,

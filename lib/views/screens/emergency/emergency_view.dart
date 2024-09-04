@@ -1,6 +1,7 @@
 import 'package:felpus/extensions/extension.dart';
 
 import 'package:felpus/controllers/message_controller.dart';
+import 'package:felpus/views/components/custom_text.dart';
 import 'package:felpus/views/screens/resources/resources_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,12 +20,12 @@ class EmergencyView extends StatefulWidget {
 
 class _EmergencyViewState extends State<EmergencyView> {
   final List<Map<String, String>> items = [
-    {'title': 'Lost Pets'.tr, 'icon': AppImages.lostPets},
-    {'title': 'Injured Pet'.tr, 'icon': AppImages.injuredPet},
-    {'title': 'Abused Pet'.tr, 'icon': AppImages.abusedPet},
-    {'title': 'Fire'.tr, 'icon': AppImages.fire},
-    {'title': 'Earthquake'.tr, 'icon': AppImages.earthquake},
-    {'title': 'Flood'.tr, 'icon': AppImages.flood},
+    {'title': 'Lost Pets', 'icon': AppImages.lostPets},
+    {'title': 'Injured Pet', 'icon': AppImages.injuredPet},
+    {'title': 'Abused Pet', 'icon': AppImages.abusedPet},
+    {'title': 'Fire', 'icon': AppImages.fire},
+    {'title': 'Earthquake', 'icon': AppImages.earthquake},
+    {'title': 'Flood', 'icon': AppImages.flood},
   ];
 
   int selectedIndex = -1;
@@ -89,6 +90,7 @@ class _EmergencyViewState extends State<EmergencyView> {
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               Image.asset(
@@ -98,10 +100,12 @@ class _EmergencyViewState extends State<EmergencyView> {
                                 color: selectedIndex == index ? AppColors.white : AppColors.black,
                               ),
                               const SizedBox(height: 10),
-                              Text(
-                                item['title']!,
-                                style: h2.copyWith(color: selectedIndex == index ? AppColors.white : AppColors.black),
-                              ),
+                              CustomText(
+                                textAlign: TextAlign.center,
+                                text: item['title']!.tr,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 18,
+                                color: selectedIndex == index ? AppColors.white : AppColors.black,)
                             ],
                           ),
                         ),
