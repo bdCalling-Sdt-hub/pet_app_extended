@@ -71,9 +71,7 @@ class HomeView extends StatelessWidget {
         ),
         body: GetBuilder<HomeController>(
           builder: (controller) => SingleChildScrollView(
-            child: controller.isLoading
-                ? const Center(child: CircularProgressIndicator())
-                : Column(
+            child: Column(
               children: [
                 Stack(
                   children: [
@@ -126,35 +124,39 @@ class HomeView extends StatelessWidget {
                         ),
                       ),
                       sh10,
-                      SizedBox(
-                        height: 45,
-                        child: GroupsNContactsController.instance.groupsList.isEmpty? CustomText(text: "No groups found".tr) : ListView.builder(
-                            shrinkWrap: true,
-                            scrollDirection: Axis.horizontal,
-                            itemCount: GroupsNContactsController.instance.groupsList.length,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 15.0),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius:
-                                      BorderRadius.circular(25),
-                                      color: AppColors.lowGray),
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10.0, vertical: 10),
-                                    child: Center(
-                                      child: Text(
-                                        GroupsNContactsController.instance.groupsList[index].groupName,
-                                        style: h2.copyWith(fontSize: 14),
+                      GetBuilder<GroupsNContactsController>(builder: (controller) {
+                        return SizedBox(
+                          height: 45,
+                          child: controller.isGettingGroups
+                              ? const Center(child: CircularProgressIndicator())
+                              :  controller.groupsList.isEmpty? CustomText(text: "No groups found".tr) : ListView.builder(
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              itemCount: controller.groupsList.length,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 15.0),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                        BorderRadius.circular(25),
+                                        color: AppColors.lowGray),
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 10.0, vertical: 10),
+                                      child: Center(
+                                        child: Text(
+                                          GroupsNContactsController.instance.groupsList[index].groupName,
+                                          style: h2.copyWith(fontSize: 14),
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              );
-                            }),
-                      ),
+                                );
+                              }),
+                        );
+                      },),
                       sh10,
 
                       ///<<<================ My Pets ==========================>>>
@@ -178,7 +180,9 @@ class HomeView extends StatelessWidget {
                         ],
                       ),
                       sh10,
-                      controller.myPetList.isEmpty
+                      controller.isLoading
+                          ? const Center(child: CircularProgressIndicator())
+                          : controller.myPetList.isEmpty
                           ? const NoData()
                           : SizedBox(
                         height: 190.h,
@@ -266,7 +270,9 @@ class HomeView extends StatelessWidget {
                       ),
                       sh10,
 
-                      controller.foundPetList.isEmpty
+                      controller.isFoundPetGetting
+                          ? const Center(child: CircularProgressIndicator())
+                          : controller.foundPetList.isEmpty
                           ? const Center(child: NoData())
                           : ListView.builder(
                           physics:

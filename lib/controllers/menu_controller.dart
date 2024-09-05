@@ -1,4 +1,5 @@
 
+import 'package:felpus/controllers/adoption_controller.dart';
 import 'package:felpus/controllers/my_pet_controller.dart';
 import 'package:felpus/utils/App_Utils/app_utils.dart';
 import 'package:felpus/views/screens/adoption/create_adoption_view.dart';
@@ -23,21 +24,228 @@ class MenuDataController extends GetxController {
   bool isLoading = false;
   String? image;
 
-  String selectedPet = 'Choose Your Pet';
-  final List<String> pets = [
-    'Choose Your Pet',
-    'Dogs',
-    'Cats',
-    'Birds',
-    'Fish',
-    'Rodents',
-    'Rabbits',
-    'Reptiles',
-    'Invertebrates',
-    'Ferrets',
-    'Hedgehogs',
-    'Horse'
+  // String selectedPet = 'Choose Your Pet';
+  // final List<String> pets = [
+  //   'Choose Your Pet',
+  //   'Dogs',
+  //   'Cats',
+  //   'Birds',
+  //   'Fish',
+  //   'Rodents',
+  //   'Rabbits',
+  //   'Reptiles',
+  //   'Invertebrates',
+  //   'Ferrets',
+  //   'Hedgehogs',
+  //   'Horse'
+  // ];
+
+  // Pet breeds list containing both pets and their breeds
+  final List<Map<String, dynamic>> petBreedsList = [
+    {
+      "category": "Dogs",
+      "breeds": [
+        "Labrador Retriever",
+        "German Shepherd",
+        "Golden Retriever",
+        "Poodle",
+        "French Bulldog",
+        "Beagle",
+        "Shih Tzu",
+        "Dachshund",
+        "Boxer",
+        "Rottweiler"
+      ]
+    },
+    {
+      "category": "Cats",
+      "breeds": [
+        "Persian Cat",
+        "Maine Coon",
+        "Siamese Cat",
+        "Bengal Cat",
+        "Ragdoll",
+        "Sphynx",
+        "British Shorthair",
+        "Scottish Fold",
+        "Abyssinian",
+        "Russian Blue"
+      ]
+    },
+    {
+      "category": "Birds",
+      "breeds": [
+        "African Grey Parrot",
+        "Budgerigar",
+        "Cockatiel",
+        "Macaw",
+        "Canary",
+        "Lovebird",
+        "Finch",
+        "Amazon Parrot",
+        "Cockatoo",
+        "Eclectus Parrot"
+      ]
+    },
+    {
+      "category": "Fish",
+      "breeds": [
+        "Betta Fish",
+        "Goldfish",
+        "Guppy",
+        "Angelfish",
+        "Discus",
+        "Clownfish",
+        "Tetra",
+        "Swordtail",
+        "Cichlid",
+        "Koi"
+      ]
+    },
+    {
+      "category": "Rodents",
+      "breeds": [
+        "Syrian Hamster",
+        "Dwarf Hamster",
+        "Guinea Pig",
+        "Gerbil",
+        "Mouse",
+        "Chinchilla",
+        "Degus",
+        "Capybara",
+        "Prairie Dog",
+        "Rat"
+      ]
+    },
+    {
+      "category": "Rabbits",
+      "breeds": [
+        "Holland Lop",
+        "Netherland Dwarf",
+        "Flemish Giant",
+        "Mini Rex",
+        "English Angora",
+        "Lionhead",
+        "French Lop",
+        "Californian Rabbit",
+        "Harlequin Rabbit",
+        "Silver Marten"
+      ]
+    },
+    {
+      "category": "Reptiles",
+      "breeds": [
+        "Leopard Gecko",
+        "Ball Python",
+        "Bearded Dragon",
+        "Corn Snake",
+        "Russian Tortoise",
+        "Chameleon",
+        "Green Iguana",
+        "Red-Eared Slider",
+        "Crested Gecko",
+        "Blue-Tongued Skink"
+      ]
+    },
+    {
+      "category": "Invertebrates",
+      "breeds": [
+        "Tarantula",
+        "Emperor Scorpion",
+        "Madagascar Hissing Cockroach",
+        "Hermit Crab",
+        "Giant African Millipede",
+        "Giant Asian Mantis",
+        "Stick Insect",
+        "Jumping Spider",
+        "Ants",
+        "Sea Monkeys"
+      ]
+    },
+    {
+      "category": "Ferrets",
+      "breeds": [
+        "Standard Ferret",
+        "Angora Ferret",
+        "Black Sable Ferret",
+        "Albino Ferret",
+        "Cinnamon Ferret",
+        "Silver Ferret",
+        "Chocolate Ferret",
+        "Blaze Ferret",
+        "Panda Ferret",
+        "Champagne Ferret"
+      ]
+    },
+    {
+      "category": "Hedgehogs",
+      "breeds": [
+        "African Pygmy Hedgehog",
+        "European Hedgehog",
+        "Indian Long-Eared Hedgehog",
+        "Algerian Hedgehog",
+        "Southern White-Breasted Hedgehog",
+        "Northern White-Breasted Hedgehog",
+        "Egyptian Hedgehog",
+        "Desert Hedgehog",
+        "Somali Hedgehog",
+        "Amur Hedgehog"
+      ]
+    },
+    {
+      "category": "Horse",
+      "breeds": [
+        "Arabian Horse",
+        "Thoroughbred",
+        "American Quarter Horse",
+        "Friesian Horse",
+        "Clydesdale",
+        "Shetland Pony",
+        "Appaloosa",
+        "Andalusian",
+        "Haflinger",
+        "Belgian Draft Horse"
+      ]
+    }
   ];
+
+  // Selected pet and breed
+  String? selectedPet;
+  String? selectedBreed;
+
+  // Available breeds for selected pet
+  List<String> availableBreeds = [];
+
+  // Extract pet categories from petBreedsList
+  List<String> get petCategories {
+    return petBreedsList
+        .map((category) => category['category'] as String)
+        .toList();
+  }
+
+  // Method to handle pet selection
+  void selectPet(String? value) {
+    if (value != null) {
+      selectedPet = value;
+
+      // Find the breeds based on the selected pet
+      availableBreeds = petBreedsList
+          .firstWhere((category) => category['category'] == value)['breeds']
+          .cast<String>();
+
+      // Reset breed selection when pet changes
+      selectedBreed = null;
+      update(); // Notify UI of changes
+    }
+  }
+
+  // Method to handle breed selection
+  void selectBreed(String? value) {
+    if (value != null) {
+      selectedBreed = value;
+      update(); // Notify UI of changes
+    }
+  }
 
 
   TextEditingController nameController = TextEditingController();
@@ -63,11 +271,11 @@ class MenuDataController extends GetxController {
   TextEditingController petHistoryController = TextEditingController();
   TextEditingController contactInfoController = TextEditingController();
 
-  selectPet(value) {
-    selectedPet = value ?? 'Choose Your Pet';
-    update();
-    petTypeController.text = value;
-  }
+  // selectPet(value) {
+  //   selectedPet = value ?? 'Choose Your Pet';
+  //   update();
+  //   petTypeController.text = value;
+  // }
 
   selectImage() async {
     image = await OtherHelper.openGallery();
@@ -122,6 +330,9 @@ class MenuDataController extends GetxController {
     print.log("Create Lost Pet Response: ${response.message}, ${response.body}");
 
     if (response.statusCode == 200) {
+      if(forPets == "adopt"){
+        AdoptionController.instance.getAdoptPetRepo();
+      }
       Get.back();
       Utils.snackBarSuccessMessage("Success:", response.message);
       makeEmptyTextField();

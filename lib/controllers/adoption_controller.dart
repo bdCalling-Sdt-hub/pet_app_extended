@@ -13,6 +13,8 @@ class AdoptionController extends GetxController {
 
   final count = 0.obs;
 
+  static AdoptionController get instance => Get.put(AdoptionController());
+
   bool isLoading = false;
   Pagination? pagination;
 

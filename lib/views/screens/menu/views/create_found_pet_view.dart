@@ -5,6 +5,7 @@ import 'package:felpus/helpers/validator_helper.dart';
 import 'package:felpus/views/components/custom_container_button.dart';
 import 'package:felpus/views/components/custom_loader.dart';
 import 'package:felpus/views/components/custom_text_field.dart';
+import 'package:felpus/views/components/pet_selection_drop_down.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -50,32 +51,7 @@ class _CreateFoundPetViewState extends State<CreateFoundPetView> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     sh20,
-                    Container(
-                      width: Get.width,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20.0, vertical: 5.0),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black),
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton<String>(
-                          value: controller.selectedPet,
-                          icon: const Icon(Icons.arrow_drop_down),
-                          iconSize: 24,
-                          elevation: 16,
-                          style: h2,
-                          onChanged: controller.selectPet,
-                          items: controller.pets
-                              .map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value.tr),
-                            );
-                          }).toList(),
-                        ),
-                      ),
-                    ),
+                    petSelectionDropDown(controller),
                     sh10,
                     controller.image == null
                         ? GestureDetector(

@@ -198,7 +198,6 @@ class LocalConstants extends Translations {
           "Remember me": "Remember me",
           "Sign In": "Sign In",
           "Don't have an account? ": "Don't have an account? ",
-          "Sign Up": "Sign Up",
           "Create Found Pet Card": "Create Found Pet Card",
           "Microchip Number": "Microchip Number",
           "Description": "Description",
@@ -346,17 +345,13 @@ class LocalConstants extends Translations {
           "Spanish Police" : "Spanish Police",
           "Argentine Police" : "Argentine Police",
           "Spanish Firefighters" : "Spanish Firefighters",
-          "Argentine Firefighters" : "Argentine Firefighters"
+          "Argentine Firefighters" : "Argentine Firefighters",
+          "Sign Up": "Sign Up",
         },
         'es_ES': {
-          "Protect, Locate, Adopt.": "Protege, Ubica, Adopta.",
-          "Ensuring Every Pet's Safety and Forever Home.":
-              "Garantizando la seguridad y un hogar para siempre para cada mascota.",
           "Keep your pets safe": "Mantén a tus mascotas seguras",
           "Protect your pets from any crisis easily by using":
               "Protege a tus mascotas de cualquier crisis fácilmente usando",
-          "Adopt or Foster a Pet by using":
-              "Adopta o acoge a una mascota usando",
           "Easily find pets available for adoption or foster care in your area.":
               "Encuentra fácilmente mascotas disponibles para adopción o cuidado temporal en tu área.",
           "Resources for Crisis Pets in": "Recursos para mascotas en crisis en",
@@ -547,7 +542,6 @@ class LocalConstants extends Translations {
           "Remember me": "Recuérdame",
           "Sign In": "Iniciar Sesión",
           "Don't have an account? ": "¿No tienes una cuenta?",
-          "Sign Up": "Regístrate",
           "Create Found Pet Card": "Crear Tarjeta de Mascota Encontrada",
           "Microchip Number": "Número de Microchip",
           "Description": "Descripción",
@@ -748,7 +742,6 @@ class LocalConstants extends Translations {
           "Forgot the password": "Olvidé la contraseña",
           "Sign in": "Iniciar sesión",
           "Don’t have an account": "No tengo una cuenta",
-          "Sign up": "Iniciar sesión",
           "Already have an account": "Ya tengo una cuenta",
           "Full Name": "Nombre Completo",
           "Create Your Account": "Crear Cuenta",
@@ -879,7 +872,6 @@ class LocalConstants extends Translations {
           "Remember me": "Recuérdame",
           "Sign In": "Iniciar sesión",
           "Don't have an account? ": "¿No tienes una cuenta?",
-          "Sign Up": "Sign Up",
           "Create Found Pet Card": "Crear tarjeta de mascota encontrada",
           "Microchip Number": "Número de Microchip",
           "Description": "Descripción",
@@ -993,7 +985,8 @@ class LocalConstants extends Translations {
           "Get": "Obtener",
           "OTP": "OTP",
           "Now continue after": "Ahora continúa después",
-          "register in": "Registrarse en"
+          "register in": "Registrarse en",
+          "Sign Up": "Regístrate",
 
         },
       };

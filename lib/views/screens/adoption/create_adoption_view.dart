@@ -4,10 +4,12 @@ import 'package:felpus/extensions/extension.dart';
 import 'package:felpus/helpers/validator_helper.dart';
 import 'package:felpus/models/pet_model.dart';
 import 'package:felpus/utils/App_Utils/app_utils.dart';
+import 'package:felpus/views/components/breed_selection_drop_down.dart';
 import 'package:felpus/views/components/custom_container_button.dart';
 import 'package:felpus/views/components/custom_loader.dart';
 import 'package:felpus/views/components/custom_text.dart';
 import 'package:felpus/views/components/custom_text_field.dart';
+import 'package:felpus/views/components/pet_selection_drop_down.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -56,32 +58,7 @@ class _CreateAdoptionViewState extends State<CreateAdoptionView> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     20.height,
-                    Container(
-                      width: Get.width,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20.0, vertical: 5.0),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black),
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton<String>(
-                          value: controller.selectedPet,
-                          icon: const Icon(Icons.arrow_drop_down),
-                          iconSize: 24,
-                          elevation: 16,
-                          style: h2,
-                          onChanged: controller.selectPet,
-                          items: controller.pets
-                              .map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value.tr),
-                            );
-                          }).toList(),
-                        ),
-                      ),
-                    ),
+                    petSelectionDropDown(controller),
                     12.height,
                     controller.image == null
                         ? GestureDetector(
@@ -152,13 +129,9 @@ class _CreateAdoptionViewState extends State<CreateAdoptionView> {
                       controller: controller.ageController,
                     ),
                     12.height,
-                    CustomTextFormField(
-                      title: "Breed".tr,
-                      hintText: CreateAdoptionView.isUpdate? CreateAdoptionView.petListDetails.breed.tr : "What breed is your pet?".tr,
-                      horizontalPadding: 0,
-                      validator: ValidatorHelper.validator,
-                      controller: controller.breedController,
-                    ),
+                    CustomText(text: "Breed".tr, fontWeight: FontWeight.w600,),
+                    8.height,
+                    breedSelectionDropDown(controller),
                     12.height,
                     CustomTextFormField(
                       title: "Gender".tr,
@@ -314,7 +287,7 @@ class _CreateAdoptionViewState extends State<CreateAdoptionView> {
                         }else{
                           if (formKey.currentState!.validate()) {
                             if(controller.image != null){
-                              controller.addPetsRepo(forPets: "adopt".tr);
+                              controller.addPetsRepo(forPets: "adopt");
                             }else{
                               Utils.snackBarErrorMessage("Select your pet image first!".tr, "");
                             }

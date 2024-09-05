@@ -161,8 +161,7 @@ class ChatListView extends StatelessWidget {
                             return GestureDetector(
                               onTap: () {
                                 controller.chatId = chatUserDetails.id;
-                                controller.createOrGetMessageRepo(
-                                    chatId: chatUserDetails.id);
+                                controller.createOrGetMessageRepo(chatId: chatUserDetails.id);
                                 // Get.to(() => const MessageView());
                               },
                               child: ChatListItem(
