@@ -27,7 +27,6 @@ class MessageController extends GetxController {
   @override
   void onInit() {
     searchController.addListener(_filterChatUsers);
-    listenMessage();
     print.log("Mr. Chat ID Is Printing ===========  $chatId") ;
     super.onInit();
   }
@@ -302,7 +301,6 @@ class MessageController extends GetxController {
       var singleChatData = ChatDataModel.fromJson(data);
       print.log("Data from socket : =========>>>> $singleChatData");
 
-      DateTime time = DateTime.tryParse(data['createdAt']) ?? DateTime.now();
       chatItemsList.add(
           ChatMessageModel(
             chatId: singleChatData.chat,

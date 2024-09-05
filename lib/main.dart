@@ -31,6 +31,7 @@ Future<void> main() async {
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (_, context) {
+
           return GetMaterialApp(
             debugShowCheckedModeBanner: false,
             title: "Felpus",

@@ -61,6 +61,18 @@ class ResourcesView extends StatelessWidget {
 
   final Map<int, bool> selectedItems = {};
 
+  List policeNumberList = [
+    {"Spanish Police" : "091"},
+    {"Argentine Police" : "911"},
+  ];
+
+  List rescueNumberList = [
+    {"Spanish Firefighters" : "112"},
+    {"Argentine Firefighters" : "911"},
+  ];
+
+  RxInt selectedItem = 10.obs;
+
   void _printSelectedIndices() {
     final selectedIndices = selectedItems.entries
         .where((entry) => entry.value)
@@ -102,9 +114,11 @@ class ResourcesView extends StatelessWidget {
                       isCallFiremanTapped.value = !isCallFiremanTapped.value;
                       if(isCallFiremanTapped.value){
                         if(isFire || isEarthQuake || isFlood){
-                          FlutterPhoneDirectCaller.callNumber("999");
+                          // FlutterPhoneDirectCaller.callNumber("999");
+                          customShowDialog(context: context, helpList: rescueNumberList);
                         }else{
-                          FlutterPhoneDirectCaller.callNumber("191");
+                          // FlutterPhoneDirectCaller.callNumber("191");
+                          customShowDialog(context: context, helpList: policeNumberList);
                         }
                       }
                     },
@@ -120,7 +134,13 @@ class ResourcesView extends StatelessWidget {
                         children: [
                           Image.asset(isFire || isEarthQuake || isFlood? AppImages.fireTruck : AppImages.policeAlarm, scale: isFire || isEarthQuake || isFlood? 4 : 8, color: isCallFiremanTapped.value? AppColors.white : null),
                           sh5,
-                          Text(isFire || isEarthQuake || isFlood? "Call Fireman".tr : "Call Police".tr,style: h2.copyWith(fontSize: 20, color: isCallFiremanTapped.value? AppColors.white : AppColors.black),)
+                          CustomText(
+                            textAlign: TextAlign.center,
+                              text: isFire || isEarthQuake || isFlood? "Call Fireman".tr : "Call Police".tr,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w600,
+                              color: isCallFiremanTapped.value? AppColors.white : AppColors.black
+                          )
                         ],
                       ),
                     ),),
@@ -308,6 +328,89 @@ class ResourcesView extends StatelessWidget {
             )
           ],
         )
+    );
+  }
+
+  Future<dynamic> customShowDialog({required BuildContext context, required List helpList}) {
+    return showDialog(context: context, builder: (context) {
+                        return AlertDialog(
+                          content: Obx(() => Padding(
+                            padding: EdgeInsets.only(left: 20.w),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: List.generate(
+                                helpList.length,
+                                    (index) {
+                                  // Get the key (police name) and value (police number) from the map
+                                  String name = helpList[index].keys.first;
+                                  String number = helpList[index].values.first;
+
+                                  return GestureDetector(
+                                    onTap: () {
+                                      FlutterPhoneDirectCaller.callNumber(number);
+                                      // Use the value (police number) when tapped
+                                      print.log('Police Number: $number'); // Replace with your action
+                                      selectedItem.value = index;
+                                    },
+                                    child: SizedBox(
+                                      height: 50,
+                                      child: Row(
+                                        children: [
+                                          Container(
+                                            padding: EdgeInsets.all(4.r),
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(50),
+                                              border: Border.all(
+                                                color: Colors.black.withOpacity(.2),
+                                                width: 1,
+                                              ),
+                                              color: index == selectedItem.value
+                                                  ? AppColors.green
+                                                  : AppColors.white,
+                                            ),
+                                            child: Icon(Icons.call_outlined, color: index != selectedItem.value
+                                                ? AppColors.green
+                                                : AppColors.white,),
+                                          ),
+                                          CustomText(
+                                            text: name.tr, // Display the police name (key)
+                                            color: index == selectedItem.value? AppColors.mainColor : AppColors.black,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w600,
+                                            left: 16,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                          )),
+                        );
+                      },);
+  }
+  Row cardShortSelection(int value, String text) {
+    return Row(
+      children: [
+        Radio<int>(
+            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            value: value,
+            groupValue: selectedItem.value,
+            activeColor: AppColors.black,
+            fillColor: MaterialStateProperty.all(AppColors.black),
+            splashRadius: 20,
+            onChanged: (value) {
+              selectedItem.value = value!.toInt();
+            },
+            visualDensity: VisualDensity(horizontal: -4, vertical: -2)),
+        SizedBox(width: 12.w),
+        CustomText(
+          text: text,
+          fontSize: 16,
+          color: AppColors.black,
+        )
+      ],
     );
   }
 }
