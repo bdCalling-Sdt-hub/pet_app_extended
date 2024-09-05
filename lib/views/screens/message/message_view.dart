@@ -42,13 +42,6 @@ class _MessageViewState extends State<MessageView> {
     });
   }
 
-  @override
-  void dispose() {
-    messageController.scrollController.dispose(); // Dispose the controller when not needed
-    super.dispose();
-  }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -71,9 +64,14 @@ class _MessageViewState extends State<MessageView> {
                   ),
                 ),
                 sw10,
-                Text(
-                  controller.chatPersonInfo.name,
-                  style: h2.copyWith(fontSize: 20, color: AppColors.black),
+                Expanded(  // Use Expanded to make the text fit in the remaining space
+                  child: CustomText(
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                    text: controller.chatPersonInfo.name,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ],
             ),
@@ -94,6 +92,7 @@ class _MessageViewState extends State<MessageView> {
                     itemBuilder: (context, index) {
                       var chatDataItems =
                       controller.chatItemsList[index];
+                      // controller.chatId = chatDataItems.chatId;
                       return chatItems(
                         controller: controller,
                         text: chatDataItems.text,
@@ -179,8 +178,10 @@ class _MessageViewState extends State<MessageView> {
                           ),
                         ),
                         sw20,
-                        GestureDetector(
-                          onTap: () {},
+                        InkWell(
+                          onTap: () {
+                            controller.sendMessageRepo().then((value) => controller.scrollToBottom());
+                          },
                           child: Column(
                             children: [
                               Image.asset(AppImages.check, scale: 4),
@@ -238,6 +239,7 @@ class _MessageViewState extends State<MessageView> {
                 petName: petName,
                 petGender: petGender,
                 petAge: petAge,
+                isSentByMe: senderId == PrefsHelper.userId ? true : false,
                 petAddress: petAddress),
           ),
         if (text != "")
@@ -269,13 +271,14 @@ class _MessageViewState extends State<MessageView> {
                 petName: petName,
                 petGender: petGender,
                 petAge: petAge,
+                isSentByMe: senderId == PrefsHelper.userId ? true : false,
                 petAddress: petAddress),
           ),
         if (text == "safe") 16.height,
         if (text == "safe")
           CustomText(
             textAlign: TextAlign.center,
-            text: "Conversation ends here for this pet, thank you".tr,
+            text: "Conversation ends here for this pet, Thank you".tr,
             fontWeight: FontWeight.w600,
           ),
         10.height,
@@ -289,9 +292,10 @@ class _MessageViewState extends State<MessageView> {
         required String petName,
         required String petGender,
         required String petAge,
+        bool isSentByMe = false,
         required String petAddress}) {
     return Container(
-      margin: EdgeInsets.only(top: 10.h, bottom: 10.h),
+      margin: EdgeInsets.only(top: 10.h, bottom: 10.h, left: isSentByMe? 0.w : 42.w),
       width: 158.w,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10), color: AppColors.mainColor),

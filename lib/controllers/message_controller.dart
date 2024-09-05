@@ -82,6 +82,7 @@ class MessageController extends GetxController {
   void onClose() {
     searchController.removeListener(_filterChatUsers);
     searchController.dispose();
+    scrollController.dispose();
     super.onClose();
   }
 
@@ -198,6 +199,9 @@ class MessageController extends GetxController {
         );
       }).toList();
 
+      if(chatItemsList.isNotEmpty){
+        chatId = chatItemsList[0].chatId;
+      }
       final Map<String, dynamic> data = jsonDecode(response.body)["data"];
 
       // Ensure that chatInfo is a Map<String, dynamic>
@@ -208,7 +212,6 @@ class MessageController extends GetxController {
         chatPersonInfo = ChatInfo(); // Default instance or other logic
       }
       update();
-
       listenMessage();
       print.log("Mr. Chat ID Is Printing ===========  $chatId") ;
       helpTypeTitle = getTitleFromHelpType(helpType);
@@ -234,15 +237,8 @@ class MessageController extends GetxController {
     };
 
     Map<String, String> body = {
-      "text": sendMsgController.text
+      "text": sendMsgController.text.isNotEmpty? sendMsgController.text : "safe",
     };
-
-    chatItemsList.add(ChatMessageModel(
-      chatId: chatId,
-      time: OtherHelper.formatTime(DateTime.now().toLocal().toString()),
-      text: sendMsgController.text,
-    ));
-    update();
 
     var response = await ApiService.postApi("${AppUrls.messages}/$chatId", body, header: header) ;
 
@@ -251,7 +247,7 @@ class MessageController extends GetxController {
 
        var singleChatData = ChatDataModel.fromJson(responseData);
 
-      chatDataList.add(singleChatData);
+      // chatDataList.add(singleChatData);
       update();
       sendMsgController.clear();
       print.log("Message sent successfully");
@@ -312,10 +308,14 @@ class MessageController extends GetxController {
             chatId: singleChatData.chat,
             time: OtherHelper.formatTime(singleChatData.createdAt),
             text: singleChatData.text,
+            pet: singleChatData.pet,
             sender: singleChatData.sender,
           )
       );
-      scrollToBottom();
+      update();
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        scrollToBottom();
+      });
       isLoading = false;
       update();
     });
