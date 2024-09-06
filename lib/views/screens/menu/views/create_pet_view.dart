@@ -1,4 +1,8 @@
+import 'package:felpus/extensions/extension.dart';
+import 'package:felpus/helpers/prefs_helper.dart';
+import 'package:felpus/views/components/custom_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../utils/app_color/app_colors.dart';
@@ -57,8 +61,9 @@ class CreatePetView extends GetView {
                             GestureDetector(
                               onTap: () => Get.to(() => const CreateLostPetView()),
                               child: Container(
+                                padding: EdgeInsets.symmetric(horizontal: 4.w),
                                 height: 50,
-                                width: 150,
+                                width: PrefsHelper.localizationCountryCode == "US"? 150 : 210,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(5),
                                   color: AppColors.white,
@@ -75,8 +80,8 @@ class CreatePetView extends GetView {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Image.asset(AppImages.lagPrint,scale: 4,),
-                                    sw5,
-                                    Text("Lost Pet".tr,style: h3.copyWith(fontSize: 16),)
+                                    8.width,
+                                    Expanded(child: Text("Lost Pet".tr,style: h3.copyWith(fontSize: 16),))
                                   ],
                                 ),
                               ),
@@ -107,8 +112,9 @@ class CreatePetView extends GetView {
                             GestureDetector(
                               onTap: () => Get.to(() => const CreateFoundPetView()),
                               child: Container(
+                                padding: EdgeInsets.symmetric(horizontal: 4.w),
                                 height: 50,
-                                width: 150,
+                                width: PrefsHelper.localizationCountryCode == "US"? 150 : 210,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(5),
                                   color: AppColors.white,
@@ -125,8 +131,8 @@ class CreatePetView extends GetView {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Image.asset(AppImages.handCat,scale: 4,),
-                                    sw5,
-                                    Text("Found Pet".tr,style: h3.copyWith(fontSize: 16),)
+                                    8.width,
+                                    Expanded(child: Text("Found Pet".tr,style: h3.copyWith(fontSize: 16),))
                                   ],
                                 ),
                               ),
@@ -157,8 +163,9 @@ class CreatePetView extends GetView {
                             GestureDetector(
                               onTap: () => Get.to(() => const CreateAdoptionView()),
                               child: Container(
+                                padding: EdgeInsets.symmetric(horizontal: 4.w),
                                 height: 50,
-                                width: 150,
+                                width: PrefsHelper.localizationCountryCode == "US"? 160 : 210,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(5),
                                   color: AppColors.white,
@@ -175,8 +182,8 @@ class CreatePetView extends GetView {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Image.asset(AppImages.veterinary,scale: 4,),
-                                    sw5,
-                                    Text("For Adoption".tr,style: h3.copyWith(fontSize: 16),)
+                                    8.width,
+                                    Expanded(child: Text("For Adoption".tr,style: h3.copyWith(fontSize: 16),))
                                   ],
                                 ),
                               ),

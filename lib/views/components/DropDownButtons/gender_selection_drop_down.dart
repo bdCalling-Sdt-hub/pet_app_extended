@@ -18,7 +18,7 @@ Container genderSelectionDropDown(MenuDataController controller) {
     child: DropdownButtonHideUnderline(
       child: DropdownButton<String>(
         value: controller.selectedGender,
-        hint: const Text("Select pet gender"),
+        hint: Text("Select pet gender".tr),
         icon: const Icon(Icons.arrow_drop_down),
         iconSize: 24,
         elevation: 16,

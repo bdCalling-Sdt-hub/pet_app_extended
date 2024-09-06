@@ -18,7 +18,7 @@ Container breedSelectionDropDown(MenuDataController controller) {
     child: DropdownButtonHideUnderline(
       child: DropdownButton<String>(
         value: controller.selectedBreed,
-        hint: const Text("Choose Breed"),
+        hint: Text("Choose Breed".tr),
         icon: const Icon(Icons.arrow_drop_down),
         iconSize: 24,
         elevation: 16,
@@ -28,10 +28,10 @@ Container breedSelectionDropDown(MenuDataController controller) {
             .map<DropdownMenuItem<String>>((String value) {
           return DropdownMenuItem<String>(
             value: value,
-            child: Text(value),
+            child: Text(value.tr),
           );
         }).toList(),
-        disabledHint: const Text("Select a pet first"),
+        disabledHint: Text("Select a pet first".tr),
       ),
     ),
   );

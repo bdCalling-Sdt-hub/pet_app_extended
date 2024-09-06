@@ -1,9 +1,12 @@
 
 class AppUrls {
+  // static String socketUrl = "http://115.127.156.14:8020";
   static String socketUrl = "http://192.168.10.137:5000";
-  // static String baseUrl = "http://192.168.10.130:9000/api/v1";
+
+  // static String baseUrl = "http://115.127.156.14:8010/api/v1";
   static String baseUrl = "http://192.168.10.137:8000/api/v1";
-  // static String photoUrl = "http://192.168.10.130:9000";
+
+  // static String photoUrl = "http://115.127.156.14:8010";
   static String photoUrl = "http://192.168.10.137:8000";
 
   static String users = "$baseUrl/users";
