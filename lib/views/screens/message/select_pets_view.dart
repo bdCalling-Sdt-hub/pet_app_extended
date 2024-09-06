@@ -90,8 +90,8 @@ class _SelectPetsViewState extends State<SelectPetsView> {
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 10.0, vertical: 6),
                                       child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisSize: MainAxisSize.min,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           ClipRRect(
                                             borderRadius:
@@ -105,7 +105,7 @@ class _SelectPetsViewState extends State<SelectPetsView> {
                                           ),
                                           const SizedBox(
                                               height: 8), // Add some spacing
-                                          Row(
+                                          Wrap(
                                             children: [
                                               Text(
                                                 "${petListItems.petName}, ",

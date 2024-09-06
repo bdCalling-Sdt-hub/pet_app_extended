@@ -313,9 +313,9 @@ class _MessageViewState extends State<MessageView> {
                 width: 158.w,
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
+            Wrap(
+              // mainAxisAlignment: MainAxisAlignment.start,
+              // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   "$petBreed, ",

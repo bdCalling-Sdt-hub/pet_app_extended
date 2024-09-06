@@ -99,7 +99,8 @@ class _YourPetViewState extends State<YourPetView> {
                                   ),
                                 ),
                                 const SizedBox(height: 8), // Add some spacing
-                                Row(
+                                Wrap(
+                                  // crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
                                       "${petListItems.petName}, ",
