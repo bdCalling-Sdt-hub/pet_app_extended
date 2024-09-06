@@ -34,6 +34,7 @@ class NotificationsView extends GetView<NotificationsController> {
               : controller.notifications.isEmpty
                   ? const Center(child: NoData())
                   : ListView.builder(
+                      reverse: true,
                       itemCount: controller.notifications.length,
                       shrinkWrap: true,
                       physics: const BouncingScrollPhysics(),

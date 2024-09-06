@@ -323,13 +323,11 @@ class _MessageViewState extends State<MessageView> {
                   style: h2.copyWith(
                       fontWeight: FontWeight.w700, color: AppColors.white),
                 ),
-                Expanded(
-                  child: Text(
-                    petName,
-                    maxLines: 2,
-                    style: h2.copyWith(
-                        fontWeight: FontWeight.w700, color: AppColors.white),
-                  ),
+                Text(
+                  petName,
+                  maxLines: 2,
+                  style: h2.copyWith(
+                      fontWeight: FontWeight.w700, color: AppColors.white),
                 )
               ],
             ),
