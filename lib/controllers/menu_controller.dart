@@ -209,9 +209,12 @@ class MenuDataController extends GetxController {
     }
   ];
 
+  List<String>genderList = ['Male', 'Female'];
+
   // Selected pet and breed
   String? selectedPet;
   String? selectedBreed;
+  String? selectedGender;
 
   // Available breeds for selected pet
   List<String> availableBreeds = [];
@@ -228,6 +231,7 @@ class MenuDataController extends GetxController {
     if (value != null) {
       selectedPet = value;
 
+      petTypeController.text = value;
       // Find the breeds based on the selected pet
       availableBreeds = petBreedsList
           .firstWhere((category) => category['category'] == value)['breeds']
@@ -243,7 +247,16 @@ class MenuDataController extends GetxController {
   void selectBreed(String? value) {
     if (value != null) {
       selectedBreed = value;
+      breedController.text = value;
       update(); // Notify UI of changes
+    }
+  }
+
+  void selectGender(String? value) {
+    if(value != null){
+      selectedGender = value ;
+      genderController.text = value;
+      update();
     }
   }
 

@@ -76,9 +76,12 @@ class GroupsView extends GetView<GroupsNContactsController> {
               Text('Your Groups'.tr, style: h2.copyWith(fontSize: 20, color: AppColors.mainColor)),
               sh10,
               controller.isGettingGroups
-                  ? const CustomLoader()
+                  ? SizedBox(
+                height: 150.h,
+                  child: CustomLoader())
                   : controller.groupsList.isEmpty
-                  ? const NoData()
+                  ? SizedBox(
+                  height: 150.h, child: const NoData())
                   : SizedBox(
                 height: 76,
                 child: ListView.builder(
@@ -119,9 +122,13 @@ class GroupsView extends GetView<GroupsNContactsController> {
               Text('Contacts'.tr, style: h2.copyWith(fontSize: 20, color: AppColors.mainColor)),
               sh10,
               controller.isLoading
-                  ? const CustomLoader()
+                  ? SizedBox(
+                height: 150.h,
+                  child: const CustomLoader())
                   : controller.contactsList.isEmpty
-                  ? const NoData()
+                  ? SizedBox(
+                height: 150.h,
+                  child: const NoData())
                   : Flexible(
                 child: GridView.builder(
                     shrinkWrap: true,

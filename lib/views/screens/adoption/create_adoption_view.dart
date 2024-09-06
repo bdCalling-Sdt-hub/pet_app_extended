@@ -4,12 +4,13 @@ import 'package:felpus/extensions/extension.dart';
 import 'package:felpus/helpers/validator_helper.dart';
 import 'package:felpus/models/pet_model.dart';
 import 'package:felpus/utils/App_Utils/app_utils.dart';
-import 'package:felpus/views/components/breed_selection_drop_down.dart';
+import 'package:felpus/views/components/DropDownButtons/breed_selection_drop_down.dart';
+import 'package:felpus/views/components/DropDownButtons/gender_selection_drop_down.dart';
 import 'package:felpus/views/components/custom_container_button.dart';
 import 'package:felpus/views/components/custom_loader.dart';
 import 'package:felpus/views/components/custom_text.dart';
 import 'package:felpus/views/components/custom_text_field.dart';
-import 'package:felpus/views/components/pet_selection_drop_down.dart';
+import 'package:felpus/views/components/DropDownButtons/pet_selection_drop_down.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -129,17 +130,11 @@ class _CreateAdoptionViewState extends State<CreateAdoptionView> {
                       controller: controller.ageController,
                     ),
                     12.height,
-                    CustomText(text: "Breed".tr, fontWeight: FontWeight.w600,),
-                    8.height,
+                    CustomText(text: "Breed".tr, fontWeight: FontWeight.w600, bottom: 8,),
                     breedSelectionDropDown(controller),
                     12.height,
-                    CustomTextFormField(
-                      title: "Gender".tr,
-                      hintText: CreateAdoptionView.isUpdate? CreateAdoptionView.petListDetails.sex.tr :"What is your pet's gender?".tr,
-                      horizontalPadding: 0,
-                      validator: ValidatorHelper.validator,
-                      controller: controller.genderController,
-                    ),
+                    CustomText(text: "Gender".tr, fontWeight: FontWeight.w600, bottom: 8),
+                    genderSelectionDropDown(controller),
                     12.height,
                     CustomTextFormField(
                       title: "Color".tr,

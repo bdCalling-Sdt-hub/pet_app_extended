@@ -1,4 +1,3 @@
-
 import 'package:felpus/controllers/home_controller.dart';
 import 'package:felpus/controllers/pet_details_controller.dart';
 import 'package:felpus/helpers/prefs_helper.dart';
@@ -10,6 +9,7 @@ import 'package:felpus/models/pet_model.dart';
 import 'package:felpus/views/components/no_data.dart';
 import 'package:felpus/views/screens/resources/resources_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../../../controllers/lost_pets_controller.dart';
@@ -30,15 +30,21 @@ class LostPetsView extends GetView<LostPetsController> {
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
-        automaticallyImplyLeading: ResourcesView.isLost? true : false,
-        leading: ResourcesView.isLost? InkWell( onTap: () {
-          Get.back();
-          ResourcesView.isLost = false;
-        },child: Icon(Icons.arrow_back_ios)) : null,
+        automaticallyImplyLeading: ResourcesView.isLost ? true : false,
+        leading: ResourcesView.isLost
+            ? InkWell(
+                onTap: () {
+                  Get.back();
+                  ResourcesView.isLost = false;
+                },
+                child: Icon(Icons.arrow_back_ios))
+            : null,
         backgroundColor: AppColors.white,
         actions: [
           GestureDetector(
-            onTap: () => Get.to(() => const NotificationsView(),),
+            onTap: () => Get.to(
+              () => const NotificationsView(),
+            ),
             child: Image.asset(
               AppImages.notification,
               scale: 4,
@@ -47,124 +53,148 @@ class LostPetsView extends GetView<LostPetsController> {
           sw15,
           ClipRRect(
               borderRadius: BorderRadius.circular(100),
-              child: CustomImage(imageSrc: PrefsHelper.userImageUrl, imageType: ImageType.network,  height: 40,
-                width: 40,)),
+              child: CustomImage(
+                imageSrc: PrefsHelper.userImageUrl,
+                imageType: ImageType.network,
+                height: 40,
+                width: 40,
+              )),
           sw10,
         ],
       ),
-      body: GetBuilder<HomeController>(builder: (controller) {
-        return Stack(
-
-          children: [
-            Image.asset(AppImages.backgroundImage, fit: BoxFit.fill, height: Get.height, width: Get.width,),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Column(
-                children: [
-                  sh10,
-                  ///<<<==================== Lost Pets ====================>>>
-
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Lost Pets".tr,
-                        style: h2.copyWith(
-                            fontSize: 20, color: AppColors.mainColor),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Get.to(() => AllLostPetsView());
-                        },
-                        child: Text(
-                          "See all".tr,
-                          style: h2.copyWith(
-                              fontSize: 18, color: AppColors.ash),
-                        ),
-                      ),
-                    ],
-                  ),
-                  sh10,
-
-                  ///<<<<================= Lost Pets ====================>>>>
-                   controller.isLostPetGetting? const CustomLoader() : controller.lostPetList.isEmpty
-                      ? const NoData()
-                      : Expanded(
-                    child: ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: controller.lostPetList.length,
-                        itemBuilder: (context, index) {
-                          PetModel item =
-                          controller.lostPetList[index];
-                          return GestureDetector(
-                              onTap: () {
-                                PetDetailsController.instance.getPetDetailsRepo(petId: item.id);
-                                Get.to(() => const PetDetailsView());
-                              },
-                              child: petsList(pet: item));
-                        }),
-                  ),
-                  sh10,
-
-                  ///<<<<================= Found Pets ====================>>>>
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Found Pets".tr,
-                        style: h2.copyWith(
-                            fontSize: 20, color: AppColors.mainColor),
-                      ),
-                      GestureDetector(
-                        onTap: () => Get.to(() => AllFoundPetsView()),
-                        child: Text(
-                          "See all".tr,
-                          style: h2.copyWith(
-                              fontSize: 18, color: AppColors.ash),
-                        ),
-                      ),
-                    ],
-                  ),
-                  sh10,
-
-                  controller.isFoundPetGetting? const CustomLoader() :controller.foundPetList.isEmpty
-                      ? const Center(child: NoData())
-                      : Expanded(
-                    child: ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: controller.foundPetList.length,
-                        itemBuilder: (context, index) {
-                          PetModel item =
-                          controller.foundPetList[index];
-                          return GestureDetector(
-                              onTap: () {
-                                PetDetailsController.instance.getPetDetailsRepo(petId: item.id);
-                                Get.to(() => const PetDetailsView());
-                              },
-                              child: petsList(pet: item));
-                        }),
-                  ),
-                  Obx(() {
-                    return AdsServices.isBannerAdReady.value
-                        ? Container(
-                      alignment: Alignment.center,
-                      width: AdsServices.bannerAdFirst.size.width.toDouble(),
-                      height: AdsServices.bannerAdFirst.size.height.toDouble(),
-                      child: AdWidget(ad: AdsServices.bannerAdFirst),
-                    )
-                        : const SizedBox();
-                  }),
-                ],
+      body: GetBuilder<HomeController>(
+        builder: (controller) {
+          return Stack(
+            children: [
+              Image.asset(
+                AppImages.backgroundImage,
+                fit: BoxFit.fill,
+                height: Get.height,
+                width: Get.width,
               ),
-            ),
-            // Positioned(
-            //     bottom: 0,
-            //     right: 0,
-            //     left: 0,
-            //     child: Image.asset(AppImages.ads, scale: 4,)),
-          ],
-        );
-      },),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Column(
+                  children: [
+                    sh10,
+
+                    ///<<<==================== Lost Pets ====================>>>
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Lost Pets".tr,
+                          style: h2.copyWith(
+                              fontSize: 20, color: AppColors.mainColor),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Get.to(() => AllLostPetsView());
+                          },
+                          child: Text(
+                            "See all".tr,
+                            style:
+                                h2.copyWith(fontSize: 18, color: AppColors.ash),
+                          ),
+                        ),
+                      ],
+                    ),
+                    sh10,
+
+                    ///<<<<================= Lost Pets ====================>>>>
+                    controller.isLostPetGetting
+                        ? SizedBox(height: 150.h, child: const CustomLoader())
+                        : controller.lostPetList.isEmpty
+                            ? SizedBox(height: 150.h, child: const NoData())
+                            : Expanded(
+                                child: ListView.builder(
+                                    shrinkWrap: true,
+                                    itemCount: controller.lostPetList.length,
+                                    itemBuilder: (context, index) {
+                                      PetModel item =
+                                          controller.lostPetList[index];
+                                      return GestureDetector(
+                                          onTap: () {
+                                            PetDetailsController.instance
+                                                .getPetDetailsRepo(
+                                                    petId: item.id);
+                                            Get.to(
+                                                () => const PetDetailsView());
+                                          },
+                                          child: petsList(pet: item));
+                                    }),
+                              ),
+                    sh10,
+
+                    ///<<<<================= Found Pets ====================>>>>
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Found Pets".tr,
+                          style: h2.copyWith(
+                              fontSize: 20, color: AppColors.mainColor),
+                        ),
+                        GestureDetector(
+                          onTap: () => Get.to(() => AllFoundPetsView()),
+                          child: Text(
+                            "See all".tr,
+                            style:
+                                h2.copyWith(fontSize: 18, color: AppColors.ash),
+                          ),
+                        ),
+                      ],
+                    ),
+                    sh10,
+
+                    controller.isFoundPetGetting
+                        ? SizedBox(height: 150.h, child: CustomLoader())
+                        : controller.foundPetList.isEmpty
+                            ? Center(
+                                child: SizedBox(height: 150.h, child: NoData()))
+                            : Expanded(
+                                child: ListView.builder(
+                                    shrinkWrap: true,
+                                    itemCount: controller.foundPetList.length,
+                                    itemBuilder: (context, index) {
+                                      PetModel item =
+                                          controller.foundPetList[index];
+                                      return GestureDetector(
+                                          onTap: () {
+                                            PetDetailsController.instance
+                                                .getPetDetailsRepo(
+                                                    petId: item.id);
+                                            Get.to(
+                                                () => const PetDetailsView());
+                                          },
+                                          child: petsList(pet: item));
+                                    }),
+                              ),
+                  ],
+                ),
+              ),
+              // Positioned(
+              //     bottom: 0,
+              //     right: 0,
+              //     left: 0,
+              //     child: Image.asset(AppImages.ads, scale: 4,)),
+            ],
+          );
+        },
+      ),
+      bottomNavigationBar: Obx(() {
+        return AdsServices.isBannerAdReady.value
+            ? Container(
+          alignment: Alignment.center,
+          width: AdsServices.bannerAdFirst.size.width
+              .toDouble(),
+          height: AdsServices.bannerAdFirst.size.height
+              .toDouble(),
+          child: AdWidget(ad: AdsServices.bannerAdFirst),
+        )
+            : const SizedBox.shrink();
+      }),
     );
   }
 }
