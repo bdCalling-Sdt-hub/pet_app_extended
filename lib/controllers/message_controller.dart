@@ -200,6 +200,7 @@ class MessageController extends GetxController {
 
       if(chatItemsList.isNotEmpty){
         chatId = chatItemsList[0].chatId;
+        print.log("ChatId: ===== $chatId");
       }
       final Map<String, dynamic> data = jsonDecode(response.body)["data"];
 

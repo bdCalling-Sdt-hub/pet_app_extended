@@ -92,7 +92,7 @@ class _MessageViewState extends State<MessageView> {
                     itemBuilder: (context, index) {
                       var chatDataItems =
                       controller.chatItemsList[index];
-                      // controller.chatId = chatDataItems.chatId;
+                      controller.chatId = chatDataItems.chatId;
                       return chatItems(
                         controller: controller,
                         text: chatDataItems.text,
