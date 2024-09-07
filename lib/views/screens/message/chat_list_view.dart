@@ -149,7 +149,7 @@ class ChatListView extends StatelessWidget {
                         child: CustomLoader(),
                       )
                           : controller.chatActiveUsersList.isEmpty? const SizedBox(
-                        height: 100,
+                        height: 200,
                           child: NoData()
                       ) : Expanded(
                         child: ListView.builder(
@@ -180,7 +180,7 @@ class ChatListView extends StatelessWidget {
                         ),
                       )
                           : controller.chatArchivedUsersList.isEmpty? const SizedBox(
-                          height: 100,
+                          height: 200,
                           child: NoData()
                       ) : Expanded(
                         child: ListView.builder(

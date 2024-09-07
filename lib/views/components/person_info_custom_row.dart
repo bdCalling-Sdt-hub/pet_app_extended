@@ -32,10 +32,13 @@ Padding personInfoCustomRow({required String iconPath, double imageScale = 4,req
             ),
           ],
         ),
-        CustomText(
-          text: titleInfo,
-          maxLines: 5,
-          fontWeight: FontWeight.w600,
+        Expanded(
+          child: CustomText(
+            textAlign: TextAlign.end,
+            text: titleInfo,
+            maxLines: 5,
+            fontWeight: FontWeight.w600,
+          ),
         )
         // Text(
         //   titleInfo,

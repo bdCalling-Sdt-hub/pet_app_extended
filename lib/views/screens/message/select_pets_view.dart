@@ -64,7 +64,7 @@ class _SelectPetsViewState extends State<SelectPetsView> {
                               crossAxisCount: 2,
                               crossAxisSpacing: 8.0,
                               mainAxisSpacing: 18.0,
-                              mainAxisExtent: 260, // Remove fixed height
+                              mainAxisExtent: 280, // Remove fixed height
                             ),
                             itemBuilder: (context, index) {
                               var petListItems = controller.myPetList[index];
