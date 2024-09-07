@@ -90,8 +90,7 @@ class _MessageViewState extends State<MessageView> {
                     controller: controller.scrollController,
                     itemCount: controller.chatItemsList.length,
                     itemBuilder: (context, index) {
-                      var chatDataItems =
-                      controller.chatItemsList[index];
+                      var chatDataItems = controller.chatItemsList[index];
                       controller.chatId = chatDataItems.chatId;
                       return chatItems(
                         controller: controller,
