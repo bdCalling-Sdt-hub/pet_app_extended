@@ -37,7 +37,7 @@ Future<void> main() async {
             title: "Felpus",
             locale: Locale(PrefsHelper.localizationLanguageCode,
                 PrefsHelper.localizationCountryCode),
-            fallbackLocale: const Locale("en", "US"),
+            fallbackLocale: const Locale("es", "ES"),
             translations: LocalConstants(),
             defaultTransition: Transition.noTransition,
             transitionDuration:  const Duration(milliseconds: 400),

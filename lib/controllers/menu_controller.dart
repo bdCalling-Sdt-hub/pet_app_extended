@@ -54,7 +54,8 @@ class MenuDataController extends GetxController {
         "Shih Tzu",
         "Dachshund",
         "Boxer",
-        "Rottweiler"
+        "Rottweiler",
+        "No Breed Found"
       ]
     },
     {

@@ -20,9 +20,9 @@ class EditProfileView extends StatelessWidget {
   EditProfileView({super.key});
 
   final ImagePickerController imagePickerController =
-  Get.put(ImagePickerController());
+      Get.put(ImagePickerController());
   final CompleteProfileController completeProfileController =
-  Get.put(CompleteProfileController());
+      Get.put(CompleteProfileController());
 
   @override
   Widget build(BuildContext context) {
@@ -39,106 +39,119 @@ class EditProfileView extends StatelessWidget {
               onTap: () => Get.back(), child: const Icon(Icons.arrow_back_ios)),
         ),
         body: SingleChildScrollView(
-          child: GetBuilder<CompleteProfileController>(builder: (controller) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                sh20,
-                Stack(
-                  children: [
-                    Obx(() => imagePickerController.selectedImagePath.value == ''
-                        ? PrefsHelper.userImageUrl != ""
-                        ? ClipRRect(
-                      borderRadius: BorderRadius.circular(100),
-                      child: CustomImage(
-                        defaultImage: AppImages.profile,
-                        imageSrc: PrefsHelper.userImageUrl,
-                        imageType: ImageType.network,
-                      ),
-                    )
-                        : Icon(
-                      CupertinoIcons.person,
-                      size: 100,
-                      color: AppColors.mainColor.withOpacity(0.2),
-                    )
-                        : Container(
-                        height: 128,
-                        width: 128,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                              color: AppColors.mainColor.withOpacity(0.2),
-                              width: 2),
-                        ),
-                        child: ClipOval(
-                            child: Image.file(File(imagePickerController
-                                .selectedImagePath.value), fit: BoxFit.fill,)))),
-                    Positioned(
-                      bottom: 0,
-                      right: 0,
-                      child: GestureDetector(
-                        onTap: () {
-                          imagePickerController.pickImage(ImageSource.gallery);
-                        },
-                        child: Container(
-                            height: 40,
-                            width: 40,
-                            decoration: BoxDecoration(
-                              color: AppColors.white,
-                              shape: BoxShape.circle,
-                              border: Border.all(
+          child: GetBuilder<CompleteProfileController>(
+            builder: (controller) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  sh20,
+                  Stack(
+                    children: [
+                      Obx(() => imagePickerController.selectedImagePath.value ==
+                              ''
+                          ? PrefsHelper.userImageUrl != ""
+                              ? Container(
+                                  height: 128,
+                                  width: 128,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(100)),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(100),
+                                    child: CustomImage(
+                                      defaultImage: AppImages.profile,
+                                      imageSrc: PrefsHelper.userImageUrl,
+                                      imageType: ImageType.network,
+                                    ),
+                                  ),
+                                )
+                              : Icon(
+                                  CupertinoIcons.person,
+                                  size: 100,
                                   color: AppColors.mainColor.withOpacity(0.2),
-                                  width: 2),
-                            ),
-                            child: Image.asset(
-                              AppImages.edit,
-                              scale: 4,
-                            )),
-                      ),
-                    )
-                  ],
-                ),
-                sh10,
-                CustomTextField(
-                  controller: completeProfileController.fullNameController,
-                  title: "Full Name".tr,
-                  width: Get.width,
-                  hintText: "Enter your full name".tr,
-                ),
-                CustomTextField(
-                  controller: completeProfileController.phoneController,
-                  title: "Phone".tr,
-                  width: Get.width,
-                  hintText: "Enter your phone number".tr,
-                ),
-                CustomTextField(
-                  controller: completeProfileController.locationController,
-                  title: "Address".tr,
-                  width: Get.width,
-                  hintText: "Enter your address".tr,
-                ),
-                CustomTextField(
-                  maxLines: 10,
-                  controller: completeProfileController.bioController,
-                  title: "Bio".tr,
-                  width: Get.width,
-                  hintText: "Write something about you...".tr,
-                ),
-                sh20,
-                completeProfileController.isLoading
-                    ? const CustomLoader()
-                    : CustomButton(
-                  onTap: () {
-                    completeProfileController.updateProfileRepo();
-                  },
-                  title: "Update".tr,
-                  width: Get.width,
-                  color: AppColors.mainColor,
-                ),
-                sh10,
-              ],
-            );
-          },),
+                                )
+                          : Container(
+                              height: 128,
+                              width: 128,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                    color: AppColors.mainColor.withOpacity(0.2),
+                                    width: 2),
+                              ),
+                              child: ClipOval(
+                                  child: Image.file(
+                                File(imagePickerController
+                                    .selectedImagePath.value),
+                                fit: BoxFit.fill,
+                              )))),
+                      Positioned(
+                        bottom: 0,
+                        right: 0,
+                        child: GestureDetector(
+                          onTap: () {
+                            imagePickerController
+                                .pickImage(ImageSource.gallery);
+                          },
+                          child: Container(
+                              height: 40,
+                              width: 40,
+                              decoration: BoxDecoration(
+                                color: AppColors.white,
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                    color: AppColors.mainColor.withOpacity(0.2),
+                                    width: 2),
+                              ),
+                              child: Image.asset(
+                                AppImages.edit,
+                                scale: 4,
+                              )),
+                        ),
+                      )
+                    ],
+                  ),
+                  sh10,
+                  CustomTextField(
+                    controller: completeProfileController.fullNameController,
+                    title: "Full Name".tr,
+                    width: Get.width,
+                    hintText: "Enter your full name".tr,
+                  ),
+                  CustomTextField(
+                    controller: completeProfileController.phoneController,
+                    title: "Phone".tr,
+                    width: Get.width,
+                    hintText: "Enter your phone number".tr,
+                  ),
+                  CustomTextField(
+                    controller: completeProfileController.locationController,
+                    title: "Address".tr,
+                    width: Get.width,
+                    hintText: "Enter your address".tr,
+                  ),
+                  CustomTextField(
+                    maxLines: 10,
+                    controller: completeProfileController.bioController,
+                    title: "Bio".tr,
+                    width: Get.width,
+                    hintText: "Write something about you...".tr,
+                  ),
+                  sh20,
+                  completeProfileController.isLoading
+                      ? const CustomLoader()
+                      : CustomButton(
+                          onTap: () {
+                            completeProfileController.updateProfileRepo();
+                          },
+                          title: "Update".tr,
+                          width: Get.width,
+                          color: AppColors.mainColor,
+                        ),
+                  sh10,
+                ],
+              );
+            },
+          ),
         ));
   }
 }

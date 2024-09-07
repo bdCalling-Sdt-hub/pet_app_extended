@@ -140,7 +140,7 @@ class _MessageViewState extends State<MessageView> {
                                   border: InputBorder.none,
                                   hintStyle:
                                   h3.copyWith(color: AppColors.grayLight),
-                                  hintText: "Write your message...",
+                                  hintText: "Write your message...".tr,
                                 ),
                               ),
                             ),
@@ -153,7 +153,7 @@ class _MessageViewState extends State<MessageView> {
                               onTap: () {
                                 if (controller.sendMsgController.text.isEmpty) {
                                   Utils.toastMessage(
-                                      message: "Write something first!");
+                                      message: "Write something first!".tr);
                                 } else {
                                   controller.sendMessageRepo().then((value) => controller.scrollToBottom());
                                 }
@@ -171,7 +171,7 @@ class _MessageViewState extends State<MessageView> {
                           child: Column(
                             children: [
                               Image.asset(AppImages.more, scale: 15),
-                              Text("More Resources",
+                              Text("More Resources".tr,
                                   style: h3.copyWith(fontSize: 13)),
                             ],
                           ),

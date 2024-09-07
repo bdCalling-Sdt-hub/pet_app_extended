@@ -185,7 +185,12 @@ class MessageController extends GetxController {
       var responseData = jsonDecode(response.body)["data"]["allMessage"];
       chatDataList = (responseData as List).map((data) => ChatDataModel.fromJson(data)).toList();
 
+      if(chatDataList.isNotEmpty){
+        chatId = chatDataList[0].chat;
+        print.log("ChatId: ===== $chatId");
+      }
       chatItemsList = chatDataList.map((chatData) {
+        chatId = chatData.chat;
         return ChatMessageModel(
           // map the fields from chatData to ChatMessageModel fields
           chatId: chatId,
@@ -198,10 +203,6 @@ class MessageController extends GetxController {
         );
       }).toList();
 
-      if(chatItemsList.isNotEmpty){
-        chatId = chatItemsList[0].chatId;
-        print.log("ChatId: ===== $chatId");
-      }
       final Map<String, dynamic> data = jsonDecode(response.body)["data"];
 
       // Ensure that chatInfo is a Map<String, dynamic>
@@ -240,6 +241,14 @@ class MessageController extends GetxController {
       "text": sendMsgController.text.isNotEmpty? sendMsgController.text : "safe",
     };
 
+    // chatItemsList.add(
+    //     ChatMessageModel(
+    //       chatId: chatId,
+    //       time: OtherHelper.formatTime(DateTime.now().toLocal().toString()),
+    //       text: sendMsgController.text,
+    //     )
+    // );
+    // update();
     var response = await ApiService.postApi("${AppUrls.messages}/$chatId", body, header: header) ;
 
     if (response.statusCode == 200) {
@@ -302,16 +311,18 @@ class MessageController extends GetxController {
       var singleChatData = ChatDataModel.fromJson(data);
       print.log("Data from socket : =========>>>> $singleChatData");
 
-      chatItemsList.add(
-          ChatMessageModel(
-            chatId: singleChatData.chat,
-            time: OtherHelper.formatTime(singleChatData.createdAt),
-            text: singleChatData.text,
-            pet: singleChatData.pet,
-            sender: singleChatData.sender,
-          )
-      );
-      update();
+        // if(singleChatData.sender.id != PrefsHelper.userId){
+          chatItemsList.add(
+              ChatMessageModel(
+                chatId: singleChatData.chat,
+                time: OtherHelper.formatTime(singleChatData.createdAt),
+                text: singleChatData.text,
+                pet: singleChatData.pet,
+                sender: singleChatData.sender,
+              )
+          );
+        update();
+      // }
       WidgetsBinding.instance.addPostFrameCallback((_) {
         scrollToBottom();
       });

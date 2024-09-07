@@ -30,6 +30,8 @@ dependencies:
   font_awesome_flutter: ^10.7.0
   flutter_phone_direct_caller: ^2.1.1
   google_mobile_ads: ^5.1.0
+  flutter_image_compress: ^2.3.0
+  image: ^4.2.0
 
 
 

@@ -11,13 +11,13 @@ class ChangeLanguageScreen extends StatelessWidget {
   ChangeLanguageScreen({super.key});
 
   final List locale = [
-    {"name": "en", "countryCode": "US", "locale": const Locale("en", "US")},
     {"name": "es", "countryCode": "ES", "locale": const Locale("es", "ES")},
+    {"name": "en", "countryCode": "US", "locale": const Locale("en", "US")},
   ];
 
   List languageList = [
-    "English",
     "Spanish",
+    "English",
   ];
   RxInt selectedItem = 0.obs;
   updateLanguage(Locale locale) {

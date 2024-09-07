@@ -14,6 +14,7 @@ import '../views/screens/profile_location/profile_location_view.dart';
 class CompleteProfileController extends GetxController {
   static CompleteProfileController get instance =>
       Get.put(CompleteProfileController());
+
   var selectedDate = DateTime.now().obs;
 
   String get formattedDate => DateFormat('dd-MM-yy').format(selectedDate.value);
@@ -35,7 +36,7 @@ class CompleteProfileController extends GetxController {
   TextEditingController fullNameController =
       TextEditingController(text: PrefsHelper.userName);
   TextEditingController phoneController = TextEditingController(text: PrefsHelper.userPhone);
-  TextEditingController bioController = TextEditingController();
+  TextEditingController bioController = TextEditingController(text: PrefsHelper.bio);
 
   setLocation({required String address}) {
     locationController.text = address;
@@ -49,15 +50,16 @@ class CompleteProfileController extends GetxController {
     update();
     print.log("repo is called");
 
-    // Map<String, String> header = {
-    //   'Authorization': PrefsHelper.token,
-    // };
+    Map<String, String> header = {
+      "Authorization" : PrefsHelper.token
+    };
 
     Map<String, String> body = {
       "fullName": fullNameController.text,
       "phone": phoneController.text,
       "address": locationController.text,
-      "bio" : bioController.text
+      "dob": formattedDate,
+      "bio": bioController.text
     };
 
     String? imagePath = ImagePickerController.instance.selectedImagePath.value;
@@ -67,7 +69,7 @@ class CompleteProfileController extends GetxController {
         url: "${AppUrls.users}/${PrefsHelper.userId}",
         body: body,
         imagePath: imagePath,
-        // header: header
+        header: header
     );
 
     print.log(response.body);
@@ -84,11 +86,15 @@ class CompleteProfileController extends GetxController {
       PrefsHelper.userImageUrl = responseData['data']['photo'];
       PrefsHelper.address = responseData['data']['address'];
       PrefsHelper.userPhone = responseData['data']['phone'];
+      PrefsHelper.dob = responseData['data']['dob'];
+      PrefsHelper.bio = responseData['data']['bio'];
 
       PrefsHelper.setString("userName", responseData['data']['fullName']);
       PrefsHelper.setString("userImageUrl", responseData['data']['photo']);
       PrefsHelper.setString("address", responseData['data']['address']);
       PrefsHelper.setString("userPhone", responseData['data']['phone']);
+      PrefsHelper.setString("dob", responseData['data']['dob']);
+      PrefsHelper.setString("bio", responseData['data']['bio']);
 
       Get.back();
     } else {

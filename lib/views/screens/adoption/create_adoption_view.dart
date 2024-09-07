@@ -133,7 +133,7 @@ class _CreateAdoptionViewState extends State<CreateAdoptionView> {
                     CustomText(text: "Breed".tr, fontWeight: FontWeight.w600, bottom: 8,),
                     breedSelectionDropDown(controller),
                     12.height,
-                    CustomText(text: "Gender".tr, fontWeight: FontWeight.w600, bottom: 8),
+                    CustomText(text: "Sex".tr, fontWeight: FontWeight.w600, bottom: 8),
                     genderSelectionDropDown(controller),
                     12.height,
                     CustomTextFormField(

@@ -26,9 +26,11 @@ class PrefsHelper {
   static String userGender = "";
   static String userHeight = "";
   static String address = "";
+  static String dob = "";
+  static String bio = "";
 
-  static String localizationLanguageCode = 'en';
-  static String localizationCountryCode = 'US';
+  static String localizationLanguageCode = 'es';
+  static String localizationCountryCode = 'ES';
   static bool isCoachSignIn = false;
 
   ///<<<======================== Get All Data Form Shared Preference ==============>
@@ -53,13 +55,15 @@ class PrefsHelper {
     userGender = preferences.getString("userGender") ?? "";
     userHeight = preferences.getString("userHeight") ?? "";
     address = preferences.getString("address") ?? "";
+    dob = preferences.getString("dob") ?? "";
+    bio = preferences.getString("bio") ?? "";
 
     isLogIn = preferences.getBool("isLogIn") ?? false;
     isNotifications = preferences.getBool("isNotifications") ?? true;
     localizationCountryCode =
-        preferences.getString("localizationCountryCode") ?? "US";
+        preferences.getString("localizationCountryCode") ?? "ES";
     localizationLanguageCode =
-        preferences.getString("localizationLanguageCode") ?? "en";
+        preferences.getString("localizationLanguageCode") ?? "es";
     isCoachSignIn = preferences.getBool("isCoachSignIn") ?? false;
     coachWorkingStatus = preferences.getBool("coachWorkingStatus") ?? false;
 
