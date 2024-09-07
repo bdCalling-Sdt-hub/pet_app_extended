@@ -49,9 +49,9 @@ class CompleteProfileController extends GetxController {
     update();
     print.log("repo is called");
 
-    Map<String, String> header = {
-      'Authorization': PrefsHelper.token,
-    };
+    // Map<String, String> header = {
+    //   'Authorization': PrefsHelper.token,
+    // };
 
     Map<String, String> body = {
       "fullName": fullNameController.text,
@@ -67,7 +67,8 @@ class CompleteProfileController extends GetxController {
         url: "${AppUrls.users}/${PrefsHelper.userId}",
         body: body,
         imagePath: imagePath,
-        header: header);
+        // header: header
+    );
 
     print.log(response.body);
     print.log(response.message);

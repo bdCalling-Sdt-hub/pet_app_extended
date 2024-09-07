@@ -147,7 +147,7 @@ class HomeView extends StatelessWidget {
                                           horizontal: 10.0, vertical: 10),
                                       child: Center(
                                         child: Text(
-                                          GroupsNContactsController.instance.groupsList[index].groupName,
+                                          controller.groupsList[index].groupName,
                                           style: h2.copyWith(fontSize: 14),
                                         ),
                                       ),

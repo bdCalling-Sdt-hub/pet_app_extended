@@ -1,3 +1,4 @@
+import 'package:felpus/controllers/auth/forgot_controller.dart';
 import 'package:felpus/controllers/signup_controller.dart';
 import 'package:felpus/extensions/extension.dart';
 import 'package:felpus/helpers/validator_helper.dart';
@@ -8,6 +9,7 @@ import 'package:felpus/utils/size_box/custom_sizebox.dart';
 import 'package:felpus/views/components/custom_button.dart';
 import 'package:felpus/views/components/custom_loader.dart';
 import 'package:felpus/views/components/custom_text_field.dart';
+import 'package:felpus/views/screens/TermsAndServices/terms_and_services.dart';
 import 'package:felpus/views/screens/login/login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:felpus/views/components/custom_auth_appbar.dart';
@@ -103,9 +105,14 @@ class SignupView extends StatelessWidget {
                             ],
                           ),
                           sw5,
-                          Text(
-                            "Terms and Services.".tr,
-                            style: h4,
+                          InkWell(
+                            onTap: () {
+                              Get.to(()=> TermsAndServices());
+                            },
+                            child: Text(
+                              "Terms and Services.".tr,
+                              style: h4,
+                            ),
                           )
                         ],
                       ),
@@ -117,7 +124,7 @@ class SignupView extends StatelessWidget {
                         onTap: () {
                           if (_formKey.currentState!.validate() &&
                               signUpController.isChecked.value) {
-                            signUpController.startTimer();
+                            ForgotController.instance.startTimer();
                             signUpController.signUpRepo();
                           } else {
                             Utils.snackBarErrorMessage(

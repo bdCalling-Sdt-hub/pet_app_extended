@@ -39,23 +39,15 @@ class EditProfileView extends StatelessWidget {
               onTap: () => Get.back(), child: const Icon(Icons.arrow_back_ios)),
         ),
         body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              sh20,
-              Stack(
-                children: [
-                  Obx(() => imagePickerController.selectedImagePath.value == ''
-                      ? Container(
-                    height: 128,
-                    width: 128,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                          color: AppColors.mainColor.withOpacity(0.2),
-                          width: 2),
-                    ),
-                    child: PrefsHelper.userImageUrl != ""
+          child: GetBuilder<CompleteProfileController>(builder: (controller) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                sh20,
+                Stack(
+                  children: [
+                    Obx(() => imagePickerController.selectedImagePath.value == ''
+                        ? PrefsHelper.userImageUrl != ""
                         ? ClipRRect(
                       borderRadius: BorderRadius.circular(100),
                       child: CustomImage(
@@ -68,133 +60,85 @@ class EditProfileView extends StatelessWidget {
                       CupertinoIcons.person,
                       size: 100,
                       color: AppColors.mainColor.withOpacity(0.2),
-                    ),
-                  )
-                      : Container(
-                      height: 128,
-                      width: 128,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                            color: AppColors.mainColor.withOpacity(0.2),
-                            width: 2),
+                    )
+                        : Container(
+                        height: 128,
+                        width: 128,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                              color: AppColors.mainColor.withOpacity(0.2),
+                              width: 2),
+                        ),
+                        child: ClipOval(
+                            child: Image.file(File(imagePickerController
+                                .selectedImagePath.value), fit: BoxFit.fill,)))),
+                    Positioned(
+                      bottom: 0,
+                      right: 0,
+                      child: GestureDetector(
+                        onTap: () {
+                          imagePickerController.pickImage(ImageSource.gallery);
+                        },
+                        child: Container(
+                            height: 40,
+                            width: 40,
+                            decoration: BoxDecoration(
+                              color: AppColors.white,
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                  color: AppColors.mainColor.withOpacity(0.2),
+                                  width: 2),
+                            ),
+                            child: Image.asset(
+                              AppImages.edit,
+                              scale: 4,
+                            )),
                       ),
-                      child: ClipOval(
-                          child: Image.file(File(imagePickerController
-                              .selectedImagePath.value))))),
-                  Positioned(
-                    bottom: 0,
-                    right: 0,
-                    child: GestureDetector(
-                      onTap: () {
-                        imagePickerController.pickImage(ImageSource.gallery);
-                      },
-                      child: Container(
-                          height: 40,
-                          width: 40,
-                          decoration: BoxDecoration(
-                            color: AppColors.white,
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                                color: AppColors.mainColor.withOpacity(0.2),
-                                width: 2),
-                          ),
-                          child: Image.asset(
-                            AppImages.edit,
-                            scale: 4,
-                          )),
-                    ),
-                  )
-                ],
-              ),
-              sh10,
-              CustomTextField(
-                controller: completeProfileController.fullNameController,
-                title: "Full Name".tr,
-                width: Get.width,
-                hintText: "Enter your full name".tr,
-              ),
-              CustomTextField(
-                controller: completeProfileController.phoneController,
-                title: "Phone".tr,
-                width: Get.width,
-                hintText: "Enter your phone number".tr,
-              ),
-              // Padding(
-              //   padding:
-              //       const EdgeInsets.symmetric(horizontal: 20, vertical: 7),
-              //   child: Column(
-              //     crossAxisAlignment: CrossAxisAlignment.start,
-              //     children: [
-              //       Text(
-              //         "Date of Birth".tr,
-              //         style: h3.copyWith(color: AppColors.textColor),
-              //       ),
-              //       const SizedBox(
-              //         height: 12,
-              //       ),
-              //       GestureDetector(
-              //         onTap: () {
-              //           completeProfileController.selectDate(context);
-              //         },
-              //         child: Container(
-              //           height: 50,
-              //           width: Get.width,
-              //           decoration: BoxDecoration(
-              //               color: AppColors.white,
-              //               borderRadius: BorderRadius.circular(10),
-              //               border: Border.all(color: AppColors.grayLight)),
-              //           child: Padding(
-              //               padding:
-              //                   const EdgeInsets.symmetric(horizontal: 8.0),
-              //               child: Row(
-              //                 children: [
-              //                   sw5,
-              //                   const Icon(
-              //                     Icons.calendar_today_outlined,
-              //                     color: AppColors.grayLight,
-              //                   ),
-              //                   sw5,
-              //                   Obx(() => Text(
-              //                         completeProfileController.formattedDate,
-              //                         style: h4.copyWith(
-              //                             color: AppColors.grayLight,
-              //                             fontSize: 16),
-              //                       ))
-              //                 ],
-              //               )),
-              //         ),
-              //       )
-              //     ],
-              //   ),
-              // ),
-              CustomTextField(
-                controller: completeProfileController.locationController,
-                title: "Address".tr,
-                width: Get.width,
-                hintText: "Enter your address".tr,
-              ),
-              CustomTextField(
-                maxLines: 10,
-                controller: completeProfileController.bioController,
-                title: "Bio".tr,
-                width: Get.width,
-                hintText: "Write something about you...".tr,
-              ),
-              sh20,
-              completeProfileController.isLoading
-                  ? const CustomLoader()
-                  : CustomButton(
-                onTap: () {
-                  completeProfileController.updateProfileRepo();
-                },
-                title: "Update".tr,
-                width: Get.width,
-                color: AppColors.mainColor,
-              ),
-              sh10,
-            ],
-          ),
+                    )
+                  ],
+                ),
+                sh10,
+                CustomTextField(
+                  controller: completeProfileController.fullNameController,
+                  title: "Full Name".tr,
+                  width: Get.width,
+                  hintText: "Enter your full name".tr,
+                ),
+                CustomTextField(
+                  controller: completeProfileController.phoneController,
+                  title: "Phone".tr,
+                  width: Get.width,
+                  hintText: "Enter your phone number".tr,
+                ),
+                CustomTextField(
+                  controller: completeProfileController.locationController,
+                  title: "Address".tr,
+                  width: Get.width,
+                  hintText: "Enter your address".tr,
+                ),
+                CustomTextField(
+                  maxLines: 10,
+                  controller: completeProfileController.bioController,
+                  title: "Bio".tr,
+                  width: Get.width,
+                  hintText: "Write something about you...".tr,
+                ),
+                sh20,
+                completeProfileController.isLoading
+                    ? const CustomLoader()
+                    : CustomButton(
+                  onTap: () {
+                    completeProfileController.updateProfileRepo();
+                  },
+                  title: "Update".tr,
+                  width: Get.width,
+                  color: AppColors.mainColor,
+                ),
+                sh10,
+              ],
+            );
+          },),
         ));
   }
 }

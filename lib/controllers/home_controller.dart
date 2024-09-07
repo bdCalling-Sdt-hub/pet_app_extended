@@ -128,7 +128,7 @@ class HomeController extends GetxController {
   wait(){
     isLoading = true;
     update();
-    Future.wait([getFoundPetRepo(), getLostPetRepo(), getMyPetRepo(), GroupsNContactsController.instance.getGroupsRepo()]);
+    Future.wait([getFoundPetRepo(), getLostPetRepo(), getMyPetRepo()]);
     isLoading = false;
     update();
   }

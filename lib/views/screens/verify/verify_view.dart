@@ -91,6 +91,7 @@ class VerifyView extends GetView {
                               ? GetBuilder<SignupController>(builder: (controller) {
                             return controller.isLoading? const CustomLoader(size: 40) : InkWell(
                               onTap: () {
+                                forgetController.startTimer();
                                 controller.signUpRepo();
                               },
                               child:  CustomText(

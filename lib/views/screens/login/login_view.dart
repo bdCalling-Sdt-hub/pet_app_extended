@@ -128,7 +128,7 @@ class LoginView extends StatelessWidget {
                         title: "Sign In".tr,
                         width: Get.width,
                         color: AppColors.mainColor),
-                    sh100,
+                    sh20,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

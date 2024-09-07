@@ -32,7 +32,7 @@ class GroupsNContactsController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    // getGroupsRepo();
+    getGroupsRepo();
     getContactsRepo();
     filteredContacts = contactsList;
   }
@@ -78,7 +78,9 @@ class GroupsNContactsController extends GetxController {
     print.log("Create Lost Pet Response: ${response.message}, ${response.body}");
 
     if (response.statusCode == 200) {
+      getGroupsRepo();
       Get.back();
+      imagePath = '';
       Utils.snackBarSuccessMessage("Success:", response.message);
     } else {
       Get.snackbar(response.statusCode.toString(), response.message);
