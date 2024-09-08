@@ -134,21 +134,28 @@ class HomeView extends StatelessWidget {
                               scrollDirection: Axis.horizontal,
                               itemCount: controller.groupsList.length,
                               itemBuilder: (context, index) {
-                                return Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 15.0),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius:
-                                        BorderRadius.circular(25),
-                                        color: AppColors.lowGray),
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 10.0, vertical: 10),
-                                      child: Center(
-                                        child: Text(
-                                          controller.groupsList[index].groupName,
-                                          style: h2.copyWith(fontSize: 14),
+                                return GestureDetector(
+                                  onTap: () {
+                                    // FocusScope.of(context).unfocus();
+                                    // MessageController.instance.createOrGetMessageRepo(
+                                    //     chatId: controller.groupsList[index].id);
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 15.0),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                          BorderRadius.circular(25),
+                                          color: AppColors.lowGray),
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 10.0, vertical: 10),
+                                        child: Center(
+                                          child: Text(
+                                            controller.groupsList[index].groupName,
+                                            style: h2.copyWith(fontSize: 14),
+                                          ),
                                         ),
                                       ),
                                     ),

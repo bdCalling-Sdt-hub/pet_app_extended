@@ -32,8 +32,15 @@ dependencies:
   google_mobile_ads: ^5.1.0
   flutter_image_compress: ^2.3.0
   image: ^4.2.0
+  icons_launcher: ^2.1.7
 
-
+icons_launcher:
+  image_path: 'assets/images/launcherIcon.png'
+  platforms:
+    android:
+      enable: true
+    ios:
+      enable: true
 
 
   flutter: 
