@@ -309,19 +309,23 @@ class MessageController extends GetxController {
       update();
 
       var singleChatData = ChatDataModel.fromJson(data);
-      print.log("Data from socket : =========>>>> $singleChatData");
 
-        if(singleChatData.sender.id != PrefsHelper.userId || chatItemsList.last.text != singleChatData.text){
-          chatItemsList.add(
-              ChatMessageModel(
-                chatId: singleChatData.chat,
-                time: OtherHelper.formatTime(singleChatData.createdAt),
-                text: singleChatData.text,
-                pet: singleChatData.pet,
-                sender: singleChatData.sender,
-              )
-          );
-        update();
+      print.log("chatItemsList.last.text : ${chatItemsList[chatItemsList.length-1].text}");
+      print.log("singleChatData.text : ${singleChatData.text}");
+
+        if(singleChatData.sender.id != PrefsHelper.userId){
+          if(chatItemsList.last.text != singleChatData.text){
+            chatItemsList.add(
+                ChatMessageModel(
+                  chatId: singleChatData.chat,
+                  time: OtherHelper.formatTime(singleChatData.createdAt),
+                  text: singleChatData.text,
+                  pet: singleChatData.pet,
+                  sender: singleChatData.sender,
+                )
+            );
+            update();
+          }
       }
       WidgetsBinding.instance.addPostFrameCallback((_) {
         scrollToBottom();
