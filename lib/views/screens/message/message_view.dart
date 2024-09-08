@@ -1,10 +1,7 @@
 import 'package:felpus/extensions/extension.dart';
-import 'package:felpus/helpers/other_helper.dart';
 import 'package:felpus/helpers/prefs_helper.dart';
-import 'package:felpus/models/chat_data_model.dart';
 import 'package:felpus/utils/App_Utils/app_utils.dart';
 import 'package:felpus/views/components/custom_image.dart';
-import 'package:felpus/views/components/custom_loader.dart';
 import 'package:felpus/views/components/custom_text.dart';
 import 'package:felpus/views/components/no_data.dart';
 import 'package:flutter/cupertino.dart';
@@ -92,6 +89,10 @@ class _MessageViewState extends State<MessageView> {
                     itemBuilder: (context, index) {
                       var chatDataItems = controller.chatItemsList[index];
                       controller.chatId = chatDataItems.chatId;
+                      if(chatDataItems.sender.id == PrefsHelper.userId){
+                        MessageController.helpType = chatDataItems.helpType;
+                        print("MessageController.helpType : ${MessageController.helpType}");
+                      }
                       return chatItems(
                         controller: controller,
                         text: chatDataItems.text,

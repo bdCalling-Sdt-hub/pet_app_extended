@@ -241,14 +241,14 @@ class MessageController extends GetxController {
       "text": sendMsgController.text.isNotEmpty? sendMsgController.text : "safe",
     };
 
-    // chatItemsList.add(
-    //     ChatMessageModel(
-    //       chatId: chatId,
-    //       time: OtherHelper.formatTime(DateTime.now().toLocal().toString()),
-    //       text: sendMsgController.text,
-    //     )
-    // );
-    // update();
+    chatItemsList.add(
+        ChatMessageModel(
+          chatId: chatId,
+          time: OtherHelper.formatTime(DateTime.now().toLocal().toString()),
+          text: sendMsgController.text,
+        )
+    );
+    update();
     var response = await ApiService.postApi("${AppUrls.messages}/$chatId", body, header: header) ;
 
     if (response.statusCode == 200) {
@@ -311,7 +311,7 @@ class MessageController extends GetxController {
       var singleChatData = ChatDataModel.fromJson(data);
       print.log("Data from socket : =========>>>> $singleChatData");
 
-        // if(singleChatData.sender.id != PrefsHelper.userId){
+        if(singleChatData.sender.id != PrefsHelper.userId || chatItemsList.last.text != singleChatData.text){
           chatItemsList.add(
               ChatMessageModel(
                 chatId: singleChatData.chat,
@@ -322,7 +322,7 @@ class MessageController extends GetxController {
               )
           );
         update();
-      // }
+      }
       WidgetsBinding.instance.addPostFrameCallback((_) {
         scrollToBottom();
       });

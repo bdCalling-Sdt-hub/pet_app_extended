@@ -75,10 +75,10 @@ class _EmergencyViewState extends State<EmergencyView> {
                             selectedIndex = index;
                           });
                           if(index == 3 || index == 4 || index == 5){
-                            ResourcesView.isFlood = true;
+                            ResourcesView.isFire = true;
                             ResourcesView.isLost = false;
                           } else {
-                            ResourcesView.isFlood = false;
+                            ResourcesView.isFire = false;
                             ResourcesView.isLost = true;
                           }
                           MessageController.instance.handleItemSelected(item);

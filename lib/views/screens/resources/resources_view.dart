@@ -1,4 +1,5 @@
 import 'package:felpus/controllers/GoogleMapControllers/nearby_map_controller.dart';
+import 'package:felpus/controllers/message_controller.dart';
 import 'package:felpus/utils/app_color/app_colors.dart';
 import 'package:felpus/utils/app_text_style/styles.dart';
 import 'package:felpus/utils/size_box/custom_sizebox.dart';
@@ -44,8 +45,8 @@ class ResourcesView extends StatelessWidget {
   ];
 
   static bool isFire = false;
-  static bool isEarthQuake = false;
-  static bool isFlood = false;
+  // static bool isEarthQuake = false;
+  // static bool isFlood = false;
 
   static bool isLost = false;
   // static bool isInjured = false;
@@ -83,6 +84,7 @@ class ResourcesView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print.log("HElP TYPE : ${MessageController.helpType}");
     return Scaffold(
         backgroundColor: AppColors.white,
         appBar: AppBar(
@@ -113,7 +115,7 @@ class ResourcesView extends StatelessWidget {
                       isVetsNearbyTapped.value = false;
                       isCallFiremanTapped.value = !isCallFiremanTapped.value;
                       if(isCallFiremanTapped.value){
-                        if(isFire || isEarthQuake || isFlood){
+                        if(isFire || MessageController.helpType == "fire" || MessageController.helpType == "earthquake" || MessageController.helpType == "flood"){
                           // FlutterPhoneDirectCaller.callNumber("999");
                           customShowDialog(context: context, helpList: rescueNumberList);
                         }else{
@@ -132,11 +134,11 @@ class ResourcesView extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset(isFire || isEarthQuake || isFlood? AppImages.fireTruck : AppImages.policeAlarm, scale: isFire || isEarthQuake || isFlood? 4 : 8, color: isCallFiremanTapped.value? AppColors.white : null),
+                          Image.asset(isFire|| MessageController.helpType == "fire" || MessageController.helpType == "earthquake" || MessageController.helpType == "flood"? AppImages.fireTruck : AppImages.policeAlarm, scale: isFire|| MessageController.helpType == "fire" || MessageController.helpType == "earthquake" || MessageController.helpType == "flood"? 4 : 8, color: isCallFiremanTapped.value? AppColors.white : null),
                           sh5,
                           CustomText(
                             textAlign: TextAlign.center,
-                              text: isFire || isEarthQuake || isFlood? "Call Fireman".tr : "Call Police".tr,
+                              text: isFire|| MessageController.helpType == "fire" || MessageController.helpType == "earthquake" || MessageController.helpType == "flood"? "Call Fireman".tr : "Call Police".tr,
                               fontSize: 20,
                               fontWeight: FontWeight.w600,
                               color: isCallFiremanTapped.value? AppColors.white : AppColors.black
@@ -181,7 +183,7 @@ class ResourcesView extends StatelessWidget {
                       isVetsNearbyTapped.value = !isVetsNearbyTapped.value;
                       isCallFiremanTapped.value = false;
 
-                      if(isFire || isEarthQuake || isFlood){
+                      if(isFire|| MessageController.helpType == "fire" || MessageController.helpType == "earthquake" || MessageController.helpType == "flood"){
                         NearByMapController.searchForText = "Vets".tr;
                         Get.to(()=> NearbyMapScreen());
                       }else{
@@ -198,9 +200,9 @@ class ResourcesView extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset(isFire || isEarthQuake || isFlood? AppImages.petLeg : AppImages.pawSearchIcon ,scale: isFire || isEarthQuake || isFlood? 4 : 8, color: isVetsNearbyTapped.value ? AppColors.white : null),
+                          Image.asset(isFire|| MessageController.helpType == "fire" || MessageController.helpType == "earthquake" || MessageController.helpType == "flood"? AppImages.petLeg : AppImages.pawSearchIcon ,scale: isFire|| MessageController.helpType == "fire" || MessageController.helpType == "earthquake" || MessageController.helpType == "flood" ? 4 : 8, color: isVetsNearbyTapped.value ? AppColors.white : null),
                           sh5,
-                          Text(isFire || isEarthQuake || isFlood? "Vets Nearby".tr : "Check Lost & Found Pets".tr,style: h2.copyWith(fontSize: 20, color: isVetsNearbyTapped.value ? AppColors.white : AppColors.black),textAlign: TextAlign.center,)
+                          Text(isFire|| MessageController.helpType == "fire" || MessageController.helpType == "earthquake" || MessageController.helpType == "flood"? "Vets Nearby".tr : "Check Lost & Found Pets".tr,style: h2.copyWith(fontSize: 20, color: isVetsNearbyTapped.value ? AppColors.white : AppColors.black),textAlign: TextAlign.center,)
                         ],
                       ),
                     ),),
@@ -214,7 +216,7 @@ class ResourcesView extends StatelessWidget {
                       isCallFiremanTapped.value = false;
 
                       if(isFirstAidTapped.value){
-                        if(isFire || isEarthQuake || isFlood){
+                        if(isFire|| MessageController.helpType == "fire" || MessageController.helpType == "earthquake" || MessageController.helpType == "flood"){
                           Get.bottomSheet(
                             Container(
                               width: Get.width,
@@ -316,9 +318,9 @@ class ResourcesView extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset(isFire || isEarthQuake || isFlood? AppImages.firstAidKit : AppImages.tipsLightIcon,scale: isFire || isEarthQuake || isFlood? 4 : 8, color: isFirstAidTapped.value? AppColors.white : null),
+                          Image.asset(isFire|| MessageController.helpType == "fire" || MessageController.helpType == "earthquake" || MessageController.helpType == "flood"? AppImages.firstAidKit : AppImages.tipsLightIcon,scale: isFire|| MessageController.helpType == "fire" || MessageController.helpType == "earthquake" || MessageController.helpType == "flood" ? 4 : 8, color: isFirstAidTapped.value? AppColors.white : null),
                           sh5,
-                          Text(isFire || isEarthQuake || isFlood? "First Aid".tr : "Tips To Find Lost Pets".tr,style: h2.copyWith(fontSize: 20, color: isFirstAidTapped.value? AppColors.white : AppColors.black),textAlign: TextAlign.center, )
+                          Text(isFire|| MessageController.helpType == "fire" || MessageController.helpType == "earthquake" || MessageController.helpType == "flood"? "First Aid".tr : "Tips To Find Lost Pets".tr,style: h2.copyWith(fontSize: 20, color: isFirstAidTapped.value? AppColors.white : AppColors.black),textAlign: TextAlign.center, )
                         ],
                       ),
                     )),

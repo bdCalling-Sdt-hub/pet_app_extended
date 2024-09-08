@@ -27,7 +27,7 @@ class ChangeLanguageScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    selectedItem.value = PrefsHelper.localizationCountryCode == "US" ? 0 : 1;
+    selectedItem.value = PrefsHelper.localizationCountryCode == "ES" ? 0 : 1;
     return Scaffold(
       body: SafeArea(
         child: Padding(
