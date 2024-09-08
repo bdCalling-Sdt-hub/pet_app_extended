@@ -146,7 +146,7 @@ class ChatListView extends StatelessWidget {
                           ? controller.isLoading
                           ? SizedBox(
                         height: 300.h,
-                        child: CustomLoader(),
+                        child: const CustomLoader(),
                       )
                           : controller.chatActiveUsersList.isEmpty? const SizedBox(
                         height: 200,

@@ -7,6 +7,7 @@ import 'package:felpus/views/components/no_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'dart:developer' as print;
 
 import 'package:get/get.dart';
 import '../../../controllers/message_controller.dart';
@@ -91,7 +92,7 @@ class _MessageViewState extends State<MessageView> {
                       controller.chatId = chatDataItems.chatId;
                       if(chatDataItems.sender.id == PrefsHelper.userId){
                         MessageController.helpType = chatDataItems.helpType;
-                        print("MessageController.helpType : ${MessageController.helpType}");
+                        print.log("MessageController.helpType : ${MessageController.helpType}");
                       }
                       return chatItems(
                         controller: controller,

@@ -217,6 +217,7 @@ class MenuDataController extends GetxController {
   String? selectedBreed;
   String? selectedGender;
 
+  bool showBreedInputField = false; // Track if "Other" was selected
   // Available breeds for selected pet
   List<String> availableBreeds = [];
 
@@ -248,7 +249,11 @@ class MenuDataController extends GetxController {
   void selectBreed(String? value) {
     if (value != null) {
       selectedBreed = value;
-      breedController.text = value;
+      if(value != "Other"){
+        breedController.text = value;
+      }else{
+        breedController.clear();
+      }
       update(); // Notify UI of changes
     }
   }

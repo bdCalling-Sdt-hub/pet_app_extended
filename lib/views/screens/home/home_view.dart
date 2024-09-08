@@ -42,9 +42,8 @@ class HomeView extends StatelessWidget {
           actions: [
             InkWell(
               onTap: () {
-                MessageController.instance.getChatUsers(status: "archived");
                 MessageController.instance.getChatUsers(status: "active");
-                Get.to(() => ChatListView());
+                Get.to(() => ChatListView())!.then((value) => MessageController.instance.getChatUsers(status: "archived"),);
               },
               child: Image.asset(
                 AppImages.chat,

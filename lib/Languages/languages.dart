@@ -337,7 +337,6 @@ class LocalConstants extends Translations {
       "Argentine Firefighters": "Bomberos Argentinos",
 
 
-
       "Protect, Locate, Adopt.": "Protege, Localiza, Adopta",
       "Ensuring Every Pet's Safety and Forever Home.": "Garantizando La Seguridad de tu Mascota",
       "Keep your pets safe.": "Tu Mascota a Salvo",
@@ -770,6 +769,9 @@ class LocalConstants extends Translations {
       "Choose Your Pet": "Elige Tu Mascota",
       "Write something first!" : "¡Escribe algo primero!",
             "Sex": "Sexo",
+            "Other" : "Otro",
+            "Enter the breed name" : "Ingresa el nombre de la raza",
+            "Other Breed" : "Otra raza"
     },
 
         'en_US': {
@@ -1255,6 +1257,9 @@ class LocalConstants extends Translations {
           "Choose Your Pet": "Choose Your Pet",
           "Write something first!" : "Write something first!",
             "Sex": "Sex",
+            "Other" : "Other",
+            "Enter the breed name" : "Enter the breed name",
+            "Other Breed" : "Other Breed"
         },
   };
 }
