@@ -66,7 +66,7 @@ class LoginController extends GetxController {
           print.log(PrefsHelper.userEmail);
         }
           // Get.to(()=> HomeView());
-          Get.to(() => DashboardView());
+          Get.offAll(() => DashboardView());
           emailController.clear();
           passwordController.clear();
 
