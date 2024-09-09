@@ -42,7 +42,7 @@ Padding myPetsWidget({required PetModel pet}) {
                   style: h4.copyWith(fontSize: 13),
                 ),
                 Text(
-                  " ${pet.age} ${"Years".tr}.",
+                  ", ${pet.age} ${"Years".tr}.",
                   style: h4.copyWith(fontSize: 13),
                 ),
               ],
