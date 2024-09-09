@@ -1,5 +1,6 @@
 import 'package:felpus/controllers/GoogleMapControllers/nearby_map_controller.dart';
 import 'package:felpus/controllers/message_controller.dart';
+import 'package:felpus/helpers/prefs_helper.dart';
 import 'package:felpus/utils/app_color/app_colors.dart';
 import 'package:felpus/utils/app_text_style/styles.dart';
 import 'package:felpus/utils/size_box/custom_sizebox.dart';
@@ -126,7 +127,7 @@ class ResourcesView extends StatelessWidget {
                     },
                     child: Obx(() => Container(
                       height: 132,
-                      width: 142,
+                      width: PrefsHelper.localizationCountryCode == "ES"?  200 : 142,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           color: isCallFiremanTapped.value? AppColors.mainColor : AppColors.pinkExtraLight
@@ -159,7 +160,7 @@ class ResourcesView extends StatelessWidget {
                       Get.to(()=> NearbyMapScreen());
                     },
                     child: Obx(() => Container(
-                      width: 142,
+                      width: PrefsHelper.localizationCountryCode == "ES"?  200 : 142,
                       padding: EdgeInsets.symmetric(vertical: 4.h),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
@@ -192,7 +193,7 @@ class ResourcesView extends StatelessWidget {
                     },
                     child: Obx(() => Container(
                       padding: EdgeInsets.symmetric(vertical: 4.h),
-                      width: 142,
+                      width: PrefsHelper.localizationCountryCode == "ES"?  200 :142,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           color: isVetsNearbyTapped.value ? AppColors.mainColor : AppColors.pinkExtraLight
@@ -309,7 +310,7 @@ class ResourcesView extends StatelessWidget {
                       }
                     },
                     child: Obx(() => Container(
-                      width: 142,
+                      width: PrefsHelper.localizationCountryCode == "ES"?  200 : 142,
                       padding: EdgeInsets.symmetric(vertical: 4.h),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
