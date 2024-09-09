@@ -87,10 +87,17 @@ class MessageController extends GetxController {
 
   ///============================ Get Chat Users =============================
 
+  bool isArchivedLoading = false;
+
     Future getChatUsers({required String status}) async {
       chatActiveUsersList.clear();
-      isLoading = true;
-      update();
+      if(status == "active"){
+        isLoading = true;
+        update();
+      }else{
+        isArchivedLoading = true;
+        update();
+      }
 
 
       print.log("Get Chat Users response---------------------------->>>>");
@@ -110,6 +117,8 @@ class MessageController extends GetxController {
         Utils.snackBarErrorMessage(response.statusCode.toString(), response.message);
       }
 
+      isArchivedLoading = false;
+      update();
       isLoading = false;
       update();
     }
@@ -241,14 +250,16 @@ class MessageController extends GetxController {
       "text": sendMsgController.text.isNotEmpty? sendMsgController.text : "safe",
     };
 
-    chatItemsList.add(
-        ChatMessageModel(
-          chatId: chatId,
-          time: OtherHelper.formatTime(DateTime.now().toLocal().toString()),
-          text: sendMsgController.text,
-        )
-    );
-    update();
+   if(sendMsgController.text.isNotEmpty){
+     chatItemsList.add(
+         ChatMessageModel(
+           chatId: chatId,
+           time: OtherHelper.formatTime(DateTime.now().toLocal().toString()),
+           text: sendMsgController.text,
+         )
+     );
+     update();
+   }
     var response = await ApiService.postApi("${AppUrls.messages}/$chatId", body, header: header) ;
 
     if (response.statusCode == 200) {
@@ -313,8 +324,8 @@ class MessageController extends GetxController {
       print.log("chatItemsList.last.text : ${chatItemsList[chatItemsList.length-1].text}");
       print.log("singleChatData.text : ${singleChatData.text}");
 
-        if(singleChatData.sender.id != PrefsHelper.userId){
-          if(chatItemsList.last.text != singleChatData.text){
+        if(singleChatData.sender.id != PrefsHelper.userId || singleChatData.text == "safe"){
+          if(chatItemsList.last.text != singleChatData.text || singleChatData.text == "safe"){
             chatItemsList.add(
                 ChatMessageModel(
                   chatId: singleChatData.chat,

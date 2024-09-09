@@ -90,7 +90,7 @@ class _MessageViewState extends State<MessageView> {
                     itemBuilder: (context, index) {
                       var chatDataItems = controller.chatItemsList[index];
                       controller.chatId = chatDataItems.chatId;
-                      if(chatDataItems.sender.id == PrefsHelper.userId){
+                      if(chatDataItems.sender.id == PrefsHelper.userId && chatDataItems.helpType.isNotEmpty){
                         MessageController.helpType = chatDataItems.helpType;
                         print.log("MessageController.helpType : ${MessageController.helpType}");
                       }
@@ -243,7 +243,7 @@ class _MessageViewState extends State<MessageView> {
                 isSentByMe: senderId == PrefsHelper.userId ? true : false,
                 petAddress: petAddress),
           ),
-        if (text != "")
+        if (text != "" && text != "safe")
           ChatMessage(
             text: text,
             time: time,
