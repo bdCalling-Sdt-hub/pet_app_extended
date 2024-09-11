@@ -2,6 +2,7 @@ import 'package:felpus/extensions/extension.dart';
 import 'package:felpus/helpers/prefs_helper.dart';
 import 'package:felpus/utils/App_Utils/app_utils.dart';
 import 'package:felpus/views/components/custom_image.dart';
+import 'package:felpus/views/components/custom_loader.dart';
 import 'package:felpus/views/components/custom_text.dart';
 import 'package:felpus/views/components/no_data.dart';
 import 'package:flutter/cupertino.dart';
@@ -151,7 +152,7 @@ class _MessageViewState extends State<MessageView> {
                         sw10,
                         Expanded(
                           flex: 1,
-                          child: InkWell(
+                          child: controller.isLoading? const CustomLoader(size: 30,) : InkWell(
                               onTap: () {
                                 if (controller.sendMsgController.text.isEmpty) {
                                   Utils.toastMessage(

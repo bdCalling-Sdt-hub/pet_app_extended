@@ -5,6 +5,7 @@ import 'package:felpus/views/components/custom_image.dart';
 import 'package:felpus/views/components/custom_loader.dart';
 import 'package:felpus/views/components/custom_text.dart';
 import 'package:felpus/views/components/no_data.dart';
+import 'package:felpus/views/screens/groups/all_contacts_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -122,7 +123,15 @@ class GroupsView extends GetView<GroupsNContactsController> {
                     }),
               ),
               sh5,
-              Text('Contacts'.tr, style: h2.copyWith(fontSize: 20, color: AppColors.mainColor)),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('Contacts'.tr, style: h2.copyWith(fontSize: 20, color: AppColors.mainColor)),
+                  InkWell(
+                    onTap: () => Get.to(() => const AllContactsView()),
+                      child: CustomText(text: "See all".tr, fontSize: 20, color: AppColors.mainColor,))
+                ],
+              ),
               sh10,
               controller.isLoading
                   ? SizedBox(
