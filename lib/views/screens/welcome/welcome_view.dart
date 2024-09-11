@@ -25,18 +25,11 @@ class WelcomeView extends GetView {
             sh20,
             Column(
               children: [
-                Text(
-                  "Now continue after".tr,
-                  style: h3.copyWith(
-                    fontSize: 30,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                Wrap(
+                  alignment: WrapAlignment.center,
                   children: [
                     Text(
-                      "register in".tr,
+                      "Register and start enjoying".tr,
                       style: h3.copyWith(fontSize: 30),
                       textAlign: TextAlign.center,
                     ),

@@ -14,11 +14,13 @@ class ImagePickerController extends GetxController {
   static ImagePickerController get instance => Get.put(ImagePickerController());
 
   var selectedImagePath = ''.obs;
+  RxBool isLoading = false.obs;
 
   Future<void> pickImage(ImageSource source) async {
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: source);
 
+    isLoading.value = true;
     if (pickedFile != null) {
       File imageFile = File(pickedFile.path);
 
@@ -42,5 +44,6 @@ class ImagePickerController extends GetxController {
     } else {
       selectedImagePath.value = '';  // Handle when no image is selected
     }
+    isLoading.value = false;
   }
 }

@@ -1,6 +1,7 @@
 import 'package:felpus/controllers/groups_n_contacts_controller.dart';
 import 'package:felpus/controllers/message_controller.dart';
 import 'package:felpus/extensions/extension.dart';
+import 'package:felpus/views/components/custom_image.dart';
 import 'package:felpus/views/components/custom_loader.dart';
 import 'package:felpus/views/components/custom_text.dart';
 import 'package:flutter/material.dart';
@@ -101,15 +102,12 @@ class _EmergencySendSmsTypeViewState extends State<EmergencySendSmsTypeView> {
                                                       horizontal: 10.0,
                                                       vertical: 10),
                                               child: Center(
-                                                child: Text(
-                                                  groupsItems.groupName,
-                                                  style: h2.copyWith(
-                                                      fontSize: 14,
-                                                      color: selectedGroup ==
-                                                              index
-                                                          ? AppColors.white
-                                                          : AppColors.black),
-                                                ),
+                                                child: CustomText(
+                                                  maxLines: 2,
+                                                  text: groupsItems.groupName, color: selectedGroup ==
+                                                    index
+                                                    ? AppColors.white
+                                                    : AppColors.black,)
                                               ),
                                             ),
                                           ),
@@ -222,17 +220,16 @@ class _EmergencySendSmsTypeViewState extends State<EmergencySendSmsTypeView> {
                                                       horizontal: 10.0,
                                                       vertical: 10),
                                               child: Center(
-                                                child: Text(
-                                                  contactItems.fullName == ""
-                                                      ? "No name".tr
-                                                      : contactItems.fullName,
-                                                  style: h2.copyWith(
-                                                      fontSize: 14,
-                                                      color: selectedContact ==
-                                                              index
-                                                          ? AppColors.white
-                                                          : AppColors.black),
-                                                ),
+                                                child: CustomText(
+                                                  maxLines: 2,
+                                                  text: contactItems.fullName == ""
+                                                    ? "No name".tr
+                                                    : contactItems.fullName, color: selectedContact ==
+                                                    index
+                                                    ? AppColors.white
+                                                    : AppColors.black,
+                                                  fontSize: 14,
+                                                )
                                               ),
                                             ),
                                           ),

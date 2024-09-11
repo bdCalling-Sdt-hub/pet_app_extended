@@ -36,7 +36,7 @@ Padding petsList({required PetModel pet}) {
                 Row(
                   children: [
                     Text(
-                      "${pet.sex},",
+                      "${pet.sex.tr},",
                       style: h4.copyWith(fontSize: 13),
                     ),
                     4 .width,

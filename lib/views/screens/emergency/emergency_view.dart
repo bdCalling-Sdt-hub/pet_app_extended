@@ -1,6 +1,7 @@
 import 'package:felpus/extensions/extension.dart';
 
 import 'package:felpus/controllers/message_controller.dart';
+import 'package:felpus/helpers/prefs_helper.dart';
 import 'package:felpus/views/components/custom_text.dart';
 import 'package:felpus/views/screens/resources/resources_view.dart';
 import 'package:flutter/material.dart';
@@ -61,10 +62,11 @@ class _EmergencyViewState extends State<EmergencyView> {
                   height: 500,
                   child: GridView.builder(
                     padding: const EdgeInsets.all(8.0),
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3,
                       crossAxisSpacing: 8.0,
                       mainAxisSpacing: 8.0,
+                      mainAxisExtent:  PrefsHelper.localizationCountryCode == "ES"? 130 : 110
                     ),
                     itemCount: items.length,
                     itemBuilder: (context, index) {

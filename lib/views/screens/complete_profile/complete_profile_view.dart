@@ -3,6 +3,7 @@ import 'package:felpus/extensions/extension.dart';
 import 'package:felpus/helpers/validator_helper.dart';
 import 'package:felpus/views/components/custom_auth_appbar.dart';
 import 'package:felpus/views/components/custom_button.dart';
+import 'package:felpus/views/components/custom_loader.dart';
 import 'package:felpus/views/components/custom_text_field.dart';
 import 'package:felpus/views/components/custom_textfelid.dart';
 import 'package:flutter/material.dart';
@@ -81,7 +82,7 @@ class CompleteProfileView extends StatelessWidget {
                           border: Border.all(color: AppColors.mainColor.withOpacity(0.2), width: 2),
                         ),
                         child: ClipOval(
-                          child: Image.file(File(imagePickerController.selectedImagePath.value), fit: BoxFit.fill,),
+                          child: imagePickerController.isLoading.value? const CustomLoader() : Image.file(File(imagePickerController.selectedImagePath.value), fit: BoxFit.fill,),
                         ),
                       ),
                     ),

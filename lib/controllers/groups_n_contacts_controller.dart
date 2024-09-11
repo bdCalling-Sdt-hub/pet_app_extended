@@ -106,7 +106,10 @@ class GroupsNContactsController extends GetxController {
       var data = jsonDecode(response.body)['data'];
 
       for (var item in data) {
-        contactsList.add(UserModel.fromJson(item));
+        if(UserModel.fromJson(item).id != PrefsHelper.userId){
+          contactsList.add(UserModel.fromJson(item));
+        }
+
       }
       update();
     } else {

@@ -184,7 +184,7 @@ class LostPetsView extends GetView<LostPetsController> {
         },
       ),
       bottomNavigationBar: Obx(() {
-        return AdsServices.isBannerAdReady.value
+        return AdsServices.isBannerAdFirstReady.value
             ? Container(
           alignment: Alignment.center,
           width: AdsServices.bannerAdFirst.size.width

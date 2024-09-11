@@ -114,7 +114,7 @@ class PopUp {
                     height: 48,
                     text: "Yes".tr,
                     onTap: () {
-                      AdsServices.disposeBannerAd();
+                      AdsServices.disposeBannerAds();
                       PrefsHelper.removeAllPrefData();
                       Get.offAll(()=> LoginView());
                       // Get.offAllNamed(AppRoutes.signInScreen);

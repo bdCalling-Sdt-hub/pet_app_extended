@@ -42,7 +42,7 @@ class PetDetailsView extends GetView<PetDetailsController> {
                                     onTap: () => Get.back(),
                                     child: const Icon(Icons.arrow_back_ios)),
                                 Text(
-                                  "Pet’s Information",
+                                  "Pet’s Information".tr,
                                   style: h2.copyWith(fontSize: 18),
                                 ),
                                 sw50,
@@ -79,11 +79,11 @@ class PetDetailsView extends GetView<PetDetailsController> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                "Sex : ",
+                                                "${"Sex".tr} : ",
                                                 style: h3,
                                               ),
                                               Text(
-                                                controller.petModel.sex,
+                                                controller.petModel.sex.tr,
                                                 style: h4,
                                               ),
                                             ],
@@ -93,7 +93,7 @@ class PetDetailsView extends GetView<PetDetailsController> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                "Color : ",
+                                                "${"Color".tr} : ",
                                                 style: h3,
                                               ),
                                               Text(
@@ -114,11 +114,11 @@ class PetDetailsView extends GetView<PetDetailsController> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                "Age : ",
+                                                "${"Age".tr} : ",
                                                 style: h3,
                                               ),
                                               controller.petModel.age.isEmpty? const SizedBox():                                              Text(
-                                                "${controller.petModel.age} years",
+                                                "${controller.petModel.age} ${"years".tr}",
                                                 style: h4,
                                               ),
                                             ],
@@ -129,7 +129,7 @@ class PetDetailsView extends GetView<PetDetailsController> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                "Weight : ",
+                                                "${"Weight".tr} : ",
                                                 style: h3,
                                               ),
                                               controller.petModel.weight.isEmpty? const SizedBox():
@@ -159,7 +159,7 @@ class PetDetailsView extends GetView<PetDetailsController> {
                                           ),
                                           sw5,
                                           Text(
-                                            "Description About The Pet:",
+                                            "${"Description About The Pet".tr}:",
                                             style: h3,
                                           )
                                         ],
@@ -190,14 +190,14 @@ class PetDetailsView extends GetView<PetDetailsController> {
                         child: Column(
                           children: [
                             Text(
-                              "Owner’s Information",
+                              "Owner’s Information".tr,
                               style: h2.copyWith(fontSize: 18),
                             ),
                             sh30,
-                            personInfoCustomRow(iconPath: AppImages.user, imageScale: 7,title: "Name", titleInfo: controller.petModel.userId!.fullName),
-                            personInfoCustomRow(iconPath: AppImages.homeLocation, title: "Address", titleInfo: controller.petModel.userId!.address),
-                            personInfoCustomRow(iconPath: AppImages.phone, title: "Phone", titleInfo: controller.petModel.userId!.phone),
-                            personInfoCustomRow(iconPath: AppImages.email, title: "Email", titleInfo: controller.petModel.userId!.email),
+                            personInfoCustomRow(iconPath: AppImages.user, imageScale: 7,title: "Name".tr, titleInfo: controller.petModel.userId!.fullName),
+                            personInfoCustomRow(iconPath: AppImages.homeLocation, title: "Address".tr, titleInfo: controller.petModel.userId!.address),
+                            personInfoCustomRow(iconPath: AppImages.phone, title: "Phone".tr, titleInfo: controller.petModel.userId!.phone),
+                            personInfoCustomRow(iconPath: AppImages.email, title: "Email".tr, titleInfo: controller.petModel.userId!.email),
                           ],
                         ),
                       ),

@@ -157,7 +157,7 @@ class AdoptionView extends GetView<AdoptionController> {
                 left: 0,
                 right: 0,
                 child: Obx(() {
-                  return AdsServices.isBannerAdReady.value
+                  return AdsServices.isBannerAdThirdReady.value
                       ? Container(
                           alignment: Alignment.center,
                           width:

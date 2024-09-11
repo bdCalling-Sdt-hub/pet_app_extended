@@ -23,7 +23,7 @@ Future<void> main() async {
   DependencyInjection dI = DependencyInjection();
   dI.dependencies();
   await MobileAds.instance.initialize();
-  AdsServices.loadBannerAd();
+  AdsServices.loadBannerAds();
 
   runApp(
     ScreenUtilInit(

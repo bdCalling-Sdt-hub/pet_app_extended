@@ -96,7 +96,7 @@ class AllFoundPetsView extends GetView {
         },
       ),
       bottomNavigationBar:  Obx(() {
-        return AdsServices.isBannerAdReady.value?
+        return AdsServices.isBannerAdFourthReady.value?
         Container(
           alignment: Alignment.center,
           width: AdsServices.bannerAdFourth.size.width.toDouble(),

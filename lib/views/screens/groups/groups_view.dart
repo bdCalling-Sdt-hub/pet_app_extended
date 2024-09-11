@@ -2,11 +2,13 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:felpus/helpers/prefs_helper.dart';
 import 'package:felpus/views/components/custom_image.dart';
 import 'package:felpus/views/components/custom_loader.dart';
+import 'package:felpus/views/components/custom_text.dart';
 import 'package:felpus/views/components/no_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../controllers/groups_n_contacts_controller.dart';
 import '../../../utils/app_color/app_colors.dart';
 import '../../../utils/app_images/app_images.dart';
@@ -138,12 +140,15 @@ class GroupsView extends GetView<GroupsNContactsController> {
                     itemBuilder: (context, index) {
                       return Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                        child: controller.contactsList[index].phone.isEmpty
-                            ? const SizedBox()
-                            : InkWell(
-                          onTap: () {
-                            FlutterPhoneDirectCaller.callNumber(
-                                controller.contactsList[index].phone);
+                        child:
+                        // controller.contactsList[index].phone.isEmpty
+                        //     ? const SizedBox()
+                        //     :
+                        InkWell(
+                          onTap: () async {
+                            await makePhoneCall(controller.contactsList[index].phone);
+                            // FlutterPhoneDirectCaller.callNumber(
+                            //     controller.contactsList[index].phone);
                           },
                           child: Container(
                             decoration: BoxDecoration(
@@ -151,10 +156,9 @@ class GroupsView extends GetView<GroupsNContactsController> {
                             child: Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
                               child: Center(
-                                child: Text(
-                                  controller.contactsList[index].fullName,
-                                  style: h2.copyWith(fontSize: 14, color: AppColors.black),
-                                ),
+                                child: CustomText(
+                                  maxLines: 1,
+                                  text: controller.contactsList[index].fullName, fontSize: 14, overflow: TextOverflow.ellipsis,)
                               ),
                             ),
                           ),
@@ -167,5 +171,16 @@ class GroupsView extends GetView<GroupsNContactsController> {
         );
       }),
     );
+  }
+  Future<void> makePhoneCall(String phoneNumber) async {
+    final Uri launchUri = Uri(
+      scheme: 'tel',
+      path: phoneNumber,
+    );
+    if (await canLaunchUrl(launchUri)) {
+      await launchUrl(launchUri);
+    } else {
+      throw 'Could not launch $phoneNumber';
+    }
   }
 }

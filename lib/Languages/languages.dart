@@ -78,6 +78,7 @@ class LocalConstants extends Translations {
       "Terms of Services": "Términos de servicio",
       "Are you sure to logout?": "¿Estás seguro de cerrar sesión?",
       "Are you sure to delete?": "¿Estás seguro de eliminar?",
+            "Years" : "Años",
       "years": "años",
       "No Data": "Sin datos",
       "Adoption": "Adopción",
@@ -335,6 +336,7 @@ class LocalConstants extends Translations {
       "Argentine Police": "Policía Argentina",
       "Spanish Firefighters": "Bomberos Españoles",
       "Argentine Firefighters": "Bomberos Argentinos",
+            "Register and start enjoying" : "Regístrate y comienza a disfrutar de ",
 
 
       "Protect, Locate, Adopt.": "Protege, Localiza, Adopta",
@@ -763,6 +765,8 @@ class LocalConstants extends Translations {
 
       "Male": "Macho",
       "Female": "Hembra",
+            "male" : "macho",
+            "female" : "hembra",
       "Choose Breed": "Elige Raza",
       "Select a pet first": "Selecciona una mascota primero",
       "Select pet gender": "Selecciona el género de la mascota",
@@ -771,7 +775,8 @@ class LocalConstants extends Translations {
             "Sex": "Sexo",
             "Other" : "Otro",
             "Enter the breed name" : "Ingresa el nombre de la raza",
-            "Other Breed" : "Otra raza"
+            "Other Breed" : "Otra raza",
+            "Description About The Pet" : "Descripción de la mascota",
     },
 
         'en_US': {
@@ -1251,6 +1256,10 @@ class LocalConstants extends Translations {
 
           "Male": "Male",
           "Female": "Female",
+            "male" : "male",
+            "female" : "female",
+            "Years" : "Years",
+
           "Choose Breed": "Choose Breed",
           "Select a pet first": "Select a pet first",
           "Select pet gender": "Select pet gender",
@@ -1259,7 +1268,9 @@ class LocalConstants extends Translations {
             "Sex": "Sex",
             "Other" : "Other",
             "Enter the breed name" : "Enter the breed name",
-            "Other Breed" : "Other Breed"
+            "Other Breed" : "Other Breed",
+            "Register and start enjoying" : "Register and start enjoying ",
+            "Description About The Pet" : "Description About The Pet"
         },
   };
 }

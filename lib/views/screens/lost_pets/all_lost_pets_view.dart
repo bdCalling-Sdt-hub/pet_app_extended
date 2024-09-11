@@ -99,7 +99,7 @@ class AllLostPetsView extends StatelessWidget {
         },
       ),
       bottomNavigationBar: Obx(() {
-        return AdsServices.isBannerAdReady.value
+        return AdsServices.isBannerAdSecondReady.value
             ? Container(
                 alignment: Alignment.center,
                 width: AdsServices.bannerAdSecond.size.width.toDouble(),

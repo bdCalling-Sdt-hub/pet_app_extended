@@ -2,118 +2,64 @@ import 'package:felpus/helpers/ads_helper.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/get_rx.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'dart:developer';
 
 
 class AdsServices {
-  static RxBool isBannerAdReady = false.obs;
+  // Separate readiness states for each banner
+  static RxBool isBannerAdFirstReady = false.obs;
+  static RxBool isBannerAdSecondReady = false.obs;
+  static RxBool isBannerAdThirdReady = false.obs;
+  static RxBool isBannerAdFourthReady = false.obs;
+
   static late BannerAd bannerAdFirst;
   static late BannerAd bannerAdSecond;
   static late BannerAd bannerAdThird;
   static late BannerAd bannerAdFourth;
 
-  static RxBool isInterstitialAdReady = false.obs;
-  static late InterstitialAd interstitialAd;
-
-  static void loadInterstitialAd() {
-    InterstitialAd.load(
-        adUnitId: AdsHelper.interstitialAdUnitId(),
-        request: const AdRequest(),
-        adLoadCallback: InterstitialAdLoadCallback(
-          onAdLoaded: (ad) {
-            interstitialAd = ad;
-            isInterstitialAdReady = true.obs;
-            print("Interstitial Ad Ready");
-          },
-          onAdFailedToLoad: (error) {
-            print(
-                "==========================================================> Interstitial Ad Error $error");
-            interstitialAd.dispose();
-
-            isInterstitialAdReady = false.obs;
-          },
-        ));
+  // Reusable method to load a banner ad
+  static BannerAd _createBannerAd(RxBool isReadyState) {
+    return BannerAd(
+      adUnitId: AdsHelper.bannerAdUnitId(),
+      size: AdSize.largeBanner,
+      request: const AdRequest(),
+      listener: BannerAdListener(
+        onAdLoaded: (_) {
+          isReadyState.value = true;
+          log("Banner Ad Loaded");
+        },
+        onAdFailedToLoad: (ad, error) {
+          ad.dispose();
+          isReadyState.value = false;
+          log("Banner Ad Error: $error");
+        },
+      ),
+    );
   }
 
-  static void loadBannerAd() {
-    bannerAdFirst = BannerAd(
-      adUnitId: AdsHelper.bannerAdUnitId(),
-      size: AdSize.largeBanner,
-      request: const AdRequest(),
-      listener: BannerAdListener(
-        onAdLoaded: (_) {
-          isBannerAdReady.value = true;
-          print("Banner Ad Ready");
-        },
-        onAdFailedToLoad: (ad, error) {
-          ad.dispose();
-          isBannerAdReady.value = false;
-          print("Banner Ad Error: $error");
-        },
-      ),
-    );
+  // Load all banner ads
+  static void loadBannerAds() {
+    bannerAdFirst = _createBannerAd(isBannerAdFirstReady);
+    bannerAdSecond = _createBannerAd(isBannerAdSecondReady);
+    bannerAdThird = _createBannerAd(isBannerAdThirdReady);
+    bannerAdFourth = _createBannerAd(isBannerAdFourthReady);
+
     bannerAdFirst.load();
-
-    bannerAdSecond = BannerAd(
-      adUnitId: AdsHelper.bannerAdUnitId(),
-      size: AdSize.largeBanner,
-      request: const AdRequest(),
-      listener: BannerAdListener(
-        onAdLoaded: (_) {
-          isBannerAdReady.value = true;
-          print("Banner Ad Ready");
-        },
-        onAdFailedToLoad: (ad, error) {
-          ad.dispose();
-          isBannerAdReady.value = false;
-          print("Banner Ad Error: $error");
-        },
-      ),
-    );
     bannerAdSecond.load();
-
-    bannerAdThird = BannerAd(
-      adUnitId: AdsHelper.bannerAdUnitId(),
-      size: AdSize.largeBanner,
-      request: const AdRequest(),
-      listener: BannerAdListener(
-        onAdLoaded: (_) {
-          isBannerAdReady.value = true;
-          print("Banner Ad Ready");
-        },
-        onAdFailedToLoad: (ad, error) {
-          ad.dispose();
-          isBannerAdReady.value = false;
-          print("Banner Ad Error: $error");
-        },
-      ),
-    );
     bannerAdThird.load();
-
-    bannerAdFourth = BannerAd(
-      adUnitId: AdsHelper.bannerAdUnitId(),
-      size: AdSize.largeBanner,
-      request: const AdRequest(),
-      listener: BannerAdListener(
-        onAdLoaded: (_) {
-          isBannerAdReady.value = true;
-          print("Banner Ad Ready");
-        },
-        onAdFailedToLoad: (ad, error) {
-          ad.dispose();
-          isBannerAdReady.value = false;
-          print("Banner Ad Error: $error");
-        },
-      ),
-    );
     bannerAdFourth.load();
   }
 
-  static void disposeBannerAd() {
-
+  // Dispose of all banner ads
+  static void disposeBannerAds() {
     bannerAdFirst.dispose();
     bannerAdSecond.dispose();
     bannerAdThird.dispose();
     bannerAdFourth.dispose();
-    isBannerAdReady.value = false;
+
+    isBannerAdFirstReady.value = false;
+    isBannerAdSecondReady.value = false;
+    isBannerAdThirdReady.value = false;
+    isBannerAdFourthReady.value = false;
   }
 }
