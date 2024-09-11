@@ -37,7 +37,7 @@ class CompleteProfileView extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                sh20,
+                 sh20,
                 Center(
                   child: Column(
                     children: [
@@ -118,6 +118,7 @@ class CompleteProfileView extends StatelessWidget {
                 CustomTextFormField(
                   controller: controller.phoneController,
                   title: "Phone".tr,
+                  keyboardType: TextInputType.phone,
                   validator: ValidatorHelper.validator,
                   hintText: "Enter your phone number".tr,
                 ),

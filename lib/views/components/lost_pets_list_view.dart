@@ -2,6 +2,7 @@
 import 'package:felpus/extensions/extension.dart';
 import 'package:felpus/models/pet_model.dart';
 import 'package:felpus/views/components/custom_image.dart';
+import 'package:felpus/views/components/custom_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -25,28 +26,29 @@ Padding petsList({required PetModel pet}) {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  pet.breed,
-                  style: h2.copyWith(fontWeight: FontWeight.w700),
-                ),
-                Row(
-                  children: [
-                    Text(
-                      "${pet.sex.tr},",
-                      style: h4.copyWith(fontSize: 13),
-                    ),
-                    4 .width,
-                    Text(
-                      "${pet.age} ${"years".tr}",
-                      style: h4.copyWith(fontSize: 13),
-                    ),
-                  ],
-                ),
-              ],
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CustomText(
+                    maxLines: 2,
+                    text: pet.breed, fontWeight: FontWeight.w700,),
+                  Row(
+                    children: [
+                      Text(
+                        "${pet.sex.tr},",
+                        style: h4.copyWith(fontSize: 13),
+                      ),
+                      4 .width,
+                      Text(
+                        "${pet.age} ${"years".tr}",
+                        style: h4.copyWith(fontSize: 13),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,

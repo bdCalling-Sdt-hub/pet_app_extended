@@ -1,4 +1,5 @@
 import 'package:dotted_border/dotted_border.dart';
+import 'package:felpus/extensions/extension.dart';
 import 'package:felpus/helpers/prefs_helper.dart';
 import 'package:felpus/views/components/custom_image.dart';
 import 'package:felpus/views/components/custom_loader.dart';
@@ -132,39 +133,31 @@ class GroupsView extends GetView<GroupsNContactsController> {
                 height: 150.h,
                   child: const NoData())
                   : Flexible(
-                child: GridView.builder(
-                    shrinkWrap: true,
-                    itemCount: controller.contactsList.length,
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3, crossAxisSpacing: 8.0, mainAxisSpacing: 18.0, mainAxisExtent: 45),
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                        child:
-                        // controller.contactsList[index].phone.isEmpty
-                        //     ? const SizedBox()
-                        //     :
-                        InkWell(
-                          onTap: () async {
-                            await makePhoneCall(controller.contactsList[index].phone);
-                            // FlutterPhoneDirectCaller.callNumber(
-                            //     controller.contactsList[index].phone);
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(25), color: AppColors.lowGray),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
-                              child: Center(
-                                child: CustomText(
-                                  maxLines: 1,
-                                  text: controller.contactsList[index].fullName, fontSize: 14, overflow: TextOverflow.ellipsis,)
-                              ),
-                            ),
-                          ),
+                child: ListView.builder(
+                  itemCount: controller.contactsList.length,
+                  itemBuilder: (context, index) {
+                    var contactListItem = controller.contactsList[index];
+                  return Row(
+                    children: [
+                      const Icon(Icons.account_circle, size: 28, color: AppColors.black,),
+                      12.width,
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CustomText(text: contactListItem.fullName, fontWeight: FontWeight.w600, fontSize: 16,),
+                            CustomText(text: contactListItem.phone, color: AppColors.textColor,),
+                          ],
                         ),
-                      );
-                    }),
+                      ),
+                      IconButton(onPressed: () {
+                        makePhoneCall(controller.contactsList[index].phone);
+                        // FlutterPhoneDirectCaller.callNumber(controller.contactsList[index].phone);
+                      }, icon: Icon(Icons.phone_outlined, size: 26,)),
+
+                    ],
+                  );
+                },),
               )
             ],
           ),
@@ -184,3 +177,39 @@ class GroupsView extends GetView<GroupsNContactsController> {
     }
   }
 }
+
+
+// child: GridView.builder(
+//     shrinkWrap: true,
+//     itemCount: controller.contactsList.length,
+//     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+//         crossAxisCount: 3, crossAxisSpacing: 8.0, mainAxisSpacing: 18.0, mainAxisExtent: 45),
+//     itemBuilder: (context, index) {
+//       return Padding(
+//         padding: const EdgeInsets.symmetric(horizontal: 15.0),
+//         child:
+//         // controller.contactsList[index].phone.isEmpty
+//         //     ? const SizedBox()
+//         //     :
+//         InkWell(
+//           onTap: () async {
+//             await makePhoneCall(controller.contactsList[index].phone);
+//             // FlutterPhoneDirectCaller.callNumber(
+//             //     controller.contactsList[index].phone);
+//           },
+//           child: Container(
+//             decoration: BoxDecoration(
+//                 borderRadius: BorderRadius.circular(25), color: AppColors.lowGray),
+//             child: Padding(
+//               padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
+//               child: Center(
+//                 child: CustomText(
+//                   maxLines: 1,
+//                   text: controller.contactsList[index].fullName, fontSize: 14, overflow: TextOverflow.ellipsis,)
+//               ),
+//             ),
+//           ),
+//         ),
+//       );
+//     }),
+

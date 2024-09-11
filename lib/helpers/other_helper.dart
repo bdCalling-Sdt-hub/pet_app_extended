@@ -60,7 +60,7 @@ class OtherHelper {
   static Future<String?> openGallery() async {
     final ImagePicker picker = ImagePicker();
     final XFile? getImages =
-    await picker.pickImage(source: ImageSource.gallery, imageQuality: 50);
+    await picker.pickImage(source: ImageSource.gallery, imageQuality: 5);
     if (getImages == null) return null;
     print.log(getImages.path);
 
@@ -72,7 +72,7 @@ class OtherHelper {
   static Future<String?> openCamera() async {
     final ImagePicker picker = ImagePicker();
     final XFile? getImages =
-    await picker.pickImage(source: ImageSource.camera, imageQuality: 50);
+    await picker.pickImage(source: ImageSource.camera, imageQuality: 5);
     if (getImages == null) return null;
     print.log(getImages.path);
 

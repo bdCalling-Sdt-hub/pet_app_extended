@@ -35,6 +35,7 @@ dependencies:
   icons_launcher: ^2.1.7
   url_launcher: ^6.3.0
 
+
 icons_launcher:
   image_path: 'assets/images/launcherIcon.png'
   platforms:

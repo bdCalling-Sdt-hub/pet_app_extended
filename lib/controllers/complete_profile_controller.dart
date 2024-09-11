@@ -96,6 +96,8 @@ class CompleteProfileController extends GetxController {
       PrefsHelper.setString("dob", responseData['data']['dob']);
       PrefsHelper.setString("bio", responseData['data']['bio']);
 
+      ImagePickerController.instance.selectedImagePath.value = '';
+
       Get.back();
     } else {
       Utils.snackBarErrorMessage("Oops!!", "Something went wrong, try again!");

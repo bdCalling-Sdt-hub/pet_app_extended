@@ -290,12 +290,6 @@ class MenuDataController extends GetxController {
   TextEditingController petHistoryController = TextEditingController();
   TextEditingController contactInfoController = TextEditingController();
 
-  // selectPet(value) {
-  //   selectedPet = value ?? 'Choose Your Pet';
-  //   update();
-  //   petTypeController.text = value;
-  // }
-
   selectImage() async {
     image = await OtherHelper.openGallery();
     update();
