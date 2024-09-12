@@ -24,10 +24,11 @@ class MessageController extends GetxController {
   static MessageController get instance => Get.put(MessageController());
 
   final count = 0.obs;
+
   @override
   void onInit() {
     searchController.addListener(_filterChatUsers);
-    print.log("Mr. Chat ID Is Printing ===========  $chatId") ;
+    print.log("Mr. Chat ID Is Printing ===========  $chatId");
     super.onInit();
   }
 
@@ -35,7 +36,6 @@ class MessageController extends GetxController {
   RxBool isStyle = false.obs;
   RxBool isInformation = true.obs;
   RxBool isPetSafe = false.obs;
-
 
   static String helpType = "";
   static String chatUserId = "";
@@ -45,7 +45,7 @@ class MessageController extends GetxController {
 
   String helpTypeTitle = "";
 
-  List<ChatMessageModel>chatItemsList = [];
+  List<ChatMessageModel> chatItemsList = [];
 
   List<ChatDataModel> chatDataList = [];
   ChatInfo chatPersonInfo = ChatInfo.fromJson({});
@@ -55,13 +55,11 @@ class MessageController extends GetxController {
 
   bool isLoading = false;
 
-  List<ChatUserModel>chatArchivedUsersList = [];
+  List<ChatUserModel> chatArchivedUsersList = [];
   RxList<ChatUserModel> chatActiveUsersList = <ChatUserModel>[].obs;
   RxList<ChatUserModel> filteredChatUsersList = <ChatUserModel>[].obs;
 
   final ScrollController scrollController = ScrollController();
-
-
 
   void _filterChatUsers() {
     String query = searchController.text.toLowerCase();
@@ -89,40 +87,43 @@ class MessageController extends GetxController {
 
   bool isArchivedLoading = false;
 
-    Future getChatUsers({required String status}) async {
-      chatActiveUsersList.clear();
-      if(status == "active"){
-        isLoading = true;
-        update();
-      }else{
-        isArchivedLoading = true;
-        update();
-      }
-
-
-      print.log("Get Chat Users response---------------------------->>>>");
-      var response = await ApiService.getApi("${AppUrls.chatUsers}?status=$status");
-
-      if (response.statusCode == 200) {
-
-        var responseData = jsonDecode(response.body)['data'];
-        if(status == "active"){
-          chatActiveUsersList.value = (responseData as List).map((data) => ChatUserModel.fromJson(data)).toList();
-        }else{
-          chatArchivedUsersList = (responseData as List).map((data) => ChatUserModel.fromJson(data)).toList();
-        }
-
-        update();
-      } else {
-        Utils.snackBarErrorMessage(response.statusCode.toString(), response.message);
-      }
-
-      isArchivedLoading = false;
+  Future getChatUsers({required String status}) async {
+    chatActiveUsersList.clear();
+    if (status == "active") {
+      isLoading = true;
       update();
-      isLoading = false;
+    } else {
+      isArchivedLoading = true;
       update();
     }
 
+    print.log("Get Chat Users response---------------------------->>>>");
+    var response =
+        await ApiService.getApi("${AppUrls.chatUsers}?status=$status");
+
+    if (response.statusCode == 200) {
+      var responseData = jsonDecode(response.body)['data'];
+      if (status == "active") {
+        chatActiveUsersList.value = (responseData as List)
+            .map((data) => ChatUserModel.fromJson(data))
+            .toList();
+      } else {
+        chatArchivedUsersList = (responseData as List)
+            .map((data) => ChatUserModel.fromJson(data))
+            .toList();
+      }
+
+      update();
+    } else {
+      Utils.snackBarErrorMessage(
+          response.statusCode.toString(), response.message);
+    }
+
+    isArchivedLoading = false;
+    update();
+    isLoading = false;
+    update();
+  }
 
   final Map<String, String> helpTypeMapping = {
     'Lost Pets': 'lostPet',
@@ -134,12 +135,12 @@ class MessageController extends GetxController {
   };
 
   final Map<String, String> helpTypeIcons = {
-    'lostPet' : AppImages.lostPets,
-    'injuredPet' :  AppImages.injuredPet,
-    'abusedPet' : AppImages.abusedPet,
-    'fire' : AppImages.fire,
-    'earthquake' : AppImages.earthquake,
-    'flood' : AppImages.flood,
+    'lostPet': AppImages.lostPets,
+    'injuredPet': AppImages.injuredPet,
+    'abusedPet': AppImages.abusedPet,
+    'fire': AppImages.fire,
+    'earthquake': AppImages.earthquake,
+    'flood': AppImages.flood,
   };
 
   void assignHelpType(String title) {
@@ -154,20 +155,22 @@ class MessageController extends GetxController {
     assignHelpType(title);
 
     // Now MessageController.helpType will be correctly assigned
-    print.log(MessageController.helpType); // This will print the corresponding helpType
+    print.log(MessageController
+        .helpType); // This will print the corresponding helpType
   }
-
 
 // Function to get the title based on helpType
   String getTitleFromHelpType(String helpType) {
     // Reverse the map to get helpType as keys and title as values
-    final Map<String, String> titleMapping = helpTypeMapping.map((key, value) => MapEntry(value, key));
+    final Map<String, String> titleMapping =
+        helpTypeMapping.map((key, value) => MapEntry(value, key));
     return titleMapping[helpType] ?? "Unknown";
   }
 
   ///=================== Create or Get Message Repo ==========================
 
-  Future createOrGetMessageRepo({bool isNewMsg = false, required String chatId}) async {
+  Future createOrGetMessageRepo(
+      {bool isNewMsg = false, required String chatId}) async {
     isLoading = true;
     update();
 
@@ -178,23 +181,27 @@ class MessageController extends GetxController {
 
     print.log("===>>> $helpType, $chatType, $chatUserId, $petId");
     Map<String, String> body = {};
-    if(isNewMsg){
-     body = {
+    if (isNewMsg) {
+      body = {
         "helpType": helpType,
         "chatType": chatType,
         "alertId": chatUserId,
         "petId": petId
       };
-
     }
 
-    var response = isNewMsg ? await ApiService.postApi(AppUrls.newMessage, body, header: header) : await ApiService.getApi("${AppUrls.messages}/$chatId", header: header);
+    var response = isNewMsg
+        ? await ApiService.postApi(AppUrls.newMessage, body, header: header)
+        : await ApiService.getApi("${AppUrls.messages}/$chatId",
+            header: header);
 
     if (response.statusCode == 200) {
       var responseData = jsonDecode(response.body)["data"]["allMessage"];
-      chatDataList = (responseData as List).map((data) => ChatDataModel.fromJson(data)).toList();
+      chatDataList = (responseData as List)
+          .map((data) => ChatDataModel.fromJson(data))
+          .toList();
 
-      if(chatDataList.isNotEmpty){
+      if (chatDataList.isNotEmpty) {
         chatId = chatDataList[0].chat;
         print.log("ChatId: ===== $chatId");
       }
@@ -223,13 +230,14 @@ class MessageController extends GetxController {
       }
       update();
       listenMessage();
-      print.log("Mr. Chat ID Is Printing ===========  $chatId") ;
+      print.log("Mr. Chat ID Is Printing ===========  $chatId");
       helpTypeTitle = getTitleFromHelpType(helpType);
       Get.to(() => MessageView());
 
       print.log("New message created for $helpTypeTitle");
     } else {
-      Utils.snackBarErrorMessage(response.statusCode.toString(), response.message);
+      Utils.snackBarErrorMessage(
+          response.statusCode.toString(), response.message);
     }
     isLoading = false;
     update();
@@ -247,32 +255,36 @@ class MessageController extends GetxController {
     };
 
     Map<String, String> body = {
-      "text": sendMsgController.text.isNotEmpty? sendMsgController.text : "safe",
+      "text": sendMsgController.text.isNotEmpty
+          ? sendMsgController.text == "safe"
+              ? "${sendMsgController.text} "
+              : sendMsgController.text
+          : "safe",
     };
 
-   if(sendMsgController.text.isNotEmpty){
-     chatItemsList.add(
-         ChatMessageModel(
-           chatId: chatId,
-           time: OtherHelper.formatTime(DateTime.now().toLocal().toString()),
-           text: sendMsgController.text,
-         )
-     );
-     update();
-   }
-    var response = await ApiService.postApi("${AppUrls.messages}/$chatId", body, header: header) ;
+    if (sendMsgController.text.isNotEmpty) {
+      chatItemsList.add(ChatMessageModel(
+        chatId: chatId,
+        time: OtherHelper.formatTime(DateTime.now().toLocal().toString()),
+        text: sendMsgController.text,
+      ));
+      update();
+    }
+    var response = await ApiService.postApi("${AppUrls.messages}/$chatId", body,
+        header: header);
 
     if (response.statusCode == 200) {
       var responseData = jsonDecode(response.body)["data"];
 
-       var singleChatData = ChatDataModel.fromJson(responseData);
+      var singleChatData = ChatDataModel.fromJson(responseData);
 
       // chatDataList.add(singleChatData);
       update();
       sendMsgController.clear();
       print.log("Message sent successfully");
     } else {
-      Utils.snackBarErrorMessage(response.statusCode.toString(), response.message);
+      Utils.snackBarErrorMessage(
+          response.statusCode.toString(), response.message);
     }
     isLoading = false;
     update();
@@ -321,22 +333,22 @@ class MessageController extends GetxController {
 
       var singleChatData = ChatDataModel.fromJson(data);
 
-      print.log("chatItemsList.last.text : ${chatItemsList[chatItemsList.length-1].text}");
+      print.log(
+          "chatItemsList.last.text : ${chatItemsList[chatItemsList.length - 1].text}");
       print.log("singleChatData.text : ${singleChatData.text}");
 
-        if(singleChatData.sender.id != PrefsHelper.userId || singleChatData.text == "safe"){
-          if(chatItemsList.last.text != singleChatData.text || singleChatData.text == "safe"){
-            chatItemsList.add(
-                ChatMessageModel(
-                  chatId: singleChatData.chat,
-                  time: OtherHelper.formatTime(singleChatData.createdAt),
-                  text: singleChatData.text,
-                  pet: singleChatData.pet,
-                  sender: singleChatData.sender,
-                )
-            );
-            update();
-          }
+      if (singleChatData.sender.id != PrefsHelper.userId ||
+          singleChatData.text == "safe") {
+        if (chatItemsList.last.text != singleChatData.text) {
+          chatItemsList.add(ChatMessageModel(
+            chatId: singleChatData.chat,
+            time: OtherHelper.formatTime(singleChatData.createdAt),
+            text: singleChatData.text,
+            pet: singleChatData.pet,
+            sender: singleChatData.sender,
+          ));
+          update();
+        }
       }
       WidgetsBinding.instance.addPostFrameCallback((_) {
         scrollToBottom();
@@ -355,5 +367,4 @@ class MessageController extends GetxController {
       );
     }
   }
-
 }

@@ -16,6 +16,8 @@ class ChatListView extends StatelessWidget {
 
   final MessageController controller = Get.put(MessageController());
 
+  int selectedIndex = -1;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -216,6 +218,7 @@ class ChatListView extends StatelessWidget {
                                                     index];
                                                 return GestureDetector(
                                                   onTap: () {
+                                                    selectedIndex = index;
                                                     controller.chatId =
                                                         chatUserDetails.id;
                                                     controller
@@ -224,12 +227,12 @@ class ChatListView extends StatelessWidget {
                                                                 chatUserDetails
                                                                     .id);
                                                   },
-                                                  child: controller.isLoading
+                                                  child: controller.isLoading && selectedIndex == index
                                                       ? const Padding(
                                                           padding:
                                                               EdgeInsets
                                                                   .only(
-                                                                  top: 16.0),
+                                                                  top: 20.0),
                                                           child:
                                                               CustomLoader(
                                                                   size: 40),
