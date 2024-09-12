@@ -343,10 +343,7 @@ class MenuDataController extends GetxController {
     print.log("Create Lost Pet Response: ${response.message}, ${response.body}");
 
     if (response.statusCode == 200) {
-      if(forPets == "adopt"){
-        AdoptionController.instance.getAdoptPetRepo();
-      }
-      Get.back();
+      Get.back(result: true);
       Utils.snackBarSuccessMessage("Success:", response.message);
       makeEmptyTextField();
     } else {

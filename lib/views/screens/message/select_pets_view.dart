@@ -4,6 +4,7 @@ import 'package:felpus/utils/App_Utils/app_utils.dart';
 import 'package:felpus/views/components/custom_button.dart';
 import 'package:felpus/views/components/custom_image.dart';
 import 'package:felpus/views/components/custom_loader.dart';
+import 'package:felpus/views/components/custom_text.dart';
 import 'package:felpus/views/components/no_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -91,7 +92,8 @@ class _SelectPetsViewState extends State<SelectPetsView> {
                                           horizontal: 10.0, vertical: 6),
                                       child: Column(
                                         mainAxisSize: MainAxisSize.min,
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           ClipRRect(
                                             borderRadius:
@@ -105,27 +107,14 @@ class _SelectPetsViewState extends State<SelectPetsView> {
                                           ),
                                           const SizedBox(
                                               height: 8), // Add some spacing
-                                          Wrap(
-                                            children: [
-                                              Text(
-                                                "${petListItems.petName}, ",
-                                                style: h2.copyWith(
-                                                  fontWeight: FontWeight.w700,
-                                                  color: selectedPet == index
-                                                      ? AppColors.white
-                                                      : AppColors.black,
-                                                ),
-                                              ),
-                                              Text(
-                                                petListItems.breed,
-                                                style: h2.copyWith(
-                                                  fontWeight: FontWeight.w700,
-                                                  color: selectedPet == index
-                                                      ? AppColors.white
-                                                      : AppColors.black,
-                                                ),
-                                              ),
-                                            ],
+                                          Text(
+                                            petListItems.breed,
+                                            style: h2.copyWith(
+                                              fontWeight: FontWeight.w700,
+                                              color: selectedPet == index
+                                                  ? AppColors.white
+                                                  : AppColors.black,
+                                            ),
                                           ),
                                           const SizedBox(
                                               height: 4), // Add some spacing
@@ -153,32 +142,27 @@ class _SelectPetsViewState extends State<SelectPetsView> {
                                           ),
                                           const SizedBox(
                                               height: 4), // Add some spacing
-                                          Row(
-                                            children: [
-                                              Icon(
-                                                CupertinoIcons.location_solid,
-                                                color: selectedPet == index
-                                                    ? AppColors.white
-                                                    : AppColors.mainColor,
-                                              ),
-                                              Expanded(
-                                                child: SizedBox(
-                                                  width: 115.w,
-                                                  child: Text(
-                                                    petListItems.address,
-                                                    style: h5.copyWith(
-                                                      fontSize: 12,
-                                                      color: selectedPet == index
-                                                          ? AppColors.white
-                                                          : AppColors.black,
-                                                    ),
+                                          Expanded(
+                                            child: Row(
+                                              children: [
+                                                Icon(
+                                                  CupertinoIcons.location_solid,
+                                                  color: selectedPet == index
+                                                      ? AppColors.white
+                                                      : AppColors.mainColor,
+                                                ),
+                                                Expanded(
+                                                  child: CustomText(
                                                     maxLines: 2,
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
+                                                    overflow: TextOverflow.ellipsis,
+                                                    text: petListItems.address,
+                                                    color: selectedPet == index
+                                                        ? AppColors.white
+                                                        : AppColors.black,
                                                   ),
                                                 ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
                                         ],
                                       ),
@@ -197,22 +181,29 @@ class _SelectPetsViewState extends State<SelectPetsView> {
             right: 0,
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 14.0),
-              child: GetBuilder<MessageController>(builder: (controller) {
-                return controller.isLoading? const CustomLoader() : CustomButton(
-                  onTap: () {
-                    if (selectedPet == -1) {
-                      Utils.toastMessage(
-                          message: "A pet must be selected before sending a message".tr);
-                    } else {
-                      controller.createOrGetMessageRepo(isNewMsg: true, chatId: "");
-                    }
-                  },
-                  title: "New Message".tr,
-                  width: Get.width,
-                  color: AppColors.mainColor,
-                  titleColor: AppColors.white,
-                );
-              },),
+              child: GetBuilder<MessageController>(
+                builder: (controller) {
+                  return controller.isLoading
+                      ? const CustomLoader()
+                      : CustomButton(
+                          onTap: () {
+                            if (selectedPet == -1) {
+                              Utils.toastMessage(
+                                  message:
+                                      "A pet must be selected before sending a message"
+                                          .tr);
+                            } else {
+                              controller.createOrGetMessageRepo(
+                                  isNewMsg: true, chatId: "");
+                            }
+                          },
+                          title: "New Message".tr,
+                          width: Get.width,
+                          color: AppColors.mainColor,
+                          titleColor: AppColors.white,
+                        );
+                },
+              ),
             ),
           ),
         ],

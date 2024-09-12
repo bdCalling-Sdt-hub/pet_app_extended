@@ -296,7 +296,14 @@ class _CreateAdoptionViewState extends State<CreateAdoptionView> {
                         horizontalPadding: 0,
                         controller: controller.contactInfoController,
                       ),
-
+                      12.height,
+                      CustomTextFormField(
+                        title: "Description".tr,
+                        hintText: "Write a short description about your pet".tr,
+                        horizontalPadding: 0,
+                        validator: ValidatorHelper.validator,
+                        controller: controller.descriptionController,
+                      ),
                       12.height,
                       controller.isLoading
                           ? const CustomLoader()

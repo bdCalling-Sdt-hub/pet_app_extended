@@ -2,6 +2,7 @@
 import 'package:felpus/extensions/extension.dart';
 import 'package:felpus/views/components/custom_image.dart';
 import 'package:felpus/views/components/custom_loader.dart';
+import 'package:felpus/views/components/custom_text.dart';
 import 'package:felpus/views/components/person_info_custom_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -65,6 +66,20 @@ class PetDetailsView extends GetView<PetDetailsController> {
                                       controller.petModel.breed,
                                       style: h1.copyWith(fontSize: 28),
                                     ),
+                                  ),
+                                  Row(
+                                    crossAxisAlignment:
+                                    CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "${"Name".tr} : ",
+                                        style: h3,
+                                      ),
+                                      Text(
+                                        controller.petModel.petName,
+                                        style: h3,
+                                      ),
+                                    ],
                                   ),
                                   Row(
                                     mainAxisAlignment:
@@ -143,6 +158,97 @@ class PetDetailsView extends GetView<PetDetailsController> {
                                       ),
                                     ],
                                   ),
+                                  if(controller.petModel.forPets == "adopt")...[
+                                    Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  "${"Health Con".tr} : ",
+                                                  style: h3,
+                                                ),
+                                                Text(
+                                                  controller.petModel.healthCondition,
+                                                  style: h4,
+                                                ),
+                                              ],
+                                            ),
+                                            Row(
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  "${"Neuter".tr} : ",
+                                                  style: h3,
+                                                ),
+                                                Text(
+                                                  controller.petModel.neuter,
+                                                  style: h4,
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                        Column(
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                          children: [
+                                            Row(
+                                              mainAxisAlignment: MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  "${"Vaccine".tr} : ",
+                                                  style: h3,
+                                                ),
+                                                Text(controller.petModel.vaccine,
+                                                  style: h4,
+                                                ),
+                                              ],
+                                            ),
+                                            Row(
+                                              mainAxisAlignment: MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  "${"Temper".tr} : ",
+                                                  style: h3,
+                                                ),
+                                                Text(
+                                                  controller.petModel.temper,
+                                                  style: h4,
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                  Row(
+                                    crossAxisAlignment:
+                                    CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "${"Microchip".tr} : ",
+                                        style: h3,
+                                      ),
+                                      Text(
+                                        controller.petModel.microchipNumber,
+                                        style: h4,
+                                      ),
+                                    ],
+                                  ),
                                   sh15,
                                   Container(
                                     decoration: BoxDecoration(
@@ -172,6 +278,62 @@ class PetDetailsView extends GetView<PetDetailsController> {
                                     style: h4,
                                     textAlign: TextAlign.justify,
                                   ),
+                                  if(controller.petModel.forPets == "adopt")...[
+                                    Row(
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "${"Pet History".tr} : ",
+                                          style: h3,
+                                        ),
+                                        Text(
+                                          controller.petModel.petHistory,
+                                          style: h4,
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "${"Contact Information".tr} : ",
+                                          style: h3,
+                                        ),
+                                        Text(
+                                          controller.petModel.contactInformation,
+                                          style: h4,
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                  if(controller.petModel.forPets == "found")...[
+                                    8.height,
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        color: AppColors.oliveDeep,
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(4.0),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Icon(Icons.location_on, color: AppColors.mainColor,),
+                                            sw5,
+                                            Text(
+                                              "${"Found Location".tr}:",
+                                              style: h3,
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    CustomText(
+                                      maxLines: 2,
+                                        text: controller.petModel.address)
+                                  ]
                                 ],
                               ),
                             ),

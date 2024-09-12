@@ -1,5 +1,7 @@
 import 'package:felpus/controllers/adoption_controller.dart';
 import 'package:felpus/controllers/pet_details_controller.dart';
+import 'package:felpus/helpers/prefs_helper.dart';
+import 'package:felpus/views/components/custom_image.dart';
 import 'package:felpus/views/components/custom_loader.dart';
 import 'package:felpus/views/components/lost_pets_list_view.dart';
 import 'package:felpus/views/components/no_data.dart';
@@ -63,10 +65,7 @@ class AllAdoptionPetsView extends GetView {
                   color: AppColors.grayLight.withOpacity(0.1), width: 2),
             ),
             child: ClipOval(
-              child: Image.asset(
-                AppImages.boy,
-                fit: BoxFit.fill,
-              ),
+              child: CustomImage(imageSrc: PrefsHelper.userImageUrl, imageType: ImageType.network,),
             ),
           ),
           sw10,

@@ -74,9 +74,13 @@ class AdoptionView extends GetView<AdoptionController> {
                       borderType: BorderType.RRect,
                       radius: const Radius.circular(10),
                       child: GestureDetector(
-                        onTap: () => Get.to(
-                          () => CreateAdoptionView(),
-                        ),
+                        onTap: () async {
+                          var data = await
+                          Get.to(() => CreateAdoptionView());
+                          if(data){
+                            controller.getAdoptPetRepo();
+                          }
+                        },
                         child: Container(
                           height: 110,
                           width: Get.width,

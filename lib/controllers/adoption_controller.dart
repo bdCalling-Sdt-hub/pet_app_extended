@@ -26,12 +26,14 @@ class AdoptionController extends GetxController {
   Future getAdoptPetRepo({int page = 1, int limit = 10}) async {
     if(page == 1){
       adoptPetList.clear();
+      isLoading = true;
+      update();
     }else{
       isMoreLoading = true;
       update();
     }
 
-    var response = await ApiService.getApi("${AppUrls.filterByTag}?find=found&page=$page&limit=$limit");
+    var response = await ApiService.getApi("${AppUrls.filterByTag}?find=adopt&page=$page&limit=$limit");
 
     if (response.statusCode == 200) {
       print.log("Found pet response---------------------------->>>>");
@@ -48,6 +50,7 @@ class AdoptionController extends GetxController {
       Utils.snackBarErrorMessage(
           response.statusCode.toString(), response.message);
     }
+    isLoading = false;
     isMoreLoading = false;
     update();
   }
