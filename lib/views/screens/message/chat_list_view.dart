@@ -123,7 +123,8 @@ class ChatListView extends StatelessWidget {
                                     onTap: () {
                                       controller.isStyle.value = true;
                                       controller.isInformation.value = false;
-                                      controller.getChatUsers(status: "archived");
+                                      controller.getChatUsers(
+                                          status: "archived");
                                     },
                                     child: Container(
                                       padding: const EdgeInsets.symmetric(
@@ -223,27 +224,39 @@ class ChatListView extends StatelessWidget {
                                                                 chatUserDetails
                                                                     .id);
                                                   },
-                                                  child: ChatListItem(
-                                                    image: chatUserDetails
-                                                                .type ==
-                                                            "single"
-                                                        ? chatUserDetails
-                                                            .partner.photo
-                                                        : chatUserDetails.photo,
-                                                    name:
-                                                        chatUserDetails.type ==
-                                                                "single"
-                                                            ? chatUserDetails
-                                                                .partner
-                                                                .fullName
-                                                            : chatUserDetails
-                                                                .groupName,
-                                                    message: chatUserDetails
-                                                        .lastMessage,
-                                                    time: "10 :15".tr,
-                                                    numberOfMessages: 5,
-                                                    isArchived: true,
-                                                  ),
+                                                  child: controller.isLoading
+                                                      ? const Padding(
+                                                          padding:
+                                                              EdgeInsets
+                                                                  .only(
+                                                                  top: 16.0),
+                                                          child:
+                                                              CustomLoader(
+                                                                  size: 40),
+                                                        )
+                                                      : ChatListItem(
+                                                          image: chatUserDetails
+                                                                      .type ==
+                                                                  "single"
+                                                              ? chatUserDetails
+                                                                  .partner.photo
+                                                              : chatUserDetails
+                                                                  .photo,
+                                                          name: chatUserDetails
+                                                                      .type ==
+                                                                  "single"
+                                                              ? chatUserDetails
+                                                                  .partner
+                                                                  .fullName
+                                                              : chatUserDetails
+                                                                  .groupName,
+                                                          message:
+                                                              chatUserDetails
+                                                                  .lastMessage,
+                                                          time: "10 :15".tr,
+                                                          numberOfMessages: 5,
+                                                          isArchived: true,
+                                                        ),
                                                 );
                                               },
                                             ),
