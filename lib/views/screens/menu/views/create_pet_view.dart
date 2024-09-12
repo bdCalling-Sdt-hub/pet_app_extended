@@ -10,8 +10,8 @@ import '../../../../utils/app_images/app_images.dart';
 import '../../../../utils/app_text_style/styles.dart';
 import '../../../../utils/size_box/custom_sizebox.dart';
 import '../../adoption/create_adoption_view.dart';
-import 'create_found_pet_view.dart';
-import 'create_lost_pet_view.dart';
+import 'create_my_or_found_pet_view.dart';
+import 'create_update_lost_pet_view.dart';
 
 
 class CreatePetView extends GetView {
@@ -36,10 +36,64 @@ class CreatePetView extends GetView {
                 height: Get.height,
                 width: Get.width,
                 child: Image.asset(AppImages.backgroundImage, fit: BoxFit.fill,)),
-            Padding(
+            SingleChildScrollView(
               padding: const EdgeInsets.symmetric(horizontal: 14.0),
               child: Column(
                 children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 7.0),
+                    child: Container(
+                      height: 200,
+                      width: Get.width,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: AppColors.olive
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text("Do you have any pet?".tr,style: h4.copyWith(fontWeight: FontWeight.bold,fontSize: 16),),
+                            sh5,
+                            Text("Tap the 'My Pet' button, fill in your pet's description and any identifying features, then submit to alert the community.".tr,style: h4.copyWith(fontSize: 14),textAlign: TextAlign.center,),
+                            sh5,
+                            GestureDetector(
+                              onTap: () {
+                                CreateMyOrFoundPetView.isMyPet = true;
+                                Get.to(() => CreateMyOrFoundPetView());
+                              },
+                              child: Container(
+                                padding: EdgeInsets.symmetric(horizontal: 4.w),
+                                height: 50,
+                                width: PrefsHelper.localizationCountryCode == "US"? 150 : 210,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  color: AppColors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.2),
+                                      spreadRadius: 2,
+                                      blurRadius: 3,
+                                      offset: const Offset(0, 3), // changes position of shadow
+                                    ),
+                                  ],
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset(AppImages.addMyPet, height: 32, width: 32,),
+                                    8.width,
+                                    Expanded(child: Text("My Pet".tr,style: h3.copyWith(fontSize: 16),))
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 7.0),
                     child: Container(
@@ -110,7 +164,7 @@ class CreatePetView extends GetView {
                             Text("Tap 'Found Pet' button, provide details about the pet and where it was found. Submit to alert the community and help reunite the pet.".tr,style: h4.copyWith(fontSize: 14),textAlign: TextAlign.center,),
                             sh5,
                             GestureDetector(
-                              onTap: () => Get.to(() => const CreateFoundPetView()),
+                              onTap: () => Get.to(() => CreateMyOrFoundPetView()),
                               child: Container(
                                 padding: EdgeInsets.symmetric(horizontal: 4.w),
                                 height: 50,

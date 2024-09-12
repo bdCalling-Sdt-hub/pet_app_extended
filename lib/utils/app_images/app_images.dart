@@ -68,6 +68,7 @@ class AppImages{
   static const tipsLightIcon = "assets/icons/tipsLightIcon.png";
   static const translateIcon = "assets/icons/translateIcon.svg";
   static const petSaveIcon = "assets/icons/petSaveIcon.png";
+  static const addMyPet = "assets/icons/addMyPet.png";
 
   /// Svg Icons
   static const wifiOff = "assets/icons/svgIcon/wifi_off.svg";

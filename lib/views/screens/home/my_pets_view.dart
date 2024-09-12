@@ -1,5 +1,8 @@
 
 import 'package:felpus/controllers/home_controller.dart';
+import 'package:felpus/controllers/pet_details_controller.dart';
+import 'package:felpus/helpers/prefs_helper.dart';
+import 'package:felpus/views/components/custom_image.dart';
 import 'package:felpus/views/components/my_pets_grid.dart';
 import 'package:felpus/models/pet_model.dart';
 import 'package:felpus/views/components/no_data.dart';
@@ -43,10 +46,7 @@ class MyPetsView extends GetView {
               ),
             ),
             child: ClipOval(
-              child: Image.asset(
-                AppImages.boy,
-                fit: BoxFit.fill,
-              ),
+              child: CustomImage(imageSrc: PrefsHelper.userImageUrl, imageType: ImageType.network,),
             ),
           ),
           sw10,
@@ -71,7 +71,10 @@ class MyPetsView extends GetView {
               PetModel item = controller.myPetList[index];
               return GestureDetector(
                 onTap: () {
-                  Get.to(() => const PetDetailsView());
+                  PetDetailsController.instance
+                      .getPetDetailsRepo(petId: item.id);
+                  Get.to(() =>
+                  const PetDetailsView());
                 },
                 child: myPetsWidget(pet: item),
               );

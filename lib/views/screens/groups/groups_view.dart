@@ -59,7 +59,13 @@ class GroupsView extends GetView<GroupsNContactsController> {
                 borderType: BorderType.RRect,
                 radius: const Radius.circular(10),
                 child: GestureDetector(
-                  onTap: () => Get.to(() => const CreateGroupView()),
+                  onTap: () async {
+                    var data = await
+                    Get.to(() => const CreateGroupView());
+                   if(data){
+                     controller.getGroupsRepo();
+                   }
+                  },
                   child: Container(
                     height: 110,
                     width: Get.width,
@@ -106,11 +112,7 @@ class GroupsView extends GetView<GroupsNContactsController> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(
-                                  groupItems.groupName,
-                                  style: h1.copyWith(fontSize: 14),
-                                  maxLines: 1,
-                                ),
+                                CustomText(text: groupItems.groupName, overflow: TextOverflow.ellipsis, maxLines: 1, fontSize: 14, fontWeight: FontWeight.w700,),
                                 Text(
                                   "${groupItems.participants.length} Members".tr,
                                   style: h3.copyWith(fontSize: 14),

@@ -251,7 +251,9 @@ class _CreateGroupViewState extends State<CreateGroupView> {
             child: Container(
               width: Get.width,
               color: AppColors.white,
-              child: Row(
+              child: controller.isLoading
+                  ? const CustomLoader()
+                  :  Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CustomButton(
@@ -260,9 +262,7 @@ class _CreateGroupViewState extends State<CreateGroupView> {
                     color: AppColors.light,
                     titleColor: AppColors.black,
                   ),
-                  controller.isLoading
-                      ? const CustomLoader()
-                      : CustomButton(
+                  CustomButton(
                       onTap: () {
                         controller.createGroupRepo();
                         _printSelectedIndices();

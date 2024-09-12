@@ -777,6 +777,11 @@ class LocalConstants extends Translations {
             "Enter the breed name" : "Ingresa el nombre de la raza",
             "Other Breed" : "Otra raza",
             "Description About The Pet" : "Descripción de la mascota",
+            "Do you have any pet?" : "¿Tienes alguna mascota?",
+            "Tap the 'My Pet' button, fill in your pet's description and any identifying features, then submit to alert the community." : "Toca el botón 'Mi Mascota', completa la descripción de tu mascota y cualquier característica identificativa, luego envíalo para alertar a la comunidad.",
+            "Create My Pet Card" : "Crear la tarjeta de mi mascota",
+            "My Pet" : "Mi Mascota"
+
     },
 
         'en_US': {
@@ -1270,7 +1275,11 @@ class LocalConstants extends Translations {
             "Enter the breed name" : "Enter the breed name",
             "Other Breed" : "Other Breed",
             "Register and start enjoying" : "Register and start enjoying ",
-            "Description About The Pet" : "Description About The Pet"
+            "Description About The Pet" : "Description About The Pet",
+            "Do you have any pet?" : "Do you have any pet?",
+            "Tap the 'My Pet' button, fill in your pet's description and any identifying features, then submit to alert the community." : "Tap the 'My Pet' button, fill in your pet's description and any identifying features, then submit to alert the community.",
+            "Create My Pet Card" : "Create My Pet Card",
+            "My Pet" : "My Pet"
         },
   };
 }

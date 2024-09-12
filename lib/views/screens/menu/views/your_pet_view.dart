@@ -13,7 +13,7 @@ import 'package:get/get.dart';
 import '../../../../utils/app_color/app_colors.dart';
 import '../../../../utils/app_images/app_images.dart';
 import '../../../../utils/app_text_style/styles.dart';
-import 'create_lost_pet_view.dart';
+import 'create_update_lost_pet_view.dart';
 
 class YourPetView extends StatefulWidget {
   const YourPetView({super.key});
@@ -126,7 +126,7 @@ class _YourPetViewState extends State<YourPetView> {
                                 Row(
                                   children: [
                                     Text(
-                                      "${petListItems.sex}, ",
+                                      "${petListItems.sex.tr}, ",
                                       style: h4.copyWith(
                                         fontSize: 13,
                                         color: selectedPet == index
@@ -135,7 +135,7 @@ class _YourPetViewState extends State<YourPetView> {
                                       ),
                                     ),
                                     Text(
-                                      "${petListItems.age} Years.".tr,
+                                      "${petListItems.age} ${"Years".tr}.",
                                       style: h4.copyWith(
                                         fontSize: 13,
                                         color: selectedPet == index

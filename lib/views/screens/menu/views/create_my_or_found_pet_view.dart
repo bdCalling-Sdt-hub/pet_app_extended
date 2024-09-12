@@ -18,16 +18,12 @@ import '../../../../utils/app_images/app_images.dart';
 import '../../../../utils/app_text_style/styles.dart';
 import '../../../../utils/size_box/custom_sizebox.dart';
 
-class CreateFoundPetView extends StatefulWidget {
-  const CreateFoundPetView({super.key});
+class CreateMyOrFoundPetView extends StatelessWidget {
+  CreateMyOrFoundPetView({super.key});
 
-  @override
-  State<CreateFoundPetView> createState() => _CreateFoundPetViewState();
-}
-
-class _CreateFoundPetViewState extends State<CreateFoundPetView> {
   final ImagePickerController imagePickerController = Get.put(ImagePickerController());
 
+  static bool isMyPet = false;
   final formKey = GlobalKey<FormState>();
 
   @override
@@ -37,7 +33,7 @@ class _CreateFoundPetViewState extends State<CreateFoundPetView> {
         appBar: AppBar(
           backgroundColor: AppColors.white,
           title: Text(
-            'Create Found Pet Card'.tr,
+            isMyPet? "Create My Pet Card".tr : 'Create Found Pet Card'.tr,
             style: h2.copyWith(fontSize: 20, color: AppColors.mainColor),
           ),
           centerTitle: true,
@@ -181,7 +177,7 @@ class _CreateFoundPetViewState extends State<CreateFoundPetView> {
                       height: 42,
                       onTap: () {
                         if (formKey.currentState!.validate()) {
-                          controller.addPetsRepo(forPets: "found");
+                          controller.addPetsRepo(forPets: isMyPet? "mypet" : "found");
                         }
                       },
                     ),

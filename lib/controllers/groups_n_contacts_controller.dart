@@ -75,11 +75,10 @@ class GroupsNContactsController extends GetxController {
         header: header
     );
 
-    print.log("Create Lost Pet Response: ${response.message}, ${response.body}");
+    print.log("New Group Created Response: ${response.message}, ${response.body}");
 
     if (response.statusCode == 200) {
-      getGroupsRepo();
-      Get.back();
+      Get.back(result: true);
       imagePath = '';
       Utils.snackBarSuccessMessage("Success:", response.message);
     } else {
@@ -149,6 +148,7 @@ class GroupsNContactsController extends GetxController {
     isGettingGroups = false;
     update();
   }
+
 
   @override
   void onReady() {

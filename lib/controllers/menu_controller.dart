@@ -3,7 +3,7 @@ import 'package:felpus/controllers/adoption_controller.dart';
 import 'package:felpus/controllers/my_pet_controller.dart';
 import 'package:felpus/utils/App_Utils/app_utils.dart';
 import 'package:felpus/views/screens/adoption/create_adoption_view.dart';
-import 'package:felpus/views/screens/menu/views/create_lost_pet_view.dart';
+import 'package:felpus/views/screens/menu/views/create_update_lost_pet_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'dart:developer' as print;
