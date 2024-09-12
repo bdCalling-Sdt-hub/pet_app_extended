@@ -257,7 +257,7 @@ class MessageController extends GetxController {
     Map<String, String> body = {
       "text": sendMsgController.text.isNotEmpty
           ? sendMsgController.text == "safe"
-              ? "${sendMsgController.text} "
+              ? " ${sendMsgController.text} "
               : sendMsgController.text
           : "safe",
     };
@@ -266,7 +266,7 @@ class MessageController extends GetxController {
       chatItemsList.add(ChatMessageModel(
         chatId: chatId,
         time: OtherHelper.formatTime(DateTime.now().toLocal().toString()),
-        text: sendMsgController.text,
+        text: sendMsgController.text == "safe" ? " ${sendMsgController.text} " : sendMsgController.text,
       ));
       update();
     }
