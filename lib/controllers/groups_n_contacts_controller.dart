@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:contacts_service/contacts_service.dart';
 import 'package:felpus/helpers/image_picker.dart';
 import 'package:felpus/helpers/prefs_helper.dart';
 import 'package:felpus/models/group_model.dart';
@@ -10,6 +11,8 @@ import 'package:felpus/utils/App_Utils/app_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:developer' as print;
+
+import 'package:permission_handler/permission_handler.dart';
 
 class GroupsNContactsController extends GetxController {
   //TODO: Implement GroupsController
@@ -104,8 +107,9 @@ class GroupsNContactsController extends GetxController {
 
       var data = jsonDecode(response.body)['data'];
 
+      await getContacts();
       for (var item in data) {
-        if(UserModel.fromJson(item).id != PrefsHelper.userId){
+        if(UserModel.fromJson(item).id != PrefsHelper.userId && phoneNumber.contains(UserModel.fromJson(item).phone)){
           contactsList.add(UserModel.fromJson(item));
         }
 
@@ -118,6 +122,41 @@ class GroupsNContactsController extends GetxController {
 
     isLoading = false;
     update();
+  }
+
+  List phoneNumber = [];
+  List<Contact> contacts = [];
+  Set<String> uniqueContacts = {}; // To track unique phone numbers
+
+  Future<void> getContacts() async {
+    // Request permission
+    PermissionStatus status = await Permission.contacts.request();
+
+    if (status.isGranted) {
+      // Fetch contacts and filter only those with at least one phone number
+      Iterable<Contact> _contacts = await ContactsService.getContacts();
+      print.log("Contacts: $_contacts");
+        contacts = _contacts.where((contact) {
+          // Get the list of phone numbers safely
+          final phoneNumbers = contact.phones?.map((phone) => phone.value).whereType<String>().toList() ?? [];
+
+          // Filter out duplicates and ensure there's at least one valid phone number
+          if (phoneNumbers.isNotEmpty && !uniqueContacts.contains(phoneNumbers.first)) {
+            uniqueContacts.add(phoneNumbers.first); // Add to unique set
+            return true; // Include in the list
+          }
+          return false; // Exclude from the list if no phone number
+        }).toList();
+
+      // Print contact names and phone numbers
+      for (var contact in contacts) {
+        print.log('Name: ${contact.displayName}');
+        for (var phone in contact.phones!) {
+          phoneNumber.add(phone.value);
+          print.log('Phone: ${phone.value}');
+        }
+      }
+    }
   }
 
   ///<<<=============== Get Groups Repo ======================>>>
